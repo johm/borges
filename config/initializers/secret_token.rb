@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Borges::Application.config.secret_token = '2d45577496bf05ab5dd60b26981b5136748c9972f312e2e2ef4d3b44fe513b4b3a9caac57b32826d18eaf73666d8d74db0789988e42ce72d43ce63afea2c21ca'
+Borges::Application.config.secret_token = 'c626ad25a0bfd4a5b5239473fd41b5b1c9cbc927960edd8ce92578768ff764a077d1d8179dadfcaa5a9e73150ab7f9b1e48cdd446ac491a534dcb9aac66aa6a3'
