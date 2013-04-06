@@ -11,3 +11,15 @@ require 'machinist/active_record'
 User.blueprint do
   # Attributes here
 end
+
+Author.blueprint do
+  # Attributes here
+end
+
+Title.blueprint do
+  # Attributes here
+end
+
+Contribution.blueprint do
+  # Attributes here
+end

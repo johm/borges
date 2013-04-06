@@ -1,4 +1,13 @@
 Borges::Application.routes.draw do
+  resources :contributions
+
+
+  resources :titles
+
+
+  resources :authors
+
+
   authenticated :user do
     root :to => 'home#index'
   end
