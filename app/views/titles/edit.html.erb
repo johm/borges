@@ -1,6 +1,50 @@
 <h1>Editing title</h1>
 
-<%= render 'form' %>
+<%= nested_form_for @title,:html=>{:class=>"form-horizontal"} do |f| %>
+<% if @title.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@title.errors.count, "error") %> prohibited this title from being saved:</h2>
+      
+      <ul>
+	<% @title.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+	<% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+  <div class="field control-group">
+    <%= f.label :title, :class=>"control-label" %>
+    <div class="controls">
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="field control-group">
+    <%= f.label :contributors, :class=>"control-label" %><br />
+    <div class="controls">
+      <%= f.fields_for :contributions do |contribution_form| %>
+      <!-- %= contribution_form.collection_select(:author_id,Author.all,:id,:full_name,:prompt=>true) -->
+      <%= contribution_form.autocomplete_field :author, autocomplete_author_full_name_contributions_path %>
+      
+
+      <%= contribution_form.text_field :what,:placeholder=>"Type of contribution" %>
+      <%= contribution_form.link_to_remove raw("<i class='icon-minus'></i> Remove this contributor"), :class=>"btn" %>
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add a contributor"), :contributions, {:class=>:btn} %>
+	<%= link_to raw("<i class='icon-plus'></i> Create a new author"), new_author_path, {:class=>:btn,:target=>:new} %>
+      </div>
+    </div>
+  </div>
+  <div class="actions control-group">
+    <div class="controls">
+    <%= f.submit :value=>"Save",:class=>"btn btn-large btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @title %> |
 <%= link_to 'Back', titles_path %>
+

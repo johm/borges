@@ -1,5 +1,7 @@
 Borges::Application.routes.draw do
-  resources :contributions
+  resources :contributions do 
+    get :autocomplete_author_full_name, :on => :collection
+  end
 
 
   resources :titles
