@@ -23,3 +23,7 @@ end
 Contribution.blueprint do
   # Attributes here
 end
+
+Edition.blueprint do
+  # Attributes here
+end

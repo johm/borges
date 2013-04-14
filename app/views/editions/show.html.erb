@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Isbn13:</b>
+  <%= @edition.isbn13 %>
+</p>
+
+<p>
+  <b>Isbn10:</b>
+  <%= @edition.isbn10 %>
+</p>
+
+<p>
+  <b>Year of publication:</b>
+  <%= @edition.year_of_publication %>
+</p>
+
+<p>
+  <b>Format:</b>
+  <%= @edition.format %>
+</p>
+
+<p>
+  <b>In print:</b>
+  <%= @edition.in_print %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @edition.notes %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @edition.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_edition_path(@edition) %> |
+<%= link_to 'Back', editions_path %>

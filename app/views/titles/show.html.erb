@@ -1,9 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
+<h1>Title</h1>
   <%= @title.title %>
-</p>
+  
+<h2>Contributors</h2>
+<ul>
+<% @title.contributions.each do |c| %>
+<li><%= link_to c, c.author %>
+<% end %>
+</ul>
+
+<h2>Editions</h2>
+<ul>
+<% @title.editions.each do |e| %>
+<li><%= link_to e, e %>
+<% end %>
+</ul>
 
 
 <%= link_to 'Edit', edit_title_path(@title) %> |
