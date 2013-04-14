@@ -13,5 +13,9 @@ class Author < ActiveRecord::Base
     self.full_name = "#{first_name} #{last_name}"
   end
 
+  def name_and_id
+    "#{full_name} (#{id})"
+  end
+
 
 end

@@ -5,7 +5,6 @@ class TitlesController < ApplicationController
   # GET /titles.json
   def index
     @titles = Title.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @titles }
@@ -67,7 +66,7 @@ class TitlesController < ApplicationController
     authorize! :update, @title, :message => 'Not authorized to edit titles.'
     
     @title = Title.find(params[:id])
-
+    
     respond_to do |format|
       if @title.update_attributes(params[:title])
         format.html { redirect_to @title, notice: 'Title was successfully updated.' }
