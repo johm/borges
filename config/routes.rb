@@ -1,4 +1,7 @@
 Borges::Application.routes.draw do
+  resources :copies
+
+
   resources :editions
 
 

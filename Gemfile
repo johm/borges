@@ -27,3 +27,4 @@ gem 'rails3-jquery-autocomplete'
 gem 'jquery-ui-rails'
 gem "nested_form"
 gem 'lisbn'
+gem 'carrierwave'

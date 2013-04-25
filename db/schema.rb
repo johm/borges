@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414153156) do
+ActiveRecord::Schema.define(:version => 20130425213731) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -29,6 +29,22 @@ ActiveRecord::Schema.define(:version => 20130414153156) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "copies", :force => true do |t|
+    t.integer  "edition_id"
+    t.integer  "cost_in_cents"
+    t.integer  "price_in_cents"
+    t.text     "notes"
+    t.integer  "distributor_id"
+    t.integer  "owner_id"
+    t.boolean  "is_used"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "copies", ["distributor_id"], :name => "index_copies_on_distributor_id"
+  add_index "copies", ["edition_id"], :name => "index_copies_on_edition_id"
+  add_index "copies", ["owner_id"], :name => "index_copies_on_owner_id"
+
   create_table "editions", :force => true do |t|
     t.string   "isbn13"
     t.string   "isbn10"
@@ -39,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20130414153156) do
     t.integer  "title_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "cover"
   end
 
   add_index "editions", ["title_id"], :name => "index_editions_on_title_id"

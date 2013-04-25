@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Edition:</b>
+  <%= @copy.edition %>
+</p>
+
+<p>
+  <b>Cost in cents:</b>
+  <%= @copy.cost_in_cents %>
+</p>
+
+<p>
+  <b>Price in cents:</b>
+  <%= @copy.price_in_cents %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @copy.notes %>
+</p>
+
+<p>
+  <b>Distributor:</b>
+  <%= @copy.distributor %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @copy.owner %>
+</p>
+
+<p>
+  <b>Is used:</b>
+  <%= @copy.is_used %>
+</p>
+
+
+<%= link_to 'Edit', edit_copy_path(@copy) %> |
+<%= link_to 'Back', copies_path %>

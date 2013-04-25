@@ -1,0 +1,35 @@
+<h1>Listing copies</h1>
+
+<table>
+  <tr>
+    <th>Edition</th>
+    <th>Cost in cents</th>
+    <th>Price in cents</th>
+    <th>Notes</th>
+    <th>Distributor</th>
+    <th>Owner</th>
+    <th>Is used</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @copies.each do |copy| %>
+  <tr>
+    <td><%= copy.edition %></td>
+    <td><%= copy.cost_in_cents %></td>
+    <td><%= copy.price_in_cents %></td>
+    <td><%= copy.notes %></td>
+    <td><%= copy.distributor %></td>
+    <td><%= copy.owner %></td>
+    <td><%= copy.is_used %></td>
+    <td><%= link_to 'Show', copy %></td>
+    <td><%= link_to 'Edit', edit_copy_path(copy) %></td>
+    <td><%= link_to 'Destroy', copy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Copy', new_copy_path %>

@@ -1,4 +1,7 @@
-<%= form_for(@edition) do |f| %>
+<%= form_for(@edition ,:html => {:multipart=>true,:class=>"form-horizontal"}) do |f| %>
+
+<h1>for <%= @edition.title %></h1>
+
   <% if @edition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@edition.errors.count, "error") %> prohibited this edition from being saved:</h2>
@@ -11,21 +14,30 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :isbn13 %><br />
-    <%= f.text_field :isbn13 %>
+  <div class="field control-group">
+      <%= f.label :isbn13, :class=>"control-label" %> 
+      <div class="controls">
+	<%= f.text_field :isbn13 %>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :isbn10 %><br />
-    <%= f.text_field :isbn10 %>
+  <div class="field control-group">
+    <%= f.label :isbn10, :class=>"control-label" %>
+    <div class="controls">
+      <%= f.text_field :isbn10 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :year_of_publication %><br />
-    <%= f.number_field :year_of_publication %>
+  <div class="field control-group">
+    <%= f.label :year_of_publication, :class=>"control-label" %>
+    <div class="controls">
+      <%= f.select :year_of_publication, (1900..2020) %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :format %><br />
-    <%= f.text_field :format %>
+
+  <div class="field control-group">
+    <%= f.label :format, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.select :format, Edition.formats %>
+    </div>
   </div>
   <div class="field">
     <%= f.label :in_print %><br />
@@ -35,10 +47,14 @@
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
   </div>
+
+
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.label :cover %><br />
+    <%= f.file_field :cover %>
   </div>
+    
+
   <div class="actions">
     <%= f.submit %>
   </div>

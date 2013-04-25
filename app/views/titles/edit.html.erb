@@ -42,7 +42,7 @@
       <%= f.fields_for :editions do |edition_form| %>
       <%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13" %>
       <%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10" %>
-      <%= edition_form.select :format, ['Hardcover','Paperback'] %>
+      <%= edition_form.select :format, Edition.formats %>
       <%= edition_form.link_to_remove raw("<i class='icon-minus'></i> Remove this edition"), :class=>"btn" %>
       <% end %>
       <div class="verticaloffset">

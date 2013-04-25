@@ -4,11 +4,15 @@ class Contribution < ActiveRecord::Base
   belongs_to :title
 
   def to_s
-    if what 
-      "#{author.full_name} (#{what})"
+    if author 
+      if what 
+        "#{author.full_name} (#{what})"
+      else
+        author.full_name
+      end
     else
-      author.full_name
-    end
+      ""
+    end  
   end
 
 end

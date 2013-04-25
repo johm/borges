@@ -27,3 +27,7 @@ end
 Edition.blueprint do
   # Attributes here
 end
+
+Copy.blueprint do
+  # Attributes here
+end

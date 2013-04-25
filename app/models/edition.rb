@@ -1,10 +1,17 @@
 class Edition < ActiveRecord::Base
   belongs_to :title
+  has_many :copies
   attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
   before_save :copy_isbns
+  mount_uploader :cover, ImageUploader
+
+
+  def self.formats
+    ['Hardcover','Paperback','Pamphlet']
+  end
 
   def to_s
     "#{format} (#{year_of_publication})"
