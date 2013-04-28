@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425213731) do
+ActiveRecord::Schema.define(:version => 20130428020205) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -39,10 +39,12 @@ ActiveRecord::Schema.define(:version => 20130425213731) do
     t.boolean  "is_used"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "invoice_id"
   end
 
   add_index "copies", ["distributor_id"], :name => "index_copies_on_distributor_id"
   add_index "copies", ["edition_id"], :name => "index_copies_on_edition_id"
+  add_index "copies", ["invoice_id"], :name => "index_copies_on_invoice_id"
   add_index "copies", ["owner_id"], :name => "index_copies_on_owner_id"
 
   create_table "editions", :force => true do |t|
@@ -59,6 +61,56 @@ ActiveRecord::Schema.define(:version => 20130425213731) do
   end
 
   add_index "editions", ["title_id"], :name => "index_editions_on_title_id"
+
+  create_table "invoice_line_items", :force => true do |t|
+    t.integer  "quantity"
+    t.integer  "edition_id"
+    t.integer  "invoice_id"
+    t.integer  "purchase_order_id"
+    t.boolean  "is_transfer"
+    t.float    "discount"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "invoice_line_items", ["edition_id"], :name => "index_invoice_line_items_on_edition_id"
+  add_index "invoice_line_items", ["invoice_id"], :name => "index_invoice_line_items_on_invoice_id"
+  add_index "invoice_line_items", ["purchase_order_id"], :name => "index_invoice_line_items_on_purchase_order_id"
+
+  create_table "invoices", :force => true do |t|
+    t.integer  "distributor_id"
+    t.text     "notes"
+    t.string   "number"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
+
+  create_table "purchase_order_line_items", :force => true do |t|
+    t.integer  "quantity"
+    t.integer  "edition_id"
+    t.integer  "purchase_order_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "purchase_order_line_items", ["edition_id"], :name => "index_purchase_order_line_items_on_edition_id"
+  add_index "purchase_order_line_items", ["purchase_order_id"], :name => "index_purchase_order_line_items_on_purchase_order_id"
+
+  create_table "purchase_orders", :force => true do |t|
+    t.string   "number"
+    t.text     "notes"
+    t.integer  "customer_id"
+    t.integer  "distributor_id"
+    t.boolean  "ordered"
+    t.datetime "ordered_when"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "purchase_orders", ["customer_id"], :name => "index_purchase_orders_on_customer_id"
+  add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

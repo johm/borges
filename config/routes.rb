@@ -1,4 +1,10 @@
 Borges::Application.routes.draw do
+  resources :invoice_line_items
+
+
+  resources :invoices
+
+
   resources :purchase_order_line_items
 
 

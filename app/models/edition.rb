@@ -2,6 +2,7 @@ class Edition < ActiveRecord::Base
   belongs_to :title
   has_many :copies
   has_many :purchase_order_line_items
+  has_many :invoice_line_items 
   attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication
 
   validate :isbns_are_valid

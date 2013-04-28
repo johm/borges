@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @invoice_line_item.quantity %>
+</p>
+
+<p>
+  <b>Edition:</b>
+  <%= @invoice_line_item.edition %>
+</p>
+
+<p>
+  <b>Invoice:</b>
+  <%= @invoice_line_item.invoice %>
+</p>
+
+<p>
+  <b>Purchase order:</b>
+  <%= @invoice_line_item.purchase_order %>
+</p>
+
+<p>
+  <b>Is transfer:</b>
+  <%= @invoice_line_item.is_transfer %>
+</p>
+
+<p>
+  <b>Discount:</b>
+  <%= @invoice_line_item.discount %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_line_item_path(@invoice_line_item) %> |
+<%= link_to 'Back', invoice_line_items_path %>

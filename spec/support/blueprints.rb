@@ -39,3 +39,11 @@ end
 PurchaseOrderLineItem.blueprint do
   # Attributes here
 end
+
+Invoice.blueprint do
+  # Attributes here
+end
+
+InvoiceLineItem.blueprint do
+  # Attributes here
+end
