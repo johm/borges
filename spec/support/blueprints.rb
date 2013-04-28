@@ -31,3 +31,7 @@ end
 Copy.blueprint do
   # Attributes here
 end
+
+PurchaseOrder.blueprint do
+  # Attributes here
+end

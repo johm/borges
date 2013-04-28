@@ -1,4 +1,7 @@
 Borges::Application.routes.draw do
+  resources :purchase_orders
+
+
   resources :copies
 
 

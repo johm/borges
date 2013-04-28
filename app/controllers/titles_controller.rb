@@ -1,6 +1,7 @@
 class TitlesController < ApplicationController
   before_filter :authenticate_user! 
-  
+  load_and_authorize_resource
+
   # GET /titles
   # GET /titles.json
   def index
@@ -25,8 +26,6 @@ class TitlesController < ApplicationController
   # GET /titles/new
   # GET /titles/new.json
   def new
-    authorize! :new, @title, :message => 'Not authorized to add titles.'
-
     @title = Title.new
 
     respond_to do |format|
@@ -37,16 +36,12 @@ class TitlesController < ApplicationController
 
   # GET /titles/1/edit
   def edit
-    authorize! :edit, @title, :message => 'Not authorized to edit titles.'
-    
     @title = Title.find(params[:id])
   end
 
   # POST /titles
   # POST /titles.json
   def create
-    authorize! :create, @title, :message => 'Not authorized to add titles.'
-    
     @title = Title.new(params[:title])
 
     respond_to do |format|
@@ -63,8 +58,6 @@ class TitlesController < ApplicationController
   # PUT /titles/1
   # PUT /titles/1.json
   def update
-    authorize! :update, @title, :message => 'Not authorized to edit titles.'
-    
     @title = Title.find(params[:id])
     
     respond_to do |format|
@@ -81,8 +74,6 @@ class TitlesController < ApplicationController
   # DELETE /titles/1
   # DELETE /titles/1.json
   def destroy
-    authorize! :destroy, @title, :message => 'Not authorized to edit titles.'
-
     @title = Title.find(params[:id])
     @title.destroy
 

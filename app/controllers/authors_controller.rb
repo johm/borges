@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
   before_filter :authenticate_user! 
+  load_and_authorize_resource
 
   # GET /authors
   # GET /authors.json
@@ -25,8 +26,6 @@ class AuthorsController < ApplicationController
   # GET /authors/new
   # GET /authors/new.json
   def new
-    authorize! :new, @author, :message => 'Not authorized to add authors.'
-
     @author = Author.new
 
     respond_to do |format|
@@ -37,15 +36,12 @@ class AuthorsController < ApplicationController
 
   # GET /authors/1/edit
   def edit
-    authorize! :edit, @author, :message => 'Not authorized to edit authors.'
-
     @author = Author.find(params[:id])
   end
 
   # POST /authors
   # POST /authors.json
   def create
-    authorize! :create, @author, :message => 'Not authorized to add authors.'
     @author = Author.new(params[:author])
 
     respond_to do |format|
@@ -62,8 +58,6 @@ class AuthorsController < ApplicationController
   # PUT /authors/1
   # PUT /authors/1.json
   def update
-    authorize! :update, @author, :message => 'Not authorized to edit authors.'
-
     @author = Author.find(params[:id])
 
     respond_to do |format|
@@ -80,8 +74,6 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1
   # DELETE /authors/1.json
   def destroy
-    authorize! :destroy, @author, :message => 'Not authorized to destroy authors.'
-
     @author = Author.find(params[:id])
     @author.destroy
 

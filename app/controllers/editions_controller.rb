@@ -1,10 +1,11 @@
 class EditionsController < ApplicationController
   before_filter :authenticate_user! 
+  load_and_authorize_resource
+
   # GET /editions
   # GET /editions.json
   def index
     @editions = Edition.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @editions }
@@ -25,7 +26,6 @@ class EditionsController < ApplicationController
   # GET /editions/new
   # GET /editions/new.json
   def new
-    authorize! :new, @edition, :message => 'Not authorized to add.'
     @edition = Edition.new
 
     respond_to do |format|
@@ -36,14 +36,12 @@ class EditionsController < ApplicationController
 
   # GET /editions/1/edit
   def edit
-    authorize! :edit, @edition, :message => 'Not authorized to edit.'
     @edition = Edition.find(params[:id])
   end
 
   # POST /editions
   # POST /editions.json
   def create
-    authorize! :create, @edition, :message => 'Not authorized to edit.'
     @edition = Edition.new(params[:edition])
 
     respond_to do |format|
@@ -60,7 +58,6 @@ class EditionsController < ApplicationController
   # PUT /editions/1
   # PUT /editions/1.json
   def update
-    authorize! :update, @edition, :message => 'Not authorized to edit.'
     @edition = Edition.find(params[:id])
 
     respond_to do |format|
@@ -77,7 +74,6 @@ class EditionsController < ApplicationController
   # DELETE /editions/1
   # DELETE /editions/1.json
   def destroy
-    authorize! :destroy, @edition, :message => 'Not authorized to edit.'
     @edition = Edition.find(params[:id])
     @edition.destroy
 

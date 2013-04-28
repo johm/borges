@@ -1,5 +1,7 @@
 class CopiesController < ApplicationController
   before_filter :authenticate_user! 
+  load_and_authorize_resource
+
   # GET /copies
   # GET /copies.json
   def index
@@ -25,7 +27,6 @@ class CopiesController < ApplicationController
   # GET /copies/new
   # GET /copies/new.json
   def new
-    authorize! :new, @copy, :message => 'Not authorized to add.'
     @copy = Copy.new
 
     respond_to do |format|
@@ -36,14 +37,12 @@ class CopiesController < ApplicationController
 
   # GET /copies/1/edit
   def edit
-    authorize! :edit, @copy, :message => 'Not authorized to edit.'
     @copy = Copy.find(params[:id])
   end
 
   # POST /copies
   # POST /copies.json
   def create
-    authorize! :new, @copy, :message => 'Not authorized to add.'
     @copy = Copy.new(params[:copy])
 
     respond_to do |format|
@@ -60,7 +59,6 @@ class CopiesController < ApplicationController
   # PUT /copies/1
   # PUT /copies/1.json
   def update
-    authorize! :edit, @copy, :message => 'Not authorized to edit.'
     @copy = Copy.find(params[:id])
 
     respond_to do |format|
@@ -77,7 +75,6 @@ class CopiesController < ApplicationController
   # DELETE /copies/1
   # DELETE /copies/1.json
   def destroy
-    authorize! :edit, @copy, :message => 'Not authorized to edit.'
     @copy = Copy.find(params[:id])
     @copy.destroy
 
