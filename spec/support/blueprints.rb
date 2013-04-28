@@ -35,3 +35,7 @@ end
 PurchaseOrder.blueprint do
   # Attributes here
 end
+
+PurchaseOrderLineItem.blueprint do
+  # Attributes here
+end
