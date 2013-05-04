@@ -40,9 +40,46 @@
     <%= f.label :editions, :class=>"control-label" %><br />
     <div class="controls">
       <%= f.fields_for :editions do |edition_form| %>
-      <%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13" %>
-      <%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10" %>
-      <%= edition_form.select :format, Edition.formats %>
+      <%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13",:class=>"input-medium" %>
+      <%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10",:class=>"input-small" %>
+      <div class="input-prepend">
+	<span class="add-on">$</span>
+	<%= edition_form.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
+      </div>
+      <%= edition_form.select :format, Edition.formats,{},{:class=>"input-medium"} %>
+      <label class="checkbox inline">
+	<%= edition_form.check_box :in_print %> in print?
+      </label>
+
+       <a href="#" onClick="$('#edition_details-<%= edition_form.my_unique_id %>').collapse('toggle');return false;">
+	<button type="button" class="btn btn-info">
+	Details <span class="caret"></span>
+	</button>
+      </a>
+
+      <div class="collapse" id="edition_details-<%= edition_form.my_unique_id %>">
+	<div class="well">
+	  <div class="control-group">
+	    <label class="control-label">Year of publication</label>
+	    <div class="controls"><%= edition_form.text_field :year_of_publication,:placeholder=>"Year",:class=>"input-small" %></div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Notes (public)</label>
+	    <div class="controls"><%= edition_form.text_area :notes,:placeholder=>"Notes",:rows=>3 %></div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Cover</label>
+	    <div class="controls">
+	      <%= edition_form.file_field :cover %>
+	      <%= image_tag edition_form.object.cover_url(:thumb) if edition_form.object.cover? %>
+	    </div>
+
+
+	  </div>
+
+	</div>
+      </div>
+
       <%= edition_form.link_to_remove raw("<i class='icon-minus'></i> Remove this edition"), :class=>"btn" %>
       <% end %>
       <div class="verticaloffset">

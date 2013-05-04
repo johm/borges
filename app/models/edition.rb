@@ -3,13 +3,14 @@ class Edition < ActiveRecord::Base
   has_many :copies
   has_many :purchase_order_line_items
   has_many :invoice_line_items 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
   before_save :copy_isbns
   mount_uploader :cover, ImageUploader
 
+  monetize :list_price_cents
 
   def self.formats
     ['Hardcover','Paperback','Pamphlet']

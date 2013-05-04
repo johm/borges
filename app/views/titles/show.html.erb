@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Title</h1>
-  <%= @title.title %>
+
+<%= image_tag @title.latest_edition.cover_url(:medium) if @title.latest_edition? %>
+
+<h1><%= @title.title %></h1>
   
 <h2>Contributors</h2>
 <ul>

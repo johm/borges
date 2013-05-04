@@ -31,6 +31,7 @@ Borges::Application.routes.draw do
   authenticated :user do
     root :to => 'home#index'
   end
+  match 'frontpage', :to=>'home#frontpage'
   root :to => "home#index"
   devise_for :users
   resources :users

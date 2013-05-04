@@ -1,3 +1,110 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$nearwhite:#f6f6f6;
+$nearblack:#000810;
+
+
+body.frontpage {
+background-color:$nearblack;
+}
+
+body.frontpage td {
+background-color:$nearblack;
+color:$nearwhite !important;
+}
+
+
+.bebas {
+font-family:"Bebas Neue";
+}
+
+
+
+.lincoln {
+font-family:"Abraham Lincoln";
+}
+
+.edmond {
+font-family:"Edmondsans";
+}
+
+.tablet {
+font-family:"Tablet Gothic SemiCondensed";
+}
+
+.copse {
+font-family:"Copse";
+}
+
+.muncie {
+font-family:"Muncie";
+}
+
+
+.fairview {
+font-family:"fairview";
+}
+
+
+.geared {
+font-family:"Geared Slab";
+}
+
+.frontpage .content {
+font-family:"ChunkFiveRegular";
+font-size:60px;
+color:#050505;
+text-shadow: 1px 1px 2px #333333;
+filter: dropshadow(color=#707070, offx=1, offy=1);
+}
+
+.frontpage .title {
+font-family:"Franchise";
+font-weight:normal;
+text-transform:uppercase;
+}
+
+.frontpage .subtitle {
+font-family:"AbrahamLincoln";
+font-weight:normal;
+text-transform:uppercase;
+font-size:100px;
+line-height:110px;
+}
+
+body.frontpage {
+padding-top:0px;
+}
+
+.frontpage table {
+border-collapse:collapse;
+}
+
+.frontpage td {
+border:7px solid $nearwhite;
+padding-left:20px;
+padding-right:20px;
+padding-top:i5px;
+padding-bottom:5px;
+vertical-align:middle;
+text-align:center;
+}
+
+.frontpage .redemmas {
+font-size:200px;
+}
+
+.frontpage .bookstore {
+font-size:100px;
+position:relative;
+top:-45px;
+}
+
+.frontpage .coffeehouse {
+font-size:83px;
+top:-20px;
+position:relative;
+}
+

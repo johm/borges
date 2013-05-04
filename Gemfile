@@ -28,3 +28,5 @@ gem 'jquery-ui-rails'
 gem "nested_form"
 gem 'lisbn'
 gem 'carrierwave'
+gem 'money-rails'
+gem 'rmagick'
