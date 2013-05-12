@@ -12,6 +12,9 @@ class Edition < ActiveRecord::Base
 
   monetize :list_price_cents
 
+  scope :newest_first, order("year_of_publication desc")
+  
+
   def self.formats
     ['Hardcover','Paperback','Pamphlet']
   end

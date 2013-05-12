@@ -13,6 +13,14 @@ class Title < ActiveRecord::Base
   def to_s
     title
   end
+
+  def latest_edition
+    editions.newest_first.first
+  end
+
+  def latest_edition?
+    latest_edition
+  end
   
 
 end
