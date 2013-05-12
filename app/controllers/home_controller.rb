@@ -7,4 +7,9 @@ class HomeController < ApplicationController
     render :layout => "frontpage"
   end
 
+  def interior
+    render :layout => "frontpage"
+  end
+
+
 end
