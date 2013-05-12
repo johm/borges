@@ -1,6 +1,8 @@
 Borges::Application.routes.draw do
-  resources :invoice_line_items
+  resources :distributors
 
+
+  resources :invoice_line_items
 
   resources :invoices
 
@@ -32,6 +34,7 @@ Borges::Application.routes.draw do
     root :to => 'home#index'
   end
   match 'frontpage', :to=>'home#frontpage'
+  match 'interior', :to=>'home#interior'
   root :to => "home#index"
   devise_for :users
   resources :users

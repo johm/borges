@@ -47,3 +47,7 @@ end
 InvoiceLineItem.blueprint do
   # Attributes here
 end
+
+Distributor.blueprint do
+  # Attributes here
+end
