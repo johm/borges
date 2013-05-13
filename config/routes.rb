@@ -10,7 +10,9 @@ Borges::Application.routes.draw do
   resources :purchase_order_line_items
 
 
-  resources :purchase_orders
+  resources :purchase_orders do 
+    get :autocomplete_distributor_name, :on => :collection
+  end
 
 
   resources :copies

@@ -1,4 +1,4 @@
-<%= form_for(@purchase_order) do |f| %>
+<%= form_for(@purchase_order,:html=>{:class=>"form-horizontal"}) do |f| %>
   <% if @purchase_order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@purchase_order.errors.count, "error") %> prohibited this purchase_order from being saved:</h2>
@@ -11,22 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </div>
+  <%= mytextfield f,:number,:number %>
+  <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path %>
+  
+
+  
+
+  
   <div class="field">
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
   </div>
-  <div class="field">
+<!--  <div class="field">
     <%= f.label :customer %><br />
     <%= f.text_field :customer %>
-  </div>
-  <div class="field">
-    <%= f.label :distributor %><br />
-    <%= f.text_field :distributor %>
-  </div>
+  </div>-->
   <div class="field">
     <%= f.label :ordered %><br />
     <%= f.check_box :ordered %>
