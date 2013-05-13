@@ -1,0 +1,19 @@
+<%= form_for @distributor,:html=>{:class=>"form-horizontal"} do |f| %>
+  <% if @distributor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@distributor.errors.count, "error") %> prohibited this distributor from being saved:</h2>
+
+      <ul>
+      <% @distributor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= mytextfield(f,:name,:name) %>
+  <%= mytextfield(f,:our_account_number,:our_account_number) %>
+  <%= mytextarea(f,:notes,:notes) %>    
+  <%= mysubmit(f,"Save") %>
+
+<% end %>
