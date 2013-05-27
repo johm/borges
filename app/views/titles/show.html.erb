@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
 <div class="span2">
-<%= image_tag @edition.cover_url(:medium),:class=>"bookcover"  %>
+<%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless @edition.nil? %>
 </div>
 <div class="span7">
 <h1 class="booktitle"><%= @title.title %></h1>
