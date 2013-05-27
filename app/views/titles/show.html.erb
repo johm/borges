@@ -18,24 +18,24 @@
 </div>
 
 <div class="span3">
-  <%= status_and_price(@edition) %>
-  <%= buy_or_order(@edition) %>  
+  <%= status_and_price(@edition) unless @edition.nil? %>
+  <%= buy_or_order(@edition) unless @edition.nil? %>  
   <table class="table">
   <tr>
     <th>ISBN</th>
-    <td><%= @edition.isbn13 %></td>
+    <td><%= @edition.isbn13 unless @edition.nil? %></td>
   </tr>
   <tr>
     <th>List price</th>
-    <td>$<%= @edition.list_price %></td>
+    <td>$<%= @edition.list_price unless @edition.nil? %></td>
   </tr>
   <tr>
     <th>Publisher</th>
-    <td><%= @title.publisher.name %></td>
+    <td><%= @title.publisher.name unless @edition.nil? %></td>
   </tr>
   <tr>
     <th>Year of publication</th>
-    <td><%= @edition.year_of_publication %></td>
+    <td><%= @edition.year_of_publication unless @edition.nil? %></td>
   </tr>
   
   <tr>
