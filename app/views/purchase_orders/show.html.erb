@@ -1,24 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Number:</b>
-  <%= @purchase_order.number %>
-</p>
+<table class="table">
+  <tr>
+    <th>Our PO number:</th>
+    <td><%= @purchase_order.number %></td>
+  </tr>
 
-<p>
-  <b>Notes:</b>
-  <%= @purchase_order.notes %>
-</p>
+  <tr>
+    <th>Distributor:</th>
+    <td><%= link_to @purchase_order.distributor, @purchase_order.distributor %></td>
+  </tr>
+  
+  <tr>
+    <th>Customer:</th>
+    <td><%= link_to @purchase_order.customer,@purchase_order.customer %></td>
+  </tr>
+  
+  <tr>
+    <th>Notes:</th>
+    <td><%= best_in_place @purchase_order, :notes, :type => :textarea %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Customer:</b>
-  <%= @purchase_order.customer %>
-</p>
 
-<p>
-  <b>Distributor:</b>
-  <%= @purchase_order.distributor %>
-</p>
+
 
 <p>
   <b>Ordered:</b>

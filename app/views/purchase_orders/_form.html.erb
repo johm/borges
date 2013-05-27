@@ -2,7 +2,6 @@
   <% if @purchase_order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@purchase_order.errors.count, "error") %> prohibited this purchase_order from being saved:</h2>
-
       <ul>
       <% @purchase_order.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -12,20 +11,13 @@
   <% end %>
 
   <%= mytextfield f,:number,:number %>
-  <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path %>
-  
+  <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, new_distributor_path() %> 
+  <%= mytextarea f,:notes,:notes, {:rows=>5} %>
 
-  
-
-  
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
 <!--  <div class="field">
     <%= f.label :customer %><br />
     <%= f.text_field :customer %>
-  </div>-->
+  </div>
   <div class="field">
     <%= f.label :ordered %><br />
     <%= f.check_box :ordered %>
@@ -34,7 +26,7 @@
     <%= f.label :ordered_when %><br />
     <%= f.datetime_select :ordered_when %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+-->
+<%=  mysubmit(f,"Create") %>
   </div>
 <% end %>

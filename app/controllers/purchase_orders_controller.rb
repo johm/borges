@@ -1,6 +1,5 @@
 class PurchaseOrdersController < ApplicationController
-  autocomplete :distributor,:name,:full=>true
-
+  autocomplete :distributor,:name,:full=>true,:display_value=>:name_and_id
 
   before_filter :authenticate_user! 
   load_and_authorize_resource 

@@ -14,6 +14,7 @@
 
 /*
  *= require jquery.ui.all
+ *= require bootstrap-wysihtml5
 */
 
 .content {
@@ -37,4 +38,27 @@ margin-top:5px;
 .field_with_errors {
 display:inline !important;
 color:#ff0000 !important;	
+}
+
+
+.block {
+display:block !important;
+}
+
+
+.status_and_price, .status_and_price td {
+font-size:22px;
+}
+
+table.status_and_price {
+margin-bottom:4px;
+}
+
+#error_explanation li {
+color:black;		   
+}
+
+
+.content a,.content a:visited {
+color:#ffcc00;
 }

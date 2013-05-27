@@ -13,6 +13,7 @@ class Edition < ActiveRecord::Base
   monetize :list_price_cents
 
   scope :newest_first, order("year_of_publication desc")
+  scope :without_edition, lambda{|e| e ? {:conditions => ["id != ?", e.id]} : {} }
   
 
   def self.formats

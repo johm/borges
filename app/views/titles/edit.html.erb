@@ -12,44 +12,54 @@
       </ul>
     </div>
     <% end %>
+
+    <%= mytextfield f,:title,:title,{:class=>"input-xxlarge"} %>
+    <div class="controls">
+      <a href="#" onClick="$('#title_details').collapse('toggle');return false;">
+	<button type="button" class="btn btn-info">
+	  Details <span class="caret"></span>
+	</button>
+      </a>
+    </div>
+    <div class="collapse" id="title_details">
+      <div class="well">
+	<%= myselectfield f,:publisher,:publisher,autocomplete_publisher_name_titles_path %>
+	<%= mytextarea f,:description,:description, :rows=>10 %>
+      </div>
+    </div>
     
-  <div class="field control-group">
-    <%= f.label :title, :class=>"control-label" %>
-    <div class="controls">
-      <%= f.text_field :title %>
-    </div>
-  </div>
 
-  <div class="field control-group">
-    <%= f.label :contributors, :class=>"control-label" %><br />
-    <div class="controls">
-      <%= f.fields_for :contributions do |contribution_form| %>
-      <%= contribution_form.autocomplete_field :author, autocomplete_author_full_name_contributions_path,:id_element => "#author-#{contribution_form.my_unique_id}", :name=>'ignorethisonsubmit' %>
-      <%= contribution_form.hidden_field :author_id, :id => "author-#{contribution_form.my_unique_id}" %>
-      <%= contribution_form.text_field :what,:placeholder=>"Type of contribution" %>
-      <%= contribution_form.link_to_remove raw("<i class='icon-minus'></i> Remove this contributor"), :class=>"btn" %>
-      <% end %>
-      <div class="verticaloffset">
-	<%= f.link_to_add raw("<i class='icon-plus'></i> Add a contributor"), :contributions, {:class=>:btn} %>
-	<%= link_to raw("<i class='icon-plus'></i> Create a new author"), new_author_path, {:class=>:btn,:target=>:new} %>
+
+    <div class="field control-group">
+      <%= f.label :contributors, :class=>"control-label" %><br />
+      <div class="controls">
+	<%= f.fields_for :contributions do |contribution_form| %>
+	<%= contribution_form.autocomplete_field :author, autocomplete_author_full_name_contributions_path,:id_element => "#author-#{contribution_form.my_unique_id}", :name=>'ignorethisonsubmit' %>
+	<%= contribution_form.hidden_field :author_id, :id => "author-#{contribution_form.my_unique_id}" %>
+	<%= contribution_form.text_field :what,:placeholder=>"Type of contribution" %>
+	<%= contribution_form.link_to_remove raw("<i class='icon-minus'></i> Remove this contributor"), :class=>"btn" %>
+	<% end %>
+	<div class="verticaloffset">
+	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a contributor"), :contributions, {:class=>:btn} %>
+	  <%= link_to raw("<i class='icon-plus'></i> Create a new author"), new_author_path, {:class=>:btn,:target=>:new} %>
+	</div>
       </div>
     </div>
-  </div>
-
-  <div class="field control-group">
-    <%= f.label :editions, :class=>"control-label" %><br />
-    <div class="controls">
-      <%= f.fields_for :editions do |edition_form| %>
-      <%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13",:class=>"input-medium" %>
-      <%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10",:class=>"input-small" %>
-      <div class="input-prepend">
-	<span class="add-on">$</span>
-	<%= edition_form.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
+    
+    <div class="field control-group">
+      <%= f.label :editions, :class=>"control-label" %><br />
+      <div class="controls">
+	<%= f.fields_for :editions do |edition_form| %>
+	<%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13",:class=>"input-medium" %>
+	<%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10",:class=>"input-small" %>
+	<div class="input-prepend">
+	  <span class="add-on">$</span>
+	  <%= edition_form.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
       </div>
-      <%= edition_form.select :format, Edition.formats,{},{:class=>"input-medium"} %>
-      <label class="checkbox inline">
-	<%= edition_form.check_box :in_print %> in print?
-      </label>
+	<%= edition_form.select :format, Edition.formats,{},{:class=>"input-medium"} %>
+	<label class="checkbox inline">
+	  <%= edition_form.check_box :in_print %> in print?
+	</label>
 
        <a href="#" onClick="$('#edition_details-<%= edition_form.my_unique_id %>').collapse('toggle');return false;">
 	<button type="button" class="btn btn-info">

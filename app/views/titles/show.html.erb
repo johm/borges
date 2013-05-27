@@ -1,24 +1,78 @@
 <p id="notice"><%= notice %></p>
 
 
-<%= image_tag @title.latest_edition.cover_url(:medium) if @title.latest_edition? %>
+<div class="container">
+  <div class="row">
+<div class="span2">
+<%= image_tag @edition.cover_url(:medium),:class=>"bookcover"  %>
+</div>
+<div class="span7">
+<h1 class="booktitle"><%= @title.title %></h1>
+<h2 class="contributors">
+  <%= sanitize contributors_list(@title) %>
+</h2>
 
-<h1><%= @title.title %></h1>
+<div class="description">
+  <%= sanitize @title.description %>
+</div>
+</div>
+
+<div class="span3">
+  <%= status_and_price(@edition) %>
+  <%= buy_or_order(@edition) %>  
+  <table class="table">
+  <tr>
+    <th>ISBN</th>
+    <td><%= @edition.isbn13 %></td>
+  </tr>
+  <tr>
+    <th>List price</th>
+    <td>$<%= @edition.list_price %></td>
+  </tr>
+  <tr>
+    <th>Publisher</th>
+    <td><%= @title.publisher.name %></td>
+  </tr>
+  <tr>
+    <th>Year of publication</th>
+    <td><%= @edition.year_of_publication %></td>
+  </tr>
   
-<h2>Contributors</h2>
-<ul>
-<% @title.contributions.each do |c| %>
-<li><%= link_to c, c.author %>
-<% end %>
-</ul>
+  <tr>
+    <th>Other editions</th>
+    <td>
+      <ul class="editions">
+      <% @title.editions.without_edition(@edition).each do |e| %>
+      <li><%= link_to e, e %>
+	<% end %>
+      </ul>
+    </td>
+  
+</table>
+</div>
+</div>
+</div>
 
-<h2>Editions</h2>
-<ul>
-<% @title.editions.each do |e| %>
-<li><%= link_to e, e %>
-<% end %>
-</ul>
+
 
 
 <%= link_to 'Edit', edit_title_path(@title) %> |
 <%= link_to 'Back', titles_path %>
+
+
+<% content_for :related do %>
+
+<div class="span3">
+hey
+</div>
+<div class="span3">
+more stuff
+</div>
+<div class="span3">
+tk
+</div>
+<div class="span3">
+coming soon
+</div>
+
+<% end %>

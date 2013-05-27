@@ -5,27 +5,32 @@
 $nearwhite:#f6f6f6;
 $nearblack:#000810;
 $darkred:#7C1212;
-
-//.interior #maincontent {
-//background-color:$nearwhite;	     
-//min-height:550px;
-//}
-
-a.fitinner {
-display:block;
-}
+$lightgrey:#c9c2b0; 
+$lightbrown:#b5a57f; //good but too dark?
+$lightbrown:#bcb093;
 
 $holderwidth:1200px;
 $horpad:20px;
 $mar:5px;
 
 
-body.frontpage {
-background-color:$nearblack;
+
+a.fitinner {
+display:block;
 }
 
+
+
+body.frontpage {
+background-color:$nearblack !important;
+background-image:none;
+}
+
+
+
+
 body.interior {
-background-color:$nearwhite;
+background-color:$lightbrown;
 }
 
 
@@ -102,7 +107,7 @@ color:$nearwhite;
 }
 
 .interior #holder div {
-background-color:$nearwhite;
+background-color:$lightbrown;
 color:$nearblack;
 }
 
@@ -122,7 +127,8 @@ background-color:transparent;
 }
 
 .mybutton {
-border:1px solid $nearwhite;
+color:$darkred;
+border:3px solid $nearblack;
 padding:5px;
 margin-top:10px;
 border-radius:4px;
@@ -131,6 +137,10 @@ text-align:center;
 text-transform:uppercase;
 }
 
+.mybutton:hover {
+color:$nearblack;
+background-color:$lightgrey !important;
+}
 
 .booktitle {
 font-size:30px;
@@ -169,7 +179,7 @@ line-height:20px !important;
 .interior div.text {
 font-family:Copse;
 font-size:12px;
-background-color:$nearwhite !important;
+background-color:$lightbrown !important;
 color:$nearblack !important;
 }
 
@@ -301,3 +311,62 @@ padding:0px !important;
 } 
 
 
+/* making kate's interior layout */
+
+body {
+background-image: url('library1.jpg');
+background-size:cover;
+padding-top:220px;
+}
+
+#main {
+border-top:1px solid $nearblack;
+background-color:rgba(70, 63, 63, 0.95);
+color:$nearwhite;
+}
+
+.navbar-fixed-top .navbar-inner {
+min-height:60px;
+}
+
+
+
+
+
+.content {
+background-color:transparent;
+}
+
+.bookcover {
+float:right;
+margin-left:20px;
+border:1px solid #333;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+
+
+h1,h2 {
+font-family:"Dosis";
+//font-family:"Source Sans Pro";
+font-family:"Edmondsans";
+font-weight:normal;
+}
+
+.description {
+font-family:"Dosis";
+//font-family:"Quattrocento Sans";
+font-family:"Source Sans Pro";
+font-weight:300;
+font-size:18px;
+line-height:24px;
+}
+
+
+a.btn-primary,a.btn-primary:visited {
+color:white;
+}

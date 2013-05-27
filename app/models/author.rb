@@ -17,5 +17,4 @@ class Author < ActiveRecord::Base
     "#{full_name} (#{id})"
   end
 
-
 end

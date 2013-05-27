@@ -1,6 +1,9 @@
 class PurchaseOrder < ActiveRecord::Base
   # there should be a mechanism by which purchase order line items can be checked off against invoices
+  validates :number, :uniqueness => true
+  validates :number, :presence => true
   
+
   
 
   belongs_to :customer

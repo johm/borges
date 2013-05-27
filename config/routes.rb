@@ -1,4 +1,10 @@
 Borges::Application.routes.draw do
+  resources :publishers
+
+
+  resources :customers
+
+
   resources :distributors
 
 
@@ -26,7 +32,9 @@ Borges::Application.routes.draw do
   end
 
 
-  resources :titles
+  resources :titles do 
+    get :autocomplete_publisher_name, :on => :collection
+  end
 
 
   resources :authors

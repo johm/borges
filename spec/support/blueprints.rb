@@ -51,3 +51,11 @@ end
 Distributor.blueprint do
   # Attributes here
 end
+
+Customer.blueprint do
+  # Attributes here
+end
+
+Publisher.blueprint do
+  # Attributes here
+end

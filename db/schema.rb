@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512231840) do
+ActiveRecord::Schema.define(:version => 20130518151115) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20130512231840) do
   add_index "copies", ["edition_id"], :name => "index_copies_on_edition_id"
   add_index "copies", ["invoice_id"], :name => "index_copies_on_invoice_id"
   add_index "copies", ["owner_id"], :name => "index_copies_on_owner_id"
+
+  create_table "customers", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "distributors", :force => true do |t|
     t.string   "name"
@@ -96,6 +105,14 @@ ActiveRecord::Schema.define(:version => 20130512231840) do
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
 
+  create_table "publishers", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "notes"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "purchase_order_line_items", :force => true do |t|
     t.integer  "quantity"
     t.integer  "edition_id"
@@ -134,9 +151,13 @@ ActiveRecord::Schema.define(:version => 20130512231840) do
 
   create_table "titles", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "description"
+    t.integer  "publisher_id"
   end
+
+  add_index "titles", ["publisher_id"], :name => "index_titles_on_publisher_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

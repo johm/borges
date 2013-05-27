@@ -2,6 +2,8 @@ class TitlesController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
 
+  autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id
+
   # GET /titles
   # GET /titles.json
   def index
@@ -16,6 +18,8 @@ class TitlesController < ApplicationController
   # GET /titles/1.json
   def show
     @title = Title.find(params[:id])
+    @edition = params[:edition_id] ? Edition.find(params[:edition_id]) : @title.latest_edition
+    
 
     respond_to do |format|
       format.html # show.html.erb

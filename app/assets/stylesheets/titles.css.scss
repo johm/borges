@@ -1,3 +1,31 @@
 // Place all the styles related to the Titles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+h1.booktitle {
+font-size:26px;
+font-weight:normal;
+line-height:30px;
+}
+
+.contributors, .contributors a {
+color:#999999;
+font-size:22px;
+}
+
+
+
+ul.editions {
+list-style-type:none;
+margin-left:0px;
+}
+
+$darkred:#7C1212;
+$nearwhite:#f6f6f6;
+
+.relatedbar {
+background-color:$darkred;
+color:$nearwhite;
+min-height:200px;
+}
