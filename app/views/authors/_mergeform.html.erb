@@ -1,0 +1,13 @@
+
+<%= nested_form_for(@author,:html => {:class=>"form-horizontal"}) do |f| %>
+    <div class="field control-group">
+      <%= f.label :move_all_contributions_to, :class=>"control-label" %>
+    <div class="controls">
+      <%= autocomplete_field_tag :old_author, "", autocomplete_author_full_name_contributions_path,:id_element => "#merge_author",  :class=>'a_contribution' %>
+      <%= hidden_field_tag :merge_author  %>
+      
+      
+    </div>
+    </div>
+<%= mysubmit f,"Merge" %>
+<% end %>

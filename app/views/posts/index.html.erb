@@ -1,0 +1,38 @@
+<div class="container posts">
+  <div class="row">
+    <div class="span2">
+    </div>
+    <div class="span7">
+       <h1>Blog</h1>
+    </div>
+    <div class="span3">
+      <%=  mylinkbutton "<i class='icon-plus'></i> New Post", new_post_path  if can? :create, Post %>
+    </div>
+  </div>
+  
+
+    <% @posts.each do |post| %>
+    <div class="row">
+      <div class="span2">
+	<% post.images.each do |i| %>
+	<div class="item">
+	  <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
+	</div>  
+	<% end %>
+
+      </div>
+      <div class="span7 postshort">
+	<h2 class="posttitle"><%= link_to post.title,post %></h2>
+	<div class="introduction">
+	  <%= raw post.introduction %>
+	</div>
+	<%= link_to "Read more",post %>
+      </div>
+      <div class="span3">
+      </div>
+    </div>
+  <% end %>
+  
+  <%= paginate @posts %>
+</div>
+

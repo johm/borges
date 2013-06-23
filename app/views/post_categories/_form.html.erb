@@ -1,0 +1,17 @@
+<%= form_for(@post_category,:class=>'form-horizontal') do |f| %>
+  <% if @post_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_category.errors.count, "error") %> prohibited this post_category from being saved:</h2>
+
+      <ul>
+      <% @post_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= mytextfield f,:name,:name %>
+  <%= mysubmit f,"Save" %>
+
+<% end %>

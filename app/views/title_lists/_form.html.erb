@@ -1,0 +1,35 @@
+<%= nested_form_for(@title_list,:html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @title_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@title_list.errors.count, "error") %> prohibited this title_list from being saved:</h2>
+
+      <ul>
+      <% @title_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= mytextfield f,:name,:name,{:class=>"input-xxlarge"} %>
+  <%= mytextarea f,:description,:description %>
+  <%= mycheckbox f,:public,:public,{"data-on-label"=>"Yes","data-off-label"=>"No"} %>
+
+  <%= mysubmit f,"Save" %>
+  
+  <div class="field control-group">
+    <%= f.label :titles_on_this_list, :class=>"control-label" %><br />
+    <div class="controls">
+      <%= f.fields_for :title_list_memberships do |member_form| %>
+      <%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
+      <%= mytextfield member_form,:notes,:notes %>
+      
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add a title"), :title_list_memberships, {:class=>:btn} %>
+      </div>
+    </div>
+  </div>
+  <%= mysubmit f,"Save" %>
+
+<% end %>

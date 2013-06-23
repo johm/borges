@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Post:</b>
+  <%= @post_title_list_link.post %>
+</p>
+
+<p>
+  <b>Title list:</b>
+  <%= @post_title_list_link.title_list %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_title_list_link_path(@post_title_list_link) %> |
+<%= link_to 'Back', post_title_list_links_path %>

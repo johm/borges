@@ -1,0 +1,25 @@
+<h1>Listing post_title_links</h1>
+
+<table>
+  <tr>
+    <th>Post</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @post_title_links.each do |post_title_link| %>
+  <tr>
+    <td><%= post_title_link.post %></td>
+    <td><%= post_title_link.title %></td>
+    <td><%= link_to 'Show', post_title_link %></td>
+    <td><%= link_to 'Edit', edit_post_title_link_path(post_title_link) %></td>
+    <td><%= link_to 'Destroy', post_title_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post title link', new_post_title_link_path %>

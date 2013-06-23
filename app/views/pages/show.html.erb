@@ -1,0 +1,78 @@
+
+
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Images</h3>
+  </div>
+  <div class="modal-body">
+    <div id="myCarousel" class="carousel slide">  
+  <!-- Carousel items -->  
+  <div class="carousel-inner">  
+    <% @page.images.each do |i| %>
+    <div class="item">
+      <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
+      <h1><%= i.title %></h1>
+    </div>  
+    <% end %>
+  </div>  
+  <!-- Carousel nav -->  
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>  
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>  
+</div> 
+    
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="span2">
+      
+      <% index=0 %>
+      <% @page.images.each do |i| %>
+      <% index=index+1 %>
+      <div>
+	<a href="#myModal" onclick="$('#myCarousel div').removeClass('active'); $('#myCarousel div:nth-child(<%= index %>)').addClass('active');" role="button" data-toggle="modal"> 
+	<%= image_tag i.the_image_url(:thumb),{:width => "100%"} %>
+	<h5><%= i.title %></h5>
+	</a>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="span8">
+      <h1 id="pagetitle"><%= @page.title %></h1>
+      <div class="introduction">
+	<%= raw @page.introduction %>
+      </div>
+      
+      <div class="body">
+	<%= raw @page.body %>
+      </div>
+    </div>
+      <div class="span2">
+	<% if @page.parent %>
+	<h4><%= link_to "Back to #{@page.parent.title}",@page.parent%></h4>
+	<% end %>
+	
+	<% if @page.children %>
+	<ul>
+	  <% @page.children.each do |c|%>
+	  <li>
+	    <h4><%= link_to "#{c.title}",c %></h4>
+	  </li>
+	</ul>
+	<% end %>
+	<% end %>
+
+
+      </div>
+
+    </div>
+  </div>
+      
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>

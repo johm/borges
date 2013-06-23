@@ -1,0 +1,10 @@
+<h1>Lists</h1>
+
+
+<% @title_lists.each do |title_list| %>
+    <%= title_list.name %>     <%= title_list.public %>  
+    <%= title_list.description %>
+<% end %>
+
+
+<%=  mylinkbutton "<i class='icon-plus'></i> New List", new_title_list_path   if can? :create, TitleList %>

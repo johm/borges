@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div style="float:right;">
+  <%= mylinkbutton 'Edit', edit_title_list_path(@title_list) if can? :edit,TitleList %>
+</div>  
+<h1><%= @title_list.name %></h1>
+<p>
+  <%= sanitize @title_list.description %>
+</p>
+
+<% @title_list.titles.each do |t| %>
+<%= render :partial=>'titles/title', :object=>t %>
+<% end %>
+  

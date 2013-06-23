@@ -1,0 +1,87 @@
+<%= nested_form_for(@post,:html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= mytextfield f,"Post title",:title,{:class=>"input-xxlarge"} %>
+  <%= mytextfield f,"Post slug",:slug,{:class=>"input-xxlarge",:placeholder=>"Will be generated automatically"} %>
+  
+  <%= myselector f,"Post Category",:post_category_id, options_from_collection_for_select(PostCategory.all,:id,:name) %>
+
+  <%= mytextarea f,"Introductory text",:introduction %>
+  <%= mytextarea f,"Body text",:body %>
+  
+
+  
+  <div class="field control-group">
+    <%= f.label :images,"Images", :class=>"control-label" %><br />
+    <div class="controls well">
+      <%= f.fields_for :images do |image_form| %>
+      <div class="grouping">
+	<div class="container-fluid">
+	  <div class="row-fluid">
+	    <div class="span10">
+	      <div class="field control-group">
+		<%= mytextfield image_form,"Image title",:title %>
+		<%= image_form.label :the_image,"Image file",:class=>"control-label" %>
+		<div class="controls">
+		  <%= image_form.file_field :the_image %>
+		</div>
+	      </div>
+	      <%= mytextfield image_form,"Or specify a remote url",:remote_the_image_url %>
+	      <div class="field control-group">
+		<div class="controls">
+		  <%= image_form.link_to_remove raw("<i class='icon-minus'></i> Remove this image"), :class=>"btn" %>
+		</div>
+	      </div>
+	    </div>
+	    
+	    <div class="span2">
+	      <%= image_tag(image_form.object.the_image_url(:thumb),:class=>"formthumb") if image_form.object.the_image %>
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add another image"), :images, {:class=>:btn} %>
+      </div>
+    </div>  
+    
+    <div class="field control-group">
+      <%= f.label :books_related_to_this_post, :class=>"control-label" %><br />
+      <div class="controls">
+	<%= f.fields_for :post_title_links do |member_form| %>
+	<%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
+	<% end %>
+	<div class="verticaloffset">
+	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a book"), :post_title_links, {:class=>:btn} %>
+	</div>
+      </div>
+    </div>
+    
+
+    <div class="field control-group">
+      <%= f.label :lists_related_to_this_post, :class=>"control-label" %><br />
+      <div class="controls">
+	<%= f.fields_for :post_title_list_links do |member_form| %>
+	<%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_title_lists_path %>
+	<% end %>
+	<div class="verticaloffset">
+	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a list"), :post_title_list_links, {:class=>:btn} %>
+	</div>
+      </div>
+    </div>
+    
+    <%= mysubmit f, "Save" %>
+  </div>
+  
+  <% end %>

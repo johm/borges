@@ -1,0 +1,25 @@
+<%= form_for(@post_title_list_link) do |f| %>
+  <% if @post_title_list_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_title_list_link.errors.count, "error") %> prohibited this post_title_list_link from being saved:</h2>
+
+      <ul>
+      <% @post_title_list_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :post %><br />
+    <%= f.text_field :post %>
+  </div>
+  <div class="field">
+    <%= f.label :title_list %><br />
+    <%= f.text_field :title_list %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

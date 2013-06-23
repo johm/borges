@@ -1,0 +1,27 @@
+<h1>Listing title_list_memberships</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Title list</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @title_list_memberships.each do |title_list_membership| %>
+  <tr>
+    <td><%= title_list_membership.title %></td>
+    <td><%= title_list_membership.title_list %></td>
+    <td><%= title_list_membership.notes %></td>
+    <td><%= link_to 'Show', title_list_membership %></td>
+    <td><%= link_to 'Edit', edit_title_list_membership_path(title_list_membership) %></td>
+    <td><%= link_to 'Destroy', title_list_membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Title list membership', new_title_list_membership_path %>

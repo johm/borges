@@ -1,0 +1,89 @@
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Images</h3>
+  </div>
+  <div class="modal-body">
+    <div id="myCarousel" class="carousel slide">  
+  <!-- Carousel items -->  
+  <div class="carousel-inner">  
+    <% @post.images.each do |i| %>
+    <div class="item">
+      <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
+      <h1><%= i.title %></h1>
+    </div>  
+    <% end %>
+  </div>  
+  <!-- Carousel nav -->  
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>  
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>  
+</div> 
+    
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="span2">
+      
+      <% index=0 %>
+      <% @post.images.each do |i| %>
+      <% index=index+1 %>
+      <div>
+	<a href="#myModal" onclick="$('#myCarousel div').removeClass('active'); $('#myCarousel div:nth-child(<%= index %>)').addClass('active');" role="button" data-toggle="modal"> 
+	<%= image_tag i.the_image_url(:thumb),{:width => "100%"} %>
+	<h5><%= i.title %></h5>
+	</a>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="span8">
+      <h1 id="pagetitle"><%= @post.title %></h1>
+      <div class="introduction">
+	<%= raw @post.introduction %>
+      </div>
+      
+      <div class="body">
+	<%= raw @post.body %>
+      </div>
+    </div>
+      <div class="span2">
+	<%=  mylinkbutton "<i class='icon-edit'></i> Edit", edit_post_path(@post)   if can? :edit, Post %>
+
+	<% @post.titles.each do |t| %>
+	<%= link_to(image_tag(t.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),t) unless t.latest_published_edition.try(:cover_url,:medium).nil? %>
+	<h4><%= link_to t.title,t %></h4>
+	<% end %>
+
+	More posts go here
+
+
+	
+
+
+      </div>
+
+    </div>
+  </div>
+
+<% @post.title_lists.each do |title_list| %>
+<div style="float:right;">
+  <%= mylinkbutton 'Edit', edit_title_list_path(title_list) if can? :edit,TitleList %>
+</div>  
+<h1><%= link_to title_list.name,title_list %></h1>
+<p>
+  <%= sanitize title_list.description %>
+</p>
+
+<% title_list.titles.each do |t| %>
+<%= render :partial=>'titles/title', :object=>t %>
+<% end %>
+<% end %>
+
+
+
+
+

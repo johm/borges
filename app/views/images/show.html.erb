@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+  <h1><%= @image.title %></h1>
+  
+  <a href="<%= @image.the_image_url %>">
+    <%= image_tag @image.the_image_url(:reasonable), {:width => "100%"} %>
+  </a>
+
+
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>

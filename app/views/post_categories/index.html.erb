@@ -1,0 +1,23 @@
+<h1>Listing post_categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @post_categories.each do |post_category| %>
+  <tr>
+    <td><%= post_category.name %></td>
+    <td><%= link_to 'Show', post_category %></td>
+    <td><%= link_to 'Edit', edit_post_category_path(post_category) %></td>
+    <td><%= link_to 'Destroy', post_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post category', new_post_category_path %>
