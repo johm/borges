@@ -23,11 +23,12 @@
     </div>
     <div class="collapse" id="title_details">
       <div class="well">
-	<%= myselectfield f,:publisher,:publisher,autocomplete_publisher_name_titles_path %>
+	<%= mytextarea f,:introduction,:introduction, :rows=>5 %>
 	<%= mytextarea f,:description,:description, :rows=>10 %>
       </div>
     </div>
     
+
 
 
     <div class="field control-group">
@@ -73,6 +74,9 @@
 	    <label class="control-label">Year of publication</label>
 	    <div class="controls"><%= edition_form.text_field :year_of_publication,:placeholder=>"Year",:class=>"input-small" %></div>
 	  </div>
+	  
+	  <%= myselectfield edition_form,:publisher,:publisher,autocomplete_publisher_name_titles_path %>
+	  
 	  <div class="control-group">
 	    <label class="control-label">Notes (public)</label>
 	    <div class="controls"><%= edition_form.text_area :notes,:placeholder=>"Notes",:rows=>3 %></div>
@@ -99,13 +103,26 @@
   </div>
 
 
+    <%= mysubmit f,"Save" %>
 
 
-  <div class="actions control-group">
+
+  <div class="field control-group">
+    <%= f.label :lists_this_title_is_on, :class=>"control-label" %><br />
     <div class="controls">
-    <%= f.submit :value=>"Save",:class=>"btn btn-large btn-primary" %>
+      <%= f.fields_for :title_list_memberships do |member_form| %>
+      <%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_titles_path %>
+      <%= mytextfield member_form,:notes,:notes %>
+      
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a list"), :title_list_memberships, {:class=>:btn} %>
+      </div>
     </div>
   </div>
+
+    <%= mysubmit f,"Save" %>
+
 <% end %>
 
 

@@ -11,22 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field control-group">
-    <%= f.label :first_name , :class=>"control-label" %>
-    <div class="controls">
-      <%= f.text_field :first_name %>
-    </div>
-  </div>
+  <%= mytextfield f,:first_name,:first_name %>
+  <%= mytextfield f,:last_name,:last_name %>
+  <%= mytextarea f,:bio,:bio %>
+  <%= mysubmit f,"Save" %>
 
-  <div class="field control-group">
-    <%= f.label :last_name, :class=>"control-label" %>
-    <div class="controls">
-      <%= f.text_field :last_name %>
-    </div>
-  </div>
-  <div class="actions control-group">
-    <div class="controls">
-      <%= f.submit :value=>"Save",:class => "btn btn-large btn-primary" %>
-    </div>
-  </div>
 <% end %>

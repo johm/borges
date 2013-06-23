@@ -1,15 +1,13 @@
+<div style="float:right">
+  <%= mylinkbutton 'Edit', edit_author_path(@author) %> 
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>First name:</b>
-  <%= @author.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @author.last_name %>
-</p>
-
-
-<%= link_to 'Edit', edit_author_path(@author) %> |
-<%= link_to 'Back', authors_path %>
+<h1>Author: <%= @author.full_name %></h1>
+<div class="introduction">
+  <%= raw @author.bio %>
+</div>
+<% @author.titles.each do |t|  %>
+<%= render :partial=>'titles/title', :object=>t %>
+<% end %>

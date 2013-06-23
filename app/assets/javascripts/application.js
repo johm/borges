@@ -16,10 +16,12 @@
 //= require jquery.fittext.js
 //= require autocomplete-rails
 //= require bootstrap
+//= require bootstrap-switch
 //= require jquery_nested_form
 //= require jquery.purr
 //= require best_in_place
-//= require bootstrap-wysihtml5
+//= require ckeditor/init
 //= require_tree .
 
 
+//  require bootstrap-wysihtml5

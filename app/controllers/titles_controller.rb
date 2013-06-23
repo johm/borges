@@ -1,13 +1,14 @@
 class TitlesController < ApplicationController
   before_filter :authenticate_user! 
+  before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
-
   autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id
+  autocomplete :title_list,:name,:full=>true,:display_value=>:name
 
   # GET /titles
   # GET /titles.json
   def index
-    @titles = Title.all
+    @titles = Title.page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @titles }
@@ -18,8 +19,7 @@ class TitlesController < ApplicationController
   # GET /titles/1.json
   def show
     @title = Title.find(params[:id])
-    @edition = params[:edition_id] ? Edition.find(params[:edition_id]) : @title.latest_edition
-    
+    @edition = params[:edition_id] ? Edition.find(params[:edition_id]) : @title.latest_published_edition
 
     respond_to do |format|
       format.html # show.html.erb
@@ -31,6 +31,9 @@ class TitlesController < ApplicationController
   # GET /titles/new.json
   def new
     @title = Title.new
+    @title.contributions << Contribution.new
+    @title.editions << Edition.new(:list_price => 0)
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,11 +49,25 @@ class TitlesController < ApplicationController
   # POST /titles
   # POST /titles.json
   def create
+    
+    # do a dance to set the publisher from a string
+    if (params[:title][:editions_attributes]["0"][:publisher_id].blank? && @publisher_name)
+      params[:title][:editions_attributes]["0"][:publisher_id]=Publisher.find_or_create_by_name(@publisher_name).id
+    end
+      
+    # do a more complicated dance to deal with contributions and authornames
+    
+    params[:title][:contributions_attributes].each do |k,v|
+      params[:title][:contributions_attributes][k][:author_id]=Author.find_or_create_by_full_name(@authornames[k]).id
+    end
+
+
     @title = Title.new(params[:title])
+    
 
     respond_to do |format|
       if @title.save
-        format.html { redirect_to @title, notice: 'Title was successfully created.' }
+        format.html { redirect_to @title, notice: "Title was successfully created." }
         format.json { render json: @title, status: :created, location: @title }
       else
         format.html { render action: "new" }
@@ -86,4 +103,26 @@ class TitlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def hack_out_params
+    params[:title][:title_list_memberships_attributes].each do |k,v| 
+      params[:title][:title_list_memberships_attributes][k].delete :title_list
+    end
+    
+    
+    @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
+    params[:title][:editions_attributes].each do |k,v|
+      params[:title][:editions_attributes][k].delete :publisher
+    end
+
+    @authornames={}
+    params[:title][:contributions_attributes].each do |k,v| 
+      @authornames[k]=v[:author]
+      params[:title][:contributions_attributes][k].delete :author
+    end
+    
+  end
+
 end

@@ -1,16 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-
 <div class="container">
   <div class="row">
-<div class="span2">
-<%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless @edition.nil? %>
+    <div class="span2">
+      <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless @edition.nil? %>
+    </div>
+    <div class="span7">
+      <h1 class="booktitle"><%= @title.title %></h1>
+      <h2 class="contributors">
+	<%= sanitize contributors_list(@title) %>
+      </h2>
+
+<div class="introduction">
+  <%= sanitize @title.introduction %>
 </div>
-<div class="span7">
-<h1 class="booktitle"><%= @title.title %></h1>
-<h2 class="contributors">
-  <%= sanitize contributors_list(@title) %>
-</h2>
+
 
 <div class="description">
   <%= sanitize @title.description %>
@@ -31,7 +35,7 @@
   </tr>
   <tr>
     <th>Publisher</th>
-    <td><%= @title.publisher.name unless @title.publisher.nil? %></td>
+    <td><%= @edition.publisher.name unless @edition.publisher.nil? %></td>
   </tr>
   <tr>
     <th>Year of publication</th>
@@ -53,12 +57,7 @@
 </div>
 </div>
 
-
-
-
-<%= link_to 'Edit', edit_title_path(@title) %> |
-<%= link_to 'Back', titles_path %>
-
+<%=  mylinkbutton "<i class='icon-edit'></i> Edit", edit_title_path(@title)   if can? :edit, Title %>
 
 <% content_for :related do %>
 

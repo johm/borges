@@ -1,21 +1,29 @@
 <h1>Listing authors</h1>
 
-<table>
+<table class="table">
   <tr>
+    <th>Full name</th>
     <th>First name</th>
     <th>Last name</th>
-    <th></th>
+    <th>Books</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @authors.each do |author| %>
   <tr>
+    <td><%= link_to author.full_name,author %></td>
     <td><%= author.first_name %></td>
     <td><%= author.last_name %></td>
-    <td><%= link_to 'Show', author %></td>
-    <td><%= link_to 'Edit', edit_author_path(author) %></td>
-    <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <ul>
+      <% author.titles.each do |t| %>
+      <li><%= link_to t.title,t %></li>
+      <% end %>
+      </ul>
+      </td>
+    <td><%= link_to 'Edit', edit_author_path(author), {:class=>"btn btn-mini btn-info"} if can? :edit, Title %></td>
+    <td><%= link_to('Destroy', author, :method => :delete, :data => { :confirm => 'Are you sure?' },:class=>"btn btn-mini btn-info") if can? :destroy, Title %></td>
   </tr>
 <% end %>
 </table>

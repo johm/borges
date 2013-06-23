@@ -1,39 +1,68 @@
+<div class="container">
+  <div class="row">
+    
+    <div class="span8">
+      <table class="table">
+	<tr>
+	  <th>Our PO number:</th>
+	  <td><%= @purchase_order.number %></td>
+	</tr>
+	
+	<tr>
+	  <th>Distributor:</th>
+	  <td><%= link_to @purchase_order.distributor, @purchase_order.distributor %></td>
+	</tr>
+	
+	<tr>
+	  <th>Customer:</th>
+	  <td><%= link_to @purchase_order.customer.to_s,@purchase_order.customer %></td>
+	</tr>
+	
+	<tr>
+	  <th>Ordered?</th>
+	  <td><%= @purchase_order.ordered? ? @purchase_order.ordered_when : "Not yet" %></td>
+	</tr>
+	
+	<tr>
+	  <th>Notes:</th>
+	  <td><%= best_in_place @purchase_order, :notes, :type => :textarea %></td>
+	</tr>
+      </table>
+      
+      <h3>Items</h3>
+      <table id="purchase_order_line_items">
+	<% @purchase_order.purchase_order_line_items.each do |l| %>
+	<%= render 'purchase_order_line_items/row', :locals => { :l => l }%>
+	<% end %>
+	
+      </table>
 
-<table class="table">
-  <tr>
-    <th>Our PO number:</th>
-    <td><%= @purchase_order.number %></td>
-  </tr>
+      <%= form_for(PurchaseOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+      
+      <%= f.hidden_field(:edition_id) %>
 
-  <tr>
-    <th>Distributor:</th>
-    <td><%= link_to @purchase_order.distributor, @purchase_order.distributor %></td>
-  </tr>
-  
-  <tr>
-    <th>Customer:</th>
-    <td><%= link_to @purchase_order.customer,@purchase_order.customer %></td>
-  </tr>
-  
-  <tr>
-    <th>Notes:</th>
-    <td><%= best_in_place @purchase_order, :notes, :type => :textarea %></td>
-  </tr>
-</table>
+      <div class="control-group field">
+	<%= f.label("ISBN",:class=>"control-label") %>
+	<div class="controls">
+	  <%= content_tag(:input,"",
+	      {:name=>:isbn,:class=>:input,:type=>:text}) %>
+	</div>
+      </div>
 
-
-
-
-<p>
-  <b>Ordered:</b>
-  <%= @purchase_order.ordered %>
-</p>
-
-<p>
-  <b>Ordered when:</b>
-  <%= @purchase_order.ordered_when %>
-</p>
+      title
+      <%= mytextfield(f,"Quantity",:quantity, {:class=>"input-mini"}) %>
+      <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_purchase_order_line_item"}) %> 
+      <% end %>
+    </div>
+    <div class="span4">
+      <%= mylinkbutton("<i class='icon-ok-sign'></i> Submit order","link_for_ordering_purchase_order") unless @purchase_order.ordered? %>
+      <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
+      <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
+    </div>
+  </div>
+</div>
 
 
-<%= link_to 'Edit', edit_purchase_order_path(@purchase_order) %> |
-<%= link_to 'Back', purchase_orders_path %>
+
+
+

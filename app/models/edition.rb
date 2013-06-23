@@ -3,7 +3,9 @@ class Edition < ActiveRecord::Base
   has_many :copies
   has_many :purchase_order_line_items
   has_many :invoice_line_items 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover
+  belongs_to :publisher
+
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
@@ -12,6 +14,7 @@ class Edition < ActiveRecord::Base
 
   monetize :list_price_cents
 
+  scope :published, where(:in_print => true)
   scope :newest_first, order("year_of_publication desc")
   scope :without_edition, lambda{|e| e ? {:conditions => ["id != ?", e.id]} : {} }
   

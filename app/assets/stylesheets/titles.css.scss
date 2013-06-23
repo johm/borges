@@ -10,7 +10,7 @@ line-height:30px;
 }
 
 .contributors, .contributors a {
-color:#999999;
+color:#eeeeee;
 font-size:22px;
 }
 
@@ -24,8 +24,23 @@ margin-left:0px;
 $darkred:#7C1212;
 $nearwhite:#f6f6f6;
 
-.relatedbar {
-background-color:$darkred;
-color:$nearwhite;
-min-height:200px;
+
+.titleshort {
+margin-bottom:20px;
+}
+
+.titleshort th, .titleshort td {
+border-top-width:0px;
+}
+
+.titleshort .booktitle {
+margin-bottom:0px;
+}
+
+.contributors, .contributors a, .contributors a:visited {
+color: #eee ;
+}
+
+.contributors {
+margin-top:0px;
 }

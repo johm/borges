@@ -2,6 +2,8 @@ class PurchaseOrderLineItemsController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource 
 
+  
+
   # GET /purchase_order_line_items
   # GET /purchase_order_line_items.json
   def index
@@ -32,6 +34,7 @@ class PurchaseOrderLineItemsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @purchase_order_line_item }
+      format.js 
     end
   end
 

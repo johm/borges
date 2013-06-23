@@ -322,6 +322,7 @@ padding-top:220px;
 #main {
 border-top:1px solid $nearblack;
 background-color:rgba(70, 63, 63, 0.95);
+background-color:rgba(30, 27, 27, 0.95);
 color:$nearwhite;
 }
 
@@ -357,7 +358,7 @@ font-family:"Edmondsans";
 font-weight:normal;
 }
 
-.description {
+.description,.pages .body {
 font-family:"Dosis";
 //font-family:"Quattrocento Sans";
 font-family:"Source Sans Pro";

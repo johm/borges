@@ -13,7 +13,15 @@
       <div class="navbar navbar-fixed-top navbar-inverse">
 	<nav class="navbar-inner">
         <div class="container">
-          <%= render 'layouts/navigation' %>
+	  <%= image_tag "logo3.png", {:width=>"60px",:style=>"position:absolute;left:10px;"} %>
+	  <div class="tablet" style="color:rgb(246,246,246);font-size:30px;position:absolute;left:80px;top:23px;">
+	    RED EMMA'S
+	  </div>
+	  
+	  <div class="edmond bigtext" id="topmenu" style="color:rgb(246,246,246);" > 
+    ⁕ <a href="/menu">FOOD</a> ⁕ <a href="/coffee">COFFEE</a> ⁕ <a href="/books">BOOKS</a> ⁕ <a href="/events">EVENTS</a> ⁕ <a href="/about">ABOUT</a> ⁕ <a href="/contact">CONTACT</a> ⁕ 
+  </div>
+
         </div>
 	</nav>
       </div>
@@ -44,7 +52,10 @@
       <div class="navbar navbar-fixed-bottom navbar-inverse">
 	<nav class="navbar-inner">
           <div class="container">
-	    Bottom stuff here
+	    <div style="position:absolute;top:0px;right:0px;">
+	      <%= render 'layouts/navigation' %>
+	    </div>
+	    	  
 	</div>
 	</nav>
       </div>

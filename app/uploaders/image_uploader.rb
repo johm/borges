@@ -44,10 +44,16 @@ class ImageUploader < CarrierWave::Uploader::Base
      process :resize_to_limit => [300, 100000]
   end
 
+  version :reasonable do
+     process :resize_to_limit => [800, 100000]
+  end
+
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg gif png php
+)
   end
 
   # Override the filename of the uploaded files:

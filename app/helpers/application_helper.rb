@@ -9,31 +9,53 @@ module ApplicationHelper
                 :class=>"field control-group")
   end
 
-  def mytextarea(f,l,m,options)
+  def myselector(f,l,m,ofs,options={})
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
                 content_tag(:div,
-                            f.text_area(m,options.merge({:class=>"input-xxlarge visual"})),
+                            f.select(m,ofs,options),
                             :class=>"controls"),
                 :class=>"field control-group")
   end
 
 
-  def mysubmit(f,l)
+
+ def mycheckbox(f,l,m,options={})
+   content_tag(:div,
+               f.label(l,:class=>"control-label") +
+               content_tag(:div,
+                           content_tag(:div,
+                                       f.check_box(m),
+                                       options.merge({:class=>"switch switch-large"})),
+                           :class=>"controls"),
+               :class=>"field control-group")
+ end
+
+  def mytextarea(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            f.cktext_area(m,options.merge({:class=>"input-xxlarge"})),
+                            :class=>"controls"),
+                :class=>"field control-group")
+  end
+
+
+  def mysubmit(f,l,options={})
     content_tag(:div,
                 content_tag(:div,
-                            f.submit(:value=>l,:class=>"btn btn-large btn-primary"),
+                            f.submit(options.merge({:value=>l,:class=>"btn btn-large btn-primary"})),
                             :class=>"controls"
                             ),
                 :class=>"actions control-group")
   end
 
-
-  def mylinkbutton(text,path)
+ 
+  def mylinkbutton(text,path,options={},size="btn-large")
     content_tag(:div,
                 content_tag(:a,
-                            text,
-                            {:href=>path,:class=>"btn btn-large btn-primary controls"}
+                            raw(text),
+                            options.merge({:href=>path,:class=>"btn #{size} btn-primary controls"})
                             ),
                 :class=>"actions control-group")
   end
@@ -43,8 +65,8 @@ module ApplicationHelper
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
                 content_tag(:div,
-                            f.autocomplete_field(m,p,:id_element=>"##{m}",:name=>'ignorethisonsubmit')+
-                            f.hidden_field("#{m}_id",:id=>m) + 
+                            f.autocomplete_field(m,p,:id_element=>"##{m}-#{f.my_unique_id}")+ 
+                            f.hidden_field("#{m}_id",:id=>"#{m}-#{f.my_unique_id}") + 
                             " " +
                             (a ? content_tag(:a,
                                                   "+",

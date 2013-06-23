@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518151115) do
+ActiveRecord::Schema.define(:version => 20130623212940) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -19,7 +19,24 @@ ActiveRecord::Schema.define(:version => 20130518151115) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "full_name"
+    t.text     "bio"
   end
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "contributions", :force => true do |t|
     t.integer  "author_id"
@@ -76,9 +93,20 @@ ActiveRecord::Schema.define(:version => 20130518151115) do
     t.datetime "updated_at",          :null => false
     t.string   "cover"
     t.integer  "list_price_cents"
+    t.integer  "publisher_id"
   end
 
+  add_index "editions", ["publisher_id"], :name => "index_editions_on_publisher_id"
   add_index "editions", ["title_id"], :name => "index_editions_on_title_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "title"
+    t.string   "the_image"
+    t.integer  "imagey_id"
+    t.string   "imagey_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "invoice_line_items", :force => true do |t|
     t.integer  "quantity"
@@ -104,6 +132,61 @@ ActiveRecord::Schema.define(:version => 20130518151115) do
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "introduction"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "published"
+  end
+
+  add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
+  add_index "pages", ["published"], :name => "index_pages_on_published"
+  add_index "pages", ["slug"], :name => "index_pages_on_slug", :unique => true
+
+  create_table "post_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "post_title_links", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "title_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "post_title_links", ["post_id"], :name => "index_post_title_links_on_post_id"
+  add_index "post_title_links", ["title_id"], :name => "index_post_title_links_on_title_id"
+
+  create_table "post_title_list_links", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "title_list_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "post_title_list_links", ["post_id"], :name => "index_post_title_list_links_on_post_id"
+  add_index "post_title_list_links", ["title_list_id"], :name => "index_post_title_list_links_on_title_list_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "introduction"
+    t.text     "body"
+    t.integer  "post_category_id"
+    t.boolean  "published"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "posts", ["published"], :name => "index_posts_on_published"
+  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
 
   create_table "publishers", :force => true do |t|
     t.string   "name"
@@ -149,15 +232,32 @@ ActiveRecord::Schema.define(:version => 20130518151115) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "title_list_memberships", :force => true do |t|
+    t.integer  "title_id"
+    t.integer  "title_list_id"
+    t.string   "notes"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "title_list_memberships", ["title_id"], :name => "index_title_list_memberships_on_title_id"
+  add_index "title_list_memberships", ["title_list_id"], :name => "index_title_list_memberships_on_title_list_id"
+
+  create_table "title_lists", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "public"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "titles", :force => true do |t|
     t.string   "title"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "description"
-    t.integer  "publisher_id"
+    t.text     "introduction"
   end
-
-  add_index "titles", ["publisher_id"], :name => "index_titles_on_publisher_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -59,3 +59,35 @@ end
 Publisher.blueprint do
   # Attributes here
 end
+
+Page.blueprint do
+  # Attributes here
+end
+
+Image.blueprint do
+  # Attributes here
+end
+
+TitleList.blueprint do
+  # Attributes here
+end
+
+TitleListMembership.blueprint do
+  # Attributes here
+end
+
+PageCategory.blueprint do
+  # Attributes here
+end
+
+CreatePostTitleLink.blueprint do
+  # Attributes here
+end
+
+PostTitleLink.blueprint do
+  # Attributes here
+end
+
+PostTitleListLink.blueprint do
+  # Attributes here
+end

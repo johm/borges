@@ -60,13 +60,28 @@ class AuthorsController < ApplicationController
   def update
     @author = Author.find(params[:id])
 
-    respond_to do |format|
-      if @author.update_attributes(params[:author])
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
+
+    if ! params[:merge_author].blank?
+      @old_author_string = @author.name_and_id
+      @author_to_keep=Author.find(params[:merge_author])
+      @author.contributions.each do |c|
+        c.author=@author_to_keep
+        c.save!
+      end
+      @author.destroy
+
+      respond_to do |format|
+        format.html { redirect_to @author_to_keep, notice: "Author #{@old_author_string} was successfully merged here, and deleted." }
+      end
+    else 
+      respond_to do |format|
+        if @author.update_attributes(params[:author])
+          format.html { redirect_to @author, notice: 'Author was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @author.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -7,26 +7,22 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *
+ *   require bootstrap-wysihtml5
+
  *= require_self
  *= require_tree .
 */
 
 /*
  *= require jquery.ui.all
- *= require bootstrap-wysihtml5
+ *= require bootstrap-switch
 */
 
 .content {
   background-color: #eee;
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+
 }
 
 
@@ -61,4 +57,91 @@ color:black;
 
 .content a,.content a:visited {
 color:#ffcc00;
+color:#57A5A5;
+//color:#510606;
+
 }
+
+
+.wysihtml5-toolbar .btn {
+color:black;
+}
+
+.well label {
+color:black;
+}
+
+#main img {
+border:1px solid #111;
+}
+
+.grouping {
+border: 1px solid #ddd;
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+box-shadow: 0 1px 2px rgba(0,0,0,.075);
+padding-top:10px;
+margin-bottom:10px;
+
+}
+
+
+a.btn  {
+color:black;
+}
+
+a.btn-info,a.btn-info:visited {
+color:#fff;
+}
+
+
+#myModal .modal-body {
+	max-height: 800px;
+	}
+
+#myModal {
+top:0px;
+}
+
+#myModal .item h1 {
+position:relative;
+top:-50px;
+background-color:#444;
+background-color:rgba(64,64,64,.5);
+padding-left:10px;
+}
+
+#pagetitle {
+font-size:50px;
+}
+
+#topmenu {
+font-size:30px;
+margin-left:200px;
+position:absolute;
+right:10px;
+top:20px;
+}
+
+#topmenu a{
+color:rgb(246,246,246) !important ;
+}
+
+html,body {
+height:100%;
+}
+
+#main {
+min-height:100%;
+}
+
+nav.pagination {
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
+
+
