@@ -1,8 +1,9 @@
 class EditionsController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
-
-
+  autocomplete :title,:title,:full=>true,:display_value=>:title_and_id
+  before_filter :hack_out_params , :only=>[:create,:update]
+  
 
   # GET /editions
   # GET /editions.json
@@ -84,4 +85,13 @@ class EditionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+    private
+
+  def hack_out_params
+    params[:edition].delete :title
+    params[:edition].delete :publisher
+  end
+
+
 end

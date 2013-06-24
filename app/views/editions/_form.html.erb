@@ -1,11 +1,11 @@
-<%= form_for(@edition ,:html => {:multipart=>true,:class=>"form-horizontal"}) do |f| %>
+<%= nested_form_for(@edition ,:html => {:multipart=>true,:class=>"form-horizontal"}) do |f| %>
 
 <h1>for <%= @edition.title %></h1>
 
   <% if @edition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@edition.errors.count, "error") %> prohibited this edition from being saved:</h2>
-
+      
       <ul>
       <% @edition.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -14,24 +14,12 @@
     </div>
   <% end %>
 
-  <div class="field control-group">
-      <%= f.label :isbn13, :class=>"control-label" %> 
-      <div class="controls">
-	<%= f.text_field :isbn13 %>
-      </div>
-  </div>
-  <div class="field control-group">
-    <%= f.label :isbn10, :class=>"control-label" %>
-    <div class="controls">
-      <%= f.text_field :isbn10 %>
-    </div>
-  </div>
-  <div class="field control-group">
-    <%= f.label :year_of_publication, :class=>"control-label" %>
-    <div class="controls">
-      <%= f.select :year_of_publication, (1900..2020) %>
-    </div>
-  </div>
+
+  <%= myselectfield f,:title,:title,autocomplete_title_title_editions_path %>
+  <%= mytextfield f,:isbn13, :isbn13 %>
+  <%= mytextfield f,:isbn10, :isbn10 %>
+  <%= mytextfield f,:year_of_publication, :year_of_publication %>
+  <%= myselectfield f,:publisher,:publisher,autocomplete_publisher_name_titles_path,new_publisher_path %>
 
   <div class="field control-group">
     <%= f.label :format, :class=>'control-label' %>
@@ -39,23 +27,20 @@
       <%= f.select :format, Edition.formats %>
     </div>
   </div>
-  <div class="field">
-    <%= f.label :in_print %><br />
-    <%= f.check_box :in_print %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
+  
+  <%= mycheckbox f,:in_print,:in_print,{"data-on-label"=>"Yes","data-off-label"=>"No"} %>
 
+  <%= mytextarea f,:notes,:notes %>
 
-  <div class="field">
-    <%= f.label :cover %><br />
-    <%= f.file_field :cover %>
+  <div class="field control-group">
+    <%= f.label :cover,:class=>"control-label" %>
+    <div class="controls">
+      <%= f.file_field :cover %>
+    </div>
   </div>
     
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <%= mysubmit f, "Save" %>
+
 <% end %>

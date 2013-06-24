@@ -5,7 +5,7 @@ class Edition < ActiveRecord::Base
   has_many :invoice_line_items 
   belongs_to :publisher
 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id
 
   validate :isbns_are_valid
   before_validation :normalize_isbns

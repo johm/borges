@@ -57,7 +57,9 @@ Borges::Application.routes.draw do
   resources :copies
 
 
-  resources :editions
+  resources :editions do
+    get :autocomplete_title_title, :on => :collection
+  end
 
 
   resources :contributions do 

@@ -111,7 +111,7 @@
     <%= f.label :lists_this_title_is_on, :class=>"control-label" %><br />
     <div class="controls">
       <%= f.fields_for :title_list_memberships do |member_form| %>
-      <%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_titles_path %>
+      <%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_titles_path,new_title_list_path %>
       <%= mytextfield member_form,:notes,:notes %>
       
       <% end %>

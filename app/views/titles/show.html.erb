@@ -46,8 +46,16 @@
     <td><%= @edition.year_of_publication unless @edition.nil? %></td>
   </tr>
   
+  <% if can? :edit,Edition %>
   <tr>
-    <th>Other editions</th>
+    <th><%= mylinkbutton "Edit this edition",edit_edition_path(@edition),{},"btn-mini" %></th>
+    <td></td>
+  </tr>
+  <% end %>
+
+  <% if @title.editions.without_edition(@edition).length > 0 %>
+  <tr>
+    <th>Other editions:</th>
     <td>
       <ul class="editions">
       <% @title.editions.without_edition(@edition).each do |e| %>
@@ -55,7 +63,9 @@
 	<% end %>
       </ul>
     </td>
-  
+  </tr>
+  <% end %>
+
 </table>
 </div>
 </div>
