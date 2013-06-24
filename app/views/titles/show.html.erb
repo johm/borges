@@ -4,8 +4,12 @@
   <div class="row">
     <div class="span2">
       <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless @edition.nil? %>
+
     </div>
     <div class="span7">
+      <div style="float:right">
+	<%=  mylinkbutton "<i class='icon-edit'></i> Edit", edit_title_path(@title)   if can? :edit, Title %>
+      </div>
       <h1 class="booktitle"><%= @title.title %></h1>
       <h2 class="contributors">
 	<%= sanitize contributors_list(@title) %>
@@ -57,7 +61,6 @@
 </div>
 </div>
 
-<%=  mylinkbutton "<i class='icon-edit'></i> Edit", edit_title_path(@title)   if can? :edit, Title %>
 
 <% content_for :related do %>
 
