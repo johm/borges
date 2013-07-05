@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @title_category_membership.title %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @title_category_membership.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_title_category_membership_path(@title_category_membership) %> |
+<%= link_to 'Back', title_category_memberships_path %>
