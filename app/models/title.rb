@@ -10,7 +10,8 @@ class Title < ActiveRecord::Base
   has_many :title_list_memberships
   has_many :post_title_links
   has_many :posts, :through => :post_title_links 
-
+  has_many :title_category_memberships
+  has_many :categories,:through => :title_category_memberships
  
   accepts_nested_attributes_for :contributions, :allow_destroy => true
   accepts_nested_attributes_for :editions, :allow_destroy => true

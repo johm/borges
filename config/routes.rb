@@ -1,4 +1,13 @@
 Borges::Application.routes.draw do
+  resources :owners
+
+
+  resources :title_category_memberships
+
+
+  resources :categories
+
+
   resources :post_title_list_links
 
 

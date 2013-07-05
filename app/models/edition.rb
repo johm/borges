@@ -3,6 +3,9 @@ class Edition < ActiveRecord::Base
   has_many :copies
   has_many :purchase_order_line_items
   has_many :invoice_line_items 
+  
+  has_many :distributors, :through => :copies
+  
   belongs_to :publisher
 
   attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id
@@ -52,6 +55,8 @@ class Edition < ActiveRecord::Base
     isbn10.gsub!(/[^0-9X]/,'')
     isbn13.gsub!(/[^0-9X]/,'')
   end
+
+
 
 
 end

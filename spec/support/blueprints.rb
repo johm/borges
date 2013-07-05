@@ -91,3 +91,15 @@ end
 PostTitleListLink.blueprint do
   # Attributes here
 end
+
+Category.blueprint do
+  # Attributes here
+end
+
+TitleCategoryMembership.blueprint do
+  # Attributes here
+end
+
+Owner.blueprint do
+  # Attributes here
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623212940) do
+ActiveRecord::Schema.define(:version => 20130705183408) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20130623212940) do
     t.datetime "updated_at", :null => false
     t.string   "full_name"
     t.text     "bio"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -54,9 +62,12 @@ ActiveRecord::Schema.define(:version => 20130623212940) do
     t.integer  "distributor_id"
     t.integer  "owner_id"
     t.boolean  "is_used"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "invoice_id"
+    t.datetime "inventoried_when"
+    t.datetime "deinventoried_when"
+    t.string   "status"
   end
 
   add_index "copies", ["distributor_id"], :name => "index_copies_on_distributor_id"
@@ -132,6 +143,13 @@ ActiveRecord::Schema.define(:version => 20130623212940) do
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
+
+  create_table "owners", :force => true do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -231,6 +249,16 @@ ActiveRecord::Schema.define(:version => 20130623212940) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "title_category_memberships", :force => true do |t|
+    t.integer  "title_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "title_category_memberships", ["category_id"], :name => "index_title_category_memberships_on_category_id"
+  add_index "title_category_memberships", ["title_id"], :name => "index_title_category_memberships_on_title_id"
 
   create_table "title_list_memberships", :force => true do |t|
     t.integer  "title_id"

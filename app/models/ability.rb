@@ -19,6 +19,7 @@ class Ability
       can :read, TitleList, :public => true
       can :read, Post, :published => true
       can :read, PostCategory
+      can :read, Category
     end
     # Define abilities for the passed in user here. For example:
     #

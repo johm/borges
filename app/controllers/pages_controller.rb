@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user! 
+  before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
 
   autocomplete :parent,:title,:full=>true,:display_value=>:title_and_slug,:class_name=>Page
@@ -85,4 +86,11 @@ class PagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def hack_out_params
+    params[:page].delete :parent
+  end
+
 end

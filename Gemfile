@@ -44,3 +44,6 @@ gem 'ckeditor'
 gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails"
+gem 'sequel'
+gem 'mysql'
+gem 'googlebooks'

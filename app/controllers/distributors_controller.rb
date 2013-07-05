@@ -3,6 +3,9 @@ class DistributorsController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
 
+  has_many :copies
+  has_many :editions, :through => :copies
+
 
   # GET /distributors
   # GET /distributors.json

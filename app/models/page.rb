@@ -14,4 +14,8 @@ class Page < ActiveRecord::Base
     "#{title}"
   end
 
+  def to_s
+    "#{title}"
+  end
+
 end

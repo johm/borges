@@ -16,7 +16,6 @@ class Post < ActiveRecord::Base
 
   def dated_slug
     "#{DateTime.now.strftime('%Y-%m')}-#{title}"
-
   end
   
   def title_and_slug
