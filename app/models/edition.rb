@@ -52,8 +52,8 @@ class Edition < ActiveRecord::Base
   
   protected
   def normalize_isbns
-    isbn10.gsub!(/[^0-9X]/,'')
-    isbn13.gsub!(/[^0-9X]/,'')
+    isbn10.gsub!(/[^0-9X]/,'') unless isbn10.nil?
+    isbn13.gsub!(/[^0-9X]/,'') unless isbn13.nil?
   end
 
 
