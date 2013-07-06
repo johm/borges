@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 group :production, :staging do
-  gem "pg"
+  gem "mysql2"
 end
 
 group :development, :test do
