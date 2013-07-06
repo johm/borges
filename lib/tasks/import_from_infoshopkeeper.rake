@@ -84,10 +84,10 @@ namespace :infoshopkeeper do
                             :inventoried_when => b[:inventoried_when],
                             :deinventoried_when => b[:sold_when],
                             :status => b[:status],
-                            :owner => Owner.find_or_create_by_name(b[:owner] unless b[:owner].blank?),
-                            :distributor => Distributor.find_or_create_by_name(b[:distributor]) unless b[:distributor].blank?,
+                            :owner => (Owner.find_or_create_by_name(b[:owner]) unless b[:owner].blank?),
+                            :distributor => (Distributor.find_or_create_by_name(b[:distributor]) unless b[:distributor].blank?),
                             :notes => b[:notes],
-                            :is_used => b[:distributor] == "used" ? true : false,
+                            :is_used => (b[:distributor] == "used" ? true : false),
                             )
         
         unless new_copy.valid?
