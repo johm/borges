@@ -123,11 +123,16 @@ font-size:30px;
 margin-left:200px;
 position:absolute;
 right:10px;
-top:20px;
+bottom:10px;
+}
+
+.navbar-fixed-top .navbar-inner {
+height:80px;
 }
 
 #topmenu a{
 color:rgb(246,246,246) !important ;
+margin-left:20px;
 }
 
 html,body {
