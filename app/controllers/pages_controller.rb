@@ -21,6 +21,8 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
 
+    (@slider = true) if @page.slug=="test-page"
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @page }

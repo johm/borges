@@ -4,14 +4,13 @@
 
 
 h1.booktitle {
-font-size:26px;
+font-size:24px;
 font-weight:normal;
 line-height:30px;
 }
 
 .contributors, .contributors a {
-color:#eeeeee;
-font-size:22px;
+font-size:18px;
 }
 
 
@@ -37,10 +36,27 @@ border-top-width:0px;
 margin-bottom:0px;
 }
 
-.contributors, .contributors a, .contributors a:visited {
-color: #eee ;
-}
+
 
 .contributors {
 margin-top:0px;
+line-height:18px;
+}
+
+.shortorder .status_and_price {
+width:50%;
+font-weight:500; 
+font-family:"Raleway";
+display:inline;
+}
+
+.shortorder .status_and_price th, .shortorder .status_and_price td{
+font-size:16px;
+font-weight:500; 
+}
+
+
+
+.shortorder .control-group a.btn{
+width:100px;
 }

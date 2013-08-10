@@ -86,9 +86,10 @@ Borges::Application.routes.draw do
 
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to=>'home#frontpage' 
   end
   root :to=>'home#frontpage' 
+
   devise_for :users
   resources :users
 end

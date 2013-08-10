@@ -8,7 +8,18 @@ class TitlesController < ApplicationController
   # GET /titles
   # GET /titles.json
   def index
-    @titles = Title.page(params[:page]).per(10)
+    if ! params[:searchquery].blank? 
+      searchquery=params[:searchquery]
+      @searchquery=searchquery
+      @title_search = Title.search do
+        fulltext searchquery
+        paginate :page => params[:page], :per_page => 20
+      end
+      @titles=@title_search.results
+    else
+      @titles = Title.page(params[:page]).per(20)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @titles }

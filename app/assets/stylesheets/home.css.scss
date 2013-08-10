@@ -13,6 +13,18 @@ $holderwidth:1200px;
 $horpad:20px;
 $mar:5px;
 
+@import url(http://fonts.googleapis.com/css?family=Arvo:400,700|Copse|Abril+Fatface);
+
+
+
+ 
+//bebas neue
+//fairview
+//lincoln
+//tablet gothic 
+//edmond
+//geared
+
 
 
 a.fitinner {
@@ -192,7 +204,6 @@ color:$nearblack !important;
 font-family:"Bebas Neue";
 }
 
-
 .abril {
 font-family:"Abril Fatface";
 }
@@ -214,7 +225,6 @@ font-family:"Tablet Gothic SemiCondensed";
 font-family:"Arvo";
 }
 
-
 .copse {
 font-family:"Copse";
 }
@@ -222,7 +232,6 @@ font-family:"Copse";
 .muncie {
 font-family:"Muncie";
 }
-
 
 .fairview {
 font-family:"fairview";
@@ -320,6 +329,10 @@ background-size:cover;
 padding-top:220px;
 }
 
+body.slider {
+padding-top:360px;
+}
+
 #main {
 border-top:1px solid $nearblack;
 background-color:rgba(70, 63, 63, 0.95);
@@ -331,6 +344,10 @@ color:$nearwhite;
 min-height:60px;
 }
 
+.navbar-fixed-top, .navbar-fixed-bottom {
+position:fixed;
+z-index:99999;
+}
 
 
 
@@ -349,15 +366,46 @@ border:1px solid #333;
 @import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500);
 
 
-
-h1,h2 {
-font-family:"Dosis";
-//font-family:"Source Sans Pro";
+h1{
+font-family:"Raleway";
+font-family:"Tablet Gothic SemiCondensed";
 font-family:"Edmondsans";
-font-weight:normal;
+text-transform:uppercase;
+font-weight:100;
+color:$nearwhite;
+font-size:30px;
+margin-top:0px !important;
 }
+
+h2 {
+font-family:"Raleway";
+font-weight:500;
+color:$nearwhite;
+font-size:24px;
+margin-top:0px !important;
+}
+
+h3 {
+font-family:"Raleway";
+font-weight:500;
+color:#787878;
+font-size:18px;
+}
+
+
+.content h2 a, .content h2 a:visited{
+color:$nearwhite;
+font-size:24px;
+}
+
+.content h3 a, .content h3 a:visited { 
+color:#787878;
+font-size:18px;
+}
+
 
 .description,.pages .body {
 font-family:"Dosis";
@@ -371,4 +419,20 @@ line-height:24px;
 
 a.btn-primary,a.btn-primary:visited {
 color:white;
+}
+
+
+.navbar-inner {
+background-image:none !important;
+}
+
+.navbar-inner a:hover {
+background-color:inherit;
+}
+
+
+.btn-primary {
+color:#eee !important;
+background-color:#290000 !important;
+background-image:none;
 }

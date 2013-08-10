@@ -325,4 +325,13 @@ jQuery('document').ready(function (){
 
     jQuery("#footer").css("top",jQuery(document).height()-jQuery("#footer").height());
 
+    
+    jQuery(window).scroll(function(){
+	var top = (jQuery(window).scrollTop() > 0) ? $(window).scrollTop() : 1;
+	jQuery('#myCarousel').stop(true, true).fadeTo(100, 1 / top);
+    });
+
 });
+
+
+

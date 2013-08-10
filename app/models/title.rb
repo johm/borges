@@ -1,6 +1,13 @@
 class Title < ActiveRecord::Base
   attr_accessible :title,:contributions_attributes,:authors_attributes,:editions_attributes,:description,:introduction, :title_list_memberships_attributes
 
+  searchable do
+    text :title,:introduction,:description
+    text :authors do
+      authors.map { |a| a.full_name }
+    end  
+  end
+
   has_many :contributions
   has_many :authors, :through => :contributions
   has_many :editions 

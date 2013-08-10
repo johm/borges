@@ -6,6 +6,7 @@ end
 
 group :development, :test do
   gem "sqlite3-ruby", "~> 1.3.0", :require => "sqlite3"
+  gem "fontsquirrel-download"
 end
 
 group :assets do
@@ -47,3 +48,7 @@ gem "bootstrap-switch-rails"
 gem 'sequel'
 gem 'mysql'
 gem 'googlebooks'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem "sunspot_with_kaminari"
+gem "debugger"
