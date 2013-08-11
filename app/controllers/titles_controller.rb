@@ -115,6 +115,33 @@ class TitlesController < ApplicationController
     end
   end
 
+
+  def search
+    title = params[:title][:title]
+    author = params[:title][:my_authors]
+
+    @title_search = Title.search do
+      fulltext title do
+        fields(:title)
+      end
+      
+      fulltext author do
+        fields(:authors)
+      end
+
+      
+      paginate :page => params[:page], :per_page => 20
+    end
+    @titles=@title_search.results
+    
+    respond_to do |format|
+      format.html # search.html.erb
+      format.json { render json: @titles }
+    end
+  end
+
+
+
   private
 
   def hack_out_params

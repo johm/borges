@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sale order:</b>
+  <%= @sale_order_line_item.sale_order %>
+</p>
+
+<p>
+  <b>Copy:</b>
+  <%= @sale_order_line_item.copy %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_order_line_item_path(@sale_order_line_item) %> |
+<%= link_to 'Back', sale_order_line_items_path %>

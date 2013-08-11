@@ -1,4 +1,10 @@
 Borges::Application.routes.draw do
+  resources :sale_order_line_items
+
+
+  resources :sale_orders
+
+
   resources :owners
 
 
@@ -75,12 +81,14 @@ Borges::Application.routes.draw do
     get :autocomplete_author_full_name, :on => :collection
   end
 
-
+  get 'titles/search' => 'titles#search'
   resources :titles do 
     get :autocomplete_publisher_name, :on => :collection
     get :autocomplete_title_list_name, :on => :collection
   end
 
+
+  
 
   resources :authors
 

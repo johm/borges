@@ -1,5 +1,54 @@
+<div class="row toolbar" >
+<%= mylinkbutton "Sell books", new_sale_order_path %>
+<%= mylinkbutton "Order books", new_purchase_order_path %>
+<%= mylinkbutton "Receive books", new_invoice_path %>
+<%= mylinkbutton "Return books", "#" %>
+
+</div>
+
 <div class="row">
+
   <div class="span4">
     <%= render 'search' %>
   </div>
+
+  <div class="span4">
+    <%= render 'sales' %>
+  </div>
+
+  <div class="span4 last">
+    <%= render 'mailorders' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <%= render 'purchaseorders' %>
+  </div>
+  
+  <div class="span4">
+    <%= render 'invoices' %>
+  </div>
+
+  <div class="span4 last">
+    <%= render 'returns' %>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="span4">
+    <%= render 'newbooks' %>
+  </div>
+
+  <div class="span4">
+    <%= render 'authors' %>
+  </div>
+
+  <div class="span4">
+    <%= render 'lists' %>
+  </div>
+
+  
+</div>
 </div>

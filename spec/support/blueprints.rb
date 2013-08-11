@@ -103,3 +103,11 @@ end
 Owner.blueprint do
   # Attributes here
 end
+
+SaleOrder.blueprint do
+  # Attributes here
+end
+
+SaleOrderLineItem.blueprint do
+  # Attributes here
+end

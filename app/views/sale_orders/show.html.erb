@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>From pos:</b>
+  <%= @sale_order.from_pos %>
+</p>
+
+<p>
+  <b>From web:</b>
+  <%= @sale_order.from_web %>
+</p>
+
+<p>
+  <b>Customer po:</b>
+  <%= @sale_order.customer_po %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @sale_order.customer %>
+</p>
+
+<p>
+  <b>Total in cents:</b>
+  <%= @sale_order.total_in_cents %>
+</p>
+
+<p>
+  <b>Posted:</b>
+  <%= @sale_order.posted %>
+</p>
+
+<p>
+  <b>Discount percent:</b>
+  <%= @sale_order.discount_percent %>
+</p>
+
+<p>
+  <b>Tax amount in cents:</b>
+  <%= @sale_order.tax_amount_in_cents %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_order_path(@sale_order) %> |
+<%= link_to 'Back', sale_orders_path %>

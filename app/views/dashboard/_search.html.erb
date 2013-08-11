@@ -1,8 +1,11 @@
 <h1>Find books</h1>
-[by title]
-[by author]
+
+<%= form_for Title.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
+<%= mytextfield f,:title,:title %>
+<%= mytextfield f,:authors,:my_authors %>
 [by list] 
 [by number sold] 
 [by distributor] 
 [by publisher]
-
+<%= mysubmit f, :search %>
+<% end %>

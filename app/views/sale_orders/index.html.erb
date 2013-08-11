@@ -1,0 +1,37 @@
+<h1>Listing sale_orders</h1>
+
+<table>
+  <tr>
+    <th>From pos</th>
+    <th>From web</th>
+    <th>Customer po</th>
+    <th>Customer</th>
+    <th>Total in cents</th>
+    <th>Posted</th>
+    <th>Discount percent</th>
+    <th>Tax amount in cents</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sale_orders.each do |sale_order| %>
+  <tr>
+    <td><%= sale_order.from_pos %></td>
+    <td><%= sale_order.from_web %></td>
+    <td><%= sale_order.customer_po %></td>
+    <td><%= sale_order.customer %></td>
+    <td><%= sale_order.total_in_cents %></td>
+    <td><%= sale_order.posted %></td>
+    <td><%= sale_order.discount_percent %></td>
+    <td><%= sale_order.tax_amount_in_cents %></td>
+    <td><%= link_to 'Show', sale_order %></td>
+    <td><%= link_to 'Edit', edit_sale_order_path(sale_order) %></td>
+    <td><%= link_to 'Destroy', sale_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sale order', new_sale_order_path %>

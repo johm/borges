@@ -43,5 +43,8 @@ class Title < ActiveRecord::Base
   def latest_published_edition
     editions.published.newest_first.first || latest_edition
   end
+
+  def my_authors
+  end
   
 end
