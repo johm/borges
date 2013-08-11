@@ -11,9 +11,15 @@
     </div>
     <div class="span5">
       <%=  mylinkbutton "<i class='icon-plus'></i> New Title", new_title_path   if can? :create, Title %>
-      <%= form_tag '/titles',method: :get %>
-      <%= text_field_tag "searchquery",@searchquery %>
-      <%= submit_tag "Search"%>
+      <%= form_tag '/titles',method: :get,:html=>{:class=>"form-horizontal"} %>
+      <div class="fields">
+	<div class="field control-group">
+	  <div class="controls">
+	    <%= text_field_tag "searchquery",@searchquery %>
+	    <%= submit_tag "Search",:class=>"btn btn-primary",:style=>"position:relative;top:-5px;" %>
+	  </div>
+	</div>
+      </div>
       </form>
     </div>
   </div>
