@@ -84,6 +84,8 @@ Borges::Application.routes.draw do
 
   resources :authors
 
+  get '/dashboard/:action', :to => 'dashboard'
+  get '/dashboard/', :to => 'dashboard#index'
 
   authenticated :user do
     root :to=>'home#frontpage' 
