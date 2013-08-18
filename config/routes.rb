@@ -73,6 +73,7 @@ Borges::Application.routes.draw do
 
 
   resources :editions do
+    get :autocomplete,:on => :collection
     get :autocomplete_title_title, :on => :collection
   end
 
@@ -84,6 +85,7 @@ Borges::Application.routes.draw do
   get 'titles/search' => 'titles#search'
   resources :titles do 
     get :autocomplete_publisher_name, :on => :collection
+    get :autocomplete_distributor_name, :on => :collection
     get :autocomplete_title_list_name, :on => :collection
   end
 

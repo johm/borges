@@ -21,7 +21,7 @@ class PurchaseOrderLineItemsController < ApplicationController
     @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render partial: "/purchase_order_line_items/purchase_order_line_item", object: @purchase_order_line_item } # show.html.erb
       format.json { render json: @purchase_order_line_item }
     end
   end
@@ -47,11 +47,12 @@ class PurchaseOrderLineItemsController < ApplicationController
   # POST /purchase_order_line_items.json
   def create
     @purchase_order_line_item = PurchaseOrderLineItem.new(params[:purchase_order_line_item])
-
+    @purchase_order_line_item.quantity=1 if @purchase_order_line_item.quantity.nil?
     respond_to do |format|
       if @purchase_order_line_item.save
         format.html { redirect_to @purchase_order_line_item, notice: 'Purchase order line item was successfully created.' }
         format.json { render json: @purchase_order_line_item, status: :created, location: @purchase_order_line_item }
+        format.js {}
       else
         format.html { render action: "new" }
         format.json { render json: @purchase_order_line_item.errors, status: :unprocessable_entity }

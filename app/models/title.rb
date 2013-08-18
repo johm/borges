@@ -6,6 +6,15 @@ class Title < ActiveRecord::Base
     text :authors do
       authors.map { |a| a.full_name }
     end  
+    text :publisher do
+      editions.map { |e| e.publisher }
+    end  
+    text :distributor do
+      copies.map { |c| c.distributor }
+    end  
+
+
+
   end
 
   has_many :contributions
@@ -44,7 +53,14 @@ class Title < ActiveRecord::Base
     editions.published.newest_first.first || latest_edition
   end
 
-  def my_authors
+
+  [:authors, :publisher, :distributor].each do |attr|
+  define_method("my_#{attr}") do
+      ""
+    end
   end
   
+  
+  
+
 end

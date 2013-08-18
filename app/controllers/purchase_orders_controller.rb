@@ -2,7 +2,9 @@ class PurchaseOrdersController < ApplicationController
   autocomplete :distributor,:name,:full=>true,:display_value=>:name_and_id
 
   before_filter :authenticate_user! 
+  before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource 
+  
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -85,4 +87,12 @@ class PurchaseOrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def hack_out_params
+    params[:purchase_order].delete :distributor
+  end
+
+
 end

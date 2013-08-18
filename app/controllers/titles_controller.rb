@@ -2,7 +2,8 @@ class TitlesController < ApplicationController
   before_filter :authenticate_user! 
   before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
-  autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id
+  autocomplete :publisher,:name,:full=>true,:display_value=>:name
+  autocomplete :distributor,:name,:full=>true,:display_value=>:name
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
 
   # GET /titles
@@ -119,6 +120,8 @@ class TitlesController < ApplicationController
   def search
     title = params[:title][:title]
     author = params[:title][:my_authors]
+    publisher = params[:publisher]
+    distributor = params[:distributor]
 
     @title_search = Title.search do
       fulltext title do
@@ -129,13 +132,20 @@ class TitlesController < ApplicationController
         fields(:authors)
       end
 
+      fulltext publisher do
+        fields(:publisher)
+      end
+      
+      fulltext distributor do
+        fields(:distributor)
+      end
       
       paginate :page => params[:page], :per_page => 20
     end
     @titles=@title_search.results
     
     respond_to do |format|
-      format.html # search.html.erb
+      format.html {render 'adminsearch'} # search.html.erb
       format.json { render json: @titles }
     end
   end

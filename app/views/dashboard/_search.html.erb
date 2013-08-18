@@ -1,11 +1,14 @@
 <h1>Find books</h1>
 
-<%= form_for Title.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
+<%= nested_form_for Title.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
 <%= mytextfield f,:title,:title %>
 <%= mytextfield f,:authors,:my_authors %>
-[by list] 
+<%= my_autocomplete_field_tag f,'publisher','publisher',autocomplete_publisher_name_titles_path %>
+<%= my_autocomplete_field_tag f,'distributor','distributor',autocomplete_distributor_name_titles_path %>
+<br />
 [by number sold] 
-[by distributor] 
-[by publisher]
+[by number in stock]
+
+
 <%= mysubmit f, :search %>
 <% end %>

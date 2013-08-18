@@ -20,6 +20,15 @@ class Edition < ActiveRecord::Base
   scope :published, where(:in_print => true)
   scope :newest_first, order("year_of_publication desc")
   scope :without_edition, lambda{|e| e ? {:conditions => ["id != ?", e.id]} : {} }
+
+  searchable do
+    text :isbn10,:isbn13
+    
+    text :title do 
+      title.title
+    end
+  end  
+
   
 
   def self.formats

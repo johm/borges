@@ -22,6 +22,17 @@
   <%= myselectfield f,:publisher,:publisher,autocomplete_publisher_name_titles_path,new_publisher_path %>
 
   <div class="field control-group">
+    <%= f.label :list_price, :class=>'control-label' %>
+    <div class="controls">
+      
+      <div class="input-prepend">
+	<span class="add-on">$</span>
+	<%= f.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field control-group">
     <%= f.label :format, :class=>'control-label' %>
     <div class="controls">
       <%= f.select :format, Edition.formats %>

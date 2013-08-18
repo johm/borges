@@ -2,7 +2,47 @@
   <div class="row">
     
     <div class="span8">
-      <table class="table">
+      
+      <h3>Items</h3>
+      <table id="purchase_order_line_items">
+	<% @purchase_order.purchase_order_line_items.each do |l| %>
+	<%= render 'purchase_order_line_items/row', :locals => { :l => l }%>
+	<% end %>
+	
+      </table>
+      
+      <% if ! @purchase_order.ordered? %>
+      <%= nested_form_for(PurchaseOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+      
+      <%= f.hidden_field(:purchase_order_id,:value => @purchase_order.id) %>
+      <%= f.hidden_field(:edition_id) %>
+      
+	   <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path%>
+      
+	   <script>
+	     $('#item').bind('railsAutocomplete.select', function(event, data){
+	     $("#purchase_order_line_item_edition_id").val(data.item.id);
+	     });
+	     
+	   </script>
+
+	   <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_purchase_order_line_item"}) %> 
+	 <% end %>
+       <% end %>
+       
+       <table class="table" id="line_items">
+	 <tr><th>Quantity</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th></tr>
+	 <% @purchase_order.purchase_order_line_items.each do |li| %>
+	 <%= render li %>
+	 <% end %>
+      </table>
+
+    </div>
+    <div class="span4">
+      <%= mylinkbutton("<i class='icon-ok-sign'></i> Submit order","link_for_ordering_purchase_order") unless @purchase_order.ordered? %>
+      <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
+      <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
+            <table class="table">
 	<tr>
 	  <th>Our PO number:</th>
 	  <td><%= @purchase_order.number %></td>
@@ -28,41 +68,21 @@
 	  <td><%= best_in_place @purchase_order, :notes, :type => :textarea %></td>
 	</tr>
       </table>
-      
-      <h3>Items</h3>
-      <table id="purchase_order_line_items">
-	<% @purchase_order.purchase_order_line_items.each do |l| %>
-	<%= render 'purchase_order_line_items/row', :locals => { :l => l }%>
-	<% end %>
-	
-      </table>
 
-      <%= form_for(PurchaseOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
-      
-      <%= f.hidden_field(:edition_id) %>
-
-      <div class="control-group field">
-	<%= f.label("ISBN",:class=>"control-label") %>
-	<div class="controls">
-	  <%= content_tag(:input,"",
-	      {:name=>:isbn,:class=>:input,:type=>:text}) %>
-	</div>
-      </div>
-
-      title
-      <%= mytextfield(f,"Quantity",:quantity, {:class=>"input-mini"}) %>
-      <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_purchase_order_line_item"}) %> 
-      <% end %>
-    </div>
-    <div class="span4">
-      <%= mylinkbutton("<i class='icon-ok-sign'></i> Submit order","link_for_ordering_purchase_order") unless @purchase_order.ordered? %>
-      <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
-      <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
     </div>
   </div>
 </div>
+ 
 
+<script>
+  function afterQuantityChange() { 
+  var self=$(this);
+  $.get('/purchase_order_line_items/'+$(this).data('purchase-order-line-item'),function(data){
+  self.parent().parent().replaceWith(data);});
+  }
 
+  $('.best_in_place').bind("ajax:success", afterQuantityChange);
 
+</script>
 
 

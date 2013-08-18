@@ -86,6 +86,20 @@ class EditionsController < ApplicationController
     end
   end
 
+  def autocomplete
+    @edition_search=Edition.search do
+      fulltext params[:term]
+    end
+    
+    @editions_data=@edition_search.results.collect do |edition|
+      hash = {"id" => edition.id.to_s, "label" => "#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]", "value" => "#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]"}
+    end
+    respond_to do |format|
+      format.json { render json: @editions_data }
+    end
+  end
+
+
     private
 
   def hack_out_params

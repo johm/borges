@@ -1,0 +1,9 @@
+$("#line_items").append("<%= escape_javascript(render :partial=>"purchase_order_line_item",:object => @purchase_order_line_item) %>");
+function afterQuantityChange() { 
+  var self=$(this);
+  $.get('/purchase_order_line_items/'+$(this).data('purchase-order-line-item'),function(data){
+  self.parent().parent().replaceWith(data);});
+  }
+
+
+$('.best_in_place').bind("ajax:success", afterQuantityChange);				   

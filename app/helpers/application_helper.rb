@@ -41,6 +41,16 @@ module ApplicationHelper
   end
 
 
+  def myplaintextarea(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            f.text_area(m,options.merge({:class=>"input-xxlarge"})),
+                            :class=>"controls"),
+                :class=>"field control-group")
+  end
+
+
   def mysubmit(f,l,options={})
     content_tag(:div,
                 content_tag(:div,
@@ -60,7 +70,7 @@ module ApplicationHelper
                 :class=>"actions control-group")
   end
 
-
+ 
   def myselectfield (f,m,l,p,a=false)
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
@@ -75,5 +85,17 @@ module ApplicationHelper
                             :class=>"controls"),
                 :class=>"field control-group")
   end
+
+  def my_autocomplete_field_tag (f,m,l,p)
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            autocomplete_field_tag(m,"",p),
+                            :class=>"controls"),
+                :class=>"field control-group")
+  end
+
+
+
 
 end
