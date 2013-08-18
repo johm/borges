@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705183408) do
+ActiveRecord::Schema.define(:version => 20130818165703) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20130705183408) do
     t.integer  "purchase_order_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.boolean  "received"
   end
 
   add_index "purchase_order_line_items", ["edition_id"], :name => "index_purchase_order_line_items_on_edition_id"
@@ -249,6 +250,33 @@ ActiveRecord::Schema.define(:version => 20130705183408) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "sale_order_line_items", :force => true do |t|
+    t.integer  "sale_order_id"
+    t.integer  "copy_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "sale_order_line_items", ["copy_id"], :name => "index_sale_order_line_items_on_copy_id"
+  add_index "sale_order_line_items", ["sale_order_id"], :name => "index_sale_order_line_items_on_sale_order_id"
+
+  create_table "sale_orders", :force => true do |t|
+    t.boolean  "from_pos"
+    t.boolean  "from_web"
+    t.string   "customer_po"
+    t.integer  "customer_id"
+    t.integer  "total_in_cents"
+    t.boolean  "posted"
+    t.integer  "discount_percent"
+    t.integer  "tax_amount_in_cents"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "user_id"
+  end
+
+  add_index "sale_orders", ["customer_id"], :name => "index_sale_orders_on_customer_id"
+  add_index "sale_orders", ["user_id"], :name => "index_sale_orders_on_user_id"
 
   create_table "title_category_memberships", :force => true do |t|
     t.integer  "title_id"

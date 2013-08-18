@@ -70,6 +70,17 @@ module ApplicationHelper
                 :class=>"actions control-group")
   end
 
+
+  def mypostlinkbutton(text,path,url_options={},html_options={},size="btn-large")
+    content_tag(:div,
+                link_to(raw(text),
+                        path,
+                        url_options.merge({:method=>:post,:class=>"btn #{size} btn-primary controls"})
+                        ),
+                :class=>"actions control-group")
+  end
+
+
  
   def myselectfield (f,m,l,p,a=false)
     content_tag(:div,

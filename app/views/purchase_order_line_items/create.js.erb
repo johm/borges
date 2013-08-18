@@ -1,9 +1,15 @@
 $("#line_items").append("<%= escape_javascript(render :partial=>"purchase_order_line_item",:object => @purchase_order_line_item) %>");
+
 function afterQuantityChange() { 
   var self=$(this);
-  $.get('/purchase_order_line_items/'+$(this).data('purchase-order-line-item'),function(data){
-  self.parent().parent().replaceWith(data);});
+    $.getJSON('/purchase_order_line_items/'+$(this).data('purchase-order-line-item')+'.json',function(data){
+    $("#purchase_order_line_item_"+self.data('purchase-order-line-item')+" .ext_price").html(data.ext_price_string)});
+
+    $.getJSON('/purchase_orders/'+$(this).data('purchase-order'),function(data){	
+	$("#total").html(data.estimated_total_string);});
   }
 
 
 $('.best_in_place').bind("ajax:success", afterQuantityChange);				   
+
+$("#total").html("<%= escape_javascript(@purchase_order_line_item.purchase_order.estimated_total_string) %>");

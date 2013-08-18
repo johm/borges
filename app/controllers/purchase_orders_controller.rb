@@ -88,6 +88,20 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  def submit 
+    @purchase_order = PurchaseOrder.find(params[:id])
+    
+    @purchase_order.ordered=true
+    @purchase_order.ordered_when=DateTime.now
+
+    @purchase_order.save!
+
+    respond_to do |format|
+      format.html {redirect_to @purchase_order}
+    end
+  end
+
+
   private
 
   def hack_out_params

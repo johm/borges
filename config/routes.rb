@@ -64,6 +64,9 @@ Borges::Application.routes.draw do
 
 
   resources :purchase_orders do 
+    member do
+      post :submit
+    end
     get :autocomplete_distributor_name, :on => :collection
     resources :purchase_order_line_items
   end

@@ -4,12 +4,6 @@
     <div class="span8">
       
       <h3>Items</h3>
-      <table id="purchase_order_line_items">
-	<% @purchase_order.purchase_order_line_items.each do |l| %>
-	<%= render 'purchase_order_line_items/row', :locals => { :l => l }%>
-	<% end %>
-	
-      </table>
       
       <% if ! @purchase_order.ordered? %>
       <%= nested_form_for(PurchaseOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
@@ -22,6 +16,7 @@
 	   <script>
 	     $('#item').bind('railsAutocomplete.select', function(event, data){
 	     $("#purchase_order_line_item_edition_id").val(data.item.id);
+
 	     });
 	     
 	   </script>
@@ -39,7 +34,7 @@
 
     </div>
     <div class="span4">
-      <%= mylinkbutton("<i class='icon-ok-sign'></i> Submit order","link_for_ordering_purchase_order") unless @purchase_order.ordered? %>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
       <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
       <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
             <table class="table">
@@ -51,6 +46,11 @@
 	<tr>
 	  <th>Distributor:</th>
 	  <td><%= link_to @purchase_order.distributor, @purchase_order.distributor %></td>
+	</tr>
+	
+	<tr>
+	  <th>Estimated retail total:</th>
+	  <td><span id="total">$<%= @purchase_order.estimated_total %></span></td>
 	</tr>
 	
 	<tr>
@@ -77,11 +77,18 @@
 <script>
   function afterQuantityChange() { 
   var self=$(this);
-  $.get('/purchase_order_line_items/'+$(this).data('purchase-order-line-item'),function(data){
-  self.parent().parent().replaceWith(data);});
+
+  $.getJSON('/purchase_order_line_items/'+$(this).data('purchase-order-line-item')+'.json',function(data){
+  $("#purchase_order_line_item_"+self.data('purchase-order-line-item')+" .ext_price").html(data.ext_price_string);
+  });
+  
+  $.getJSON('/purchase_orders/'+$(this).data('purchase-order'),function(data){
+  $("#total").html(data.estimated_total_string);});
   }
+  
 
   $('.best_in_place').bind("ajax:success", afterQuantityChange);
+  // this replaces, but needs to be rebound
 
 </script>
 
