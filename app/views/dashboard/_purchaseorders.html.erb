@@ -1,3 +1,23 @@
-<h1>Orders awaiting shipping</h1>
+<h1>Recent orders</h1>
 
-10 most recent purchase orders (posted and not)
+<table class="table">
+<tr>
+  <th>PO#</th>
+  <th>Distributor</th>
+  <th>Ordered?</th>
+</tr>
+<% @purchase_orders.each do |po| %>
+<tr>
+  <td><%= link_to po.number,po %></td>
+  <td><%= link_to po.distributor.name,po.distributor %></td>
+  <td><%= po.ordered?  ? po.ordered_when.to_formatted_s(:just_date) : "No" %></td>
+
+</tr>
+<% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New order",new_purchase_order_path,{},'btn-small' %>
+<%= mylinkbutton "All orders",purchase_orders_path,{},'btn-small' %>
+<%= mylinkbutton "Distributors",distributors_path,{},'btn-small' %> 
+</div>

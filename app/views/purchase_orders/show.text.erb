@@ -1,0 +1,6 @@
+Our PO number: <%= @purchase_order.number %>
+
+<% @purchase_order.purchase_order_line_items.each do |li| %>
+<%= li.quantity %> x <%= li.edition.title.title %> (<%= li.isbn %>) 
+<% end %>
+

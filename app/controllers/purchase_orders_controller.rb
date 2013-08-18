@@ -24,6 +24,7 @@ class PurchaseOrdersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.text
       format.json { render json: @purchase_order }
     end
   end

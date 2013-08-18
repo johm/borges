@@ -9,6 +9,8 @@ class DashboardController < ApplicationController
   # GET /titles.json
 
   def index
+    @purchase_orders=PurchaseOrder.order("created_at DESC").limit(10)
+
   end
 
   def titles

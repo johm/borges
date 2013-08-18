@@ -37,6 +37,7 @@
       <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
       <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
       <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
+      <%= mylinkbutton("<i class='icon-font'></i> Text export", purchase_order_path(@purchase_order,:format=>'txt'),:target=>"_blank") %> 
             <table class="table">
 	<tr>
 	  <th>Our PO number:</th>
@@ -60,7 +61,7 @@
 	
 	<tr>
 	  <th>Ordered?</th>
-	  <td><%= @purchase_order.ordered? ? @purchase_order.ordered_when : "Not yet" %></td>
+	  <td><%= @purchase_order.ordered? ? @purchase_order.ordered_when.to_formatted_s(:just_date) : "Not yet" %></td>
 	</tr>
 	
 	<tr>
