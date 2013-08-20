@@ -2,17 +2,20 @@
   <div class="row">
     
     <div class="span8">
-      
-      <h3>Items</h3>
+      <p id="notice"><%= notice %></p>      
+
+      <h1>Purchase Order: <%= @purchase_order.number %></h1>
       
       <% if ! @purchase_order.ordered? %>
       <%= nested_form_for(PurchaseOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
-      
+
+
       <%= f.hidden_field(:purchase_order_id,:value => @purchase_order.id) %>
       <%= f.hidden_field(:edition_id) %>
       
-	   <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path%>
-      
+      <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path%>
+
+      <%= myselectfield f,:customer,:customer,autocomplete_customer_name_customers_path, new_customer_path() %>       
 	   <script>
 	     $('#item').bind('railsAutocomplete.select', function(event, data){
 	     $("#purchase_order_line_item_edition_id").val(data.item.id);
@@ -26,7 +29,7 @@
        <% end %>
        
        <table class="table" id="line_items">
-	 <tr><th>Quantity</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th></tr>
+	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Customer</th></tr>
 	 <% @purchase_order.purchase_order_line_items.each do |li| %>
 	 <%= render li %>
 	 <% end %>
@@ -52,11 +55,6 @@
 	<tr>
 	  <th>Estimated retail total:</th>
 	  <td><span id="total">$<%= @purchase_order.estimated_total %></span></td>
-	</tr>
-	
-	<tr>
-	  <th>Customer:</th>
-	  <td><%= link_to @purchase_order.customer.to_s,@purchase_order.customer %></td>
 	</tr>
 	
 	<tr>

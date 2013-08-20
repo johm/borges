@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818165703) do
+ActiveRecord::Schema.define(:version => 20130820121738) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130818165703) do
     t.float    "discount"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "price_in_cents"
   end
 
   add_index "invoice_line_items", ["edition_id"], :name => "index_invoice_line_items_on_edition_id"
@@ -140,6 +141,8 @@ ActiveRecord::Schema.define(:version => 20130818165703) do
     t.string   "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "received"
+    t.datetime "received_when"
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
@@ -220,16 +223,17 @@ ActiveRecord::Schema.define(:version => 20130818165703) do
     t.integer  "purchase_order_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.boolean  "received"
+    t.integer  "received"
+    t.integer  "customer_id"
   end
 
+  add_index "purchase_order_line_items", ["customer_id"], :name => "index_purchase_order_line_items_on_customer_id"
   add_index "purchase_order_line_items", ["edition_id"], :name => "index_purchase_order_line_items_on_edition_id"
   add_index "purchase_order_line_items", ["purchase_order_id"], :name => "index_purchase_order_line_items_on_purchase_order_id"
 
   create_table "purchase_orders", :force => true do |t|
     t.string   "number"
     t.text     "notes"
-    t.integer  "customer_id"
     t.integer  "distributor_id"
     t.boolean  "ordered"
     t.datetime "ordered_when"
@@ -237,7 +241,6 @@ ActiveRecord::Schema.define(:version => 20130818165703) do
     t.datetime "updated_at",     :null => false
   end
 
-  add_index "purchase_orders", ["customer_id"], :name => "index_purchase_orders_on_customer_id"
   add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"
 
   create_table "roles", :force => true do |t|

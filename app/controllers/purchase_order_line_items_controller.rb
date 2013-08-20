@@ -1,4 +1,6 @@
 class PurchaseOrderLineItemsController < ApplicationController
+  before_filter :hack_out_params , :only=>[:create,:update]
+
   before_filter :authenticate_user! 
   load_and_authorize_resource 
 
@@ -87,4 +89,13 @@ class PurchaseOrderLineItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  private
+  
+  def hack_out_params
+    params[:purchase_order_line_item].delete :customer
+  end
+
+
 end

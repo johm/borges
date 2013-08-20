@@ -1,6 +1,7 @@
 <h1>Listing customers</h1>
-
-<table>
+<div class="row">
+<div class="span8">
+<table class="table">
   <tr>
     <th>Name</th>
     <th>Email</th>
@@ -13,17 +14,16 @@
 
 <% @customers.each do |customer| %>
   <tr>
-    <td><%= customer.name %></td>
+    <td><%= link_to customer.name, customer %></td>
     <td><%= customer.email %></td>
     <td><%= customer.phone %></td>
     <td><%= customer.notes %></td>
-    <td><%= link_to 'Show', customer %></td>
-    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= mylinkbutton 'Edit', edit_customer_path(customer), {},"btn-small" %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Customer', new_customer_path %>
+</div>
+<div class="span4">
+<%= mylinkbutton 'New Customer', new_customer_path %>
+</div>
+</div>

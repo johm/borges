@@ -14,19 +14,6 @@
   <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, new_distributor_path() %> 
   <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
 
-<!--  <div class="field">
-    <%= f.label :customer %><br />
-    <%= f.text_field :customer %>
-  </div>
-  <div class="field">
-    <%= f.label :ordered %><br />
-    <%= f.check_box :ordered %>
-  </div>
-  <div class="field">
-    <%= f.label :ordered_when %><br />
-    <%= f.datetime_select :ordered_when %>
-  </div>
--->
 <%=  mysubmit(f,"Create") %>
   </div>
 <% end %>

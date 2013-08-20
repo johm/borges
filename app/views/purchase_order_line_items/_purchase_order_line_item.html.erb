@@ -6,4 +6,6 @@
 	  <td><%= purchase_order_line_item.isbn %></td> 
 	  <td><%= purchase_order_line_item.edition.list_price %></td>
 	  <td class="ext_price"><%= purchase_order_line_item.ext_price %></td>
+	   <td><%= purchase_order_line_item.received %></td>
+	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
 	 </tr>

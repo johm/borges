@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  autocomplete :customer,:name,:full=>true,:display_value=>:name_and_id
   # GET /customers
   # GET /customers.json
   def index
