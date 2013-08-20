@@ -8,7 +8,7 @@ class DistributorsController < ApplicationController
   # GET /distributors
   # GET /distributors.json
   def index
-    @distributors = Distributor.all
+    @distributors = Distributor.order(:name)
 
     respond_to do |format|
       format.html # index.html.erb

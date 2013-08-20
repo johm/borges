@@ -1,27 +1,27 @@
+<div class="row">
+<div class="span8">
 <h1>Listing distributors</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Name</th>
     <th>Our account number</th>
     <th>Notes</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @distributors.each do |distributor| %>
   <tr>
-    <td><%= distributor.name %></td>
+    <td><%= link_to distributor.name, distributor %></td>
     <td><%= distributor.our_account_number %></td>
     <td><%= distributor.notes %></td>
-    <td><%= link_to 'Show', distributor %></td>
-    <td><%= link_to 'Edit', edit_distributor_path(distributor) %></td>
-    <td><%= link_to 'Destroy', distributor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= mylinkbutton 'Edit', edit_distributor_path(distributor) , {}, "btn-small" %></td>
   </tr>
 <% end %>
 </table>
+</div>
+<div class="span4">
 
-<br />
-
-<%= link_to 'New Distributor', new_distributor_path %>
+<%= mylinkbutton 'New Distributor', new_distributor_path %>
+</div>
+</div>
