@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
   end
 
   def content 
-    @top_level_pages=Page.find(:all)
+    @top_level_pages=Page.where("parent_id is ?",nil)
   end
 
   def titles
