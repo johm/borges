@@ -5,12 +5,10 @@
 <%= mytextfield f,:authors,:my_authors %>
 <%= my_autocomplete_field_tag f,'publisher','publisher',autocomplete_publisher_name_titles_path %>
 <%= my_autocomplete_field_tag f,'distributor','distributor',autocomplete_distributor_name_titles_path %>
-<%= mytextfield f,:copies_sold_or_more,:my_copies_sold_or_more %>
-<%= mytextfield f,:copies_sold_or_less,:my_copies_sold_or_less %>
-<%= mytextfield f,:copies_stock_or_more,:my_copies_stock_or_more %>
-<%= mytextfield f,:copies_stock_or_less,:my_copies_stock_or_less %>
+<%= mytextfield f,">= Sold" ,:my_copies_sold_or_more %>
+<%= mytextfield f,"<= Sold",:my_copies_sold_or_less %>
+<%= mytextfield f,">= In Stock" ,:my_copies_stock_or_more %>
+<%= mytextfield f,"<= In Stock",:my_copies_stock_or_less %>
 
-
-
-<%= mysubmit f, :search %>
+<%= mysubmit f, :search,{} %>
 <% end %>

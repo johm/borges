@@ -1,3 +1,25 @@
 <h1>Recent Invoices</h1>
 
-10 most recent invoices
+<table class="table">
+<tr>
+  <th>Invoice#</th>
+  <th>Distributor</th>
+  <th># of books</th>
+  <th>Received?</th>
+</tr>
+<% @invoices.each do |i| %>
+<tr>
+  <td><%= link_to i.number,i %></td>
+  <td><%= link_to i.distributor.name,i.distributor %></td>
+  <td><%= link_to i.invoice_line_items.inject(0) {|sum,li| sum+li.quantity} %></td>
+  <td><%= i.received?  ? i.received_when.to_formatted_s(:just_date) : "No" %></td>
+</tr>
+<% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New invoice",new_invoice_path,{},'btn-small' %>
+<%= mylinkbutton "All invoices",invoices_path,{},'btn-small' %>
+<%= mylinkbutton "Distributors",distributors_path,{},'btn-small' %> 
+</div>
+
