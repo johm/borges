@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="span5">
+    <h1>Pages</h1>
+    <div class="moreactions">
+      <%= mylinkbutton "New page",new_page_path,{},'btn-small' %>
+    </div>
+
+    <table class="table">
+      <tr><th>Title</th><th>Path</th><th></th></tr>
+    <% @top_level_pages.each do |p|%>
+    <%= render "pages",{:page=> p,:indent=>0}%>
+    <% end %>
+  </div>
+</div>

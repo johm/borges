@@ -14,6 +14,10 @@ class DashboardController < ApplicationController
 
   end
 
+  def content 
+    @top_level_pages=Page.find(:all)
+  end
+
   def titles
     if ! params[:searchquery].blank? 
       searchquery=params[:searchquery]

@@ -1,0 +1,11 @@
+<tr>
+  <td><% (0..indent-1).each do |x| %>
+    -
+    <% end %>
+    <%= link_to page.title,page %></td>
+  <td><%= link_to page.slug,page %></td>
+  <td><%= mylinkbutton "Edit",edit_page_path(page),{},'btn-small' %></td>
+</tr>
+<% page.children.each do |p| %>
+    <%= render "/dashboard/pages",{:page=> p,:indent=>indent+1}%>
+<% end %>
