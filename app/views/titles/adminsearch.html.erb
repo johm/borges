@@ -12,12 +12,16 @@
 	<% @titles.each do |title| %>
 	<tr>
 	  <td><%= link_to title.title,title%></td>
+	  <td>TODO</td>
+	  <td><%= title.in_stock %></td>
+	  <td><%= title.sold %></td>
+	  <td><%= title.on_order %></td>
 	</tr>
 	<% end %>
       </table>
     </div>
     <div class="span4">
-      render the dashboard search interface here
+      <%= render '/dashboard/search' %>
     </div>
   </div>
 </div>
