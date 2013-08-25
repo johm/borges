@@ -13,6 +13,13 @@ class Title < ActiveRecord::Base
       copies.map { |c| c.distributor }
     end  
 
+    integer :copies_sold do
+      copies.where(status: "SOLD").length
+    end
+
+    integer :copies_in_stock do  
+      copies.where(status: "STOCK").length
+    end
 
 
   end
