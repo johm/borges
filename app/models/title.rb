@@ -61,7 +61,7 @@ class Title < ActiveRecord::Base
   end
 
 
-  [:authors, :publisher, :distributor].each do |attr|
+  [:authors, :publisher, :distributor,:copies_sold_or_more,:copies_sold_or_less,:copies_stock_or_more,:copies_stock_or_less].each do |attr|
   define_method("my_#{attr}") do
       ""
     end

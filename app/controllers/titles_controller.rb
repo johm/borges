@@ -120,10 +120,19 @@ class TitlesController < ApplicationController
   def search
     title = params[:title][:title]
     author = params[:title][:my_authors]
+    copies_sold_or_more = params[:title][:my_copies_sold_or_more]
+    copies_sold_or_less = params[:title][:my_copies_sold_or_less]
+    copies_stock_or_more = params[:title][:my_copies_stock_or_more]
+    copies_stock_or_less = params[:title][:my_copies_stock_or_less]
     publisher = params[:publisher]
     distributor = params[:distributor]
 
     @title_search = Title.search do
+      with(:copies_sold).greater_than(copies_sold_or_more.to_i-1) unless copies_sold_or_more.blank?
+      with(:copies_sold).less_than(copies_sold_or_less.to_i+1) unless copies_sold_or_less.blank?
+      with(:copies_in_stock).greater_than(copies_stock_or_more.to_i-1) unless copies_stock_or_more.blank?
+      with(:copies_in_stock).less_than(copies_stock_or_less.to_i+1) unless copies_stock_or_less.blank?
+        
       fulltext title do
         fields(:title)
       end
@@ -140,6 +149,8 @@ class TitlesController < ApplicationController
         fields(:distributor)
       end
       
+
+
       paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
