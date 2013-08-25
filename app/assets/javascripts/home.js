@@ -149,7 +149,6 @@ jQuery('document').ready(function (){
 
     return false;
   }
-
   function calculateSizes($t, childSelector, maxWidth, maxFontSize, minFontSize)
   {
     var $c = $t.clone(true)
@@ -331,7 +330,39 @@ jQuery('document').ready(function (){
 	jQuery('#myCarousel').stop(true, true).fadeTo(100, 1 / top);
     });
 
+    jQuery(".carousel").carousel();
+
+    jQuery(window).resize(function (){
+	var newheight = jQuery(window).height()-jQuery("#top").height();      
+	jQuery("#heroCarousel").height(newheight);
+	jQuery("#heroCarousel .item").height(newheight);
+    });
+    
+    jQuery(window).resize();
+    
+    jQuery("#invoice_line_items").on("ajax:success",".best_in_place",recalculate_invoice_line_item); 
+    jQuery("#line_items").on("ajax:success",".best_in_place",afterQuantityChange); //purchase_orders
+
 });
 
+  function afterQuantityChange(event, data, status, xhr){
+  var self=$(this);
+
+  $.getJSON('/purchase_order_line_items/'+$(this).data('purchase-order-line-item')+'.json',function(data){
+  $("#purchase_order_line_item_"+self.data('purchase-order-line-item')+" .ext_price").html(data.ext_price_string);
+  });
+  
+  $.getJSON('/purchase_orders/'+$(this).data('purchase-order'),function(data){
+  $("#total").html(data.estimated_total_string);});
+  }
+  
 
 
+
+function recalculate_invoice_line_item(event, data, status, xhr){
+    var line_item=jQuery(event.target).data("invoice-line-item");
+    var invoice=jQuery(event.target).data("invoice");
+    jQuery.getJSON('/invoice_line_items/'+$(this).data('invoice-line-item')+'.json',function(data){
+	$("#invoice_line_item_"+jQuery(event.target).data('invoice-line-item')+" .ext_price").html(data.ext_price_string);
+    });
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820121738) do
+ActiveRecord::Schema.define(:version => 20130824211829) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130820121738) do
     t.string   "imagey_type"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "invoice_line_items", :force => true do |t|
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130820121738) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "price_in_cents"
+    t.integer  "ext_in_cents"
   end
 
   add_index "invoice_line_items", ["edition_id"], :name => "index_invoice_line_items_on_edition_id"
@@ -163,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20130820121738) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.boolean  "published"
+    t.boolean  "is_hero"
   end
 
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
@@ -314,7 +317,7 @@ ActiveRecord::Schema.define(:version => 20130820121738) do
     t.string   "title"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "description"
+    t.text     "description"
     t.text     "introduction"
   end
 

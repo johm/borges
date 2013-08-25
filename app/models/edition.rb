@@ -39,6 +39,9 @@ class Edition < ActiveRecord::Base
     "#{format} (#{year_of_publication})"
   end
 
+  def isbn
+    isbn13
+  end
 
   def isbns_are_valid 
     unless isbn10.blank? || Lisbn.new(isbn10).valid?

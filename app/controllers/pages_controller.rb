@@ -9,7 +9,6 @@ class PagesController < ApplicationController
   # GET /pages.json
   def index
     @pages = Page.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @pages }
@@ -21,10 +20,16 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
 
-    (@slider = true) if @page.slug=="test-page"
-
     respond_to do |format|
-      format.html # show.html.erb
+        
+      format.html {
+        if @page.is_hero?
+          render "hero"
+        else 
+          render
+        end
+      }
+      
       format.json { render json: @page }
     end
   end

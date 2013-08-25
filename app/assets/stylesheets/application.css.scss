@@ -18,6 +18,8 @@
  *= require bootstrap-switch
 */
 
+
+
 .content {
   background-color: #eee;
   padding: 20px;
@@ -54,13 +56,14 @@ margin-bottom:4px;
 color:black;		   
 }
 
-
+/*
 .content a,.content a:visited {
 color:#ffcc00;
 color:#57A5A5;
 //color:#510606;
 
 }
+*/
 
 
 .wysihtml5-toolbar .btn {
@@ -89,13 +92,7 @@ margin-bottom:10px;
 }
 
 
-a.btn  {
-color:black;
-}
 
-a.btn-info,a.btn-info:visited {
-color:#fff;
-}
 
 
 #myModal .modal-body {

@@ -1,4 +1,5 @@
-<%= form_for(@invoice) do |f| %>
+<%= nested_form_for(@invoice,:html=>{:class=>"form-horizontal"}) do |f| %>
+
   <% if @invoice.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
@@ -11,19 +12,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :distributor %><br />
-    <%= f.text_field :distributor %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= mytextfield f,:number,:number %>
+  <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, new_distributor_path() %> 
+  <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
+
+  <%=  mysubmit(f,"Create") %>
+
 <% end %>

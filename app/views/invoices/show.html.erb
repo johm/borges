@@ -1,20 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    
+    <div class="span8">
+      <p id="notice"><%= notice %></p>      
+      <h1>INVOICE</h1>
 
-<p>
-  <b>Distributor:</b>
-  <%= @invoice.distributor %>
-</p>
+      <% if ! @invoice.received? %>
+      <%= nested_form_for(InvoiceLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+      
+      <%= f.hidden_field(:invoice_id,:value => @invoice.id) %>
+      <%= f.hidden_field(:edition_id) %>
+      
+      <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path,link_to("+",new_title_path,{:class=>:btn,:target=>"_blank"}) %>
+      <%= mytextfield f,:quantity_received,:quantity %>
+      
+      <script>
+	$('#item').bind('railsAutocomplete.select', function(event, data){
+	$("#invoice_line_item_edition_id").val(data.item.id);
+	});
+      </script>
+      
+      <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_invoice_line_item"}) %> 
 
-<p>
-  <b>Notes:</b>
-  <%= @invoice.notes %>
-</p>
+	   
+      <% end %>
+      <% end %>
 
-<p>
-  <b>Number:</b>
-  <%= @invoice.number %>
-</p>
+      <table class="table" id="invoice_line_items">
+	<tr><th>PO#</th><th>Quantity</th><th>Title</th><th>ISBN</th><th>List price</th><th>Discount</th><th>Ext</th></tr>
+ 	 <% @invoice.invoice_line_items.each do |li| %>
+	 <%= render li %>
+	 <% end %>
+      </table>
 
+      
+    </div>
+    
+    <div class="span4">
+      
+      
+    </div>
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+  </div>
+</div>

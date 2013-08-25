@@ -2,12 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$nearwhite:#f6f6f6;
+$nearwhite:#fafafa;
 $nearblack:#000810;
 $darkred:#7C1212;
 $lightgrey:#c9c2b0; 
 $lightbrown:#b5a57f; //good but too dark?
 $lightbrown:#bcb093;
+$nearwhitetwo:#fafafa;
+
+
+
 
 $holderwidth:1200px;
 $horpad:20px;
@@ -41,9 +45,6 @@ background-image:none;
 
 
 
-body.interior {
-background-color:$lightbrown;
-}
 
 
 body.frontpage td {
@@ -322,32 +323,17 @@ padding:0px !important;
 
 /* making kate's interior layout */
 
-body {
-background-image: url('library1.jpg');
-background-attachment:fixed;
-background-size:cover;
-padding-top:220px;
-}
+
 
 body.slider {
 padding-top:360px;
 }
 
 #main {
-border-top:1px solid $nearblack;
-background-color:rgba(70, 63, 63, 0.95);
-background-color:rgba(30, 27, 27, 0.95);
-color:$nearwhite;
+background-color:$nearwhitetwo;
+color:$nearblack;
 }
 
-.navbar-fixed-top .navbar-inner {
-min-height:60px;
-}
-
-.navbar-fixed-top, .navbar-fixed-bottom {
-position:fixed;
-z-index:99999;
-}
 
 
 
@@ -370,21 +356,19 @@ border:1px solid #333;
 
 
 h1{
-font-family:"Raleway";
-font-family:"Tablet Gothic SemiCondensed";
-font-family:"Edmondsans";
-text-transform:uppercase;
-font-weight:100;
-color:$nearwhite;
-font-size:30px;
+font-family:Raleway;	
+font-weight:700;
+color:$nearblack;
+font-size:35px;
 margin-top:0px !important;
 }
 
 h2 {
-font-family:"Raleway";
-font-weight:500;
-color:$nearwhite;
+font-family:Raleway;
+font-weight:300;
+color:$nearblack;
 font-size:24px;
+line-height:30px;
 margin-top:0px !important;
 }
 
@@ -397,45 +381,67 @@ font-size:18px;
 
 
 .content h2 a, .content h2 a:visited{
-color:$nearwhite;
+color:$nearblack;
 font-size:24px;
 }
 
 .content h3 a, .content h3 a:visited { 
-color:#787878;
+color:$nearblack;
 font-size:18px;
 }
 
 
 .description,.pages .body {
-font-family:"Dosis";
-//font-family:"Quattrocento Sans";
-font-family:"Source Sans Pro";
-font-weight:300;
-font-size:18px;
-line-height:24px;
+
 }
 
 
-a.btn-primary,a.btn-primary:visited {
-color:white;
-}
 
 
-.navbar-inner {
-background-image:none !important;
-}
-
-.navbar-inner a:hover {
-background-color:inherit;
-}
 
 
-.btn-primary {
-color:#eee !important;
-background-color:#290000 !important;
-background-image:none;
-}
+
 
 
 .ui-autocomplete { position: absolute; cursor: default;z-index:30000 !important;}  
+
+
+body {
+padding-top:0px !important;
+background-color: $nearwhite !important;
+}
+
+#main {
+  font-size:16px;	
+  font-height:24px;
+  font-weight:300;
+}
+
+#main strong,table.table th {
+font-weight:500;
+}
+
+table.table {
+
+}
+
+.btn-primary {
+background-color:$nearblack;
+background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
+font-family:Raleway;
+font-weight:500;
+}
+
+.btn-primary:hover {
+background-color:$nearblack;
+background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
+font-family:Raleway;
+font-weight:500;
+}
+
+.btn-primary:active {
+background-color:$nearblack;
+background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
+font-family:Raleway;
+font-weight:500;
+}

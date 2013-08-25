@@ -8,63 +8,54 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    
+    <script src="//use.edgefonts.net/lato:n1,i1,n3,i3,n4,i4,n7,i7,n9,i9;quattrocento-sans;quattrocento;league-gothic;la-belle-aurore;vibur.js"></script>
+    <script src="//use.edgefonts.net/neuton:n2,n3,n4,i4,n7,n8.js"></script>
+    
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
-    <div class="navbar navbar-fixed-top navbar-inverse">
-      <nav class="navbar-inner">
+    <div id="top" >
+      <nav class="">
         <div class="container">
-	  <%= image_tag "logo3.png", {:width=>"60px",:style=>"position:absolute;left:10px;bottom:2px;"} %>
-	  <div class="tablet" style="color:rgb(246,246,246);font-size:60px;position:absolute;left:80px;bottom:15px;">
-	    RED EMMA'S
+	  <div class="row">
+	    <div class="span5 left">
+	      <div class="headertag">
+		Red Emma's Bookstore Coffeehouse
+	      </div>
+ 	      <div class="tablet headerlinks">
+		<a href="#">Food</a>
+		<a href="#">Coffee</a>
+		<a href="#">Books</a>
+ 	      </div>
+	      <div class="headertag">
+		100% Worker-Owned and Operated
+	      </div>
+	    </div>
+ 	    <div class="span2 center"><%= image_tag "logo3.png" %></div>
+	    <div class="span5 right">
+	      <div class="headertag">
+		30 W. North Ave in Baltimore
+	      </div>
+ 	      <div class="tablet headerlinks">
+		<a href="#">Events</a>
+		<a href="#">News</a>
+		<a href="#">About</a>
+ 	      </div>
+	      <div class="headertag">
+		Open Tuesday-Sunday
+	      </div>
+	    </div> 
 	  </div>
-	  
-	  <div class="edmond bigtext" id="topmenu" style="color:rgb(246,246,246);" > 
-	     <a href="/menu">FOOD</a>  <a href="/coffee">COFFEE</a>  <a href="/books">BOOKS</a>  <a href="/events">EVENTS</a>  <a href="/about">ABOUT</a>  <a href="/contact">CONTACT</a> 
-	  </div>
-	  
-        </div>
+	  <hr/>	    
+	</div>	  
       </nav>
-      
-      <% unless @slider.nil? %>
-      <div id="myCarousel" class="carousel slide">
-                <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                  <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                  <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="item">
-                    <img  src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
-                    <div class="carousel-caption">
-                      <h4>First Thumbnail label</h4>
-                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img  src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
-                    <div class="carousel-caption">
-                      <h4>Second Thumbnail label</h4>
-                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </div>
-                  </div>
-                  <div class="item active">
-                    <img src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
-                    <div class="carousel-caption">
-                      <h4>Third Thumbnail label</h4>
-                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </div>
-                  </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-              </div>
-      <% end %>
     </div>
-
-
-      <div id="main" role="main">
-	  <div class="container">
-            <div class="content">
+      
+    
+    <div id="main" role="main">
+      <%= yield(:precontent) %>
+      <div class="container">
+        <div class="content">
               <div class="row">
 		<div class="span12">
 		  <%= render 'layouts/messages' %>
@@ -73,28 +64,28 @@
               </div>
               <footer>
               </footer>
-            </div>
-	  </div> <!--! end of .container -->
-
-	  <div class="relatedbar">
-	    <div class="container">
-              <div class="content">
-		<div class="row">
-		  <%= yield :related %>
-		</div>
-	      </div>
+        </div>
+      </div> <!--! end of .container -->
+      
+      <div class="relatedbar">
+	<div class="container">
+          <div class="content">
+	    <div class="row">
+	      <%= yield :related %>
 	    </div>
 	  </div>
-	</div> <!--! end of #main -->
-      <div class="navbar navbar-fixed-bottom navbar-inverse">
-	<nav class="navbar-inner">
-          <div class="container">
-	    <div style="position:absolute;top:0px;right:0px;">
-	      <%= render 'layouts/navigation' %>
-	    </div>
-	    	  
 	</div>
-	</nav>
       </div>
+    </div> <!--! end of #main -->
+    <div class="navbar navbar-fixed-bottom navbar-inverse">
+      <nav class="navbar-inner">
+        <div class="container">
+	  <div style="position:absolute;top:0px;right:0px;">
+	    <%= render 'layouts/navigation' %>
+	  </div>
+	  
+	</div>
+      </nav>
+    </div>
   </body>
 </html>

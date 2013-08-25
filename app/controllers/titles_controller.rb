@@ -155,10 +155,12 @@ class TitlesController < ApplicationController
   private
 
   def hack_out_params
-    params[:title][:title_list_memberships_attributes].each do |k,v| 
-      params[:title][:title_list_memberships_attributes][k].delete :title_list
-    end
     
+    if params[:title].has_key?(:title_list_memberships_attributes)
+      params[:title][:title_list_memberships_attributes].each do |k,v| 
+      params[:title][:title_list_memberships_attributes][k].delete :title_list
+      end
+    end
     
     @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
     params[:title][:editions_attributes].each do |k,v|

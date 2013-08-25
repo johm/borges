@@ -10,6 +10,7 @@ class InvoiceLineItemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @invoice_line_items }
+
     end
   end
 
@@ -45,10 +46,17 @@ class InvoiceLineItemsController < ApplicationController
   def create
     @invoice_line_item = InvoiceLineItem.new(params[:invoice_line_item])
 
+    begin
+      @invoice_line_item.price = @invoice_line_item.edition.list_price
+    rescue
+      @invoice_line_item.price = 0
+    end
+
     respond_to do |format|
       if @invoice_line_item.save
         format.html { redirect_to @invoice_line_item, notice: 'Invoice line item was successfully created.' }
         format.json { render json: @invoice_line_item, status: :created, location: @invoice_line_item }
+        format.js {}
       else
         format.html { render action: "new" }
         format.json { render json: @invoice_line_item.errors, status: :unprocessable_entity }

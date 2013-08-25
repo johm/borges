@@ -19,6 +19,8 @@
   
   <%= myselectfield f,:parent,"Parent page (optional)",autocomplete_parent_title_pages_path %>
 
+  <%= mycheckbox f,"Is a hero page?",:is_hero %>
+
   <div class="field control-group">
     <%= f.label :images,"Images", :class=>"control-label" %><br />
     <div class="controls well">
@@ -30,10 +32,11 @@
 	    <div class="span10">
 	      <div class="field control-group">
 		<%= mytextfield image_form,"Image title",:title %>
+		<%= mytextarea image_form,"Image text",:description %>
 		<%= image_form.label :the_image,"Image file",:class=>"control-label" %>
 		<div class="controls">
 		  <%= image_form.file_field :the_image %>
-	  </div>
+		</div>
 	      </div>
 	      
 	      <%= mytextfield image_form,"Or specify a remote url",:remote_the_image_url %>
@@ -42,6 +45,7 @@
 		  <%= image_form.link_to_remove raw("<i class='icon-minus'></i> Remove this image"), :class=>"btn" %>
 		</div>
 	      </div>
+
 	    </div>
 	    
 	    <div class="span2">

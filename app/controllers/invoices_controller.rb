@@ -1,5 +1,7 @@
 class InvoicesController < ApplicationController
   before_filter :authenticate_user! 
+  before_filter :hack_out_params , :only=>[:create,:update]
+
   load_and_authorize_resource
 
 
@@ -84,4 +86,12 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def hack_out_params
+    params[:invoice].delete :distributor
+  end
+
+
 end

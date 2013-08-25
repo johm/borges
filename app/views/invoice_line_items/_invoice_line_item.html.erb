@@ -1,0 +1,17 @@
+<tr id="invoice_line_item_<%= invoice_line_item.id %>">
+  <td>
+    <%= render "/invoice_line_items/po_picker", :invoice_line_item=>invoice_line_item %>
+  </td>
+  <td>
+    <%= best_in_place_if (! invoice_line_item.invoice.received?),invoice_line_item, :quantity, :type => :input, :data => {:invoice_line_item => invoice_line_item.id,:invoice => invoice_line_item.invoice.id} %>
+  </td>
+  <td><%= link_to invoice_line_item.edition.title.title, invoice_line_item.edition.title, :target=>"blank" %></td>
+  <td><%= invoice_line_item.edition.isbn %></td> 
+  <td>
+    $<%= best_in_place_if (! invoice_line_item.invoice.received?),invoice_line_item, :price, :type => :input, :data => {:invoice_line_item => invoice_line_item.id,:invoice => invoice_line_item.invoice.id} %>
+  </td>
+  <td>
+    <%= best_in_place_if (! invoice_line_item.invoice.received?),invoice_line_item, :discount, :type => :input, :data => {:invoice_line_item => invoice_line_item.id,:invoice => invoice_line_item.invoice.id} %>%
+  </td>
+  <td class="ext_price"><%= invoice_line_item.ext %></td>
+</tr>

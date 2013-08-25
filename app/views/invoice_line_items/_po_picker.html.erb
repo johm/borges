@@ -1,0 +1,7 @@
+<select name="heythere">
+  <option value=""></option>
+  <% invoice_line_item.potential_po_matches.each do |li| %>
+  <option value="<%= li.id %>"><%= li.purchase_order.number %> (<%= li.quantity - li.received %> outstanding)</option>
+  <% end %>
+
+</select>
