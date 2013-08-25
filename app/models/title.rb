@@ -61,10 +61,18 @@ class Title < ActiveRecord::Base
   end
   
 
+  def in_stock
+    copies.find_all {|c| c.status=="STOCK"}.length
+  end
+
+  def sold
+    copies.find_all {|c| c.status=="SOLD"}.length
+  end
+
   def on_order 
     purchase_order_line_items.inject (0) do |sum,li| 
-      if li.purchase_order.ordered? && ! li.received?
-        sum+li.quantity
+      if li.purchase_order.ordered? 
+        sum+li.quantity-li.received
       end
     end 
 

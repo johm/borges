@@ -14,7 +14,7 @@ class TitlesController < ApplicationController
       @searchquery=searchquery
       @title_search = Title.search do
         fulltext searchquery
-        paginate :page => params[:page], :per_page => 20
+        paginate :page => params[:page], :per_page => 200
       end
       @titles=@title_search.results
     else
@@ -140,7 +140,7 @@ class TitlesController < ApplicationController
         fields(:distributor)
       end
       
-      paginate :page => params[:page], :per_page => 20
+      paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
     
