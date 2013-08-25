@@ -8,83 +8,46 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
-    
-    <script src="//use.edgefonts.net/lato:n1,i1,n3,i3,n4,i4,n7,i7,n9,i9;quattrocento-sans;quattrocento;league-gothic;la-belle-aurore;vibur.js"></script>
-    <script src="//use.edgefonts.net/neuton:n2,n3,n4,i4,n7,n8.js"></script>
-    
+
+    <%= vendor_template("header") %>
   </head>
+
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
-    <div id="top" >
-      <nav class="">
-        <div class="container">
-	  <div class="row">
-	    <div class="span5 left">
-	      <div class="headertag">
-		Red Emma's Bookstore Coffeehouse
-	      </div>
- 	      <div class="tablet headerlinks">
-		<a href="#">Food</a>
-		<a href="#">Coffee</a>
-		<a href="#">Books</a>
- 	      </div>
-	      <div class="headertag">
-		100% Worker-Owned and Operated
-	      </div>
-	    </div>
- 	    <div class="span2 center"><%= image_tag "logo3.png" %></div>
-	    <div class="span5 right">
-	      <div class="headertag">
-		30 W. North Ave in Baltimore
-	      </div>
- 	      <div class="tablet headerlinks">
-		<a href="#">Events</a>
-		<a href="#">News</a>
-		<a href="#">About</a>
- 	      </div>
-	      <div class="headertag">
-		Open Tuesday-Sunday
-	      </div>
-	    </div> 
-	  </div>
-	  <hr/>	    
-	</div>	  
-      </nav>
-    </div>
-      
-    
+    <%= vendor_template("top") %>
+
     <div id="main" role="main">
       <%= yield(:precontent) %>
       <div class="container">
         <div class="content">
-              <div class="row">
-		<div class="span12">
-		  <%= render 'layouts/messages' %>
-		  <%= yield %>
-		</div>
-              </div>
-              <footer>
-              </footer>
+          <div class="row">
+		        <div class="span12">
+		          <%= render 'layouts/messages' %>
+		          <%= yield %>
+		        </div>
+          </div>
+          <footer>
+          </footer>
         </div>
       </div> <!--! end of .container -->
-      
+
       <div class="relatedbar">
-	<div class="container">
+	      <div class="container">
           <div class="content">
-	    <div class="row">
-	      <%= yield :related %>
-	    </div>
-	  </div>
-	</div>
+	          <div class="row">
+	            <%= yield :related %>
+	          </div>
+	        </div>
+	      </div>
       </div>
     </div> <!--! end of #main -->
     <div class="navbar navbar-fixed-bottom navbar-inverse">
       <nav class="navbar-inner">
         <div class="container">
-	  <div style="position:absolute;top:0px;right:0px;">
-	    <%= render 'layouts/navigation' %>
-	  </div>
-	  
-	</div>
+	        <div style="position:absolute;top:0px;right:0px;">
+	          <%= render 'layouts/navigation' %>
+	        </div>
+
+	      </div>
       </nav>
     </div>
   </body>
