@@ -1,5 +1,8 @@
 module ApplicationHelper
-  
+  def vendor_template(name)
+    render file: File.join("vendor/templates", name)
+  end
+
   def mytextfield(f,l,m,options={})
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
@@ -20,16 +23,16 @@ module ApplicationHelper
 
 
 
- def mycheckbox(f,l,m,options={})
-   content_tag(:div,
-               f.label(l,:class=>"control-label") +
-               content_tag(:div,
-                           content_tag(:div,
-                                       f.check_box(m),
-                                       options.merge({:class=>"switch switch-large"})),
-                           :class=>"controls"),
-               :class=>"field control-group")
- end
+  def mycheckbox(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            content_tag(:div,
+                                        f.check_box(m),
+                                        options.merge({:class=>"switch switch-large"})),
+                            :class=>"controls"),
+                :class=>"field control-group")
+  end
 
   def mytextarea(f,l,m,options={})
     content_tag(:div,
@@ -60,7 +63,7 @@ module ApplicationHelper
                 :class=>"actions control-group")
   end
 
- 
+
   def mylinkbutton(text,path,options={},size="btn-large")
     content_tag(:div,
                 content_tag(:a,
@@ -81,18 +84,18 @@ module ApplicationHelper
   end
 
 
- 
+
   def myselectfield (f,m,l,p,a=false)
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
                 content_tag(:div,
-                            f.autocomplete_field(m,p,:id_element=>"##{m}-#{f.my_unique_id}")+ 
-                            f.hidden_field("#{m}_id",:id=>"#{m}-#{f.my_unique_id}") + 
+                            f.autocomplete_field(m,p,:id_element=>"##{m}-#{f.my_unique_id}")+
+                            f.hidden_field("#{m}_id",:id=>"#{m}-#{f.my_unique_id}") +
                             " " +
                             (a ? content_tag(:a,
-                                                  "+",
-                                        {:href=>a,:class=>"btn",:target=>"_blank"}
-                                        ) : ""),
+                                             "+",
+                                             {:href=>a,:class=>"btn",:target=>"_blank"}
+                                             ) : ""),
                             :class=>"controls"),
                 :class=>"field control-group")
   end
