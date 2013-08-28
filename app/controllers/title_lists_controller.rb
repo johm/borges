@@ -94,8 +94,10 @@ class TitleListsController < ApplicationController
   
   private
   def hack_out_params
-    params[:title_list][:title_list_memberships_attributes].each do |k,v| 
-    params[:title_list][:title_list_memberships_attributes][k].delete :title
+    unless params[:title_list][:title_list_memberships_attributes].nil?
+      params[:title_list][:title_list_memberships_attributes].each do |k,v| 
+        params[:title_list][:title_list_memberships_attributes][k].delete :title
+      end
     end
   end
   

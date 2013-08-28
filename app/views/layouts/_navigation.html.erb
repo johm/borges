@@ -18,6 +18,18 @@
       <%= link_to 'Admin', users_path %>
       </li>
     <% end %>
+    <% if can? :edit,Title %>
+      <li>
+      <%= link_to 'Inventory Dashboard', '/dashboard' %>
+      </li>
+    <% end %>
+    <% if can? :edit,Page %>
+      <li>
+      <%= link_to 'Content Management', '/content' %>
+      </li>
+    <% end %>
+
+
   <% else %>
     <li>
     <%= link_to 'Sign up', new_user_registration_path %>

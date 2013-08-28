@@ -38,8 +38,8 @@ display:block;
 
 
 body.frontpage {
-background-color:$nearblack !important;
-background-image:none;
+//background-color:$nearblack !important;
+background-image:url('/assets/front-paper.jpg');
 }
 
 
@@ -48,12 +48,12 @@ background-image:none;
 
 
 body.frontpage td {
-background-color:$nearblack;
+//background-color:$nearblack;
 color:$nearwhite !important;
 }
 
 #holder {
-background-color:$nearwhite;
+//background-color:$nearwhite;
 }
 
 .interior #holder {
@@ -115,8 +115,8 @@ padding-top:10px;
 padding-bottom:10px;
 padding-right:$horpad;
 padding-left:$horpad;
-background-color:$nearblack;
-color:$nearwhite;
+//background-color:$nearblack;
+color:$nearblack;
 }
 
 .interior #holder div {
@@ -125,7 +125,7 @@ color:$nearblack;
 }
 
 #holder div a {
-color:$nearwhite
+color:$nearblack;
 }
 
 .interior #holder div a {

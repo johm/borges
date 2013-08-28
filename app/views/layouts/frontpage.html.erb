@@ -11,5 +11,16 @@
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
               <%= yield %>
+	          <div class="navbar navbar-fixed-bottom navbar-inverse">
+      <nav class="navbar-inner">
+        <div class="container">
+	  <div style="position:absolute;top:0px;right:0px;">
+	    <%= render 'layouts/navigation' %>
+	  </div>
+	  
+	</div>
+      </nav>
+    </div>
+
   </body>
 </html>
