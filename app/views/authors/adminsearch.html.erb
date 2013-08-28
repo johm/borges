@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="span8">
+    <table class="table">
+      <tr><th>Author</th><th>Titles</th><th></th></tr>
+      <% @authors.each do |a| %>
+      <tr>
+	<td><%= link_to a.full_name, a %></td>
+	<td><%= a.titles.length %></td>
+	<td><%= mylinkbutton "Edit",edit_author_path(a),{},"btn-small" %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="span4">
+    <%= mylinkbutton "<i class='icon-plus'></i>  New Author",new_author_path %>
+  </div>
+</div>

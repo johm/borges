@@ -96,7 +96,7 @@ Borges::Application.routes.draw do
 
 
   
-
+  get 'authors/search' => 'authors#search'
   resources :authors
 
   get '/dashboard/:action', :to => 'dashboard'

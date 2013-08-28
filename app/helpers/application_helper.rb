@@ -51,10 +51,10 @@ module ApplicationHelper
   end
 
 
-  def mysubmit(f,l,options={})
+  def mysubmit(f,l,options={},size="btn-large")
     content_tag(:div,
                 content_tag(:div,
-                            f.submit(options.merge({:value=>l,:class=>"btn btn-large btn-primary"})),
+                            f.submit(options.merge({:value=>l,:class=>"btn btn-primary #{size}"})),
                             :class=>"controls"
                             ),
                 :class=>"actions control-group")

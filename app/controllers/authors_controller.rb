@@ -86,6 +86,24 @@ class AuthorsController < ApplicationController
     end
   end
 
+
+  def search 
+    full_name = params[:author][:full_name]
+    @author_search = Author.search do
+      fulltext full_name do
+        fields(:full_name)
+      end
+      paginate :page => params[:page], :per_page => 200
+    end
+    @authors=@author_search.results
+    
+    respond_to do |format|
+      format.html {render 'adminsearch'} # search.html.erb
+      format.json { render json: @authors }
+    end
+
+  end
+
   # DELETE /authors/1
   # DELETE /authors/1.json
   def destroy

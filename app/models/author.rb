@@ -4,7 +4,16 @@ class Author < ActiveRecord::Base
   has_many :titles, :through => :contributions
 
   before_save :set_first_last_and_full_name
- 
+  
+  searchable do
+    text :full_name
+
+    integer :titles do
+      titles.length
+    end
+
+    text :bio
+  end
 
   def to_s 
     full_name
