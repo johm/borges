@@ -1,10 +1,33 @@
-<h1>Lists</h1>
-
-
-<% @title_lists.each do |title_list| %>
-    <%= title_list.name %>     <%= title_list.public %>  
-    <%= title_list.description %>
-<% end %>
-
-
-<%=  mylinkbutton "<i class='icon-plus'></i> New List", new_title_list_path   if can? :create, TitleList %>
+<div class="row">
+  <div class="span8">
+    <h1>Lists</h1>
+    
+    <table class="table">
+      <tr>
+	<th>Name</th>
+	<th>Description</th>
+	<% if can? :edit,TitleList %>
+	<th>Public?</th>
+	<th>Total titles</th>
+	<th>Titles in stock</th>
+	<th></th>
+	<% end %>
+      </tr>
+      <% @title_lists.each do |title_list| %>
+      <tr> 
+	<td><%= link_to title_list.name,title_list %></td>
+	<td><%= title_list.description %></td>
+	<% if can? :edit,TitleList %>
+	<td><%= title_list.public %></td>  
+	<td><%= title_list.titles.length %></td>
+	<td><%= title_list.titles_in_stock %></td>
+	<td><%= mylinkbutton "Edit",edit_title_list_path(title_list) %> </td>
+	<% end %>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="span4">
+    <%=  mylinkbutton "<i class='icon-plus'></i> New List", new_title_list_path   if can? :create, TitleList %>
+  </div>
+</div>

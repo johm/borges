@@ -1,5 +1,20 @@
-<h1>Lists</h1>
+<h1>Recent Lists</h1>
+
+<table class="table">
+  <tr><th>Name</th><th>Titles in stock</th><th></th></tr>
+  <% @title_lists.each do |l| %>
+  <tr>
+    <td><%= link_to l.name,l %></td>
+    <td><%= "#{l.titles_in_stock}/#{l.titles.length}"%></td>
+    <td><%= mylinkbutton "Edit",edit_title_list_path(l),{},'btn-mini' %></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New list",new_title_list_path,{},'btn-small' %>
+<%= mylinkbutton "All lists",title_lists_path,{},'btn-small' %>
+</div>
 
 <div>Search box for lists</div>
-
 <div>Priority lists with x in stock/y total titles</div>

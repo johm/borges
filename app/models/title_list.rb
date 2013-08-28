@@ -12,4 +12,8 @@ class TitleList < ActiveRecord::Base
     "#{name} (#{id})"
   end
 
+  def titles_in_stock
+    titles.find_all {|t| t.in_stock > 0 }.length
+  end
+
 end
