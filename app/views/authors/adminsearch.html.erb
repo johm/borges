@@ -13,5 +13,14 @@
   </div>
   <div class="span4">
     <%= mylinkbutton "<i class='icon-plus'></i>  New Author",new_author_path %>
+    <h1>Find authors</h1>
+    <%= nested_form_for @author,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :authors } do |f| %>
+<%= mytextfield f,:name,:full_name %>
+
+<%= mysubmit f, :search,{},"btn-medium" %>
+<% end %>
+
+    
   </div>
+  
 </div>

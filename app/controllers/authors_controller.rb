@@ -88,6 +88,7 @@ class AuthorsController < ApplicationController
 
 
   def search 
+    @author = Author.new(params[:author])
     full_name = params[:author][:full_name]
     @author_search = Author.search do
       fulltext full_name do

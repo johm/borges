@@ -1,5 +1,5 @@
 class Author < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :bio
+  attr_accessible :first_name, :last_name, :bio, :full_name
   has_many :contributions
   has_many :titles, :through => :contributions
 
