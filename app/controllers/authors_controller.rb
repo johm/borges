@@ -88,10 +88,11 @@ class AuthorsController < ApplicationController
 
 
   def search 
-    @author = Author.new(params[:author])
-    full_name = params[:author][:full_name]
+    @author_search_object = SearchObject.new(params[:search_object])
+    author_search_object = @author_search_object
+
     @author_search = Author.search do
-      fulltext full_name do
+      fulltext author_search_object.full_name do
         fields(:full_name)
       end
       paginate :page => params[:page], :per_page => 200

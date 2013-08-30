@@ -1,6 +1,6 @@
 <h1>Find books</h1>
 
-<%= nested_form_for Title.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
+<%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
 <%= mytextfield f,:title,:title %>
 <%= mytextfield f,:authors,:my_authors %>
 <%= my_autocomplete_field_tag f,'publisher','publisher',autocomplete_publisher_name_titles_path %>

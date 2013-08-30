@@ -1,6 +1,6 @@
 <h1>Find authors</h1>
 
-<%= nested_form_for Author.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :authors } do |f| %>
+<%= nested_form_for SearchObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :authors } do |f| %>
 <%= mytextfield f,:name,:full_name %>
 
 <%= mysubmit f, :search,{},"btn-medium" %>

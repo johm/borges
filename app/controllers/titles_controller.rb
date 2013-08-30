@@ -118,39 +118,31 @@ class TitlesController < ApplicationController
 
 
   def search
-    title = params[:title][:title]
-    author = params[:title][:my_authors]
-    copies_sold_or_more = params[:title][:my_copies_sold_or_more]
-    copies_sold_or_less = params[:title][:my_copies_sold_or_less]
-    copies_stock_or_more = params[:title][:my_copies_stock_or_more]
-    copies_stock_or_less = params[:title][:my_copies_stock_or_less]
-    publisher = params[:publisher]
-    distributor = params[:distributor]
+    @title_search_object=SearchObject.new(params[:search_object].merge({:publisher=>params[:publisher],:distributor=>params[:distributor]}))
+    title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block 
 
     @title_search = Title.search do
-      with(:copies_sold).greater_than(copies_sold_or_more.to_i-1) unless copies_sold_or_more.blank?
-      with(:copies_sold).less_than(copies_sold_or_less.to_i+1) unless copies_sold_or_less.blank?
-      with(:copies_in_stock).greater_than(copies_stock_or_more.to_i-1) unless copies_stock_or_more.blank?
-      with(:copies_in_stock).less_than(copies_stock_or_less.to_i+1) unless copies_stock_or_less.blank?
+      with(:copies_sold).greater_than(title_search_object.my_copies_sold_or_more.to_i-1) unless title_search_object.my_copies_sold_or_more.blank?
+      with(:copies_sold).less_than(title_search_object.my_copies_sold_or_less.to_i+1) unless title_search_object.my_copies_sold_or_less.blank?
+      with(:copies_in_stock).greater_than(title_search_object.my_copies_stock_or_more.to_i-1) unless title_search_object.my_copies_stock_or_more.blank?
+      with(:copies_in_stock).less_than(title_search_object.my_copies_stock_or_less.to_i+1) unless title_search_object.my_copies_stock_or_less.blank?
         
-      fulltext title do
+      fulltext title_search_object.title do
         fields(:title)
       end
       
-      fulltext author do
+      fulltext title_search_object.my_authors do
         fields(:authors)
       end
 
-      fulltext publisher do
+      fulltext title_search_object.publisher do
         fields(:publisher)
       end
       
-      fulltext distributor do
+      fulltext title_search_object.distributor do
         fields(:distributor)
       end
       
-
-
       paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
