@@ -15,8 +15,9 @@ class TitleListsController < ApplicationController
   def index
     if current_user.has_role? :admin
       if sort_column=="titles_in_stock" || sort_column=="total_titles"
-        @title_lists = # TitleList.all.sort_by {|l| l.send(sort_column)}
-        @title_lists.reverse! if sort_direction=="desc"
+        logger.info "DOING IT, sorting by #{sort_column}"
+        @title_lists = TitleList.all.sort_by {|l| l.send(sort_column)}
+#        @title_lists.reverse! if sort_direction=="desc"
       else
         @title_lists = TitleList.order(sort_column + " " + sort_direction)
       end
