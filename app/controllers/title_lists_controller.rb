@@ -15,7 +15,7 @@ class TitleListsController < ApplicationController
   def index
     if current_user.has_role? :admin
       if sort_column=="titles_in_stock" || sort_column=="total_titles"
-        @title_lists = TitleList.sort_by {|l| l.send(sort_column)}
+        @title_lists = # TitleList.all.sort_by {|l| l.send(sort_column)}
         @title_lists.reverse! if sort_direction=="desc"
       else
         @title_lists = TitleList.order(sort_column + " " + sort_direction)
@@ -111,7 +111,7 @@ class TitleListsController < ApplicationController
   end
 
   def sort_column
-    TitleList.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    TitleList.column_names.include?(params[:sort]) || ["total_titles","titles_in_stock"].include?(params[:sort]) ? params[:sort] : "name"
   end
   
   def sort_direction
