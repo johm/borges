@@ -32,7 +32,7 @@ class Edition < ActiveRecord::Base
   
 
   def self.formats
-    ['Hardcover','Paperback','Pamphlet']
+    ['Hardcover','Paperback','Pamphlet','Magazine','Journal','CD','DVD','Clothing','Other']
   end
 
   def to_s
