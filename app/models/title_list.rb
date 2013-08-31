@@ -15,5 +15,9 @@ class TitleList < ActiveRecord::Base
   def titles_in_stock
     titles.find_all {|t| t.in_stock > 0 }.length
   end
+  
+  def total_titles
+    titles.length
+  end
 
 end

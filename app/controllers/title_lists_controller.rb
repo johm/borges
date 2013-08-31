@@ -6,11 +6,20 @@ class TitleListsController < ApplicationController
 
   before_filter :hack_out_params , :only=>[:create,:update]
   
+  helper_method :sort_column, :sort_direction
+
+
+
   # GET /title_lists
   # GET /title_lists.json
   def index
     if current_user.has_role? :admin
-      @title_lists = TitleList.all
+      if sort_column=="titles_in_stock" || sort_column=="total_titles"
+        @title_lists = TitleList.sort_by {|l| l.send(sort_column)}
+        @title_lists.reverse! if sort_direction=="desc"
+      else
+        @title_lists = TitleList.order(sort_column + " " + sort_direction)
+      end
     else
       @title_lists = TitleList.where(:public => true)
     end
@@ -100,5 +109,14 @@ class TitleListsController < ApplicationController
       end
     end
   end
+
+  def sort_column
+    TitleList.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
   
 end

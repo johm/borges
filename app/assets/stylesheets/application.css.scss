@@ -166,3 +166,14 @@ float:left;
 margin-right:10px;
 }
 
+th .current {
+
+}
+
+th .asc:after {
+ content:"⇧";
+}
+ 
+th .desc:after {
+content:"⇩";
+}
