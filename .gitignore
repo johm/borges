@@ -80,6 +80,7 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/public/assets/*
 /public/uploads/*
 /solr/data
 /solr/pids
