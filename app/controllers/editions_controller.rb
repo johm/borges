@@ -19,9 +19,9 @@ class EditionsController < ApplicationController
   # GET /editions/1.json
   def show
     @edition = Edition.find(params[:id])
-
+    @title = @edition.title
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { redirect_to title_path(@title,:edition_id=>@edition)}
       format.json { render json: @edition }
     end
   end
