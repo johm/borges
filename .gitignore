@@ -15,6 +15,7 @@
 /vendor/bundle/
 /vendor/ruby/
 
+
 # minimal Rails specific artifacts
 db/*.sqlite3
 /log/*
@@ -82,3 +83,4 @@ pickle-email-*.html
 /public/uploads/*
 /solr/data
 /solr/pids
+.ruby-version
