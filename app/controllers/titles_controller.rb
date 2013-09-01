@@ -93,6 +93,26 @@ class TitlesController < ApplicationController
   def update
     @title = Title.find(params[:id])
     
+    if ! params[:merge_title].blank?
+      @old_title_string = @title.title_and_id
+      @title_to_keep=Title.find(params[:merge_title])
+
+      ["editions","title_list_memberships","post_title_links","title_category_memberships"].each do |foo|
+        @title.send(foo).each do |bar|
+          bar.title=@title_to_keep
+          bar.save!
+        end
+      end
+      @title.destroy
+      
+      @title_to_keep.save #trigger sunspot
+
+      
+      respond_to do |format|
+        format.html { redirect_to @title_to_keep, notice: "Title #{@old_title_string} was successfully merged here, and deleted." }
+      end
+    else 
+
     respond_to do |format|
       if @title.update_attributes(params[:title])
         format.html { redirect_to @title, notice: 'Title was successfully updated.' }
@@ -101,9 +121,9 @@ class TitlesController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @title.errors, status: :unprocessable_entity }
       end
-    end
+      end
+        end
   end
-
   # DELETE /titles/1
   # DELETE /titles/1.json
   def destroy
@@ -158,24 +178,24 @@ class TitlesController < ApplicationController
   private
 
   def hack_out_params
-    
-    if params[:title].has_key?(:title_list_memberships_attributes)
-      params[:title][:title_list_memberships_attributes].each do |k,v| 
-      params[:title][:title_list_memberships_attributes][k].delete :title_list
+    unless params[:title].nil?
+      if params[:title].has_key?(:title_list_memberships_attributes)
+        params[:title][:title_list_memberships_attributes].each do |k,v| 
+          params[:title][:title_list_memberships_attributes][k].delete :title_list
+        end
+      end
+      
+      @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
+      params[:title][:editions_attributes].each do |k,v|
+        params[:title][:editions_attributes][k].delete :publisher
+      end
+      
+      @authornames={}
+      params[:title][:contributions_attributes].each do |k,v| 
+        @authornames[k]=v[:author]
+        params[:title][:contributions_attributes][k].delete :author
       end
     end
-    
-    @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
-    params[:title][:editions_attributes].each do |k,v|
-      params[:title][:editions_attributes][k].delete :publisher
-    end
-
-    @authornames={}
-    params[:title][:contributions_attributes].each do |k,v| 
-      @authornames[k]=v[:author]
-      params[:title][:contributions_attributes][k].delete :author
-    end
-    
   end
 
 end
