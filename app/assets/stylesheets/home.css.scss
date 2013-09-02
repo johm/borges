@@ -13,7 +13,7 @@ $nearwhitetwo:#fafafa;
 
 
 
-$holderwidth:1200px;
+$holderwidth:1000px;
 $horpad:20px;
 $mar:5px;
 
@@ -62,20 +62,20 @@ background-color:$nearblack;
 
  
 .onerow {
-height:200px - 2 * $horpad - $mar;
+height:150px - 2 * $horpad - $mar;
 }
 
 .tworows {
-height:400px - 3 * $horpad - $mar;
+height:300px - 3 * $horpad - $mar;
 }
 
 .onepointfiverows {
-height:300px - 3 * $horpad - $mar;
+height:225px - 3 * $horpad - $mar;
 }
 
 
 .halfrow {
-height:100px - 2 * $horpad - $mar;
+height:75px - 2 * $horpad - $mar;
 }
 
 

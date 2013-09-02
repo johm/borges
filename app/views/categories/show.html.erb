@@ -10,7 +10,7 @@
 </h1>
 
 <p>
-  <div style="float:left;margin-right:10px;margin-bottom:10px;"><%= image_tag @category.image_url(:medium),:class=>"bookcover"  %></div>
+  <div style="float:left;margin-right:10px;margin-bottom:10px;"><%= image_tag @category.image_url(:medium)  if (!@category.image.file.nil? && @category.image.file.exists?)  %></div>
   <%= sanitize @category.description %>
 </p>
 
