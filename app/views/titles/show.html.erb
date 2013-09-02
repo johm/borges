@@ -106,16 +106,19 @@
 <% content_for :related do %>
 
 <div class="span3">
-hey
+  <h2>By the same author(s)</h2>
+  <% @title.by_the_same_authors.each do |t| %>
+  <%= render :partial=>'titles/title', :object=>t %>
+  <% end %>
 </div>
 <div class="span3">
-more stuff
+  <h2>Section(s)</h2>
+</div>s
+<div class="span3">
+  <h2>On our lists</h2>
 </div>
 <div class="span3">
-tk
-</div>
-<div class="span3">
-coming soon
+  <h2>On our blog</h2>
 </div>
 
 <% end %>

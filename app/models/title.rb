@@ -61,6 +61,9 @@ class Title < ActiveRecord::Base
     editions.published.newest_first.first || latest_edition
   end
 
+  def by_the_same_authors 
+    authors.collect {|a| a.titles}.flatten.find_all {|t| t.id != self.id}.uniq.sort_by {|x| x.title}
+  end
 
   [:authors, :publisher, :distributor,:copies_sold_or_more,:copies_sold_or_less,:copies_stock_or_more,:copies_stock_or_less].each do |attr|
   define_method("my_#{attr}") do
