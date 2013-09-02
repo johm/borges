@@ -105,6 +105,17 @@
 
     <%= mysubmit f,"Save" %>
 
+    <div class="field control-group">
+    <%= f.label :categories_this_title_is_in, :class=>"control-label" %><br />
+    <div class="controls">
+      <%= f.fields_for :title_category_memberships do |member_form| %>
+      <%= myselectfield member_form,:category,:name,autocomplete_category_name_titles_path %>
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a category"), :title_category_memberships, {:class=>:btn} %>
+      </div>
+    </div>
+  </div>
 
 
   <div class="field control-group">

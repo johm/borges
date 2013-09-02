@@ -1,20 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
+<div style="float:right;">
+  <%= mylinkbutton 'Edit', edit_category_path(@category) if can? :edit,Category %>
+</div>  
+
+
+<h1>Category:
   <%= @category.name %>
-</p>
+</h1>
 
 <p>
-  <b>Description:</b>
-  <%= @category.description %>
+  <div style="float:left;margin-right:10px;margin-bottom:10px;"><%= image_tag @category.image_url(:medium),:class=>"bookcover"  %></div>
+  <%= sanitize @category.description %>
 </p>
 
-<p>
-  <b>Image:</b>
-  <%= @category.image %>
-</p>
-
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<% @category.titles.each do |t| %>
+<%= render :partial=>'titles/title', :object=>t %>
+<% end %>

@@ -1,4 +1,4 @@
-<%= form_for(@category) do |f| %>
+<%= nested_form_for(@category,:html=>{:class=>"form-horizontal"}) do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -11,19 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <%= mytextfield f,:name,:name,{:class=>"input-xxlarge"} %>
+  <%= mytextarea f,:description,:description %>
+
+  <div class="field control-group">
+    <%= f.label :image,:class=>"control-label" %>
+    <div class="controls">
+      <%= f.file_field :image %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+ 
+  <%= mysubmit f,:save%>
+
 <% end %>

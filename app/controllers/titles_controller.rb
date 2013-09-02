@@ -5,6 +5,7 @@ class TitlesController < ApplicationController
   autocomplete :publisher,:name,:full=>true,:display_value=>:name
   autocomplete :distributor,:name,:full=>true,:display_value=>:name
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
+  autocomplete :category,:name,:full=>true,:display_value=>:name
 
   # GET /titles
   # GET /titles.json
@@ -184,7 +185,14 @@ class TitlesController < ApplicationController
           params[:title][:title_list_memberships_attributes][k].delete :title_list
         end
       end
+
+      if params[:title].has_key?(:title_category_memberships_attributes)
+        params[:title][:title_category_memberships_attributes].each do |k,v| 
+          params[:title][:title_category_memberships_attributes][k].delete :category
+        end
+      end
       
+
       @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
       params[:title][:editions_attributes].each do |k,v|
         params[:title][:editions_attributes][k].delete :publisher

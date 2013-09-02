@@ -1,5 +1,5 @@
 class Title < ActiveRecord::Base
-  attr_accessible :title,:contributions_attributes,:authors_attributes,:editions_attributes,:description,:introduction, :title_list_memberships_attributes
+  attr_accessible :title,:contributions_attributes,:authors_attributes,:editions_attributes,:description,:introduction, :title_list_memberships_attributes,:title_category_memberships_attributes
 
   searchable do
     text :title,:introduction,:description
@@ -39,6 +39,7 @@ class Title < ActiveRecord::Base
   accepts_nested_attributes_for :contributions, :allow_destroy => true
   accepts_nested_attributes_for :editions, :allow_destroy => true
   accepts_nested_attributes_for :title_list_memberships, :allow_destroy => true    
+  accepts_nested_attributes_for :title_category_memberships, :allow_destroy => true    
 
   def to_s
     title

@@ -97,6 +97,7 @@ Borges::Application.routes.draw do
     get :autocomplete_publisher_name, :on => :collection
     get :autocomplete_distributor_name, :on => :collection
     get :autocomplete_title_list_name, :on => :collection
+    get :autocomplete_category_name, :on => :collection
   end
 
 

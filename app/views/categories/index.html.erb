@@ -1,27 +1,27 @@
-<h1>Listing categories</h1>
+<div class="row">
+<div class="span8">
+  <h1>Listing categories</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Image</th>
-    <th></th>
-    <th></th>
-    <th></th>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Books sold</th>
+      <th>Titles in stock</th>
+      <th>Total titles</th>
+    </tr>
+    
+    <% @categories.each do |category| %>
+    <tr>
+      <td><%= link_to category.name,category %></td>
+      <td><%= category.copies_sold %></td>
+      <td><%= category.titles_in_stock %></td>
+      <td><%= category.total_titles %></td>
   </tr>
-
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.name %></td>
-    <td><%= category.description %></td>
-    <td><%= category.image %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+    <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Category', new_category_path %>
+</div>
+  
+<div class="span4">
+<%= mylinkbutton 'New Category', new_category_path if can? :edit,Category%>
+</div>
+</div>
