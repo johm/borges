@@ -108,7 +108,7 @@
 <div class="span3">
   <h2>By the same author(s)</h2>
   <% @title.by_the_same_authors.each do |t| %>
-  <%= render :partial=>'titles/short', :title=>t %>
+  <%= render :partial=>'titles/short', :locals => {:title=>t}%>
   <% end %>
 </div>
 <div class="span3">
