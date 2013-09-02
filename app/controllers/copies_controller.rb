@@ -5,7 +5,8 @@ class CopiesController < ApplicationController
   # GET /copies
   # GET /copies.json
   def index
-    @copies = Copy.all
+    @edition = Edition.find(params[:edition_id])
+    @copies = @edition.copies
 
     respond_to do |format|
       format.html # index.html.erb
