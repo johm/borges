@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824211829) do
+ActiveRecord::Schema.define(:version => 20130902004958) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -59,20 +59,17 @@ ActiveRecord::Schema.define(:version => 20130824211829) do
     t.integer  "cost_in_cents"
     t.integer  "price_in_cents"
     t.text     "notes"
-    t.integer  "distributor_id"
     t.integer  "owner_id"
     t.boolean  "is_used"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "invoice_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.datetime "inventoried_when"
     t.datetime "deinventoried_when"
     t.string   "status"
+    t.integer  "invoice_line_item_id"
   end
 
-  add_index "copies", ["distributor_id"], :name => "index_copies_on_distributor_id"
   add_index "copies", ["edition_id"], :name => "index_copies_on_edition_id"
-  add_index "copies", ["invoice_id"], :name => "index_copies_on_invoice_id"
   add_index "copies", ["owner_id"], :name => "index_copies_on_owner_id"
 
   create_table "customers", :force => true do |t|
@@ -124,27 +121,28 @@ ActiveRecord::Schema.define(:version => 20130824211829) do
     t.integer  "quantity"
     t.integer  "edition_id"
     t.integer  "invoice_id"
-    t.integer  "purchase_order_id"
+    t.integer  "purchase_order_line_item_id"
     t.boolean  "is_transfer"
     t.float    "discount"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "price_in_cents"
     t.integer  "ext_in_cents"
   end
 
   add_index "invoice_line_items", ["edition_id"], :name => "index_invoice_line_items_on_edition_id"
   add_index "invoice_line_items", ["invoice_id"], :name => "index_invoice_line_items_on_invoice_id"
-  add_index "invoice_line_items", ["purchase_order_id"], :name => "index_invoice_line_items_on_purchase_order_id"
+  add_index "invoice_line_items", ["purchase_order_line_item_id"], :name => "index_invoice_line_items_on_purchase_order_id"
 
   create_table "invoices", :force => true do |t|
     t.integer  "distributor_id"
     t.text     "notes"
     t.string   "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.boolean  "received"
     t.datetime "received_when"
+    t.integer  "shipping_cost_in_cents"
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"

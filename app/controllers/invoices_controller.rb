@@ -87,6 +87,17 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def receive
+    @invoice = Invoice.find(params[:id])
+
+    @invoice.receive
+    
+    respond_to do |format|
+      format.html { redirect_to @invoice }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def hack_out_params

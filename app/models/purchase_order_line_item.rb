@@ -3,6 +3,7 @@ class PurchaseOrderLineItem < ActiveRecord::Base
   belongs_to :purchase_order
   belongs_to :customer
   attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer
+  has_many :invoice_line_items
 
 
   def isbn 

@@ -14,6 +14,7 @@
 
   <%= mytextfield f,:number,:number %>
   <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, new_distributor_path() %> 
+  <%= mymoneyfield f,:shipping_cost,:shipping_cost %>
   <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
 
   <%=  mysubmit(f,"Create") %>

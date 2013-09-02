@@ -59,7 +59,11 @@ Borges::Application.routes.draw do
 
   resources :invoice_line_items
 
-  resources :invoices
+  resources :invoices do
+    member do
+      post :receive
+    end
+  end
 
 
   resources :purchase_order_line_items
@@ -78,6 +82,7 @@ Borges::Application.routes.draw do
 
 
   resources :editions do
+    resources :copies
     get :autocomplete,:on => :collection
     get :autocomplete_title_title, :on => :collection
   end

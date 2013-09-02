@@ -10,7 +10,7 @@ class Title < ActiveRecord::Base
       editions.map { |e| e.publisher }
     end  
     text :distributor do
-      copies.map { |c| c.distributor }
+      copies.map { |c| c.invoice_line_item.invoice.distributor }
     end  
 
     integer :copies_sold do

@@ -1,7 +1,3 @@
-<select name="heythere">
-  <option value=""></option>
-  <% invoice_line_item.potential_po_matches.each do |li| %>
-  <option value="<%= li.id %>"><%= li.purchase_order.number %> (<%= li.quantity - li.received %> outstanding)</option>
-  <% end %>
-
-</select>
+<%= form_for invoice_line_item,remote: true do |f|%>
+<%= f.select :purchase_order_line_item_id, [[nil,nil]]+ invoice_line_item.potential_po_matches.collect {|poli| ["#{poli.purchase_order.number} (#{poli.quantity - poli.received} outstanding)",poli.id]},{},onchange: "$(this).parent('form').submit();" %>
+    <% end %>

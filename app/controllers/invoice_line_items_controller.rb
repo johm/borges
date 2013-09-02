@@ -71,7 +71,8 @@ class InvoiceLineItemsController < ApplicationController
 
     respond_to do |format|
       if @invoice_line_item.update_attributes(params[:invoice_line_item])
-        format.html { redirect_to @invoice_line_item, notice: 'Invoice line item was successfully updated.' }
+        format.html { redirect_to @invoice_line_item.invoice, notice: 'Invoice line item was successfully updated.' }
+        format.js {}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,35 +1,49 @@
 <h1>Listing copies</h1>
 
-<table>
+<table class="table">
   <tr>
+    <th>Title</th>
     <th>Edition</th>
-    <th>Cost in cents</th>
-    <th>Price in cents</th>
+    <th>Cost</th>
+    <th>Price</th>
     <th>Notes</th>
     <th>Distributor</th>
     <th>Owner</th>
     <th>Is used</th>
-    <th></th>
-    <th></th>
+    <th>Ordered</th>
+    <th>PO #</th>
+    <th>Received</th>
+    <th>Invoice #</th>
+    <th>Sold</th>
+    <th>Sales Order #</th>
+    <th>Returned</th>
+    <th>Return #</th>
     <th></th>
   </tr>
 
 <% @copies.each do |copy| %>
   <tr>
-    <td><%= copy.edition %></td>
-    <td><%= copy.cost_in_cents %></td>
-    <td><%= copy.price_in_cents %></td>
+    <td><%= link_to copy.title,copy.title %></td>
+    <td><%= link_to copy.edition,copy.edition %></td>
+    <td>$<%= copy.cost %></td>
+    <td>$<%= copy.price %></td>
     <td><%= copy.notes %></td>
-    <td><%= copy.distributor %></td>
+    <td><%= link_to copy.invoice_line_item.invoice.distributor %></td>
     <td><%= copy.owner %></td>
     <td><%= copy.is_used %></td>
-    <td><%= link_to 'Show', copy %></td>
-    <td><%= link_to 'Edit', edit_copy_path(copy) %></td>
-    <td><%= link_to 'Destroy', copy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= copy.invoice_line_item.purchase_order_line_item.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %></td>
+    <td><%= link_to copy.invoice_line_item.purchase_order_line_item.purchase_order.number,copy.invoice_line_item.purchase_order_line_item.purchase_order  rescue "" %></td>
+    <td><%= copy.invoice_line_item.invoice.received_when.to_formatted_s(:just_date) rescue "" %></td>
+    <td><%= link_to copy.invoice_line_item.invoice.id,copy.invoice_line_item.invoice rescue "" %></td>
+    <td>TODO</td>
+    <td>TODO</td>
+    <td>TODO</td>
+    <td>TODO</td>
+    <td><%= mylinkbutton "<i class='icon-edit'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New Copy', new_copy_path %>
+
+

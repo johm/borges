@@ -1,3 +1,7 @@
+<%= content_for :title do %>
+ <%= @title.title %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <div class="container">
@@ -32,6 +36,19 @@
     <tr>
       <th>On order (all editions)</th>
       <td><%= @title.on_order %></td>
+    </tr>
+    
+    <tr>
+      <th>In stock (all editions)</th>
+      <td><%= @title.in_stock %></td>
+    </tr>
+
+    <tr>
+      <th>Sold (all editions)</th>
+      <td><%= @title.sold %></td>
+    </tr>
+
+
     <% end %>
   <tr>
     <th>ISBN</th>
@@ -57,6 +74,13 @@
   </tr>
   <% end %>
 
+    <% if can? :edit,Edition %>
+    <tr>
+      <th>Copies</th>
+      <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) %></td>
+    </tr>
+    <% end %>
+
   <% if @title.editions.without_edition(@edition).length > 0 %>
   <tr>
     <th>Other editions:</th>
@@ -71,6 +95,9 @@
   <% end %>
 
 </table>
+
+
+
 </div>
 </div>
 </div>

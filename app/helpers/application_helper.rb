@@ -9,6 +9,16 @@ module ApplicationHelper
                 :class=>"field control-group")
   end
 
+  def mymoneyfield(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            content_tag(:span,"$",:class=>"add-on")+f.text_field(m,options),
+                            :class=>"controls  input-prepend",:style=>"margin-left:20px"),
+                :class=>"field control-group")
+  end
+
+
   def myselector(f,l,m,ofs,options={})
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
@@ -112,6 +122,10 @@ module ApplicationHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
+
+  def sitename
+      ENV["SITENAME"] || "Borges"
   end
 
 end

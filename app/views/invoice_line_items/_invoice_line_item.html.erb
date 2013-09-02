@@ -1,6 +1,10 @@
 <tr id="invoice_line_item_<%= invoice_line_item.id %>">
   <td>
+    <% if invoice_line_item.invoice.received? %>
+    <%= link_to invoice_line_item.purchase_order_line_item.purchase_order.number,invoice_line_item.purchase_order_line_item.purchase_order unless invoice_line_item.purchase_order_line_item.nil? %>
+    <% else %>
     <%= render "/invoice_line_items/po_picker", :invoice_line_item=>invoice_line_item %>
+    <% end %>
   </td>
   <td>
     <%= best_in_place_if (! invoice_line_item.invoice.received?),invoice_line_item, :quantity, :type => :input, :data => {:invoice_line_item => invoice_line_item.id,:invoice => invoice_line_item.invoice.id} %>
