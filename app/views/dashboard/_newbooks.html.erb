@@ -5,8 +5,8 @@
 <% @titles.each do |t| %>
 <tr>
   <td><small><%= link_to t.title,t %></small></td>
-  <td><%= blurb_status(t) %></td>
-  <td><%= category_status(t) %></td>
+  <td><small><%= blurb_status(t) %></small></td>
+  <td><small><%= category_status(t) %></small></td>
 </tr>
 <% end %>
 </table>
