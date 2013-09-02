@@ -14,7 +14,7 @@
 	<% @titles.each do |title| %>
 	<tr>
 	  <td><%= link_to title.title,title%></td>
-	  <td><small><%= contributors_list(title)%></small></td>
+	  <td><small><%= sanitize contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
 	  <td><%= title.on_order %></td>
