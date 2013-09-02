@@ -108,7 +108,7 @@
 <div class="span3">
   <h2>By the same author(s)</h2>
   <% @title.by_the_same_authors.each do |t| %>
-  <%= render :partial=>'titles/title', :object=>t %>
+  <%= render :partial=>'titles/short', :object=>t %>
   <% end %>
 </div>
 <div class="span3">
