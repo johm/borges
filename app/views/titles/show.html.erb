@@ -113,12 +113,32 @@
 </div>
 <div class="span3">
   <h2>Section(s)</h2>
-</div>s
+  <% @title.categories.each do |c| %>
+  <h3><%= link_to c.name,c %></h3>
+  <%= image_tag c.image_url(:medium) %>
+  <div>
+    <%= sanitize c.description %>
+  </div>
+  <b><%= link_to "Browse this category",c %></b>
+  <hr>
+  <% end %>
+</div>
 <div class="span3">
   <h2>On our lists</h2>
+  <% @title.title_lists.each do |l| %>
+  <% if l.public? || (can? :edit, TitleList) %>
+  <h3><%= link_to l.name,l %></h3>
+  <div>
+    <%= sanitize l.description %>
+  </div>
+  <b><%= link_to "Go to the list",l %></b>
+  <hr>
+  <% end %>
+  <% end %>
 </div>
 <div class="span3">
   <h2>On our blog</h2>
+  TODO
 </div>
 
 <% end %>
