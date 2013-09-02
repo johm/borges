@@ -4,18 +4,22 @@
       <table class="table">
 	<tr>
 	  <th>Title</th>
-	  <th>Publisher(s)</th>
-	  <th>Copies in stock</th>
-	  <th>Copies sold</th>
-	  <th>Copies on order</th>
+	  <th>Author(s)</th>
+	  <th># in stock</th>
+	  <th># sold</th>
+	  <th># on order</th>
+	  <th>Blurbed?</th>
+	  <th>Categorized?</th>
 	</tr>
 	<% @titles.each do |title| %>
 	<tr>
 	  <td><%= link_to title.title,title%></td>
-	  <td>TODO</td>
+	  <td><small><%= contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
 	  <td><%= title.on_order %></td>
+	  <td><%= blurb_status(t) %></td>
+	  <td><%= category_status(t) %></td>
 	</tr>
 	<% end %>
       </table>
