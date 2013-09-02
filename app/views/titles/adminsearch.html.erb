@@ -19,7 +19,7 @@
 	  <td><%= title.sold %></td>
 	  <td><%= title.on_order %></td>
 	  <td><%= blurb_status(title) %></td>
-	  <td><%= sanitize category_status(title) %></td>
+	  <td><small><%= sanitize category_status(title) %></small></td>
 	</tr>
 	<% end %>
       </table>

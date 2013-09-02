@@ -16,7 +16,7 @@ module TitlesHelper
     if title.categories.length==0
       raw "<span class='label label-important'>No</span>"
     else
-      title.categories.collect {|c| link_to(c.name,c).html_safe}.join(" * ").html_safe
+      title.categories.collect {|c| link_to(c.name,c).html_safe}.join("<br />").html_safe
     end
   end
 end
