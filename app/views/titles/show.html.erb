@@ -115,7 +115,7 @@
   <h2>Section(s)</h2>
   <% @title.categories.each do |c| %>
   <h3><%= link_to c.name,c %></h3>
-  <%= image_tag c.image_url(:medium) %>
+  <%= image_tag c.image_url(:medium) unless c.image.nil? %>
   <div>
     <%= sanitize c.description %>
   </div>
