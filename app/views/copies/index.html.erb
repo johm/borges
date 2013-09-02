@@ -28,7 +28,7 @@
     <td>$<%= copy.cost %></td>
     <td>$<%= copy.price %></td>
     <td><%= copy.notes %></td>
-    <td><%= link_to copy.invoice_line_item.invoice.distributor %></td>
+    <td><%= link_to copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %></td>
     <td><%= copy.owner %></td>
     <td><%= copy.is_used %></td>
     <td><%= copy.invoice_line_item.purchase_order_line_item.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %></td>
