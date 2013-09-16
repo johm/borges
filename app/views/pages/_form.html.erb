@@ -49,7 +49,7 @@
 	    </div>
 	    
 	    <div class="span2">
-	      <%= image_tag(image_form.object.the_image_url(:thumb),:class=>"formthumb") unless image_form.object.the_image.nil? %>
+	      <%= image_tag(image_form.object.the_image_url(:thumb),:class=>"formthumb") unless image_form.object.the_image.blank? %>
 	    </div>
 	  </div>
 	</div>
