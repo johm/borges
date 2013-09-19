@@ -28,7 +28,18 @@ class Edition < ActiveRecord::Base
       title.title
     end
   end  
+  
+  def has_copies_in_stock?
+    copies.where("status"=>"STOCK").length > 0
+  end
 
+  def my_stock_status
+    has_copies_in_stock? ? "In stock" : "Out of stock"
+  end
+
+  def my_online_price
+    has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : ""
+  end
   
 
   def self.formats
