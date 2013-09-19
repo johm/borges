@@ -14,7 +14,7 @@ $nearwhitetwo:#fafafa;
 
 
 $holderwidth:1000px;
-$horpad:20px;
+$horpad:10px;
 $mar:5px;
 
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700|Copse|Abril+Fatface);
@@ -60,6 +60,10 @@ color:$nearwhite !important;
 background-color:$nearblack;
 }
 
+.oneandaquarterrow {
+height:187px - 2 * $horpad - $mar;
+}
+
  
 .onerow {
 height:150px - 2 * $horpad - $mar;
@@ -68,6 +72,19 @@ height:150px - 2 * $horpad - $mar;
 .tworows {
 height:300px - 3 * $horpad - $mar;
 }
+
+.twopointfiverows {
+height:375px - 3 * $horpad - $mar;
+}
+
+.twoandaquarterrows {
+height:337px - 3 * $horpad - $mar;
+}
+
+.onepointsevenfiverows {
+height:262px - 3 * $horpad - $mar;
+}
+
 
 .onepointfiverows {
 height:225px - 3 * $horpad - $mar;
@@ -84,12 +101,17 @@ width:$holderwidth/6 - 2 * $horpad - $mar;
 }
 
 .fivesixths {
-width:5 * $holderwidth/6 - 2 * $horpad - $mar;
+width:5 * $holderwidth/6 - 2 * $horpad - $mar +5;
 }
 
 .twothirds {
-width:2 * $holderwidth/3 - 2 * $horpad - $mar;
+width:2 * $holderwidth/3 - 2 * $horpad - $mar + 6;
 }
+
+.twothirdsandaquarter {
+width:2 * $holderwidth/3  - 2 * $horpad - $mar;
+}
+
 
 .fivetwelths {
 width:5 * $holderwidth/12 - 2 * $horpad - $mar;
@@ -97,22 +119,25 @@ width:5 * $holderwidth/12 - 2 * $horpad - $mar;
 
 
 .third {
-width:$holderwidth/3 - 2 * $horpad - $mar;
+width:$holderwidth/3 - 2 * $horpad - $mar + 2;
 }
 
 .quarter {
 width:$holderwidth/4 - 2 * $horpad - $mar;
 }
 
+.quarterinner {
+width:$holderwidth/4 - 2 * $horpad - $mar - 20;
+}
 
 .half {
-width:$holderwidth/2 - 2 * $horpad - $mar;
+width:$holderwidth/2 - 2 * $horpad - $mar +6;
 }
 
 
 #holder div {
-padding-top:10px;
-padding-bottom:10px;
+padding-top:5px;
+padding-bottom:5px;
 padding-right:$horpad;
 padding-left:$horpad;
 //background-color:$nearblack;
@@ -449,4 +474,21 @@ font-weight:500;
 
 .dashboard .form-horizontal .control-group {
 margin-bottom:5px;
+}
+
+.rightborder {
+border-right:5px solid $nearblack;
+}
+
+.bottomborder {
+border-bottom:5px solid $nearblack;
+}
+
+.topborder {
+border-top:5px solid $nearblack;
+}
+
+#holder {
+border:5px solid $nearblack;
+height:730px;
 }
