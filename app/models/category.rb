@@ -16,7 +16,10 @@ class Category < ActiveRecord::Base
   def total_titles
     titles.length
   end
-
+  
+  def to_s
+    name
+  end
   
   
 end
