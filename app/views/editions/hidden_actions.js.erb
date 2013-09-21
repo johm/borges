@@ -1,0 +1,3 @@
+$("#modal-window .modal-body").html("<%= escape_javascript(render(:partial=>'editions/hidden_actions',:locals=> {:edition=>@edition})) %>");
+$("#modal-window .modal-title").html("<%= escape_javascript('Edition operations') %>");
+

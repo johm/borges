@@ -17,6 +17,8 @@ class DashboardController < ApplicationController
 
   def content 
     @top_level_pages=Page.where("parent_id is ?",nil)
+    @posts=Post.order("created_at desc")  #TODO pagination
+    @post_categories=PostCategory.order("name asc")  #TODO pagination
   end
 
   def titles

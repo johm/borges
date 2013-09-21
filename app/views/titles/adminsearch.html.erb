@@ -13,13 +13,15 @@
 	</tr>
 	<% @titles.each do |title| %>
 	<tr>
-	  <td><%= link_to title.title,title%></td>
+	  <td>
+	    <%= link_to title.title,title%>
+	  </td>
 	  <td><small><%= sanitize contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
 	  <td><%= title.on_order %></td>
 	  <td><%= blurb_status(title) %></td>
-	  <td><small><%= sanitize category_status(title) %></small></td>
+	  <td><small><%= sanitize category_status(title) %></small>	    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %></td>
 	</tr>
 	<% end %>
       </table>
