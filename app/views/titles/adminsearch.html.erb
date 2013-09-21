@@ -21,7 +21,7 @@
 	  <td><%= title.sold %></td>
 	  <td><%= title.on_order %></td>
 	  <td><%= blurb_status(title) %></td>
-	  <td><small><%= sanitize category_status(title) %></small>	    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %></td>
+	  <td><small><%= sanitize category_status(title) %></small>	    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
 	</tr>
 	<% end %>
       </table>
