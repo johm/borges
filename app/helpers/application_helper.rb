@@ -128,4 +128,9 @@ module ApplicationHelper
       ENV["SITENAME"] || "Borges"
   end
 
+  def layouts
+      YAML.load(ENV["LAYOUTS"]) || ["application"]
+  end
+
+  
 end

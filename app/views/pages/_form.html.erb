@@ -19,6 +19,13 @@
   
   <%= myselectfield f,:parent,"Parent page (optional)",autocomplete_parent_title_pages_path %>
 
+  <div class="field control-group">
+    <%= f.label :layout,"Page Layout", :class=>"control-label" %>
+    <div class="controls">
+      <%= f.select :layout, layouts,{},{:class=>"input-medium"} %>
+    </div>
+  </div>
+
   <%= mycheckbox f,"Is a hero page?",:is_hero %>
 
   <div class="field control-group">
