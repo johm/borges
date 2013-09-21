@@ -9,18 +9,27 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
     
-    <script src="//use.edgefonts.net/lato:n1,i1,n3,i3,n4,i4,n7,i7,n9,i9;quattrocento-sans;quattrocento;league-gothic;la-belle-aurore;vibur.js"></script>
-    <script src="//use.edgefonts.net/neuton:n2,n3,n4,i4,n7,n8.js"></script>
     
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
+    <div id="modal-window" class="modal hide fade" role="dialog">
+      <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class="modal-title">Modal header</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn"  data-dismiss="modal">Close</a>
+  </div>
+    </div>    
     <div id="top" >
       <nav class="">
         <div class="container">
 	  <div class="row">
 	    <div class="span5 left">
 	      <div class="headertag">
-		Red Emma's Bookstore Coffeehouse
+		<span style="font-weight:700">Red Emma's Bookstore Coffeehouse</span>
 	      </div>
  	      <div class="tablet headerlinks">
 		<a href="#">Food</a>
