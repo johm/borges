@@ -5,7 +5,9 @@ Borges::Application.routes.draw do
   resources :sale_orders
 
 
-  resources :owners
+  resources :owners do
+    get :autocomplete_owner_name, :on => :collection
+  end
 
 
   resources :title_category_memberships

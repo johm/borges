@@ -45,7 +45,8 @@
        <table class="table">
 	 <tr><th>Vendor Number</th><td><%= best_in_place @invoice, :number, :type => :input %></td></tr>
 	 <tr><th>Distributor</th><td><%= link_to @invoice.distributor.name, @invoice.distributor %></td></tr>
-	 <tr><th>Received</th><td><%= @invoice.received_when.to_formatted_s(:just_date) %></td></tr>
+	 <tr><th>Owner</th><td><%= link_to @invoice.owner.name, @invoice.owner %></td></tr>
+	 <tr><th>Received</th><td><%= @invoice.received_when.to_formatted_s(:just_date) rescue "No" %></td></tr>
 	 <tr><th># of titles</th><td><%= @invoice.total_titles %></td></tr>
 	 <tr><th># of books</th><td><%= @invoice.total_copies %></td></tr>
 	 <tr><th>Cost of books</th><td>$<%= @invoice.total_cost %></td></tr>

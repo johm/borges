@@ -102,6 +102,7 @@ class InvoicesController < ApplicationController
 
   def hack_out_params
     params[:invoice].delete :distributor
+    params[:invoice].delete :owner
   end
 
 

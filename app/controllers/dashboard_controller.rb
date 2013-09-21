@@ -13,6 +13,7 @@ class DashboardController < ApplicationController
     @invoices=Invoice.order("created_at DESC").limit(10)
     @title_lists=TitleList.order("created_at DESC").limit(10)
     @titles=Title.order("created_at DESC").limit(50)
+    @owners=Owner.order("name asc")
   end
 
   def content 

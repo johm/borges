@@ -1,0 +1,17 @@
+<h1>Owners</h1>
+
+<table class="table">
+<tr>
+  <th>Name</th><th>Books in stock</th>
+</tr>
+<% @owners.each do |owner| %>
+<tr>
+<td><%= link_to owner.name,owner %></td>
+<td><%= owner.copies.where(:status=>"STOCK").length %> </td>
+</tr>
+<% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New owner",new_owner_path,{},'btn-small' %>
+</div>

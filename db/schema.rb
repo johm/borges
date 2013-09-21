@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921135157) do
+ActiveRecord::Schema.define(:version => 20130921181601) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20130921135157) do
     t.boolean  "received"
     t.datetime "received_when"
     t.integer  "shipping_cost_in_cents"
+    t.integer  "owner_id"
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
