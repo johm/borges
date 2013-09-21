@@ -33,9 +33,10 @@ class InvoiceLineItem < ActiveRecord::Base
                  :price => price,
                  :inventoried_when=>DateTime.now,
                  :invoice_line_item_id=>id,
-                 :status=>"STOCK"
+                 :status=>"STOCK",
+                 :owner=>invoice.owner
                  )
-      #need to add owner, used, notes in here
+      #need to add used, notes in here
       c.save!
     end
     # mark po line item as received

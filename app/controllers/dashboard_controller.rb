@@ -13,10 +13,13 @@ class DashboardController < ApplicationController
     @invoices=Invoice.order("created_at DESC").limit(10)
     @title_lists=TitleList.order("created_at DESC").limit(10)
     @titles=Title.order("created_at DESC").limit(50)
+    @owners=Owner.order("name asc")
   end
 
   def content 
     @top_level_pages=Page.where("parent_id is ?",nil)
+    @posts=Post.order("created_at desc")  #TODO pagination
+    @post_categories=PostCategory.order("name asc")  #TODO pagination
   end
 
   def titles

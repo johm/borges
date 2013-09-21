@@ -1,0 +1,8 @@
+$("#modal-window").modal('hide');
+$("#notificationcontent").html("<%= escape_javascript("Edition was successfully added to purchase order <a href='#{url_for(@purchase_order)}'>#{@purchase_order.number}</a>").html_safe %>");
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+

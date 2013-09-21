@@ -10,5 +10,37 @@
     <% @top_level_pages.each do |p|%>
     <%= render "pages",{:page=> p,:indent=>0}%>
     <% end %>
+    </table>
   </div>
+  
+  <div class="span5">
+    <h1>Posts</h1>
+    <div class="moreactions">
+      <%= mylinkbutton "New post",new_post_path,{},'btn-small' %>
+    </div>
+
+    <table class="table">
+      <tr><th>Title</th><th>Date</th><th>Published?</th><th>Category</th><th></th></tr>
+      <% @posts.each do |p|%>
+      <%= render "post",{:post=> p}%>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="span2">
+    <h2>Post Categories</h2>
+    <div class="moreactions">
+      <%= mylinkbutton "New post category",new_post_category_path,{},'btn-small' %>
+    </div>
+
+    <table class="table">
+      <tr><th>Title</th><th>Last post</th><th>Total posts</th><th></th></tr>
+      <% @post_categories.each do |p|%>
+      <%= render "postcategory",{:postcategory=> p}%>
+      <% end %>
+    </table>
+  </div>
+
+
+
 </div>

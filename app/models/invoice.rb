@@ -1,9 +1,11 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :distributor
+  belongs_to :distributor #where the books came from
+  belongs_to :owner #who gets the books
   has_many :invoice_line_items
   has_many :editions, :through => :invoice_line_items
-  attr_accessible :notes, :number, :distributor_id,:shipping_cost
+  attr_accessible :notes, :number, :distributor_id,:shipping_cost,:owner_id
   monetize :shipping_cost_in_cents, :as => "shipping_cost"
+  validates :owner,:presence=>true
 
   def receive
     return if received?

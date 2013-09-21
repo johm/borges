@@ -9,7 +9,6 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
     
-    
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
     <div id="modal-window" class="modal hide fade" role="dialog">
@@ -21,6 +20,7 @@
   </div>
   <div class="modal-footer">
     <a href="#" class="btn"  data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
   </div>
     </div>    
     <div id="top" >
@@ -29,26 +29,26 @@
 	  <div class="row">
 	    <div class="span5 left">
 	      <div class="headertag">
-		<span style="font-weight:700">Red Emma's Bookstore Coffeehouse</span>
+		Red Emma's: <span style="font-weight:700">Thread Coffee</span>
 	      </div>
  	      <div class="tablet headerlinks">
-		<a href="/pages/food">Food</a>
-		<a href="/pages/thread">Coffee</a>
-		<a href="/pages/books">Books</a>
+		<a href="#">Food</a>
+		<a href="#">Coffee</a>
+		<a href="#">Books</a>
  	      </div>
 	      <div class="headertag">
 		100% Worker-Owned and Operated
 	      </div>
 	    </div>
- 	    <div class="span2 center"><%= image_tag "logo3.png" %></div>
+ 	    <div class="span2 center"><%= image_tag "threadlogo_web3.png" %></div>
 	    <div class="span5 right">
 	      <div class="headertag">
 		30 W. North Ave in Baltimore
 	      </div>
  	      <div class="tablet headerlinks">
-		<a href="/pages/events">Events</a>
-		<a href="/pages/blog">News</a>
-		<a href="/pages/about">About</a>
+		<a href="#">Events</a>
+		<a href="#">News</a>
+		<a href="#">About</a>
  	      </div>
 	      <div class="headertag">
 		Open Tuesday-Sunday
@@ -62,10 +62,6 @@
       
     
     <div id="main" role="main">
-      <div id="notification" class="alert alert-block fade in" style="display:none;">            
-<!--	<button type="button" class="close" data-dismiss="alert">&times;</button>-->
-	<div id="notificationcontent"></div>
-      </div>
       <%= yield(:precontent) %>
       <div class="container">
         <div class="content">

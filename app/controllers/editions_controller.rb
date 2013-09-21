@@ -99,6 +99,32 @@ class EditionsController < ApplicationController
     end
   end
 
+  def add_to_purchase_order
+    @edition = Edition.find(params[:id])
+    @purchase_order = PurchaseOrder.find(params[:purchase_order])
+    line=PurchaseOrderLineItem.new
+    line.quantity=1
+    line.edition=@edition
+    line.purchase_order=@purchase_order
+    line.received=0
+    line.save!
+
+    respond_to do |format| 
+      format.html { redirect_to @edition.title, notice: "Edition was successfully added to purchase order <a href='#{url_for(@purchase_order)}'>#{@purchase_order}</a>".html_safe }
+      format.js {}
+    end
+  end
+
+  def hidden_actions
+    @edition = Edition.find(params[:id])
+
+    respond_to do |format|
+      format.html {  }
+      format.js { }
+    end
+  end
+
+
 
     private
 

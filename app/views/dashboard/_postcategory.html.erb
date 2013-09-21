@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to postcategory.name,postcategory %></td>
+  <td><%= postcategory.posts.where(:published=>true).length %></td>
+  <td><%= postcategory.posts.where(:published=>true).order("created_at desc").first.created_at rescue "n/a" %> </td>
+  <td><%= mylinkbutton "Edit",edit_post_category_path(postcategory),{},'btn-small' %></td>
+</tr>

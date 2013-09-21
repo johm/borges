@@ -5,7 +5,9 @@ Borges::Application.routes.draw do
   resources :sale_orders
 
 
-  resources :owners
+  resources :owners do
+    get :autocomplete_owner_name, :on => :collection
+  end
 
 
   resources :title_category_memberships
@@ -85,6 +87,10 @@ Borges::Application.routes.draw do
     resources :copies
     get :autocomplete,:on => :collection
     get :autocomplete_title_title, :on => :collection
+    member do
+      get :hidden_actions 
+      put :add_to_purchase_order
+    end
   end
 
 
@@ -98,6 +104,7 @@ Borges::Application.routes.draw do
     get :autocomplete_distributor_name, :on => :collection
     get :autocomplete_title_list_name, :on => :collection
     get :autocomplete_category_name, :on => :collection
+
   end
 
 

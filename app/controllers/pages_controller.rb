@@ -24,9 +24,9 @@ class PagesController < ApplicationController
         
       format.html {
         if @page.is_hero?
-          render "hero"
+          render "hero",:layout=>@page.layout 
         else 
-          render
+          render :layout=>@page.layout 
         end
       }
       

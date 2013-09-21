@@ -1,4 +1,6 @@
 class OwnersController < ApplicationController
+  autocomplete :owner,:name,:full=>true,:display_value=>:name_and_id
+
   before_filter :authenticate_user! 
   load_and_authorize_resource
 
