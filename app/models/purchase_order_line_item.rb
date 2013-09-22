@@ -6,7 +6,7 @@ class PurchaseOrderLineItem < ActiveRecord::Base
   attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer
   has_many :invoice_line_items
 
-  default_scope joins(:title).order('titles.title asc')
+  default_scope includes(:title).order('titles.title asc')
 
   def isbn 
     if ! edition.nil?
