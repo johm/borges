@@ -12,6 +12,10 @@ class Title < ActiveRecord::Base
     text :distributor do
       copies.map { |c| c.invoice_line_item.invoice.distributor unless c.invoice_line_item.nil? }
     end  
+    
+    text :isbn do
+      editions.map {|e| "#{e.isbn13} #{e.isbn10}"}
+    end
 
     integer :copies_sold do
       copies.where(status: "SOLD").length
