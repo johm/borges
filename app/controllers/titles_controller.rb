@@ -166,6 +166,11 @@ class TitlesController < ApplicationController
         fields(:distributor)
       end
       
+      fulltext title_search_object.isbn do
+        fields(:isbn)
+      end
+
+
       paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
