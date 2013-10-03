@@ -332,6 +332,8 @@ jQuery('document').ready(function (){
 
     jQuery(".carousel").carousel();
 
+
+
     jQuery(window).resize(function (){
 	var newheight = jQuery(window).height()-jQuery("#top").height();      
 	jQuery("#heroCarousel").height(newheight);
@@ -344,6 +346,9 @@ jQuery('document').ready(function (){
     jQuery("#line_items").on("ajax:success",".best_in_place",afterQuantityChange); //purchase_orders
 
 });
+
+
+
 
   function afterQuantityChange(event, data, status, xhr){
   var self=$(this);
@@ -366,3 +371,7 @@ function recalculate_invoice_line_item(event, data, status, xhr){
 	$("#invoice_line_item_"+jQuery(event.target).data('invoice-line-item')+" .ext_price").html(data.ext_price_string);
     });
 }
+
+
+
+

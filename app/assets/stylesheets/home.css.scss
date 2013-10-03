@@ -38,8 +38,9 @@ display:block;
 
 
 body.frontpage {
-//background-color:$nearblack !important;
-background-image:url('/assets/front-paper.jpg');
+//background-image:url('/assets/front-paper.jpg');
+background-color:$nearwhite;
+background-color:$nearblack !important;
 }
 
 
@@ -53,7 +54,9 @@ color:$nearwhite !important;
 }
 
 #holder {
-//background-color:$nearwhite;
+
+
+margin-top:20px;
 }
 
 .interior #holder {
@@ -141,20 +144,24 @@ padding-bottom:5px;
 padding-right:$horpad;
 padding-left:$horpad;
 //background-color:$nearblack;
-color:$nearblack;
+//color:$nearblack;
+color:$nearwhite;
 }
 
 .interior #holder div {
 background-color:$lightbrown;
-color:$nearblack;
+//color:$nearblack;
+color:$nearwhite;
 }
 
 #holder div a {
-color:$nearblack;
+//color:$nearblack;
+color:$nearwhite;
 }
 
 .interior #holder div a {
-color:$nearblack;
+//color:$nearblack;
+color:$nearwhite;
 }
 
 
@@ -381,27 +388,28 @@ margin-left:20px;
 
 
 h1{
-font-family:Raleway;	
-font-weight:700;
+font-family:"garamond-premier-pro-display";
+font-weight:400;
 color:$nearblack;
-font-size:35px;
+font-size:32px;
 margin-top:0px !important;
 }
 
 h2 {
-font-family:Raleway;
+font-family:"garamond-premier-pro-display";
 font-weight:300;
 color:$nearblack;
-font-size:24px;
-line-height:30px;
+font-size:28px;
+line-height:35px;
 margin-top:0px !important;
 }
 
 h3 {
-font-family:"Raleway";
-font-weight:500;
-color:#787878;
-font-size:18px;
+font-family:"minion-pro";
+font-weight:300;
+color:$nearblack;
+font-size:21px;
+line-height:25px;
 }
 
 
@@ -477,19 +485,19 @@ margin-bottom:5px;
 }
 
 .rightborder {
-border-right:5px solid $nearblack;
+border-right:5px solid $nearwhite;
 }
 
 .bottomborder {
-border-bottom:5px solid $nearblack;
+border-bottom:5px solid $nearwhite;
 }
 
 .topborder {
-border-top:5px solid $nearblack;
+border-top:5px solid $nearwhite;
 }
 
 #holder {
-border:5px solid $nearblack;
+border:5px solid $nearwhite;
 height:730px;
 }
 
@@ -502,5 +510,32 @@ height:730px;
          font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.svg#tablet_gothic_semicondenseXBd') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+
+
+#pagenav {
+margin-top:-10px;	
+}
+
+#pagenav h4{
+font-size:28px;
+font-family:"garamond-premier-pro-display";
+font-weight:300;
+//text-transform:uppercase;
+position:relative;
+top:0px;
 
 }
+
+#pagenav h4 a{
+color:$nearblack;
+padding-left:10px;
+}
+
+#pagenav h4 a:hover{
+
+border-left:1px solid $nearblack;
+text-decoration:none;
+}
+
+

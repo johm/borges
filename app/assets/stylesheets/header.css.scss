@@ -25,7 +25,7 @@ text-align:right;
 
 .headerlinks {
 font-family:"Tablet Gothic";
-font-size:35px;
+font-size:28px;
 margin-top:5px;
 margin-bottom:5px;
 }
@@ -35,13 +35,13 @@ color:$nearblack;
 text-transform:uppercase;
 border-top:1px solid $nearblack;
 border-bottom:1px solid $nearblack;
-padding-top:15px;
-padding-bottom:6px;
+padding-top:7px;
+padding-bottom:7px;
 padding-left:3px;
 padding-right:3px;
 display:inline-block;
-width:119px;
 text-align:center;
+width:90px;
 }
 
 #top .center {
@@ -54,11 +54,11 @@ width:75%;
 }
 
 .left .headerlinks a {
-margin-left:20px;
+margin-left:15px;
 }
 
 .right .headerlinks a {
-margin-right:20px;
+margin-right:15px;
 
 }
 
@@ -89,3 +89,168 @@ border:1px solid $nearblack;
 min-height:180px;
 }
 
+
+#holder {
+position:relative;
+}
+
+/* Large desktop */
+
+@media (min-width: 1200px) { 
+.headerlinks {
+font-size:35px;
+}
+
+.headerlinks a {
+padding-top:10px;
+padding-bottom:10px;
+width:119px;
+}
+
+.left .headerlinks a {
+margin-left:20px;
+}
+
+.right .headerlinks a {
+margin-right:20px;
+
+}
+
+
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 994px) { 
+
+#holder {
+transform:scale(0.75);
+-webkit-transform:scale(0.75);
+}
+
+#logo {
+padding-top:40px !important;
+}
+
+.headerlinks {
+font-size:20px;
+}
+
+.headerlinks a {
+padding-top:10px;
+padding-bottom:10px;
+width:65px;
+}
+
+.left .headerlinks a {
+margin-left:10px;
+}
+
+.right .headerlinks a {
+margin-right:10px;
+
+}
+       
+
+ }
+
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 900px) { 
+
+#holder {
+transform:scale(0.6) translate(-120px,-120px);
+-webkit-transform:scale(0.6) translate(-120px,-120px);
+}
+}
+
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+
+#holder {
+transform:scale(0.6) translate(-300px,-150px);
+-webkit-transform:scale(0.6) translate(-300px,-150px);
+}
+
+
+#top .center img{
+width:100px;
+}
+
+.center { width:20%;}
+
+.left,.right{
+width:40%;
+}
+
+.left,.right,.center {
+display:inline;
+float:left;
+}
+
+.headerlinks {
+font-size:20px;
+}
+
+.headerlinks a {
+padding-top:10px;
+padding-bottom:10px;
+width:65px;
+}
+
+.left .headerlinks a {
+margin-left:10px;
+}
+
+.right .headerlinks a {
+margin-right:10px;
+
+}
+
+
+ }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {  
+.headerlinks {
+font-size:14px;
+}
+
+#holder>div {
+display:block;
+width:450px !important;
+position:relative !important;
+height:auto !important;
+top:0px !important;
+left:0px !important;
+min-height:180px;
+border-top:5px solid $nearblack;
+border-right:5px solid $nearblack;
+border-left:5px solid $nearblack;
+border-bottom:0px solid $nearblack !important;
+
+}
+
+body.frontpage {
+padding:0px;
+}
+
+#redemmasfp {
+font-size:80px !important;
+}
+
+body.frontpage center {
+position:relative;
+left:-80px;
+}
+
+#holder {
+border:0px solid black !important;
+}
+
+}
+
+
+body.frontpage nav {
+display:none;
+}
