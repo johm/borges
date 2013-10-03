@@ -1,0 +1,96 @@
+$nearwhite:#fafafa;
+$nearblack:#000810;
+$darkred:#7C1212;
+$lightgrey:#c9c2b0; 
+$lightbrown:#b5a57f; //good but too dark?
+$lightbrown:#bcb093;
+$nearwhitetwo:#fafafa;
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+
+body {
+//  font-family: "Source Sans Pro",serif;
+//  font-weight:500;
+}
+
+.posts .introduction p{
+//font-family:"Source Sans Pro";
+//font-weight:300;
+}
+
+.posts .body p{
+//font-family:"Source Sans Pro";
+//font-weight:300;
+}
+
+.introduction {
+//font-weight:200;
+}
+
+
+.shortorder .status_and_price {
+//font-weight:500; 
+//font-family:"Raleway";
+}
+
+.shortorder .status_and_price th, .shortorder .status_and_price td{
+//font-weight:500; 
+}
+
+h4.contributors {
+//font-weight:normal;
+}
+
+
+
+.pages .introduction p, .pages .introduction p span{
+//font-family:"garamond-premier-pro-display";
+}
+
+.pages .body p, .pages .body p span{
+//font-family:"minion-pro";//"ff-tisa-web-pro";
+}
+
+#main {
+background-color:$nearwhitetwo;
+color:$nearblack;
+}
+
+h1 {
+//font-family:"garamond-premier-pro-display";
+//font-weight:400;
+//color:$nearblack;
+}
+
+h2 {
+//font-family:"garamond-premier-pro-display";
+//font-weight:300;
+//color:$nearblack;
+}
+
+h3 {
+//font-family:"minion-pro";
+//font-weight:300;
+//color:$nearblack;
+}
+
+.content h2 a, .content h2 a:visited{
+color:$nearblack;
+}
+
+.content h3 a, .content h3 a:visited { 
+color:$nearblack;
+}
+
+@font-face {
+    font-family: "Tablet Gothic SemiCondensed";
+    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot');
+    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+          font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.ttf') format('truetype'),
+         font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.svg#tablet_gothic_semicondenseXBd') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

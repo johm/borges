@@ -2,178 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$nearwhite:#fafafa;
-$nearblack:#000810;
-$darkred:#7C1212;
-$lightgrey:#c9c2b0; 
-$lightbrown:#b5a57f; //good but too dark?
-$lightbrown:#bcb093;
-$nearwhitetwo:#fafafa;
 
-
-
-
-$holderwidth:1000px;
-$horpad:10px;
-$mar:5px;
-
-@import url(http://fonts.googleapis.com/css?family=Arvo:400,700|Copse|Abril+Fatface);
-
-
-
- 
-//bebas neue
-//fairview
-//lincoln
-//tablet gothic 
-//edmond
-//geared
-
-
-
-a.fitinner {
-display:block;
-}
-
-
-
-body.frontpage {
-//background-image:url('/assets/front-paper.jpg');
-background-color:$nearwhite;
-background-color:$nearblack !important;
-}
-
-
-
-
-
-
-body.frontpage td {
-//background-color:$nearblack;
-color:$nearwhite !important;
-}
-
-#holder {
-
-
-margin-top:20px;
-}
-
-.interior #holder {
-background-color:$nearblack;
-}
-
-.oneandaquarterrow {
-height:187px - 2 * $horpad - $mar;
-}
-
- 
-.onerow {
-height:150px - 2 * $horpad - $mar;
-}
-
-.tworows {
-height:300px - 3 * $horpad - $mar;
-}
-
-.twopointfiverows {
-height:375px - 3 * $horpad - $mar;
-}
-
-.twoandaquarterrows {
-height:337px - 3 * $horpad - $mar;
-}
-
-.onepointsevenfiverows {
-height:262px - 3 * $horpad - $mar;
-}
-
-
-.onepointfiverows {
-height:225px - 3 * $horpad - $mar;
-}
-
-
-.halfrow {
-height:75px - 2 * $horpad - $mar;
-}
-
-
-.sixth {
-width:$holderwidth/6 - 2 * $horpad - $mar;
-}
-
-.fivesixths {
-width:5 * $holderwidth/6 - 2 * $horpad - $mar +5;
-}
-
-.twothirds {
-width:2 * $holderwidth/3 - 2 * $horpad - $mar + 6;
-}
-
-.twothirdsandaquarter {
-width:2 * $holderwidth/3  - 2 * $horpad - $mar;
-}
-
-
-.fivetwelths {
-width:5 * $holderwidth/12 - 2 * $horpad - $mar;
-}
-
-
-.third {
-width:$holderwidth/3 - 2 * $horpad - $mar + 2;
-}
-
-.quarter {
-width:$holderwidth/4 - 2 * $horpad - $mar;
-}
-
-.quarterinner {
-width:$holderwidth/4 - 2 * $horpad - $mar - 20;
-}
-
-.half {
-width:$holderwidth/2 - 2 * $horpad - $mar +6;
-}
-
-
-#holder div {
-padding-top:5px;
-padding-bottom:5px;
-padding-right:$horpad;
-padding-left:$horpad;
-//background-color:$nearblack;
-//color:$nearblack;
-color:$nearwhite;
-}
-
-.interior #holder div {
-background-color:$lightbrown;
-//color:$nearblack;
-color:$nearwhite;
-}
-
-#holder div a {
-//color:$nearblack;
-color:$nearwhite;
-}
-
-.interior #holder div a {
-//color:$nearblack;
-color:$nearwhite;
-}
-
-
-#holder div a:hover {
-color:$darkred;
-text-decoration:none;
-background-color:transparent;
-}
 
 .mybutton {
-color:$darkred;
-border:3px solid $nearblack;
+border:3px solid black;
 padding:5px;
 margin-top:10px;
 border-radius:4px;
@@ -183,189 +15,15 @@ text-transform:uppercase;
 }
 
 .mybutton:hover {
-color:$nearblack;
-background-color:$lightgrey !important;
+color:black;
+background-color:#666 !important;
 }
-
-.booktitle {
-font-size:30px;
-line-height:32px;
-padding-left:0px !important;
-padding-right:0px !important;
-}
-
-.bookauthor {
-font-size:20px;
-line-height:22px;
-margin-bottom:15px;
-padding-left:0px !important;
-padding-right:0px !important;
-}
-
-.bookdata p{
-font-family:'Copse'!important;
-font-size:18px;
-margin-bottom:9px !important;
-}
-
-
-
-.bookdetails {
-margin-left:250px;
-}
-
-.interior div.text p{
-text-align:justify;
-font-size:14px;
-margin-bottom:14px;
-line-height:20px !important;
-}
-
-.interior div.text {
-font-family:Copse;
-font-size:12px;
-background-color:$lightbrown !important;
-color:$nearblack !important;
-}
-
-
-
-
-
-
-.bebas {
-font-family:"Bebas Neue";
-}
-
-.abril {
-font-family:"Abril Fatface";
-}
-
-
-.lincoln {
-font-family:"Abraham Lincoln";
-}
-
-.edmond {
-font-family:"Edmondsans";
-}
-
-.tablet {
-font-family:"Tablet Gothic SemiCondensed";
-}
-
-.arvo {
-font-family:"Arvo";
-}
-
-.copse {
-font-family:"Copse";
-}
-
-.muncie {
-font-family:"Muncie";
-}
-
-.fairview {
-font-family:"fairview";
-}
-
-
-.geared {
-font-family:"Geared Slab";
-}
-
-.frontpage .content {
-font-family:"ChunkFiveRegular";
-font-size:60px;
-color:#050505;
-text-shadow: 1px 1px 2px #333333;
-filter: dropshadow(color=#707070, offx=1, offy=1);
-}
-
-.frontpage .title {
-font-family:"Franchise";
-font-weight:normal;
-text-transform:uppercase;
-}
-
-.frontpage .subtitle {
-font-family:"AbrahamLincoln";
-font-weight:normal;
-text-transform:uppercase;
-font-size:100px;
-line-height:110px;
-}
-
-body.frontpage,body.interior {
-padding-top:0px;
-}
- 
-.frontpage table {
-border-collapse:collapse;
-}
-
-.frontpage td {
-border:7px solid $nearwhite;
-padding-left:20px;
-padding-right:20px;
-padding-top:i5px;
-padding-bottom:5px;
-vertical-align:middle;
-text-align:center;
-}
-
-.frontpage .redemmas {
-font-size:200px;
-}
-
-.frontpage .bookstore {
-font-size:100px;
-position:relative;
-top:-45px;
-}
-
-.frontpage .coffeehouse {
-font-size:83px;
-top:-20px;
-position:relative;
-}
-
-.frontpage p, .interior p {
-font-family:inherit;
-margin:0px;
-padding:0px;
-}
-
-
-
-#holder div.fitinner {
-background-color:transparent !important;
-}
-
-
-.interior div#footer {
-width:$holderwidth - 5;
-border-top:5px solid $nearblack;
-position:absolute;
-right:0px;
-padding:0px !important;
-} 
-
-
-/* making kate's interior layout */
 
 
 
 body.slider {
 padding-top:360px;
 }
-
-#main {
-background-color:$nearwhitetwo;
-color:$nearblack;
-}
-
 
 
 
@@ -377,49 +35,33 @@ background-color:transparent;
 .bookcover {
 float:right;
 margin-left:20px;
-//border:1px solid #333;
 }
 
-//@import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
-//@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
 
 
 h1{
-font-family:"garamond-premier-pro-display";
-font-weight:400;
-color:$nearblack;
 font-size:32px;
 margin-top:0px !important;
 }
 
-h2 {
-font-family:"garamond-premier-pro-display";
-font-weight:300;
-color:$nearblack;
+h2{
 font-size:28px;
 line-height:35px;
 margin-top:0px !important;
 }
 
-h3 {
-font-family:"minion-pro";
-font-weight:300;
-color:$nearblack;
+h3{
 font-size:21px;
 line-height:25px;
 }
 
 
 .content h2 a, .content h2 a:visited{
-color:$nearblack;
 font-size:24px;
 }
 
 .content h3 a, .content h3 a:visited { 
-color:$nearblack;
 font-size:18px;
 }
 
@@ -441,7 +83,7 @@ font-size:18px;
 
 body {
 padding-top:0px !important;
-background-color: $nearwhite !important;
+background-color: white !important;
 }
 
 #main {
@@ -459,24 +101,14 @@ table.table {
 }
 
 .btn-primary {
-background-color:$nearblack;
-background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
-font-family:Raleway;
-font-weight:500;
+
 }
 
 .btn-primary:hover {
-background-color:$nearblack;
-background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
-font-family:Raleway;
-font-weight:500;
+
 }
 
 .btn-primary:active {
-background-color:$nearblack;
-background-image:linear-gradient(rgb(60, 60, 60), rgb(30, 30, 30));
-font-family:Raleway;
-font-weight:500;
 }
 
 
@@ -484,33 +116,7 @@ font-weight:500;
 margin-bottom:5px;
 }
 
-.rightborder {
-border-right:5px solid $nearwhite;
-}
 
-.bottomborder {
-border-bottom:5px solid $nearwhite;
-}
-
-.topborder {
-border-top:5px solid $nearwhite;
-}
-
-#holder {
-border:5px solid $nearwhite;
-height:730px;
-}
-
-
-@font-face {
-    font-family: "Tablet Gothic SemiCondensed";
-    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot');
-    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
-          font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.ttf') format('truetype'),
-         font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.svg#tablet_gothic_semicondenseXBd') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 
 
 #pagenav {
@@ -519,22 +125,16 @@ margin-top:-10px;
 
 #pagenav h4{
 font-size:28px;
-font-family:"garamond-premier-pro-display";
-font-weight:300;
-//text-transform:uppercase;
 position:relative;
 top:0px;
 
 }
 
 #pagenav h4 a{
-color:$nearblack;
 padding-left:10px;
 }
 
 #pagenav h4 a:hover{
-
-border-left:1px solid $nearblack;
 text-decoration:none;
 }
 
