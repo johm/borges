@@ -13,7 +13,11 @@
       <%= f.hidden_field(:purchase_order_id,:value => @purchase_order.id) %>
       <%= f.hidden_field(:edition_id) %>
       
-      <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path%>
+      <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path , 
+	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+                           "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+                  {:class=>'btn'}) %>
+
 
       <%= myselectfield f,:customer,:customer,autocomplete_customer_name_customers_path, new_customer_path() %>       
 	   <script>
