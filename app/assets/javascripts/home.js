@@ -335,7 +335,7 @@ jQuery('document').ready(function (){
 
 
     jQuery(window).resize(function (){
-	var newheight = jQuery(window).height()-jQuery("#top").height();      
+	var newheight = jQuery(window).height()-jQuery("#top").height() - 200;      
 	jQuery("#heroCarousel").height(newheight);
 	jQuery("#heroCarousel .item").height(newheight);
     });

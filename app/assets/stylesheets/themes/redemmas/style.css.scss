@@ -11,8 +11,12 @@ $nearwhitetwo:#fafafa;
 
 
 body {
+font-family:"minion-pro";
+font-family:"adobe-garamond-pro";
+font-family:"adobe-caslon-pro";
 //  font-family: "Source Sans Pro",serif;
 //  font-weight:500;
+color:$nearblack;
 }
 
 .posts .introduction p{
@@ -26,6 +30,7 @@ body {
 }
 
 .introduction {
+//font-family:"Source Sans Pro";
 //font-weight:200;
 }
 
@@ -46,7 +51,8 @@ h4.contributors {
 
 
 .pages .introduction p, .pages .introduction p span{
-//font-family:"garamond-premier-pro-display";
+font-family:"garamond-premier-pro-display";
+font-family:"Source Sans Pro";
 }
 
 .pages .body p, .pages .body p span{
@@ -59,15 +65,16 @@ color:$nearblack;
 }
 
 h1 {
-//font-family:"garamond-premier-pro-display";
-//font-weight:400;
-//color:$nearblack;
+
+font-family:"garamond-premier-pro-display";
+//font-family:"adobe-garamond-pro";
+font-weight:400;
 }
 
 h2 {
-//font-family:"garamond-premier-pro-display";
-//font-weight:300;
-//color:$nearblack;
+font-family:"garamond-premier-pro-display";
+font-weight:300;
+
 }
 
 h3 {
@@ -94,3 +101,26 @@ color:$nearblack;
     font-style: normal;
 }
 
+#top {
+background-color:$lightgrey;
+}
+
+
+.body p {
+
+}
+
+
+.pages .body p, .pages .body p span{
+
+font-size:18px !important;
+line-height:24px !important;
+
+-webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+text-align:justify;
+
+
+}
+ 
