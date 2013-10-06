@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921181601) do
+ActiveRecord::Schema.define(:version => 20131006142828) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(:version => 20130921181601) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "sale_orders", ["customer_id"], :name => "index_sale_orders_on_customer_id"
@@ -298,7 +299,7 @@ ActiveRecord::Schema.define(:version => 20130921181601) do
   create_table "title_list_memberships", :force => true do |t|
     t.integer  "title_id"
     t.integer  "title_list_id"
-    t.string   "notes"
+    t.text     "notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

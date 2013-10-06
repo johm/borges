@@ -49,6 +49,7 @@ class PurchaseOrdersController < ApplicationController
   # POST /purchase_orders.json
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
+
     @purchase_order.ordered=false
 
     respond_to do |format|

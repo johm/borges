@@ -19,6 +19,15 @@ module ApplicationHelper
                 :class=>"field control-group")
   end
 
+  def mypercentfield(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            content_tag(:span,"%",:class=>"add-on")+f.text_field(m,options),
+                            :class=>"controls  input-append",:style=>"margin-left:20px"),
+                :class=>"field control-group")
+  end
+
 
   def myselector(f,l,m,ofs,options={})
     content_tag(:div,
