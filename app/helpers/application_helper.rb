@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   
   def mytextfield(f,l,m,options={})
     content_tag(:div,
@@ -123,6 +124,11 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
+
+  def theme
+    ENV["THEME"] || "default"
+  end
+    
 
   def sitename
       ENV["SITENAME"] || "Borges"

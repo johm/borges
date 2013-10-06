@@ -43,9 +43,10 @@ class TitlesController < ApplicationController
   # GET /titles/new
   # GET /titles/new.json
   def new
+    isbn=params[:isbn]
     @title = Title.new
     @title.contributions << Contribution.new
-    @title.editions << Edition.new(:list_price => 0)
+    @title.editions << Edition.new(:list_price => 0, :isbn13=>isbn) 
     
 
     respond_to do |format|

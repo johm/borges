@@ -7,6 +7,8 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <script type="text/javascript" src="//use.typekit.net/rxq1igq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <%= yield(:head) %>
     
   </head>
@@ -40,7 +42,7 @@
 		100% Worker-Owned and Operated
 	      </div>
 	    </div>
- 	    <div class="span2 center"><%= image_tag "threadlogo_web3.png" %></div>
+ 	    <div class="span2 center" id="logo"><%= image_tag "threadlogo_web3.png" %></div>
 	    <div class="span5 right">
 	      <div class="headertag">
 		30 W. North Ave in Baltimore

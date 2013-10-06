@@ -1,16 +1,8 @@
-$nearwhite:#fafafa;
-$nearblack:#000810;
-$darkred:#7C1212;
-$lightgrey:#c9c2b0; 
-$lightbrown:#b5a57f; //good but too dark?
-$lightbrown:#bcb093;
-$nearwhitetwo:#fafafa;
-
 
 
 #heroCarousel .item {
 width:100%;
-height:100%;
+height:80%;
 }
 
 #heroCarousel .item img{
@@ -45,14 +37,11 @@ left:100px;
 }
 
 .carousel-caption p{
-font-family:Copse;
 font-size:18px;
 line-height:24px;
 }	
 
 .carousel-caption h4 {
-font-family:Edmondsans;
-text-transform:uppercase;
 font-size:22px;
 font-weight:normal;
 }
@@ -65,20 +54,14 @@ left:100px;
 padding:40px;
 overflow:hidden;
 width:30%;
-color:$nearwhitetwo !important;
-
 background-color:rgba(0,0,0,0.5);
-
 }
 
 
 .heroheader,.herodescription,.herodescription p,.herodescription p span {
-color:$nearwhitetwo !important;
 }
 
 .herodescription,.herodescription p,.herodescription p span,.herodescription p span a {
-font-family:"Source Sans Pro";
-font-weight:300;
 font-size:18px;
 line-height:24px;
 }

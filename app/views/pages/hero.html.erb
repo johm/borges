@@ -31,7 +31,10 @@
   <div class="row">
 
     <div class="span8">
-      <h1 id="pagetitle"><%= @page.title %></h1>
+      <h1 id="pagetitle">
+	<%= @page.title %>	
+	<div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_page_path(@page)   if can? :edit, Page %> </div>
+      </h1>
       <div class="introduction">
 	<%= raw @page.introduction %>
       </div>
@@ -41,22 +44,10 @@
       </div>
     </div>
       <div class="span2">
-	<%=  mylinkbutton "<i class='icon-edit'></i> Edit", edit_page_path(@page)   if can? :edit, Page %> 
 
-	<% if @page.parent %>
-	<h4><%= link_to "Back to #{@page.parent.title}",@page.parent%></h4>
-	<% end %>
-	
-	<% if @page.children %>
-	<ul>
-	  <% @page.children.each do |c|%>
-	  <li>
-	    <h4><%= link_to "#{c.title}",c %></h4>
-	  </li>
-	</ul>
-	<% end %>
-	<% end %>
-
+	<div id="pagenav">
+	  <%= render :partial=>"pagenav",:locals=>{:page=>@page.ancestor,:indent=>0,:current=>@page} %>
+	</div>
 
       </div>
 

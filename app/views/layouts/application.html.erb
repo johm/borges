@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= sitename %>: <%= content_for?(:title) ? yield(:title) : "#{controller.controller_name} #{controller.action_name}" %></title>
@@ -7,7 +7,10 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <%= yield(:head) %>
+    
+    <%= render :partial => "themes/#{theme}/head" %>
+    
+    <%= yield(:head) %> 
     
     
   </head>
@@ -24,40 +27,7 @@
   </div>
     </div>    
     <div id="top" >
-      <nav class="">
-        <div class="container">
-	  <div class="row">
-	    <div class="span5 left">
-	      <div class="headertag">
-		<span style="font-weight:700">Red Emma's Bookstore Coffeehouse</span>
-	      </div>
- 	      <div class="tablet headerlinks">
-		<a href="/pages/food">Food</a>
-		<a href="/pages/thread">Coffee</a>
-		<a href="/pages/books">Books</a>
- 	      </div>
-	      <div class="headertag">
-		100% Worker-Owned and Operated
-	      </div>
-	    </div>
- 	    <div class="span2 center"><%= image_tag "logo3.png" %></div>
-	    <div class="span5 right">
-	      <div class="headertag">
-		30 W. North Ave in Baltimore
-	      </div>
- 	      <div class="tablet headerlinks">
-		<a href="/pages/events">Events</a>
-		<a href="/pages/blog">News</a>
-		<a href="/pages/about">About</a>
- 	      </div>
-	      <div class="headertag">
-		Open Tuesday-Sunday
-	      </div>
-	    </div> 
-	  </div>
-	  <hr/>	    
-	</div>	  
-      </nav>
+      <%= render :partial => "themes/#{theme}/header" %>      
     </div>
       
     

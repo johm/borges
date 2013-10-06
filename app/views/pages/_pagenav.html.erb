@@ -1,0 +1,7 @@
+<h4 style="margin-left:<%= indent*0 %>px;"   class="<% 'current' if page.slug==current.slug %>"  >
+  
+  <%= link_to page.title,page %> 
+</h4>
+<% page.children.each do |p| %>
+<%= render :partial=>"pagenav",:locals=>{:page=>p,:indent=>indent+1,:current=>current} %>
+<% end %>

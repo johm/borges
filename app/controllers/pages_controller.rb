@@ -19,6 +19,7 @@ class PagesController < ApplicationController
   # GET /pages/1.json
   def show
     @page = Page.find(params[:id])
+    @posts = Post.where(:published => true).order("created_at desc")
 
     respond_to do |format|
         
