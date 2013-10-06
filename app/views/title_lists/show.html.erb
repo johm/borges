@@ -8,7 +8,8 @@
   <%= sanitize @title_list.description %>
 </p>
 
-<% @title_list.titles.each do |t| %>
-<%= render :partial=>'titles/title', :object=>t %>
+<% @title_list.title_list_memberships.each do |tlm| %>
+<div class="list-entry-text"><%= raw tlm.notes %></div>
+<%= render :partial=>'titles/title', :object=>tlm.title %>
 <% end %>
   
