@@ -47,6 +47,8 @@ class SaleOrdersController < ApplicationController
   # POST /sale_orders.json
   def create
     @sale_order = SaleOrder.new(params[:sale_order])
+    @purchase_order.from_pos=true  # we will use different controllers for web orders
+    @purchase_order.from_web=false
 
     respond_to do |format|
       if @sale_order.save

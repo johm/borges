@@ -22,7 +22,7 @@
     <div class="controls">
       <%= f.fields_for :title_list_memberships do |member_form| %>
       <%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
-      <%= mytextfield member_form,:notes,:notes %>
+      <%= mytextarea member_form,:notes,:notes %>
       
       <% end %>
       <div class="verticaloffset">

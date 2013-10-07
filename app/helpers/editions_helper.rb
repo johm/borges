@@ -18,14 +18,12 @@ module EditionsHelper
                           :class=>"btn btn-large btn-primary block"),
                   :class=>"control-group")
     else
-      content_tag(:div,
-                  link_to("Sorry, not available",
-                          "#maybedoapopupwiththeemail",
-                          :class=>"btn btn-large btn-primary block"),
-                  :class=>"control-group")
+      content_tag(:span,
+                  "Sorry, not available",
+                  :class=>"not-available")
       
     end 
     
   end
-
+  
 end

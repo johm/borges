@@ -46,7 +46,7 @@ class TitlesController < ApplicationController
     isbn=params[:isbn]
     @title = Title.new
     @title.contributions << Contribution.new
-    @title.editions << Edition.new(:list_price => 0, :isbn13=>isbn) 
+    @title.editions << Edition.new(:list_price => 0, :isbn13=>isbn,:in_print=>true,:format=>"Paperback") 
     
 
     respond_to do |format|
