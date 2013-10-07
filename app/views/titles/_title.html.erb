@@ -5,7 +5,9 @@
   <div class="span6">
     <% if can? :edit, Title %>
     <div class="hiddenactions">
-      <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %>
+      <%= unless title.latest_published_edition.nil?  
+	 link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  
+      end %>
     </div>
     <% end %>
     <h2 class="booktitle"><%= link_to title.title, title %></h2>
