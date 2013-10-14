@@ -45,6 +45,11 @@ class InvoiceLineItemsController < ApplicationController
   # POST /invoice_line_items.json
   def create
     @invoice_line_item = InvoiceLineItem.new(params[:invoice_line_item])
+    
+    begin
+      @invoice_line_item.discount=@invoice_line_item.invoice.invoice_line_items.last().discount
+    rescue
+    end
 
     begin
       @invoice_line_item.price = @invoice_line_item.edition.list_price
