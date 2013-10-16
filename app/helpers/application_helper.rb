@@ -23,7 +23,7 @@ module ApplicationHelper
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
                 content_tag(:div,
-                            content_tag(:span,"%",:class=>"add-on")+f.text_field(m,options),
+                            f.text_field(m,options)+content_tag(:span,"%",:class=>"add-on"),
                             :class=>"controls  input-append",:style=>"margin-left:20px"),
                 :class=>"field control-group")
   end

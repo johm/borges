@@ -85,9 +85,11 @@ class Title < ActiveRecord::Base
   end
 
   def on_order 
-    purchase_order_line_items.inject (0) do |sum,li| 
+    purchase_order_line_items.inject(0) do |sum,li| 
       if li.purchase_order.ordered? 
         sum+li.quantity-li.received
+      else 
+        sum
       end
     end 
 

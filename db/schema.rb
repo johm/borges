@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131006142828) do
+ActiveRecord::Schema.define(:version => 20131016120406) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20131006142828) do
     t.datetime "ordered_when"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "owner_id"
   end
 
   add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"

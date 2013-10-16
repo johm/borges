@@ -9,7 +9,9 @@
 	   <td>
 	     <%= purchase_order_line_item.received %><br />
 	     <% purchase_order_line_item.invoice_line_items.each do |li| %>
-	     <small><%= link_to "Invoice #{li.invoice.id}",li %></small>
+	     <% if li.quantity > 0 %>
+	     <small><%= link_to "Invoice #{li.invoice.id}",li.invoice %></small>
+	     <% end %>
 	     <% end %>
 	   </td>
 	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
