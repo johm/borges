@@ -42,6 +42,7 @@
     </div>
     <div class="span4">
       <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
       <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
       <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
       <%= mylinkbutton("<i class='icon-font'></i> Text export", purchase_order_path(@purchase_order,:format=>'txt'),:target=>"_blank") %> 
@@ -55,6 +56,12 @@
 	  <th>Distributor:</th>
 	  <td><%= link_to @purchase_order.distributor, @purchase_order.distributor %></td>
 	</tr>
+	
+	<tr>
+	  <th>Intended Owner:</th>
+	  <td><%= link_to @purchase_order.owner, @purchase_order.owner unless @purchase_order.owner.nil? %></td>
+	</tr>
+
 	
 	<tr>
 	  <th>Estimated retail total:</th>

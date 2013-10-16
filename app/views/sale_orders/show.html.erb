@@ -1,4 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    
+    <div class="span9">
+
+      <p id="notice"><%= notice %></p>
+      
+      <h1>Sale: <%= @sale_order.id %></h1>
+
+  </div>
+    
+    <div class="span2">
+      quicklinks to last sold books
+    </div>
+
+    <div class="span2">
+      <table class="table">
+	<tr>
+	  <th>Subtotal</th>
+	  <td id="sale_order_subtotal"><%= @sale_order.subtotal %></td>
+	</tr>
+	<tr>
+	  <th>Discount</th>
+	  <td><%= @sale_order.discount_percent %>%</td>
+	</tr>
+	<tr>
+	  <th>Tax</th>
+	  <td ><%= @sale_order.tax_amount %></td>
+	</tr>
+	<tr>
+	  <th>Total</th>
+	  <td id="sale_order_total"><%= @sale_order.total %></td>
+	</tr>
+	<th>Source</th>
+	  <td><%= if @sale_order.from_pos? 
+		  "POS"
+		  elsif @sale_order.from_web?
+		  "WEB"
+		  end
+		  %> 
+	  </td>
+	</tr>
+      </table>
+    </div>
+
+</div>
 
 <p>
   <b>From pos:</b>

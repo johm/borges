@@ -1,4 +1,4 @@
-<%= form_for(@owner) do |f| %>
+<%= form_for(@owner,:html=>{:class=>"form-horizontal"}) do |f| %>
   <% if @owner.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@owner.errors.count, "error") %> prohibited this owner from being saved:</h2>
@@ -11,15 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= mytextfield(f,:name,:name) %>
+  <%= mytextarea(f,:notes,:notes,{:size=>"40x5"}) %>    
+  <%= mysubmit(f,"Save") %>
 <% end %>

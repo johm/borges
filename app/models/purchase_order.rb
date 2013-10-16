@@ -2,11 +2,12 @@ class PurchaseOrder < ActiveRecord::Base
   # there should be a mechanism by which purchase order line items can be checked off against invoices
   validates :number, :uniqueness => true
   validates :number, :presence => true
-  
 
-  belongs_to :distributor
+  belongs_to :distributor #where the books came from
+  belongs_to :owner #who gets the books
+
   has_many :purchase_order_line_items
-  attr_accessible :notes, :number, :ordered, :ordered_when, :distributor_id
+  attr_accessible :notes, :number, :ordered, :ordered_when, :distributor_id,:owner_id
 
   def estimated_total
     purchase_order_line_items.inject(Money.new(0)) {|sum,li| sum+li.ext_price   }

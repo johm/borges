@@ -11,7 +11,10 @@
       <%= f.hidden_field(:invoice_id,:value => @invoice.id) %>
       <%= f.hidden_field(:edition_id) %>
       
-      <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path,link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+      <%= my_autocomplete_field_tag f,
+	  :item,:edition,
+	  autocomplete_editions_path,
+	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
       "window.open('#{new_title_path}?isbn='+$('#item').val())", 
       {:class=>'btn'}) %>
 

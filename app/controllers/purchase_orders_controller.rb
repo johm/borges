@@ -104,11 +104,46 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  def receive
+    @purchase_order = PurchaseOrder.find(params[:id])
+    
+    raise "You can't recieve a non-ordered order" unless @purchase_order.ordered?
+    
+    @invoice=Invoice.new
+    @invoice.distributor=@purchase_order.distributor
+    @invoice.number="#{DateTime.now.year}-#{DateTime.now.month}-#{DateTime.now.day}-#{@purchase_order.id}"
+    @invoice.shipping_cost=0
+    
+    @invoice.owner=@purchase_order.owner || Owner.default_owner
+
+    @invoice.save!
+
+    @purchase_order.purchase_order_line_items.each do |po_li| 
+      if po_li.quantity > 0 && (po_li.quantity - po_li.received) > 0 
+        i_li=InvoiceLineItem.new
+        i_li.quantity= po_li.quantity - po_li.received
+        i_li.edition=po_li.edition
+        i_li.purchase_order_line_item=po_li
+        i_li.discount=40
+        i_li.price = i_li.edition.list_price * i_li.quantity
+        @invoice.invoice_line_items << i_li
+      end
+    end
+
+
+
+    respond_to do |format|
+      format.html {redirect_to @invoice}
+    end
+  end
+
+
 
   private
 
   def hack_out_params
     params[:purchase_order].delete :distributor
+    params[:purchase_order].delete :owner
   end
 
 
