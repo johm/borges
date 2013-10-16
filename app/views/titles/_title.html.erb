@@ -1,3 +1,4 @@
+<% unless title.nil? %>
 <div class="titleshort row">
   <div class="span1">
     <%= link_to(image_tag(title.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),title) unless title.latest_published_edition.try(:cover_url,:medium).nil? unless title.latest_published_edition.nil? %>
@@ -24,4 +25,4 @@
     </div>
   </div>
 </div>
-
+<% end %>
