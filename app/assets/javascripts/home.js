@@ -372,6 +372,24 @@ function recalculate_invoice_line_item(event, data, status, xhr){
     });
 }
 
+$(document).on('nested:fieldAdded', function(event){
+  //this is a kludge to make link_to_add generate some unique ids
 
+  // this field was just inserted into your form
+    var field = event.field; 
+    
+    var autocompletefield=field.find('.theautocomplete');
+    var idfield=field.find('.theid');
+    
+    if (autocompletefield && idfield){
+	var newid="uniquish-"+Math.floor((Math.random()*100000)+1);
+	idfield.attr('id',newid);
+	autocompletefield.attr('data-id-element',"#"+newid);
+
+
+
+    }
+    
+});
 
 
