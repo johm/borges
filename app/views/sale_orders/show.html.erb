@@ -1,19 +1,37 @@
 <div class="container">
   <div class="row">
     
-    <div class="span9">
-
+    <div class="span8">
       <p id="notice"><%= notice %></p>
-      
       <h1>Sale: <%= @sale_order.id %></h1>
+      
+      <% if ! @sale_order.posted? %>
+      <%= nested_form_for(SaleOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+      
+      
+      <%= my_autocomplete_field_tag f,
+	  :item,:copy,
+	  autocomplete_copies_path,
+	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+      "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+      {:class=>'btn'}) %>
+      
+      <% end %>
+      <% end %>
 
   </div>
     
     <div class="span2">
-      quicklinks to last sold books
+      quicklinks to last 3 sold books
     </div>
 
     <div class="span2">
+      <% if ! @sale_order.posted? %>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Complete sale",post_sale_order_path(@sale_order)) %>
+      <% else %>
+      <b>Posted:</b> <%= @sale_order.posted_when %>
+      <% end %>
+
       <table class="table">
 	<tr>
 	  <th>Subtotal</th>
@@ -21,7 +39,7 @@
 	</tr>
 	<tr>
 	  <th>Discount</th>
-	  <td><%= @sale_order.discount_percent %>%</td>
+	  <td><%= best_in_place_if (! @sale_order.posted?),@sale_order, :discount_percent, :type => :input %>%</td>
 	</tr>
 	<tr>
 	  <th>Tax</th>
@@ -31,6 +49,7 @@
 	  <th>Total</th>
 	  <td id="sale_order_total"><%= @sale_order.total %></td>
 	</tr>
+
 	<th>Source</th>
 	  <td><%= if @sale_order.from_pos? 
 		  "POS"
@@ -40,51 +59,13 @@
 		  %> 
 	  </td>
 	</tr>
+	<tr>
+	  <th>Customer</th>
+	  <td><%= @sale_order.customer %></td>
+	</tr>
       </table>
     </div>
 
 </div>
 
-<p>
-  <b>From pos:</b>
-  <%= @sale_order.from_pos %>
-</p>
 
-<p>
-  <b>From web:</b>
-  <%= @sale_order.from_web %>
-</p>
-
-<p>
-  <b>Customer po:</b>
-  <%= @sale_order.customer_po %>
-</p>
-
-<p>
-  <b>Customer:</b>
-  <%= @sale_order.customer %>
-</p>
-
-<p>
-  <b>Total in cents:</b>
-  <%= @sale_order.total_in_cents %>
-</p>
-
-<p>
-  <b>Posted:</b>
-  <%= @sale_order.posted %>
-</p>
-
-<p>
-  <b>Discount percent:</b>
-  <%= @sale_order.discount_percent %>
-</p>
-
-<p>
-  <b>Tax amount in cents:</b>
-  <%= @sale_order.tax_amount_in_cents %>
-</p>
-
-
-<%= link_to 'Edit', edit_sale_order_path(@sale_order) %> |
-<%= link_to 'Back', sale_orders_path %>

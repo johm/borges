@@ -1,8 +1,13 @@
 Borges::Application.routes.draw do
   resources :sale_order_line_items
 
+ 
+  resources :sale_orders do
+    member do
+      post :post
+    end
 
-  resources :sale_orders
+  end
 
 
   resources :owners do
@@ -81,7 +86,9 @@ Borges::Application.routes.draw do
   end
 
 
-  resources :copies
+  resources :copies do 
+    get :autocomplete,:on => :collection
+  end
 
 
   resources :editions do

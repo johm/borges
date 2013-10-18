@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class CopiesController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
@@ -84,4 +85,25 @@ class CopiesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def autocomplete
+    @edition_search=Edition.search do
+      fulltext params[:term]
+    end
+    
+    @copies_data=@edition_search.results.collect do |edition|
+      @copies=edition.copies.instock.order("price_in_cents desc")
+      if params[:sales_order_id] && (@sales_order=SalesOrder.find(params[:sales_order_id]))
+        #get all the copies that aren't already on the sales order
+        @copies=@copies.find_all {|c| !(@sales_order.sales_order_line_items.collect{|soli| soli.copy.id }.include? c.id)} 
+      end
+      @copies.collect do |copy|
+        hash = {"id" => copy.id.to_s, "label" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]", "value" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]"}
+      end
+    end
+    respond_to do |format|
+      format.json { render json: @copies_data.flatten }
+    end
+  end
+  
 end
