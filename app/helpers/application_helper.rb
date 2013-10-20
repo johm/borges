@@ -1,5 +1,7 @@
 module ApplicationHelper
-
+  def theme_partial(partial_name, options = {})
+    render {partial: "themes/#{theme}/#{partial_name}"}.merge(options)
+  end
 
   def mytextfield(f,l,m,options={})
     content_tag(:div,
