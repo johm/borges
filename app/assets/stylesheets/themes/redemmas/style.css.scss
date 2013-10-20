@@ -5,15 +5,18 @@ $lightgrey:#c9c2b0;
 $lightbrown:#b5a57f; //good but too dark?
 $lightbrown:#bcb093;
 $nearwhitetwo:#fafafa;
+$red:#b4282e;
+$lightred:#e59179;
+$lightishgrey:#80807f;
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+//@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+//@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
 
 
 body {
 font-family:"minion-pro";
 font-family:"adobe-garamond-pro";
-font-family:"adobe-caslon-pro";
+
 //  font-family: "Source Sans Pro",serif;
 //  font-weight:500;
 color:$nearblack;
@@ -123,4 +126,466 @@ text-align:justify;
 
 
 }
+
+
+
+.frontpage .navbar {
+display:none;
+}
+
+.frontpage {
+padding-bottom:100px;
+}
+
+.frontpage #fronttextfluid{
+padding-top:100px;
+}
+
+ .frontpage #frontleft {
+padding-top:72px;
+}
+
+.frontpage #fronttext p {
+text-align:justify;
+margin-bottom:50px;
+}
+
+.frontpage #fronttextfluid a {
+color:#000000;
+}
+
+.frontpage #fronttextfluid a:hover {
+color:#ff0000;
+text-decoration:none;
+}
+
+.adobegaramondpro {
+font-family:'adobe-garamond-pro';
+}
+
+.chunk {
+font-family:chunk;
+}
+
+.italics {
+font-style:italic;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.light {
+    font-weight:100;
+}
+
+.proxima {
+    font-family:"proxima-nova";
+    font-weight:300;
+}
+
+.justify{
+    text-align:justify;
+}
+
+.frontpagemenubar a {
+    color:$lightred;
+}
+
+.frontpagemenubar a:hover {
+    color:$red; 
+    text-decoration:none;
+}
+
+.copse {
+    font-family:Copse;
+}
+
+.caslon {
+    font-family:"adobe-caslon-pro";
+}
+
+.front_moreaboutus,.front_address {
+color:#6b6b6b;
+//color:#525353;
+//color:#6b6c6c;
+color:$lightishgrey;
+}
+
+.front_address {
+    padding-top:20px;
+    padding-bottom:15px;
+    margin-bottom:15px;
+    border-bottom:1px solid $lightred;
+}
+
+.front_moreprojects {
+    color:$lightred;
+}
+
+.front_moreprojects a{
+    color:$lightishgrey;
+}
+
+.front_moreprojects a:hover{
+text-decoration:none;
+color:$nearblack;
+}
+
+
+/* for "normal desktops" */
+
+    #front_1 {
+	font-size:45px;
+	border-right:1px solid black;
+    }
+
+    #front_2 {
+	margin-top:23px;
+	line-height:65px;
+	font-size:46px;
+    }
+
+    #front_3 {
+	line-height:35px;
+	font-size:35px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:43px;
+    }
+
+    #front_5 {
+	margin-top:20px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    .front_whoweare {
+	font-size:20px;
+	line-height:30px;
+	position:relative;
+	top:-10px;
+	padding-right:80px;
+    }
+    
+    .frontpagemenubar {
+	font-size:19px;
+	margin-bottom:20px;
+    }
+    
+    .frontpagemenubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:20px;
+	line-height:28px;
+	padding-right:80px;
+    }
+
+    .front_address {
+	font-size:20px;
+	margin-right:80px;
+    }
+
+    .front_moreprojects {
+	font-size:18px;
+    }
+
+/* end for "normal desktops" */
+
+/* Large desktop */
+@media (min-width: 1200px) {
+    #front_1 {
+	font-size:55px;
+	border-right:1px solid red;
+    }
+
+    #front_2 {
+	margin-top:23px;
+	line-height:65px;
+	font-size:56px;
+    }
+
+    #front_3 {
+	line-height:40px;
+	font-size:43px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:53px;
+    }
+
+    #front_5 {
+	margin-top:20px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:44px;
+    }
+
+    .front_whoweare {
+	font-size:20px;
+	line-height:30px;
+	position:relative;
+	top:-10px;
+	padding-right:95px;
+    }
+    
+    .frontpagemenubar {
+	font-size:24px;
+	margin-bottom:20px;
+    }
+    
+    .frontpagemenubar a{
+	margin-right:10px;
+    }
+    
+    .front_moreaboutus {
+	font-size:20px;
+	line-height:28px;
+	padding-right:95px;
+    }
+
+    .front_address {
+	font-size:25px;
+	margin-right:90px;
+    }
+
+    .front_moreprojects {
+	font-size:21px;
+    }
+
+    
+}
  
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+    #front_1 {
+	font-size:40px;
+	border-right:1px solid green;
+    }
+
+    #front_2 {
+	margin-top:20px;
+	line-height:40px;
+	font-size:40px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:31px;
+	font-size:30.5px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:32px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	padding-right:15px;
+    }
+    
+    .frontpagemenubar {
+	font-size:16px;
+	margin-bottom:20px;
+    }
+    
+    .frontpagemenubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	padding-right:15px;
+    }
+
+    .front_address {
+	font-size:17px;
+	margin-right:15px;
+    }
+
+    .front_moreprojects {
+	font-size:16px;
+    }
+
+
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+    
+    .frontpage #frontleft {
+	padding-top:20px;
+    }
+
+    .frontpage #fronttextfluid {
+    	padding-top:40px;
+    }
+
+    #front_1 {
+	border-right:3px solid purple;
+    }
+
+    #front_1 {
+	font-size:40px;
+    }
+
+    #front_2 {
+	margin-top:20px;
+	line-height:40px;
+	font-size:40px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:31px;
+	font-size:30.5px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:32px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	width:420px;
+	
+    }
+    
+    .frontpagemenubar {
+	font-size:17px;
+	margin-bottom:20px;
+    }
+    
+    .frontpagemenubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	width:420px;
+    }
+
+    .front_address {
+	font-size:18px;
+	width:420px;
+    }
+
+    .front_moreprojects {
+	font-size:17px;
+    }
+
+
+    
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    #front_1 {
+	border-right:3px solid orange;
+    }
+        #front_1 {
+	font-size:30px;
+	line-height:30px;
+	}
+
+    #front_2 {
+	margin-top:20px;
+	line-height:30px;
+	font-size:30px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:24px;
+	font-size:24px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:28px;
+	font-size:28px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:25px;
+	font-size:25px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	width:320px;
+	
+    }
+    
+    .frontpagemenubar {
+	font-size:13px;
+	margin-bottom:20px;
+    }
+    
+    .frontpagemenubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	width:320px;
+    }
+
+    .front_address {
+	font-size:13px;
+	width:320px;
+    }
+
+    .front_moreprojects {
+	font-size:14px;
+    }
+
+
+
+
+}
