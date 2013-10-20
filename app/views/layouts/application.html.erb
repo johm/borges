@@ -7,67 +7,67 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    
-    <%= render :partial => "themes/#{theme}/head" %>
-    
-    <%= yield(:head) %> 
-    
-    
+
+    <%= theme_partial("head") %>
+
+    <%= yield(:head) %>
   </head>
+
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
     <div id="modal-window" class="modal hide fade" role="dialog">
       <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 class="modal-title">Modal header</h3>
-  </div>
-  <div class="modal-body">
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn"  data-dismiss="modal">Close</a>
-  </div>
-    </div>    
-    <div id="top" >
-      <%= render :partial => "themes/#{theme}/header" %>      
-    </div>
-      
-    
-    <div id="main" role="main">
-      <div id="notification" class="alert alert-block fade in" style="display:none;">            
-<!--	<button type="button" class="close" data-dismiss="alert">&times;</button>-->
-	<div id="notificationcontent"></div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Modal header</h3>
       </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn"  data-dismiss="modal">Close</a>
+      </div>
+    </div>
+
+    <div id="top">
+      <%= theme_partial("header") %>
+    </div>
+
+    <div id="main" role="main">
+      <div id="notification" class="alert alert-block fade in" style="display:none;">
+	      <div id="notificationcontent"></div>
+      </div>
+
       <%= yield(:precontent) %>
+
       <div class="container">
         <div class="content">
-              <div class="row">
-		<div class="span12">
-		  <%= render 'layouts/messages' %>
-		  <%= yield %>
-		</div>
-              </div>
-              <footer>
-              </footer>
+          <div class="row">
+		        <div class="span12">
+		          <%= render 'layouts/messages' %>
+		          <%= yield %>
+		        </div>
+          </div>
+          <footer>
+          </footer>
         </div>
       </div> <!--! end of .container -->
 
       <div class="relatedbar">
-	<div class="container">
+	      <div class="container">
           <div class="content">
-	    <div class="row">
-	      <%= yield :related %>
-	    </div>
-	  </div>
-	</div>
+	          <div class="row">
+	            <%= yield :related %>
+	          </div>
+	        </div>
+	      </div>
       </div>
     </div> <!--! end of #main -->
     <div class="navbar navbar-fixed-bottom navbar-inverse">
       <nav class="navbar-inner">
         <div class="container">
-	  <div style="position:absolute;top:0px;right:0px;">
-	    <%= render 'layouts/navigation' %>
-	  </div>
-	  
-	</div>
+	        <div style="position:absolute;top:0px;right:0px;">
+	          <%= render 'layouts/navigation' %>
+	        </div>
+
+	      </div>
       </nav>
     </div>
   </body>
