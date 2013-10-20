@@ -1,0 +1,72 @@
+// Place all the styles related to the Titles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.contributors, .contributors a {
+font-size:18px;
+}
+
+.introduction {
+font-size:20px;
+line-height:28px;
+}
+
+
+ul.editions {
+list-style-type:none;
+margin-left:0px;
+}
+
+
+
+
+.titleshort {
+margin-bottom:20px;
+}
+
+.titleshort th, .titleshort td {
+border-top-width:0px;
+}
+
+.titleshort .booktitle {
+margin-bottom:0px;
+}
+
+
+
+.contributors {
+margin-top:0px;
+}
+
+.shortorder .status_and_price {
+width:50%;
+display:inline;
+}
+
+.shortorder .status_and_price th, .shortorder .status_and_price td{
+font-size:16px;
+}
+
+
+
+.shortorder .control-group a.btn{
+width:100px;
+}
+
+
+h3.booktitle {
+line-height:18px;
+margin-bottom:5px;
+}
+
+h4.contributors {
+font-size:14px;
+line-height:14px;
+}
+
+
+.hiddenactions {
+float:right;
+}
