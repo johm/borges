@@ -1,5 +1,5 @@
 class TitlesController < ApplicationController
-  before_filter :authenticate_user!, ,:except=>[:index,:show]  
+  before_filter :authenticate_user!, ,:except=>[:index,:show]
   before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
   autocomplete :publisher,:name,:full=>true,:display_value=>:name
@@ -10,7 +10,7 @@ class TitlesController < ApplicationController
   # GET /titles
   # GET /titles.json
   def index
-    if ! params[:searchquery].blank? 
+    if ! params[:searchquery].blank?
       searchquery=params[:searchquery]
       @searchquery=searchquery
       @title_search = Title.search do
@@ -21,7 +21,7 @@ class TitlesController < ApplicationController
     else
       @titles = Title.page(params[:page]).per(20)
     end
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @titles }
@@ -46,8 +46,8 @@ class TitlesController < ApplicationController
     isbn=params[:isbn]
     @title = Title.new
     @title.contributions << Contribution.new
-    @title.editions << Edition.new(:list_price => 0, :isbn13=>isbn,:in_print=>true,:format=>"Paperback") 
-    
+    @title.editions << Edition.new(:isbn13 => isbn, :in_print => true, :format=>"Paperback")
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -63,21 +63,21 @@ class TitlesController < ApplicationController
   # POST /titles
   # POST /titles.json
   def create
-    
+
     # do a dance to set the publisher from a string
     if (params[:title][:editions_attributes]["0"][:publisher_id].blank? && @publisher_name)
       params[:title][:editions_attributes]["0"][:publisher_id]=Publisher.find_or_create_by_name(@publisher_name).id
     end
-      
+
     # do a more complicated dance to deal with contributions and authornames
-    
+
     params[:title][:contributions_attributes].each do |k,v|
       params[:title][:contributions_attributes][k][:author_id]=Author.find_or_create_by_full_name(@authornames[k]).id
     end
 
 
     @title = Title.new(params[:title])
-    
+
 
     respond_to do |format|
       if @title.save
@@ -94,7 +94,7 @@ class TitlesController < ApplicationController
   # PUT /titles/1.json
   def update
     @title = Title.find(params[:id])
-    
+
     if ! params[:merge_title].blank?
       @old_title_string = @title.title_and_id
       @title_to_keep=Title.find(params[:merge_title])
@@ -106,14 +106,14 @@ class TitlesController < ApplicationController
         end
       end
       @title.destroy
-      
+
       @title_to_keep.save #trigger sunspot
 
-      
+
       respond_to do |format|
         format.html { redirect_to @title_to_keep, notice: "Title #{@old_title_string} was successfully merged here, and deleted." }
       end
-    else 
+    else
 
     respond_to do |format|
       if @title.update_attributes(params[:title])
@@ -143,18 +143,18 @@ class TitlesController < ApplicationController
 
   def search
     @title_search_object=SearchObject.new(params[:search_object].merge({:publisher=>params[:publisher],:distributor=>params[:distributor]}))
-    title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block 
+    title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block
 
     @title_search = Title.search do
       with(:copies_sold).greater_than(title_search_object.my_copies_sold_or_more.to_i-1) unless title_search_object.my_copies_sold_or_more.blank?
       with(:copies_sold).less_than(title_search_object.my_copies_sold_or_less.to_i+1) unless title_search_object.my_copies_sold_or_less.blank?
       with(:copies_in_stock).greater_than(title_search_object.my_copies_stock_or_more.to_i-1) unless title_search_object.my_copies_stock_or_more.blank?
       with(:copies_in_stock).less_than(title_search_object.my_copies_stock_or_less.to_i+1) unless title_search_object.my_copies_stock_or_less.blank?
-        
+
       fulltext title_search_object.title do
         fields(:title)
       end
-      
+
       fulltext title_search_object.my_authors do
         fields(:authors)
       end
@@ -162,11 +162,11 @@ class TitlesController < ApplicationController
       fulltext title_search_object.publisher do
         fields(:publisher)
       end
-      
+
       fulltext title_search_object.distributor do
         fields(:distributor)
       end
-      
+
       fulltext title_search_object.isbn do
         fields(:isbn)
       end
@@ -175,7 +175,7 @@ class TitlesController < ApplicationController
       paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
-    
+
     respond_to do |format|
       format.html {render 'adminsearch'} # search.html.erb
       format.json { render json: @titles }
@@ -189,25 +189,25 @@ class TitlesController < ApplicationController
   def hack_out_params
     unless params[:title].nil?
       if params[:title].has_key?(:title_list_memberships_attributes)
-        params[:title][:title_list_memberships_attributes].each do |k,v| 
+        params[:title][:title_list_memberships_attributes].each do |k,v|
           params[:title][:title_list_memberships_attributes][k].delete :title_list
         end
       end
 
       if params[:title].has_key?(:title_category_memberships_attributes)
-        params[:title][:title_category_memberships_attributes].each do |k,v| 
+        params[:title][:title_category_memberships_attributes].each do |k,v|
           params[:title][:title_category_memberships_attributes][k].delete :category
         end
       end
-      
+
 
       @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
       params[:title][:editions_attributes].each do |k,v|
         params[:title][:editions_attributes][k].delete :publisher
       end
-      
+
       @authornames={}
-      params[:title][:contributions_attributes].each do |k,v| 
+      params[:title][:contributions_attributes].each do |k,v|
         @authornames[k]=v[:author]
         params[:title][:contributions_attributes][k].delete :author
       end

@@ -66,3 +66,4 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem "sunspot_with_kaminari"
 gem "debugger"
+gem "default_value_for"
