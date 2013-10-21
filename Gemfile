@@ -54,6 +54,7 @@ gem 'carrierwave'
 gem 'money-rails'
 gem 'rmagick'
 gem 'best_in_place'
+gem "default_value_for"
 
 gem 'ckeditor'
 gem "mini_magick"
