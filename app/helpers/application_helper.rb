@@ -137,6 +137,14 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
+  def menubar(choices) 
+    choices.collect {|key,value| menubarlink(key,value)}.join(" ")
+  end
+
+  def menubarlink(text,path)
+    link_to text,path
+  end
+
   def theme
     ENV["THEME"] || "default"
   end
