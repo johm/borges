@@ -8,19 +8,40 @@ $nearwhitetwo:#fafafa;
 $red:#b4282e;
 $lightred:#e59179;
 $lightishgrey:#80807f;
-
+$johnsgrey:#444a50;
 //@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
 //@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+
+.faint {
+color:$lightishgrey;	
+}
 
 
 body {
 font-family:"minion-pro";
 font-family:"adobe-garamond-pro";
-
-//  font-family: "Source Sans Pro",serif;
-//  font-weight:500;
+font-family:"adobe-caslon-pro";
 color:$nearblack;
 }
+
+#pagenav {
+display:none;
+}
+
+#heroCarousel .caption{
+color:$nearwhite;
+font-family: "proxima-nova";
+font-weight:500;
+}
+
+#heroCarousel .heroheader{
+color:$nearwhite;
+font-family: "proxima-nova";
+font-weight:500;
+}
+
+
 
 .posts .introduction p{
 //font-family:"Source Sans Pro";
@@ -32,10 +53,7 @@ color:$nearblack;
 //font-weight:300;
 }
 
-.introduction {
-//font-family:"Source Sans Pro";
-//font-weight:200;
-}
+
 
 
 .shortorder .status_and_price {
@@ -51,20 +69,27 @@ h4.contributors {
 //font-weight:normal;
 }
 
-
+.pages .introduction {
+margin-top:30px;
+}
 
 .pages .introduction p, .pages .introduction p span{
 font-family:"garamond-premier-pro-display";
-font-family:"Source Sans Pro";
+font-family:"adobe-caslon-pro";
+color:$johnsgrey;
 }
 
-.pages .body p, .pages .body p span{
-//font-family:"minion-pro";//"ff-tisa-web-pro";
+.pages .body p, .pages .body p span, .pages .body ul, .pages .body li{
+color:$johnsgrey;
 }
 
 #main {
-background-color:$nearwhitetwo;
+background-color:white;
 color:$nearblack;
+}
+
+#realcontent {
+padding-top:60px;
 }
 
 h1 {
@@ -112,13 +137,14 @@ background-color:$lightgrey;
 .body p {
 
 }
+.pages .body li{
+margin-left:40px;
+}
 
+.pages .body p, .pages .body p span,.pages .body li{
 
-.pages .body p, .pages .body p span{
-
-font-size:18px !important;
-line-height:24px !important;
-
+font-size:20px !important;
+line-height:30px !important;
 -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
@@ -139,6 +165,14 @@ padding-bottom:100px;
 
 .frontpage #fronttextfluid{
 padding-top:100px;
+}
+
+#frontleft {
+padding-top:32px;
+}
+
+#realcontentinner {
+margin-top:72px;
 }
 
  .frontpage #frontleft {
@@ -188,11 +222,20 @@ font-style:italic;
     text-align:justify;
 }
 
-.frontpagemenubar a {
+.menubar a:before {
+content:"{";
+}
+.menubar a:after {
+content:"}";
+}
+
+
+
+.menubar a {
     color:$lightred;
 }
 
-.frontpagemenubar a:hover {
+.menubar a:hover {
     color:$red; 
     text-decoration:none;
 }
@@ -206,10 +249,11 @@ font-style:italic;
 }
 
 .front_moreaboutus,.front_address {
-color:#6b6b6b;
+//color:#6b6b6b;
 //color:#525353;
 //color:#6b6c6c;
-color:$lightishgrey;
+//color:$lightishgrey; this one kate likes
+opacity:.7;
 }
 
 .front_address {
@@ -224,7 +268,9 @@ color:$lightishgrey;
 }
 
 .front_moreprojects a{
-    color:$lightishgrey;
+//    color:$lightishgrey;
+color:$nearblack;
+opacity:.6;
 }
 
 .front_moreprojects a:hover{
@@ -232,6 +278,64 @@ text-decoration:none;
 color:$nearblack;
 }
 
+
+
+#bottombar {
+background-color:$nearblack;
+color:$nearwhite;
+
+}
+
+#mc_embed_signup form {
+padding-left:0px !important;
+padding-right:0px !important;
+font-family:Copse !important;
+}
+
+#mc_embed_signup form input {
+font-family:Copse !important;
+}
+
+#mc_embed_signup .button {
+font-weight:normal !important;
+}
+
+#mc_embed_signup .button{
+background-color:#666 !important;}
+
+#mc_embed_signup .button:hover {
+    background-color:#aaa !important;
+}
+
+#bottomsocial img {
+background-color:#666;
+}
+
+#bottomnetworks img {
+    width:40%;
+    display:block;
+    margin-bottom:8px;
+}
+
+#bottomsocial img:hover {
+background-color:#aaa;}
+
+#bottomsocial a:first-child {
+margin-right:12px;
+}
+
+.bottommenubar a {
+color:$nearwhite;	
+}
+
+.bottommenubar a:hover {
+color:$lightred;
+text-decoration:none;
+}
+
+.front_whoweare{
+opacity:.9;
+}
 
 /* for "normal desktops" */
 
@@ -272,12 +376,13 @@ color:$nearblack;
 	padding-right:80px;
     }
     
-    .frontpagemenubar {
+    .menubar {
 	font-size:19px;
 	margin-bottom:20px;
+	margin-top:28px;
     }
     
-    .frontpagemenubar a{
+    .menubar a{
 	margin-right:11px;
     }
     
@@ -294,6 +399,16 @@ color:$nearblack;
 
     .front_moreprojects {
 	font-size:18px;
+    }
+
+    .bottommenubar {
+	font-size:18px;
+    }
+
+    #bottomtag {
+	font-size:20px;
+	line-height:30px;
+	margin-top:24px;
     }
 
 /* end for "normal desktops" */
@@ -337,12 +452,13 @@ color:$nearblack;
 	padding-right:95px;
     }
     
-    .frontpagemenubar {
+    .menubar {
 	font-size:24px;
 	margin-bottom:20px;
+	margin-top:43px;
     }
     
-    .frontpagemenubar a{
+    .menubar a{
 	margin-right:10px;
     }
     
@@ -359,6 +475,10 @@ color:$nearblack;
 
     .front_moreprojects {
 	font-size:21px;
+    }
+
+    .bottommenubar {
+	font-size:22px;
     }
 
     
@@ -405,12 +525,13 @@ color:$nearblack;
 	padding-right:15px;
     }
     
-    .frontpagemenubar {
+    .menubar {
 	font-size:16px;
 	margin-bottom:20px;
+	margin-top:15px;
     }
     
-    .frontpagemenubar a{
+    .menubar a{
 	margin-right:11px;
     }
     
@@ -429,6 +550,16 @@ color:$nearblack;
 	font-size:16px;
     }
 
+    #realcontentinner {
+	margin-top:0px;
+    }
+    .pages .introduction {
+	margin-top:0px;
+    }
+
+    #bottomsocial img {
+	width:32px;
+    }
 
 
 }
@@ -487,12 +618,13 @@ color:$nearblack;
 	
     }
     
-    .frontpagemenubar {
+    .menubar {
 	font-size:17px;
 	margin-bottom:20px;
+	margin-top:0px;
     }
     
-    .frontpagemenubar a{
+    .menubar a{
 	margin-right:11px;
     }
     
@@ -511,8 +643,15 @@ color:$nearblack;
 	font-size:17px;
     }
 
-
+    .bottommenubar a{
+	font-size:18px;
+	display:block;
+	margin-left:40px;
+    }
     
+    #bottomsocial {
+	margin-left:40px;
+    }
 
 }
  
@@ -561,12 +700,13 @@ color:$nearblack;
 	
     }
     
-    .frontpagemenubar {
+    .menubar {
 	font-size:13px;
 	margin-bottom:20px;
+	margin-top:0px;
     }
     
-    .frontpagemenubar a{
+    .menubar a{
 	margin-right:11px;
     }
     
@@ -589,3 +729,45 @@ color:$nearblack;
 
 
 }
+
+
+	
+	
+/* Sticky footer styles
+   -------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+/* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+        /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+      }
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+

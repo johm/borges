@@ -96,4 +96,15 @@ class Title < ActiveRecord::Base
   end
   
 
+  def probably_on_order 
+    purchase_order_line_items.inject(0) do |sum,li| 
+      if li.purchase_order.ordered? 
+        sum
+      else
+        sum+li.quantity-li.received
+      end
+    end
+  end
+  
+
 end
