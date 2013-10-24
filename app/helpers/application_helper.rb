@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def theme_partial(partial_name, options = {})
-    render {partial: "themes/#{theme}/#{partial_name}"}.merge(options)
+  def theme_partial(partial_name,options={})
+    render options.merge(:partial => "themes/#{theme}/#{partial_name}")
   end
 
   def mytextfield(f,l,m,options={})
