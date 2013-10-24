@@ -19,7 +19,7 @@
 	  <td><small><%= sanitize contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
-	  <td><%= title.on_order %></td>
+	  <td><%= title.on_order %><span class="faint">+<%= title.probablyon_order %></span></td>
 	  <td><%= blurb_status(title) %></td>
 	  <td><small><%= sanitize category_status(title) %></small>	    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
 	</tr>

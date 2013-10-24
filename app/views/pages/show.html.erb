@@ -1,38 +1,17 @@
 
+<h1 id="pagetitle"><%= @page.title %>
+  <div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_page_path(@page)   if can? :edit, Page %> 
+</h1>
+<div class="introduction">
+  <%= raw @page.introduction %>
+</div>
 
-<div class="container">
-  <div class="row">
-    <div class="span3" >
-      <div style="border-right:1px solid black;padding-right:30px;">
-      <h2>From the blog...</h2>
-      <% @posts.each do |p| %>
-        <%= render :partial=>"posts/postshort",:locals=>{:post=>p} %>
-      <% end %>
-      </div>
-    </div>
+<div class="body">
+  <%= raw @page.body %>
+</div>
 
-    <div class="span6">
-      <h1 id="pagetitle"><%= @page.title %>
-	<div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_page_path(@page)   if can? :edit, Page %> 
-      </h1>
-      <div class="introduction">
-	<%= raw @page.introduction %>
-      </div>
-      
-      <div class="body">
-	<%= raw @page.body %>
-      </div>
-      </div>
-
-      <div class="span3">
-	<div id="pagenav">
-	  <%= render :partial=>"pagenav",:locals=>{:page=>@page.ancestor,:indent=>0,:current=>@page} %>
-	</div>
-      </div>
       
 
-    </div>
-  </div>
       
 
 

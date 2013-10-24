@@ -7,6 +7,13 @@ class Copy < ActiveRecord::Base
   
   monetize :cost_in_cents, :as => "cost"
   monetize :price_in_cents, :as => "price"
+
+  scope :instock, where("status"=>"STOCK")
+  
+
+  def info
+    "$#{price}" + (notes || is_used? ? " [#{notes} #{'USED' if is_used?}]" : "" )
+  end
   
 
 end

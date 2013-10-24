@@ -5,19 +5,43 @@ $lightgrey:#c9c2b0;
 $lightbrown:#b5a57f; //good but too dark?
 $lightbrown:#bcb093;
 $nearwhitetwo:#fafafa;
+$red:#b4282e;
+$lightred:#e59179;
+$lightishgrey:#80807f;
+$johnsgrey:#444a50;
+//@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+//@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+.faint {
+color:$lightishgrey;	
+}
 
 
 body {
 font-family:"minion-pro";
 font-family:"adobe-garamond-pro";
 font-family:"adobe-caslon-pro";
-//  font-family: "Source Sans Pro",serif;
-//  font-weight:500;
 color:$nearblack;
 }
+
+#pagenav {
+display:none;
+}
+
+#heroCarousel .caption{
+color:$nearwhite;
+font-family: "proxima-nova";
+font-weight:500;
+}
+
+#heroCarousel .heroheader{
+color:$nearwhite;
+font-family: "proxima-nova";
+font-weight:500;
+}
+
+
 
 .posts .introduction p{
 //font-family:"Source Sans Pro";
@@ -29,10 +53,7 @@ color:$nearblack;
 //font-weight:300;
 }
 
-.introduction {
-//font-family:"Source Sans Pro";
-//font-weight:200;
-}
+
 
 
 .shortorder .status_and_price {
@@ -48,20 +69,27 @@ h4.contributors {
 //font-weight:normal;
 }
 
-
+.pages .introduction {
+margin-top:30px;
+}
 
 .pages .introduction p, .pages .introduction p span{
 font-family:"garamond-premier-pro-display";
-font-family:"Source Sans Pro";
+font-family:"adobe-caslon-pro";
+color:$johnsgrey;
 }
 
-.pages .body p, .pages .body p span{
-//font-family:"minion-pro";//"ff-tisa-web-pro";
+.pages .body p, .pages .body p span, .pages .body ul, .pages .body li{
+color:$johnsgrey;
 }
 
 #main {
-background-color:$nearwhitetwo;
+background-color:white;
 color:$nearblack;
+}
+
+#realcontent {
+padding-top:60px;
 }
 
 h1 {
@@ -109,13 +137,14 @@ background-color:$lightgrey;
 .body p {
 
 }
+.pages .body li{
+margin-left:40px;
+}
 
+.pages .body p, .pages .body p span,.pages .body li{
 
-.pages .body p, .pages .body p span{
-
-font-size:18px !important;
-line-height:24px !important;
-
+font-size:20px !important;
+line-height:30px !important;
 -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
@@ -123,4 +152,622 @@ text-align:justify;
 
 
 }
+
+
+
+.frontpage .navbar {
+display:none;
+}
+
+.frontpage {
+padding-bottom:100px;
+}
+
+.frontpage #fronttextfluid{
+padding-top:100px;
+}
+
+#frontleft {
+padding-top:32px;
+}
+
+#realcontentinner {
+margin-top:72px;
+}
+
+ .frontpage #frontleft {
+padding-top:72px;
+}
+
+.frontpage #fronttext p {
+text-align:justify;
+margin-bottom:50px;
+}
+
+.frontpage #fronttextfluid a {
+color:#000000;
+}
+
+.frontpage #fronttextfluid a:hover {
+color:#ff0000;
+text-decoration:none;
+}
+
+.adobegaramondpro {
+font-family:'adobe-garamond-pro';
+}
+
+.chunk {
+font-family:chunk;
+}
+
+.italics {
+font-style:italic;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.light {
+    font-weight:100;
+}
+
+.proxima {
+    font-family:"proxima-nova";
+    font-weight:300;
+}
+
+.justify{
+    text-align:justify;
+}
+
+.menubar a:before {
+content:"{";
+}
+.menubar a:after {
+content:"}";
+}
+
+
+
+.menubar a {
+    color:$lightred;
+}
+
+.menubar a:hover {
+    color:$red; 
+    text-decoration:none;
+}
+
+.copse {
+    font-family:Copse;
+}
+
+.caslon {
+    font-family:"adobe-caslon-pro";
+}
+
+.front_moreaboutus,.front_address {
+//color:#6b6b6b;
+//color:#525353;
+//color:#6b6c6c;
+//color:$lightishgrey; this one kate likes
+opacity:.7;
+}
+
+.front_address {
+    padding-top:20px;
+    padding-bottom:15px;
+    margin-bottom:15px;
+    border-bottom:1px solid $lightred;
+}
+
+.front_moreprojects {
+    color:$lightred;
+}
+
+.front_moreprojects a{
+//    color:$lightishgrey;
+color:$nearblack;
+opacity:.6;
+}
+
+.front_moreprojects a:hover{
+text-decoration:none;
+color:$nearblack;
+}
+
+
+
+#bottombar {
+background-color:$nearblack;
+color:$nearwhite;
+
+}
+
+#mc_embed_signup form {
+padding-left:0px !important;
+padding-right:0px !important;
+font-family:Copse !important;
+}
+
+#mc_embed_signup form input {
+font-family:Copse !important;
+}
+
+#mc_embed_signup .button {
+font-weight:normal !important;
+}
+
+#mc_embed_signup .button{
+background-color:#666 !important;}
+
+#mc_embed_signup .button:hover {
+    background-color:#aaa !important;
+}
+
+#bottomsocial img {
+background-color:#666;
+}
+
+#bottomnetworks img {
+    width:40%;
+    display:block;
+    margin-bottom:8px;
+}
+
+#bottomsocial img:hover {
+background-color:#aaa;}
+
+#bottomsocial a:first-child {
+margin-right:12px;
+}
+
+.bottommenubar a {
+color:$nearwhite;	
+}
+
+.bottommenubar a:hover {
+color:$lightred;
+text-decoration:none;
+}
+
+.front_whoweare{
+opacity:.9;
+}
+
+/* for "normal desktops" */
+
+    #front_1 {
+	font-size:45px;
+	border-right:1px solid black;
+    }
+
+    #front_2 {
+	margin-top:23px;
+	line-height:65px;
+	font-size:46px;
+    }
+
+    #front_3 {
+	line-height:35px;
+	font-size:35px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:43px;
+    }
+
+    #front_5 {
+	margin-top:20px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    .front_whoweare {
+	font-size:20px;
+	line-height:30px;
+	position:relative;
+	top:-10px;
+	padding-right:80px;
+    }
+    
+    .menubar {
+	font-size:19px;
+	margin-bottom:20px;
+	margin-top:28px;
+    }
+    
+    .menubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:20px;
+	line-height:28px;
+	padding-right:80px;
+    }
+
+    .front_address {
+	font-size:20px;
+	margin-right:80px;
+    }
+
+    .front_moreprojects {
+	font-size:18px;
+    }
+
+    .bottommenubar {
+	font-size:18px;
+    }
+
+    #bottomtag {
+	font-size:20px;
+	line-height:30px;
+	margin-top:24px;
+    }
+
+/* end for "normal desktops" */
+
+/* Large desktop */
+@media (min-width: 1200px) {
+    #front_1 {
+	font-size:55px;
+	border-right:1px solid red;
+    }
+
+    #front_2 {
+	margin-top:23px;
+	line-height:65px;
+	font-size:56px;
+    }
+
+    #front_3 {
+	line-height:40px;
+	font-size:43px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:53px;
+    }
+
+    #front_5 {
+	margin-top:20px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:44px;
+    }
+
+    .front_whoweare {
+	font-size:20px;
+	line-height:30px;
+	position:relative;
+	top:-10px;
+	padding-right:95px;
+    }
+    
+    .menubar {
+	font-size:24px;
+	margin-bottom:20px;
+	margin-top:43px;
+    }
+    
+    .menubar a{
+	margin-right:10px;
+    }
+    
+    .front_moreaboutus {
+	font-size:20px;
+	line-height:28px;
+	padding-right:95px;
+    }
+
+    .front_address {
+	font-size:25px;
+	margin-right:90px;
+    }
+
+    .front_moreprojects {
+	font-size:21px;
+    }
+
+    .bottommenubar {
+	font-size:22px;
+    }
+
+    
+}
  
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+    #front_1 {
+	font-size:40px;
+	border-right:1px solid green;
+    }
+
+    #front_2 {
+	margin-top:20px;
+	line-height:40px;
+	font-size:40px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:31px;
+	font-size:30.5px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:32px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	padding-right:15px;
+    }
+    
+    .menubar {
+	font-size:16px;
+	margin-bottom:20px;
+	margin-top:15px;
+    }
+    
+    .menubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	padding-right:15px;
+    }
+
+    .front_address {
+	font-size:17px;
+	margin-right:15px;
+    }
+
+    .front_moreprojects {
+	font-size:16px;
+    }
+
+    #realcontentinner {
+	margin-top:0px;
+    }
+    .pages .introduction {
+	margin-top:0px;
+    }
+
+    #bottomsocial img {
+	width:32px;
+    }
+
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+    
+    .frontpage #frontleft {
+	padding-top:20px;
+    }
+
+    .frontpage #fronttextfluid {
+    	padding-top:40px;
+    }
+
+    #front_1 {
+	border-right:3px solid purple;
+    }
+
+    #front_1 {
+	font-size:40px;
+    }
+
+    #front_2 {
+	margin-top:20px;
+	line-height:40px;
+	font-size:40px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:31px;
+	font-size:30.5px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:40px;
+	font-size:36px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:40px;
+	font-size:32px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	width:420px;
+	
+    }
+    
+    .menubar {
+	font-size:17px;
+	margin-bottom:20px;
+	margin-top:0px;
+    }
+    
+    .menubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	width:420px;
+    }
+
+    .front_address {
+	font-size:18px;
+	width:420px;
+    }
+
+    .front_moreprojects {
+	font-size:17px;
+    }
+
+    .bottommenubar a{
+	font-size:18px;
+	display:block;
+	margin-left:40px;
+    }
+    
+    #bottomsocial {
+	margin-left:40px;
+    }
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    #front_1 {
+	border-right:3px solid orange;
+    }
+        #front_1 {
+	font-size:30px;
+	line-height:30px;
+	}
+
+    #front_2 {
+	margin-top:20px;
+	line-height:30px;
+	font-size:30px;
+
+    }
+
+    #front_3 {
+	margin-top:20px;
+	line-height:24px;
+	font-size:24px;
+    }
+
+    #front_4 {
+	margin-top:22px;
+	line-height:28px;
+	font-size:28px;
+    }
+
+    #front_5 {
+	margin-top:15px;
+	margin-bottom:25px;
+	line-height:25px;
+	font-size:25px;
+    }
+
+    .front_whoweare {
+	font-size:19px;
+	line-height:29px;
+	position:relative;
+	top:-10px;
+	width:320px;
+	
+    }
+    
+    .menubar {
+	font-size:13px;
+	margin-bottom:20px;
+	margin-top:0px;
+    }
+    
+    .menubar a{
+	margin-right:11px;
+    }
+    
+    .front_moreaboutus {
+	font-size:19px;
+	line-height:28px;
+	width:320px;
+    }
+
+    .front_address {
+	font-size:13px;
+	width:320px;
+    }
+
+    .front_moreprojects {
+	font-size:14px;
+    }
+
+
+
+
+}
+
+
+	
+	
+/* Sticky footer styles
+   -------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+/* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+        /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+      }
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
