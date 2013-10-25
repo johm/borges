@@ -41,21 +41,13 @@
 	  <div id="notificationcontent"></div>
 	</div>
 	<%= yield(:precontent) %>
-	<div class="container">
-          <div class="content">
-              <div class="row">
-		<div class="span12">
-		  <%= render 'layouts/messages' %>
-		  <%= render :partial => "themes/#{theme}/leftcolumn" %>      
-		  <%= yield %> <!-- the real, system-managed content.  you can't theme this -->
-		  <%= render :partial => "themes/#{theme}/rightcolumn" %>      
-		</div>
-              </div>
-              <footer>
-              </footer>
-        </div>
-      </div> <!--! end of .container -->
-
+      	<%= render 'layouts/messages' %>
+	<%= render :partial => "themes/#{theme}/leftcolumn" %> <!-- this is more like "top" -->       
+	<%= yield %> <!-- the real, system-managed content.  you can't theme this -->
+	<%= render :partial => "themes/#{theme}/rightcolumn" %>  <!-- this is more like "bottom" -->           
+        <footer>
+        </footer>
+	
       <div class="relatedbar">
 	<div class="container">
           <div class="content">
@@ -66,10 +58,10 @@
 	</div>
       </div>
 
-
-
-    
-
+      
+      
+      
+      
       </div> <!--! end of #main -->
       
       <div id="push"></div>

@@ -149,6 +149,9 @@ module ApplicationHelper
     ENV["THEME"] || "default"
   end
 
+  def fullwidth? 
+    return controller.controller_name.in? ["dashboard","invoices","purchase_orders","sales_orders"] 
+  end
 
   def sitename
     ENV["SITENAME"] || "Borges"
