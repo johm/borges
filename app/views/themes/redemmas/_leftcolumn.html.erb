@@ -3,11 +3,16 @@
       <div class="span2" id="frontleft">
 	<%= image_tag "redemmas/emmas.png" %>
       </div>
-    <div class="span7">
-      <div id="realcontent">
-	<div class="menubar copse">
-	  <%= raw menubar({:books=>'/books',:menu=>'/pages/menu',:coffee=>'/pages/thread',:events=>'/events',:news=>'/posts',:about=>'/about'}) %>
+      <div class="span7">
+	<div id="menubar">
+	  <div class="menubar copse">
+	    <%= raw menubar({:books=>'/books',:menu=>'/pages/menu',:coffee=>'/pages/thread',:events=>'/events',:news=>'/posts',:about=>'/about'}) %>
+	  </div>
 	</div>
-	<div id="realcontentinner"
+      </div>
+  </div>
+  <div class="row" id="realcontentinner realcontent"
 	<!-- and then do the real content -->
-      
+	<% unless fullwidth? %>
+	<div class="span2"></div> 
+	<% end %>
