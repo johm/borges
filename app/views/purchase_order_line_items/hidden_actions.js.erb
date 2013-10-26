@@ -1,0 +1,3 @@
+$("#modal-window .modal-body").html("<%= escape_javascript(render(:partial=>'purchase_order_line_items/hidden_actions',:locals=> {:purchase_order_line_item=>@purchase_order_line_item})) %>");
+$("#modal-window .modal-title").html("<%= escape_javascript('Line item operations') %>");
+

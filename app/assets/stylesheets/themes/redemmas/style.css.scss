@@ -19,8 +19,6 @@ color:$lightishgrey;
 
 
 body {
-font-family:"minion-pro";
-font-family:"adobe-garamond-pro";
 font-family:"adobe-caslon-pro";
 color:$nearblack;
 }
@@ -379,7 +377,7 @@ opacity:.9;
     .menubar {
 	font-size:19px;
 	margin-bottom:20px;
-	margin-top:28px;
+	margin-top:80px;
     }
     
     .menubar a{
@@ -455,7 +453,7 @@ opacity:.9;
     .menubar {
 	font-size:24px;
 	margin-bottom:20px;
-	margin-top:43px;
+	margin-top:83px;
     }
     
     .menubar a{
@@ -771,3 +769,11 @@ body {
 }
 
 
+
+.navbar-fixed-top {
+font-family: "proxima-nova";
+}
+
+.navbar-fixed-top .navbar-inner {
+padding-left:20px;
+}

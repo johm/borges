@@ -13,7 +13,7 @@
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
     <div id="wrap" style="<%= 'padding-top:40px;' if can? :edit, Title %>">
       <% if can? :edit, Title %>
-      <div class="navbar navbar-fixed-top">
+      <div class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 	<%= render 'layouts/navigation' %>
 	</div>

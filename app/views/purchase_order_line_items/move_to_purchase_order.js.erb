@@ -1,0 +1,9 @@
+$("#modal-window").modal('hide');
+$("#notificationcontent").html("<%= escape_javascript("Item was successfully moved to purchase order <a href='#{url_for(@purchase_order)}'>#{@purchase_order.number}</a>").html_safe %>");
+$("#purchase_order_line_item_<%= @purchase_order_line_item.id %>").hide("fade");
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+
