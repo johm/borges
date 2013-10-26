@@ -150,7 +150,7 @@ module ApplicationHelper
   end
 
   def fullwidth? 
-    return controller.controller_name.in? ["dashboard","invoices","purchase_orders","sales_orders"] 
+    return controller.controller_name.in? ["dashboard","invoices","purchase_orders","sales_orders","titles"] 
   end
 
   def sitename

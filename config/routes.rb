@@ -73,7 +73,12 @@ Borges::Application.routes.draw do
   end
 
 
-  resources :purchase_order_line_items
+  resources :purchase_order_line_items do 
+    member do
+      get :hidden_actions 
+      put :move_to_purchase_order
+    end
+  end
 
 
   resources :purchase_orders do 

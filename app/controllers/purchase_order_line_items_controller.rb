@@ -91,6 +91,29 @@ class PurchaseOrderLineItemsController < ApplicationController
     end
   end
 
+  def hidden_actions
+    @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])
+
+    respond_to do |format|
+      format.html {  }
+      format.js { }
+    end
+  end
+    
+  def move_to_purchase_order
+    @old_purchase_order=@purchase_order_line_item.purchase_order
+    @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])
+    @purchase_order = PurchaseOrder.find(params[:purchase_order])
+    unless @purchase_order.ordered? || @purchase_order_line_item.purchase_order.ordered?
+      @purchase_order_line_item.purchase_order = @purchase_order 
+      @purchase_order_line_item.save!
+    end
+    respond_to do |format| 
+      format.html { redirect_to @old_purchase_order, notice: "Item #{@purchase_order_line_item.edition.title} was successfully moved to purchase order <a href='#{url_for(@purchase_order)}'>#{@purchase_order}</a>".html_safe }
+      format.js {}
+    end
+  end
+
 
   private
   

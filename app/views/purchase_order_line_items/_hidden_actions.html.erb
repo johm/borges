@@ -1,0 +1,10 @@
+
+<%= nested_form_for @purchase_order_line_item,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :move_to_purchase_order,:controller => :purchase_order_line_items } do |f| %>
+  <div class="field control-group">
+    <%= f.label :purchase_order,"Move to purchase order", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false),:id,:number) %>
+      <%= f.submit "Add", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
