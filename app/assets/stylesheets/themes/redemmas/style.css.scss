@@ -220,12 +220,14 @@ font-style:italic;
     text-align:justify;
 }
 
-.menubar a:before {
+.menubar>span>a:before {
 content:"{";
 }
-.menubar a:after {
+.menubar>span>a:after {
 content:"}";
 }
+
+
 
 
 
@@ -377,7 +379,7 @@ opacity:.9;
     .menubar {
 	font-size:19px;
 	margin-bottom:20px;
-	margin-top:80px;
+	margin-top:85px;
     }
     
     .menubar a{
@@ -453,7 +455,7 @@ opacity:.9;
     .menubar {
 	font-size:24px;
 	margin-bottom:20px;
-	margin-top:83px;
+	margin-top:100px;
     }
     
     .menubar a{
@@ -526,7 +528,7 @@ opacity:.9;
     .menubar {
 	font-size:16px;
 	margin-bottom:20px;
-	margin-top:15px;
+	margin-top:65px;
     }
     
     .menubar a{
@@ -619,7 +621,8 @@ opacity:.9;
     .menubar {
 	font-size:17px;
 	margin-bottom:20px;
-	margin-top:0px;
+	margin-top:20px;
+	padding-bottom:50px;
     }
     
     .menubar a{
@@ -702,6 +705,7 @@ opacity:.9;
 	font-size:13px;
 	margin-bottom:20px;
 	margin-top:0px;
+	padding-bottom:30px;
     }
     
     .menubar a{
@@ -777,3 +781,32 @@ font-family: "proxima-nova";
 .navbar-fixed-top .navbar-inner {
 padding-left:20px;
 }
+
+#menubar .menuwrapper {
+position:relative;
+}
+
+#menubar a {
+position:relative;
+}
+
+#menubar img {
+position:absolute;
+bottom:30px;
+left:0px;
+display:none;
+width:100%;
+}
+
+#menubar .menusub {
+position:absolute;
+bottom:0px;
+left:90px;
+display:none;
+width:500px;
+}
+
+
+.menusub {padding-left:5px;}
+.menusub a{color:$lightishgrey;font-family:"adobe-caslon-pro";}
+.menusub a:hover{color:$nearblack;}

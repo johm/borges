@@ -138,10 +138,18 @@ module ApplicationHelper
   end
 
   def menubar(choices) 
-    choices.collect {|key,value| menubarlink(key,value)}.join(" ")
+    choices.collect {|key,value| menubarlink(key,value[0],value[1])}.join(" ")
   end
 
-  def menubarlink(text,path)
+  def menubarlink(text,path,sublist)
+    content_tag("span",link_to(image_tag("#{theme}/#{text}.png")+text,path)+content_tag("span",submenubar(sublist).html_safe,{:id=>"menubar_sub_#{text}",:class=>'menusub'}),{:class=>'menuwrapper'})
+  end
+
+  def submenubar(choices)
+    choices.collect {|key,value| submenubarlink(key,value)}.join(" ")
+  end
+
+  def submenubarlink(text,path)
     link_to text,path
   end
 

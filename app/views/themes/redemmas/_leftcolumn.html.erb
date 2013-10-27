@@ -1,12 +1,15 @@
 <div class="container">
   <div class="row">
       <div class="span2" id="frontleft">
-	<%= image_tag "redemmas/emmas.png" %>
+	<% if controller_name=="pages" && @page && (@page.slug=="welcome-to-thread-coffee" || (@page.parent && @page.parent.slug=="welcome-to-thread-coffee")) %>
+	<% else %>
+	<%= image_tag "redemmas/threadlogo_web3.png" %>
+	<% end %>
       </div>
       <div class="span7">
 	<div id="menubar">
 	  <div class="menubar copse">
-	    <%= raw menubar({:books=>'/books',:menu=>'/pages/menu',:coffee=>'/pages/thread',:events=>'/events',:news=>'/posts',:about=>'/about'}) %>
+	    <%= raw menubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:menu=>['/pages/menu',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}]}) %>
 	  </div>
 	</div>
       </div>
