@@ -1,4 +1,19 @@
 jQuery('document').ready(function (){
+
+    jQuery('#menubar .menuwrapper').hover(function() {
+	jQuery(this).stop().animate({
+            "top": "50px"
+	}, 600);
+	jQuery(this).find("img").show("fade");
+	jQuery(this).find(".menusub").show("fade");
+    }, function() {
+	jQuery(this).stop().animate({
+            "top": "0px"
+	}, 600);
+	jQuery(this).find("img").hide("fade");
+	jQuery(this).find(".menusub").hide("fade");
+    });
+
     
 
     jQuery("#footer").css("top",jQuery(document).height()-jQuery("#footer").height());
@@ -31,7 +46,6 @@ jQuery('document').ready(function (){
     setTimeout(makefrontpagerespond, 750); //twice for good measure!
     
 });
-
 
 
 
