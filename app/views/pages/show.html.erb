@@ -7,6 +7,22 @@
   <%= raw @page.introduction %>
 </div>
 
+<% if @page.is_image_grid? %>
+<div class="grid">
+  <% @page.images.each do |i| %>
+  <div class="griditem">
+    <div class="griditeminner" style="background-image:url('<%= i.the_image_url(:reasonable)%>')">
+      <a href="<%= i.link %>">
+	<div class="gridborder"></div>
+      </a>
+    </div>
+    <div class="griditemtitle"><%= i.title %></div>
+    <div class="griditemdescription"><%= i.description.html_safe %></div>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
 <div class="body">
   <%= raw @page.body %>
 </div>

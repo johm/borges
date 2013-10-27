@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016120406) do
+ActiveRecord::Schema.define(:version => 20131027231152) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20131016120406) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "description"
+    t.string   "link"
   end
 
   create_table "invoice_line_items", :force => true do |t|
@@ -161,11 +162,12 @@ ActiveRecord::Schema.define(:version => 20131016120406) do
     t.text     "introduction"
     t.text     "body"
     t.integer  "parent_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.boolean  "published"
     t.boolean  "is_hero"
     t.string   "layout"
+    t.boolean  "is_image_grid"
   end
 
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
