@@ -141,8 +141,7 @@ margin-left:40px;
 
 .pages .body p, .pages .body p span,.pages .body li{
 
-font-size:20px !important;
-line-height:30px !important;
+
 -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
@@ -220,12 +219,13 @@ font-style:italic;
     text-align:justify;
 }
 
-.menubar>span>a:before {
+.menubar>span>a:before,.frontpage .menubar a:before {
 content:"{";
 }
-.menubar>span>a:after {
+.menubar>span>a:after,.frontpage .menubar a:after {
 content:"}";
 }
+
 
 
 
@@ -411,10 +411,18 @@ opacity:.9;
 	margin-top:24px;
     }
 
+       .navbar li:last-child a:after	{
+          content:" NORMAL";   
+}	  		             
+
 /* end for "normal desktops" */
 
 /* Large desktop */
 @media (min-width: 1200px) {
+       .navbar li:last-child a:after {
+          content:" LARGE";   
+}	  		             
+
     #front_1 {
 	font-size:55px;
 	border-right:1px solid red;
@@ -486,6 +494,11 @@ opacity:.9;
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
+       .navbar li:last-child a:after{
+          content:" BIG TABLET";   
+}	  		             
+
+
     #front_1 {
 	font-size:40px;
 	border-right:1px solid green;
@@ -566,7 +579,11 @@ opacity:.9;
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
-    
+              .navbar li:last-child a:after {
+          content:" BIG PHONE";   
+}	  		             
+           
+
     .frontpage #frontleft {
 	padding-top:20px;
     }
@@ -658,6 +675,10 @@ opacity:.9;
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
+              .navbar li:last-child a:after {
+          content:" SMALL PHONE";   
+}	  		             
+
     #front_1 {
 	border-right:3px solid orange;
     }
@@ -814,4 +835,9 @@ width:500px;
 
 .carousel-control {
 padding-top:20px; 
+}
+
+
+.frontpage .menubar {
+margin-top:0px; 
 }
