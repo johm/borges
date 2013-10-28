@@ -17,7 +17,6 @@ class Ability
       can :read, Image
       can :read, Page, :published => true
       can :read, TitleList, :public => true
-      can :read, TitleListMembership, :title_list => {:public => true}
       can :read, Post, :published => true
       can :read, PostCategory
       can :read, Category

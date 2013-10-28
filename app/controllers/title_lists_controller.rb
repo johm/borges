@@ -1,5 +1,5 @@
 class TitleListsController < ApplicationController
-  before_filter :authenticate_user! 
+  before_filter :authenticate_user!, :except=>[:index,:show] 
   load_and_authorize_resource
   autocomplete :title,:title,:full=>true,:display_value=>:title_and_id
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
