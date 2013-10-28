@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(:version => 20131027231152) do
   create_table "authors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "full_name"
-    t.text     "bio"
+    t.text     "bio",        :limit => 16777215
   end
 
   create_table "categories", :force => true do |t|
@@ -95,10 +95,10 @@ ActiveRecord::Schema.define(:version => 20131027231152) do
     t.integer  "year_of_publication"
     t.string   "format"
     t.boolean  "in_print"
-    t.text     "notes"
+    t.text     "notes",               :limit => 16777215
     t.integer  "title_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "cover"
     t.integer  "list_price_cents"
     t.integer  "publisher_id"
@@ -320,10 +320,10 @@ ActiveRecord::Schema.define(:version => 20131027231152) do
 
   create_table "titles", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "description"
-    t.text     "introduction"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "description",  :limit => 16777215
+    t.text     "introduction", :limit => 16777215
   end
 
   create_table "users", :force => true do |t|
