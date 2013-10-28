@@ -1,15 +1,56 @@
 jQuery('document').ready(function (){
 
+//    jQuery('#menubar .menusub').append("<span class='leftcurl'>{</span>");
+//   jQuery('#menubar .menusub').append("<span class='rightcurl'>}</span>");
+
+    jQuery('.menusub').position({
+	    my:        "left top",
+	    at:        "left-6 bottom-11",
+	    of:        jQuery("#menubar"), 
+	    collision: "fit"
+	});
+
+
+
     jQuery('#menubar .menuwrapper').hover(function() {
 	jQuery(this).stop().animate({
-            "top": "50px"
-	}, 600);
+            "top": "10px",
+	}, 400);
+	jQuery(this).children("a").find("img").stop().animate({
+            "margin-left": "12px",
+	}, 400);
+
+	jQuery(this).children("a").stop().animate({
+            "padding-top": "10px",
+            "padding-left": "10px",
+            "padding-right": "10px",
+	}, 400);
+	
+	jQuery(this).find('a').css("color","#fafafa");
+	jQuery(this).find('a').css("background-color","#cb3e38");
+	jQuery(this).find('a').css("opacity",".95");
+
 	jQuery(this).find("img").show("fade");
 	jQuery(this).find(".menusub").show("fade");
     }, function() {
 	jQuery(this).stop().animate({
-            "top": "0px"
-	}, 600);
+            "top": "0px",
+	}, 400);
+	
+	jQuery(this).children("a").find("img").stop().animate({
+            "margin-left": "0px",
+	}, 400);
+	
+	jQuery(this).children("a").stop().animate({
+            "padding-left": "0px",
+            "padding-right": "0px",
+            "padding-top": "0px",
+	}, 400);
+	
+	jQuery(this).children('a').css("color","#cb3e38");
+	jQuery(this).find('a').css("background-color","#ffffff");
+	jQuery(this).find('a').css("opacity","1");
+
 	jQuery(this).find("img").hide("fade");
 	jQuery(this).find(".menusub").hide("fade");
     });
@@ -29,6 +70,9 @@ jQuery('document').ready(function (){
 
 
     jQuery(window).resize(function (){
+
+
+
 	setTimeout(makefrontpagerespond, 500); //twice for good measure!
 	setTimeout(makefrontpagerespond, 1000); //twice for good measure!
 	var newheight = jQuery(window).height()-jQuery("#top").height() - 200;      

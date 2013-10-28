@@ -5,7 +5,7 @@ class Page < ActiveRecord::Base
   validates :layout,:presence => true
   validates :layout,:inclusion => {:in => PagesController.helpers.layouts}
   
-  attr_accessible :body, :introduction, :slug, :title, :parent_id, :images_attributes,:is_hero,:layout,:published
+  attr_accessible :body, :introduction, :slug, :title, :parent_id, :images_attributes,:is_hero,:layout,:published,:is_image_grid
   accepts_nested_attributes_for :images, :allow_destroy => true
 
   extend FriendlyId

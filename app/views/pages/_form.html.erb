@@ -27,6 +27,7 @@
   </div>
 
   <%= mycheckbox f,"Is a hero page?",:is_hero %>
+  <%= mycheckbox f,"Is an image grid page?",:is_image_grid %>
 
   <div class="field control-group">
     <%= f.label :images,"Images", :class=>"control-label" %><br />
@@ -39,6 +40,7 @@
 	    <div class="span10">
 	      <div class="field control-group">
 		<%= mytextfield image_form,"Image title",:title %>
+		<%= mytextfield image_form,"Link image to",:link %>
 		<%= mytextarea image_form,"Image text",:description %>
 		<%= image_form.label :the_image,"Image file",:class=>"control-label" %>
 		<div class="controls">
