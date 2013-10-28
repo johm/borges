@@ -16,14 +16,15 @@ jQuery('document').ready(function (){
 	jQuery(this).stop().animate({
             "top": "10px",
 	}, 400);
-	jQuery(this).children("a").find("img").stop().animate({
-            "margin-left": "12px",
-	}, 400);
+//	jQuery(this).children("a").find("img").stop().animate({
+  //          "margin-left": "12px",
+//	}, 400);
 
 	jQuery(this).children("a").stop().animate({
-            "padding-top": "10px",
-            "padding-left": "10px",
-            "padding-right": "10px",
+            "padding-top": "6px",
+         //   "padding-left": "6px",
+         //   "padding-right": "6px",
+	 //   "left":"-6px"
 	}, 400);
 	
 	jQuery(this).find('a').css("color","#fafafa");
@@ -37,14 +38,14 @@ jQuery('document').ready(function (){
             "top": "0px",
 	}, 400);
 	
-	jQuery(this).children("a").find("img").stop().animate({
-            "margin-left": "0px",
-	}, 400);
+//	jQuery(this).children("a").find("img").stop().animate({
+  //          "margin-left": "0px",
+//	}, 400);
 	
 	jQuery(this).children("a").stop().animate({
             "padding-left": "0px",
-            "padding-right": "0px",
-            "padding-top": "0px",
+       //     "padding-right": "0px",
+       //     "padding-top": "0px",
 	}, 400);
 	
 	jQuery(this).children('a').css("color","#cb3e38");
