@@ -112,9 +112,11 @@
 
 <div class="span9">
   <h2>By the same author(s)</h2>
+  <div class="grid">
   <% @title.by_the_same_authors.each do |t| %>
   <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
   <% end %>
+  </div>
 </div>
 
 <div class="span3">
