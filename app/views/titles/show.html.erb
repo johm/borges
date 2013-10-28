@@ -110,12 +110,13 @@
 
 <% content_for :related do %>
 
-<div class="span3">
+<div class="span9">
   <h2>By the same author(s)</h2>
   <% @title.by_the_same_authors.each do |t| %>
-  <%= render :partial=>'titles/short', :locals => {:title=>t}%>
+  <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
   <% end %>
 </div>
+
 <div class="span3">
   <h2>Section(s)</h2>
   <% @title.categories.each do |c| %>
@@ -127,8 +128,7 @@
   <b><%= link_to "Browse this category",c %></b>
   <hr>
   <% end %>
-</div>
-<div class="span3">
+
   <h2>On our lists</h2>
   <% @title.title_lists.each do |l| %>
   <% if l.public? || (can? :edit, TitleList) %>
@@ -141,9 +141,8 @@
   <% end %>
   <% end %>
 </div>
-<div class="span3">
-  <h2>On our blog</h2>
-  TODO
+<!--  <h2>On our blog</h2>
+  TODO -->
 </div>
 
 <% end %>

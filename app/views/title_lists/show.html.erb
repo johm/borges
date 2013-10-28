@@ -11,31 +11,7 @@
 
 <div class="grid">
   <% @title_list.title_list_memberships.each do |tlm| %>
-  <% title=tlm.title %>
-  <div class="griditem">
-    <div class="griditeminner" style="background-color:#ddd;background-image:url('<%= title.latest_edition.cover_url(:reasonable)%>')">
-      <a href="<%= title_path(title) %>">
-	<div class="gridborder"></div>
-      </a>
-    </div>
-    <div class="griditemtitle"><%= title.in_stock > 0 ? "IN STOCK" : "SPECIAL ORDER" %></div>
-    <div class="griditemdescription">
-          <% if can? :edit, Title %>
-    <div class="hiddenactions">
-      <%= unless title.latest_published_edition.nil?  
-	 link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  
-      end %>
-    </div>
-    <% end %>
-    <h2 class="booktitle"><%= link_to title.title, title %></h2>
-    <h3 class="contributors">
-      <%= raw contributors_list(title) %>
-    </h3>
-    
-
-    <%= tlm.notes.html_safe %>
-    </div>
-  </div>
+  <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>tlm.notes} %>
   <% end %>
 </div>
 </div>
