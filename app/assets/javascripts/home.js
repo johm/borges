@@ -1,14 +1,5 @@
 jQuery('document').ready(function (){
 
-//    jQuery('#menubar .menusub').append("<span class='leftcurl'>{</span>");
-//   jQuery('#menubar .menusub').append("<span class='rightcurl'>}</span>");
-
-    jQuery('.menusub').position({
-	    my:        "left top",
-	    at:        "left-6 bottom-11",
-	    of:        jQuery("#menubar"), 
-	    collision: "fit"
-	});
 
 
 
@@ -16,15 +7,9 @@ jQuery('document').ready(function (){
 	jQuery(this).stop().animate({
             "top": "10px",
 	}, 400);
-//	jQuery(this).children("a").find("img").stop().animate({
-  //          "margin-left": "12px",
-//	}, 400);
 
 	jQuery(this).children("a").stop().animate({
             "padding-top": "6px",
-         //   "padding-left": "6px",
-         //   "padding-right": "6px",
-	 //   "left":"-6px"
 	}, 400);
 	
 	jQuery(this).find('a').css("color","#fafafa");
@@ -32,20 +17,15 @@ jQuery('document').ready(function (){
 	jQuery(this).find('a').css("opacity",".95");
 
 	jQuery(this).find("img").show("fade");
-	jQuery(this).find(".menusub").show("fade");
+	jQuery(this).find(".menusub").slideDown();
     }, function() {
 	jQuery(this).stop().animate({
             "top": "0px",
 	}, 400);
 	
-//	jQuery(this).children("a").find("img").stop().animate({
-  //          "margin-left": "0px",
-//	}, 400);
 	
 	jQuery(this).children("a").stop().animate({
             "padding-left": "0px",
-       //     "padding-right": "0px",
-       //     "padding-top": "0px",
 	}, 400);
 	
 	jQuery(this).children('a').css("color","#cb3e38");
@@ -53,7 +33,7 @@ jQuery('document').ready(function (){
 	jQuery(this).find('a').css("opacity","1");
 
 	jQuery(this).find("img").hide("fade");
-	jQuery(this).find(".menusub").hide("fade");
+	jQuery(this).find(".menusub").slideUp();
     });
 
     

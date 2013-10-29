@@ -220,11 +220,24 @@ font-style:italic;
     text-align:justify;
 }
 
-.menubar>span>a:before,.frontpage .menubar a:before {
+.menubar>div>a:before,.frontpage .menubar a:before {
 content:"{";
 }
-.menubar>span>a:after,.frontpage .menubar a:after {
+.menubar>div>a:after,.frontpage .menubar a:after {
 content:"}";
+}
+
+
+.menubar>div:hover>a:before{
+content:"{";
+color:$lightred;
+opacity:.95;
+}
+.menubar>div:hover>a:after {
+content:"}";
+color:$lightred;
+opacity:.95;
+
 }
 
 
@@ -463,7 +476,7 @@ border-radius: 3px;
     }
     
     .menubar a{
-	margin-right:8px;
+//	margin-right:8px;
 	padding-bottom:2px;
     }
     
@@ -548,7 +561,7 @@ border-radius: 3px;
     }
     
     .menubar a{
-	margin-right:13px;
+//	margin-right:13px;
 	padding-bottom:0px;	
     }
         
@@ -652,7 +665,7 @@ border-radius: 3px;
     }
     
     .menubar a{
-	margin-right:11px;
+//	margin-right:11px;
     }
     
     .front_moreaboutus {
@@ -782,7 +795,7 @@ border-radius: 3px;
     }
     
     .menubar a{
-	margin-right:8px;
+//	margin-right:8px;
     }
     
     .front_moreaboutus {
@@ -972,6 +985,8 @@ padding-left:20px;
 
 #menubar .menuwrapper {
 position:relative;
+display:inline-block;
+height:30px;
 }
 
 #menubar a {
@@ -989,57 +1004,38 @@ margin-right:auto;
 }
 
 #menubar .menusub {
-font-family:proxima-nova;
-position:fixed;
-top:26px;
-left:0px;
+font-family:Copse;
+font-weight:bold;
+color:$nearwhite;
+font-size:14px;	
 display:none;
-width:770px;
-min-height:200px;
-background-color:$nearblack;
 background-color:rgba(0,8,16,.9);
 background-color:$lightred;
 opacity:.95;
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
-border-radius: 2px;
-padding:10px;
+-webkit-border-bottom-left-radius: 2px;
+-moz-border-bottom-left-radius: 2px;
+border-bottom-left-radius: 2px;
+-webkit-border-bottom-right-radius: 2px;
+-moz-border-bottom-right-radius: 2px;
+border-bottom-right-radius: 2px;
+width:100%;
+position:absolute;
+top:25px;
+overflow:hidden;
 }
 
-#menubar .menuwrapper:first-child .menusub {
--webkit-border-radius: 2px;
--webkit-border-top-left-radius: 0;
--moz-border-radius: 2px;
--moz-border-radius-topleft: 0;
-border-radius: 2px;
-border-top-left-radius: 0;
+.menusubinner {
+padding:5px;
 }
-
-
 
 
 #menubar .menuwrapper:last-child .menusub,#menubar .menuwrapper:nth-child(6) .menusub {
 
 }
 
-.leftcurl,.rightcurl {
-font-size:200px;
-position:absolute;
-top:80px;
-
-}
-
-.leftcurl {
-left:-70px;
-}
-
-.rightcurl {
-right:0px;
-}
 
 
-.menusub {padding-left:5px;}
-.menusub a{color:$nearwhite;font-family:"proxima-nova";}
+.menusub a{color:$nearwhite;}
 .menusub a:hover{color:$nearblack;}
 
 
