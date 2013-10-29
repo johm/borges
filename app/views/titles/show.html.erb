@@ -87,7 +87,7 @@
     <% if can? :edit,Edition && ! @edition.nil? %>
     <tr>
       <th>Copies</th>
-      <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) %></td>
+      <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) unless @edition.nil? %></td>
     </tr>
     <% end %>
 
