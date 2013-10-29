@@ -65,7 +65,7 @@
   </tr>
   <tr>
     <th>Publisher</th>
-    <td><%= link_to(@edition.publisher.name, @edition.publisher) unless @edition.publisher.nil? %></td>
+    <td><%= link_to(@edition.publisher.name, @edition.publisher) unless @edition.nil? || @edition.publisher.nil? %></td>
   </tr>
   <tr>
     <th>Year of publication</th>
@@ -74,12 +74,17 @@
   
   <% if can? :edit,Edition %>
   <tr>
-    <th><%=  mylinkbutton "<i class='icon-edit'></i> Edit this title", edit_title_path(@title),{},"btn-mini"   if can? :edit, Title %> <%= mylinkbutton "<i class='icon-edit'></i> Edit this edition",edit_edition_path(@edition),{},"btn-mini" %></th>
+    <th>
+      <%=  mylinkbutton "<i class='icon-edit'></i> Edit this title", edit_title_path(@title),{},"btn-mini"   if can? :edit, Title %> 
+      <% unless @edition.nil? %>
+      <%= mylinkbutton "<i class='icon-edit'></i> Edit this edition",edit_edition_path(@edition),{},"btn-mini" %>
+      <% end %>
+    </th>
     <td></td>
   </tr>
   <% end %>
 
-    <% if can? :edit,Edition %>
+    <% if can? :edit,Edition && ! @edition.nil? %>
     <tr>
       <th>Copies</th>
       <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) %></td>
