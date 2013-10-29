@@ -13,7 +13,7 @@
     <div class="span7">
     <% if can? :edit, Title && ! @edition.nil? %>
     <div class="hiddenactions">
-      <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(@edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %>
+      <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(@edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless @edition.nil? %>
     </div>
     <% end %>
 
