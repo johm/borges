@@ -1,5 +1,5 @@
   <div class="griditem">
-    <div class="griditeminner" style="background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable)%>')">
+    <div class="griditeminner" style="background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable) rescue "" %>')">
       <a href="<%= title_path(title) %>">
 	<div class="gridborder"></div>
       </a>
