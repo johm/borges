@@ -220,10 +220,14 @@ font-style:italic;
     text-align:justify;
 }
 
-.menubar>div>a:before,.frontpage .menubar a:before {
+div.bottommenuwrapper>a {
+margin-bottom:11px;
+}
+
+.menubar>div>a:before,.frontpage .menubar a:before,div.bottommenuwrapper>a:before {
 content:"{";
 }
-.menubar>div>a:after,.frontpage .menubar a:after {
+.menubar>div>a:after,.frontpage .menubar a:after,div.bottommenuwrapper>a:after {
 content:"}";
 }
 
@@ -241,8 +245,19 @@ opacity:.95;
 }
 
 
+.bottommenuwrapper {
+float:left;
+width:10%;
+margin-left:3%;
+text-align:center;
+font-size:22px;
+color:$nearwhite;
+font-family:Copse;
+}
 
-
+.bottommenuwrapper a{
+display:block;
+}
 
 
 .menubar a {
@@ -335,8 +350,8 @@ background-color:#666;
 
 
 #bottomnetworks img {
-    width:50%;
-    display:block;
+    width:40%;
+    display:inline;
     margin-bottom:8px;
 }
 
@@ -347,11 +362,11 @@ background-color:#aaa;}
 margin-right:12px;
 }
 
-.bottommenubar a {
+.bottommenubar a,.bottommenuwrapper a {
 color:$nearwhite;	
 }
 
-.bottommenubar a:hover {
+.bottommenubar a:hover,.bottommenuwrapper a:hover {
 color:$lightred;
 text-decoration:none;
 }
@@ -726,6 +741,13 @@ border-radius: 3px;
           content:" BIG PHONE";   
 }	  		             
 
+.bottommenuwrapper {
+float:none;
+width:100%;
+margin-bottom:33px;
+}
+
+
 #bottomtag {
     margin-left:40px;
     margin-right:40px;
@@ -857,6 +879,7 @@ border-radius: 3px;
               .navbar li:last-child a:after {
           content:" SMALL PHONE";   
 }	  		             
+
 
 
     #front_1 {
