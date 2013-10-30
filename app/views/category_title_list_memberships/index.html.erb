@@ -1,0 +1,27 @@
+<h1>Listing category_title_list_memberships</h1>
+
+<table>
+  <tr>
+    <th>Title list</th>
+    <th>Category</th>
+    <th>Index</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @category_title_list_memberships.each do |category_title_list_membership| %>
+  <tr>
+    <td><%= category_title_list_membership.title_list_id %></td>
+    <td><%= category_title_list_membership.category_id %></td>
+    <td><%= category_title_list_membership.index %></td>
+    <td><%= link_to 'Show', category_title_list_membership %></td>
+    <td><%= link_to 'Edit', edit_category_title_list_membership_path(category_title_list_membership) %></td>
+    <td><%= link_to 'Destroy', category_title_list_membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Category title list membership', new_category_title_list_membership_path %>

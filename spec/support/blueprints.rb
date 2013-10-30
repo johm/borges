@@ -111,3 +111,7 @@ end
 SaleOrderLineItem.blueprint do
   # Attributes here
 end
+
+CategoryTitleListMembership.blueprint do
+  # Attributes here
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027231152) do
+ActiveRecord::Schema.define(:version => 20131030120626) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(:version => 20131027231152) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "category_title_list_memberships", :force => true do |t|
+    t.integer  "title_list_id_id"
+    t.integer  "category_id_id"
+    t.integer  "index"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "category_title_list_memberships", ["category_id_id"], :name => "index_category_title_list_memberships_on_category_id_id"
+  add_index "category_title_list_memberships", ["title_list_id_id"], :name => "index_category_title_list_memberships_on_title_list_id_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -288,6 +299,17 @@ ActiveRecord::Schema.define(:version => 20131027231152) do
 
   add_index "sale_orders", ["customer_id"], :name => "index_sale_orders_on_customer_id"
   add_index "sale_orders", ["user_id"], :name => "index_sale_orders_on_user_id"
+
+  create_table "section_title_list_memberships", :force => true do |t|
+    t.integer  "title_list_id_id"
+    t.integer  "section_id_id"
+    t.integer  "index"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "section_title_list_memberships", ["section_id_id"], :name => "index_section_title_list_memberships_on_section_id_id"
+  add_index "section_title_list_memberships", ["title_list_id_id"], :name => "index_section_title_list_memberships_on_title_list_id_id"
 
   create_table "title_category_memberships", :force => true do |t|
     t.integer  "title_id"

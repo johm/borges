@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title list:</b>
+  <%= @category_title_list_membership.title_list_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @category_title_list_membership.category_id %>
+</p>
+
+<p>
+  <b>Index:</b>
+  <%= @category_title_list_membership.index %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_title_list_membership_path(@category_title_list_membership) %> |
+<%= link_to 'Back', category_title_list_memberships_path %>

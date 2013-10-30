@@ -1,5 +1,5 @@
 Borges::Application.routes.draw do
-  resources :section_title_list_memberships
+  resources :category_title_list_memberships
 
 
   resources :sale_order_line_items
