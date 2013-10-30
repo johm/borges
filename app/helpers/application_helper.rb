@@ -142,7 +142,7 @@ module ApplicationHelper
   end
 
   def menubarlink(text,path,sublist)
-    content_tag("span",link_to(image_tag("#{theme}/#{text}.png")+text,path)+content_tag("span",theme_partial("menu_#{text}")+submenubar(sublist).html_safe,{:id=>"menubar_sub_#{text}",:class=>'menusub'}),{:class=>'menuwrapper'})
+    content_tag("div",link_to(image_tag("#{theme}/#{text}.png")+text,path)+content_tag("div",content_tag("div",theme_partial("menu_#{text}")+submenubar(sublist).html_safe,{:class=>'menusubinner'}),{:id=>"menubar_sub_#{text}",:class=>'menusub'}),{:class=>'menuwrapper'})
   end
 
   def submenubar(choices)
