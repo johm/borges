@@ -1,3 +1,18 @@
-<h1>Categories</h1>
+<h1>Sections</h1>
 
-<%= link_to "Browse categories",categories_path() %>
+<table class="table">
+  <tr><th>Name</th><th>Titles in stock</th><th></th></tr>
+  <% @categories.each do |l| %>
+  <tr>
+    <td><%= link_to l.name,l %></td>
+    <td><%= "#{l.titles_in_stock}/#{l.titles.length}"%></td>
+    <td><%= mylinkbutton "Edit",edit_category_path(l),{},'btn-mini' %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+<div class="moreactions">
+<%= mylinkbutton "New section",new_category_path,{},'btn-small' %>
+<%= mylinkbutton "All sections",categories_path,{},'btn-small' %>
+</div>
