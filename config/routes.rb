@@ -1,4 +1,7 @@
 Borges::Application.routes.draw do
+  resources :category_title_list_memberships
+
+
   resources :sale_order_line_items
 
  
@@ -128,6 +131,7 @@ Borges::Application.routes.draw do
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
   get '/content/', :to => 'dashboard#content'
+  get '/books/', :to => 'home#books'
 
   authenticated :user do
     root :to=>'home#frontpage' 

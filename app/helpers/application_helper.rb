@@ -141,9 +141,20 @@ module ApplicationHelper
     choices.collect {|key,value| menubarlink(key,value[0],value[1])}.join(" ")
   end
 
-  def menubarlink(text,path,sublist)
-    content_tag("span",link_to(image_tag("#{theme}/#{text}.png")+text,path)+content_tag("span",theme_partial("menu_#{text}")+submenubar(sublist).html_safe,{:id=>"menubar_sub_#{text}",:class=>'menusub'}),{:class=>'menuwrapper'})
+  def mobilemenubar(choices) 
+    choices.collect {|key,value| mobilemenubarlink(key,value[0],value[1])}.join(" ")
   end
+
+
+  def menubarlink(text,path,sublist)
+    content_tag("div",link_to(image_tag("#{theme}/#{text}.png")+text,path)+content_tag("div",content_tag("div",theme_partial("menu_#{text}")+submenubar(sublist).html_safe,{:class=>'menusubinner'}),{:id=>"menubar_sub_#{text}",:class=>'menusub'}),{:class=>'menuwrapper'})
+  end
+
+  def mobilemenubarlink(text,path,sublist)
+    content_tag("div",link_to(text,path)+content_tag("div",content_tag("div",theme_partial("menu_#{text}")+submenubar(sublist).html_safe,{:class=>'bottommenusubinner'}),{:id=>"bottommenubar_sub_#{text}",:class=>'bottommenusub'}),{:class=>'bottommenuwrapper'})
+  end
+
+
 
   def submenubar(choices)
     choices.collect {|key,value| submenubarlink(key,value)}.join(" ")
