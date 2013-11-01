@@ -18,8 +18,25 @@
     <%= f.label :image,:class=>"control-label" %>
     <div class="controls">
       <%= f.file_field :image %>
+      <%= image_tag f.object.image_url, {:width=>"30%"} unless f.object.image_url.blank? %> 
+    </div>
+    <%= mytextfield f,:remote_image_url,:remote_image_url %>
+  </div>
+
+  <div class="field control-group">
+    <%= f.label :lists_in_this_category, :class=>"control-label" %><br />
+    <div class="controls">
+      <%= f.fields_for :category_title_list_memberships do |member_form| %>
+      <%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_titles_path,new_title_list_path %>
+      <%= myselector member_form,:position,:position,(1..20) %>
+      <% end %>
+      <div class="verticaloffset">
+	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a list"), :category_title_list_memberships, {:class=>:btn} %>
+      </div>
     </div>
   </div>
+
+
  
   <%= mysubmit f,:save%>
 

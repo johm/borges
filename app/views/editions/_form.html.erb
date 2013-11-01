@@ -47,9 +47,11 @@
     <%= f.label :cover,:class=>"control-label" %>
     <div class="controls">
       <%= f.file_field :cover %>
+      <%= image_tag f.object.cover_url, {:width=>"30%"} %> 
     </div>
   </div>
-    
+  <%= mytextfield f,:remote_cover_url,:remote_cover_url %>
+
 
 
     <%= mysubmit f, "Save" %>

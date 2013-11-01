@@ -31,15 +31,15 @@ ActiveRecord::Schema.define(:version => 20131030120626) do
   end
 
   create_table "category_title_list_memberships", :force => true do |t|
-    t.integer  "title_list_id_id"
-    t.integer  "category_id_id"
-    t.integer  "index"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "title_list_id"
+    t.integer  "category_id"
+    t.integer  "position"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "category_title_list_memberships", ["category_id_id"], :name => "index_category_title_list_memberships_on_category_id_id"
-  add_index "category_title_list_memberships", ["title_list_id_id"], :name => "index_category_title_list_memberships_on_title_list_id_id"
+  add_index "category_title_list_memberships", ["category_id"], :name => "index_category_title_list_memberships_on_category_id"
+  add_index "category_title_list_memberships", ["title_list_id"], :name => "index_category_title_list_memberships_on_title_list_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false

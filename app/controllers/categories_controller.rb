@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
-  before_filter :authenticate_user! 
+  before_filter :hack_out_params, :only=>[:create,:update]
+  before_filter :authenticate_user!, :except=>[:show,:index] 
+  
   load_and_authorize_resource
 
   # GET /categories
@@ -83,4 +85,16 @@ class CategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  private
+  def hack_out_params
+    unless params[:category][:category_title_list_memberships_attributes].nil?
+      params[:category][:category_title_list_memberships_attributes].each do |k,v| 
+        params[:category][:category_title_list_memberships_attributes][k].delete :title_list
+      end
+    end
+  end
+
+
 end

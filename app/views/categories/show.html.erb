@@ -1,3 +1,4 @@
+<div class="span7">
 <p id="notice"><%= notice %></p>
 
 <div style="float:right;">
@@ -13,6 +14,26 @@
   <div style="float:left;margin-right:10px;margin-bottom:10px;"><%= image_tag @category.image_url(:medium)  if (!@category.image.file.nil? && @category.image.file.exists?)  %></div>
   <%= sanitize @category.description %>
 </p>
+</div>
+</div>
+<div class="row">
+<div class="span2">
+</div>
+<div class="span7">
+  <hr>
+  <% @category.title_lists.order("position ASC").each do |tl| %>
+  <h2><%= tl.name %></h2>
+  <div class="grid">  
+    <% tl.titles.limit(6).each do |t| %>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+    <% end %>
+    <%= link_to "More like this...",tl,{:class=>"listmore"} %>
+  </div>
+<hr style="clear:left;">
+  <% end %>
+</div>
+
+
 
 <% @category.titles.each do |t| %>
 <%= render :partial=>'titles/title', :object=>t %>
