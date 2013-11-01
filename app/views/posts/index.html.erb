@@ -1,9 +1,6 @@
-<div class="container posts">
-  <div class="row">
-    <div class="span2">
-    </div>
+
     <div class="span7">
-       <h1>Blog</h1>
+       <h1>News and Updates</h1>
     </div>
     <div class="span3">
       <%=  mylinkbutton "<i class='icon-plus'></i> New Post", new_post_path  if can? :create, Post %>
@@ -13,6 +10,7 @@
 
     <% @posts.each do |post| %>
     <div class="row">
+      <div class="span2"></div>
       <div class="span2">
 	<% post.images.each do |i| %>
 	<div class="item">
@@ -21,12 +19,15 @@
 	<% end %>
 
       </div>
-      <div class="span7 postshort">
+      <div class="span5 postshort">
 	<h2 class="posttitle"><%= link_to post.title,post %></h2>
+	<h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
 	<div class="introduction">
 	  <%= raw post.introduction %>
 	</div>
-	<%= link_to "Read more",post %>
+	<%= link_to "Read more...",post %>
+	<%= link_to "Posted in #{post.post_category.name}",post.post_category, {:style=>"float:right;"} %>
+	<hr style="clear:both;">
       </div>
       <div class="span3">
       </div>

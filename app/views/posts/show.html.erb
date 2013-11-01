@@ -1,7 +1,13 @@
 
 
 <div class="span8">
-    <div style="float:right;">
+    
+  <h1 id="pagetitle"><div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_post_path(@post) if can? :edit, Post %></div>
+    <%= @post.title %>
+  </h1>
+  <h2><%= @post.created_at.to_formatted_s(:long_date) %></h2>
+  
+  <div style="float:right;padding-left:5px;">
       
       <% index=0 %>
       <% @post.images.each do |i| %>
@@ -13,9 +19,7 @@
       <% end %>
     </div>
 
-      <h1 id="pagetitle"><div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_post_path(@post)   if can? :edit, Post %><%= @post.title %></div>
-		
-</h1>
+    
       <div class="introduction">
 	<%= raw @post.introduction %>
       </div>
@@ -23,16 +27,25 @@
       <div class="body">
 	<%= raw @post.body %>
       </div>
+      
+      <% @post.titles.each do |t| %>
+      <%= link_to(image_tag(t.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),t) unless t.latest_published_edition.try(:cover_url,:medium).nil? %>
+      <h4><%= link_to t.title,t %></h4>
+      <% end %>
+      
+      <%= theme_partial :social %>
+
+
     </div>
       <div class="span2">
 
-	<% @post.titles.each do |t| %>
-	<%= link_to(image_tag(t.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),t) unless t.latest_published_edition.try(:cover_url,:medium).nil? %>
-	<h4><%= link_to t.title,t %></h4>
+	<h2>More posts in <%= @post.post_category.name %></h2>
+	<% @post.post_category.posts.where('id != ?',@post.id).order("created_at desc").each do |p| %>
+	<h3><%= link_to p.title,p %></h3>
+	<p><%= p.created_at.to_formatted_s(:long_date) %></p>
+	
 	<% end %>
-
-	More posts go here
-
+	
 
 	
 

@@ -1,23 +1,35 @@
-<h1>Listing post_categories</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <div class="span7">
+       <h1>News and Updates: <%= @post_category.name %></h1>
+    </div>
+  </div>
+  
 
-<% @post_categories.each do |post_category| %>
-  <tr>
-    <td><%= post_category.name %></td>
-    <td><%= link_to 'Show', post_category %></td>
-    <td><%= link_to 'Edit', edit_post_category_path(post_category) %></td>
-    <td><%= link_to 'Destroy', post_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @post_category.post.seach do |post| %>
+    <div class="row">
+      <div class="span2">
+	<% post.images.each do |i| %>
+	<div class="item">
+	  <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
+	</div>  
+	<% end %>
 
-<br />
+      </div>
+      <div class="span7 postshort">
+	<h2 class="posttitle"><%= link_to post.title,post %></h2>
+	<h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
+	<div class="introduction">
+	  <%= raw post.introduction %>
+	</div>
+	<%= link_to "Read more...",post %>
+	<%= link_to "Posted in #{post.post_category.name}",post.post_category, {:style=>"float:right;"} %>
+	<hr style="clear:both;">
+      </div>
+      <div class="span3">
+      </div>
+    </div>
+  <% end %>
+  
+  <%= paginate @post_category.posts %>
+</div>
 
-<%= link_to 'New Post category', new_post_category_path %>
