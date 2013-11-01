@@ -7,7 +7,7 @@
   </h1>
   <h2><%= @post.created_at.to_formatted_s(:long_date) %></h2>
   
-  <div style="float:right;">
+  <div style="float:right;padding-left:5px;">
       
       <% index=0 %>
       <% @post.images.each do |i| %>
@@ -42,7 +42,7 @@
 	<h2>More posts in <%= @post.post_category.name %></h2>
 	<% @post.post_category.posts.where('id != ?',@post.id).order("created_at desc").each do |p| %>
 	<h3><%= link_to p.title,p %></h3>
-	<h4><%= p.created_at.to_formatted_s(:long_date) %></h4>
+	<p><%= p.created_at.to_formatted_s(:long_date) %></p>
 	
 	<% end %>
 	
