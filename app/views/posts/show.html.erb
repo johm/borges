@@ -1,47 +1,18 @@
 
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Images</h3>
-  </div>
-  <div class="modal-body">
-    <div id="myCarousel" class="carousel slide">  
-  <!-- Carousel items -->  
-  <div class="carousel-inner">  
-    <% @post.images.each do |i| %>
-    <div class="item">
-      <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
-      <h1><%= i.title %>
-      </h1>
-    </div>  
-    <% end %>
-  </div>  
-  <!-- Carousel nav -->  
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>  
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>  
-</div> 
-    
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="span2">
+<div class="span8">
+    <div style="float:right;">
       
       <% index=0 %>
       <% @post.images.each do |i| %>
       <% index=index+1 %>
       <div>
-	<a href="#myModal" onclick="$('#myCarousel div').removeClass('active'); $('#myCarousel div:nth-child(<%= index %>)').addClass('active');" role="button" data-toggle="modal"> 
-	<%= image_tag i.the_image_url(:thumb),{:width => "100%"} %>
+	<%= image_tag i.the_image_url(:medium),{:width => "100%"} %>
 	<h5><%= i.title %></h5>
-	</a>
       </div>
       <% end %>
     </div>
 
-    <div class="span8">
       <h1 id="pagetitle"><div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_post_path(@post)   if can? :edit, Post %><%= @post.title %></div>
 		
 </h1>

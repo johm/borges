@@ -32,9 +32,12 @@
 <hr style="clear:left;">
   <% end %>
 </div>
+</div>
 
-
-
-<% @category.titles.each do |t| %>
-<%= render :partial=>'titles/title', :object=>t %>
-<% end %>
+<div class="row">
+  <div class="span2"></div>
+  <div class="span7">
+  <% @category.titles.each do |t| %>
+  <%= render :partial=>'titles/title', :object=>t %>
+  <% end %>
+  </div>
