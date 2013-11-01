@@ -1,8 +1,11 @@
 class Category < ActiveRecord::Base
-  attr_accessible :description, :image, :name
+  attr_accessible :description, :image, :name,:remote_image_url, :category_title_list_memberships_attributes
   has_many :title_category_memberships
   has_many :titles,:through => :title_category_memberships
+
+  has_many :category_title_list_memberships
   has_many :title_lists, :through => :category_title_list_memberships
+  accepts_nested_attributes_for :category_title_list_memberships, :allow_destroy => true  
 
   mount_uploader :image, ImageUploader
 
