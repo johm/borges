@@ -45,23 +45,16 @@
 	<%= render :partial => "themes/#{theme}/leftcolumn" %> <!-- this is more like "top" -->       
 	<%= yield %> <!-- the real, system-managed content.  you can't theme this -->
 	<%= render :partial => "themes/#{theme}/rightcolumn" %>  <!-- this is more like "bottom" -->           
-        <footer>
-        </footer>
 	
-      <div class="relatedbar">
-	<div class="container">
-          <div class="content">
-	    <div class="row">
-	      <%= yield :related %>
+	<div class="relatedbar">
+	  <div class="container">
+            <div class="content">
+	      <div class="row">
+		<%= yield :related %>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-      </div>
-
-      
-      
-      
-      
       </div> <!--! end of #main -->
       
       <div id="push"></div>
