@@ -85,7 +85,7 @@
 	    <label class="control-label">Cover</label>
 	    <div class="controls">
 	      <%= edition_form.file_field :cover %>
-	      <%= image_tag edition_form.object.cover_url, {:width=>"30%"} %> 
+	      <%= image_tag edition_form.object.cover_url, {:width=>"30%"} unless (edition_form.object.cover_url.blank?) %> 
 	    </div>
 	    <%= mytextfield edition_form,:remote_cover_url,:remote_cover_url %>
 
