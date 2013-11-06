@@ -4,6 +4,8 @@ class InvoiceLineItem < ActiveRecord::Base
   belongs_to :purchase_order_line_item
   has_many :copies
   attr_accessible :discount, :is_transfer, :quantity,:invoice_id,:edition_id,:price,:purchase_order_line_item_id
+  
+  validates :edition,:presence=>true
 
 
   monetize :price_in_cents,:as=>:price
@@ -22,7 +24,11 @@ class InvoiceLineItem < ActiveRecord::Base
 
   def potential_po_matches 
     #List of purchase order line items where the quantity ordered-quantity received is greater than the quantity specified when creating the line item
-    edition.purchase_order_line_items.joins(:purchase_order).where(:purchase_orders => {:ordered => true}).find_all {|x| (x.quantity-x.received) >= quantity}
+    begin
+      edition.purchase_order_line_items.joins(:purchase_order).where(:purchase_orders => {:ordered => true}).find_all {|x| (x.quantity-x.received) >= quantity}
+    rescue
+      []
+    end
   end
 
   def receive
