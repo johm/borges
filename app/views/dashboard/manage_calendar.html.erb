@@ -6,9 +6,15 @@
     </div>
 
     <table class="table">
-      <tr><th>Title</th><th>Date</th><th></th></tr>
+      <tr><th>Title</th><th>Date</th><th>Time</th><th>Location</th><th></th></tr>
     <% @events.each do |e|%>
-    <%= render "event",{:event=> e}%>
+    <tr>
+      <td><%= link_to e.title,e %></td>
+      <td><%= e.event_start.to_formatted_s(:just_date) %></td>
+      <td><%= e.event_start.to_formatted_s(:just_time)%> - <%=e.event_end.to_formatted_s(:just_time)  %></td>
+      <td><%= link_to e.event_location,e.event_location %></td>
+      <td><%= mylinkbutton "edit",edit_event_path(e),{},'btn-mini' %></td>
+    </tr>
     <% end %>
     </table>
   </div>
