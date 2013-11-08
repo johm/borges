@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/johm/bootstrap-datetimepicker-rails
+  revision: 1acfd7fc8bca7326bd086e5f8b0283f88711b7c9
+  specs:
+    bootstrap-datetimepicker-rails (0.0.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -242,6 +248,7 @@ DEPENDENCIES
   best_in_place
   better_errors (>= 0.7.2)
   binding_of_caller (>= 0.7.1)
+  bootstrap-datetimepicker-rails!
   bootstrap-sass (>= 2.3.0.0)
   bootstrap-switch-rails
   cancan (>= 1.6.9)

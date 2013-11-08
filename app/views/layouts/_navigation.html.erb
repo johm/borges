@@ -29,6 +29,12 @@
       </li>
     <% end %>
 
+    <% if can? :edit,Event %>
+      <li>
+      <%= link_to 'Calendar', '/manage_calendar' %>
+      </li>
+    <% end %>
+
 
   <% else %>
     <li>

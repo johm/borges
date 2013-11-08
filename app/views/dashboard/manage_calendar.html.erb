@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="span6">
+    <h1>Events</h1>
+    <div class="moreactions">
+      <%= mylinkbutton "New event",new_event_path,{},'btn-small' %>
+    </div>
+
+    <table class="table">
+      <tr><th>Title</th><th>Date</th><th></th></tr>
+    <% @events.each do |e|%>
+    <%= render "event",{:event=> e}%>
+    <% end %>
+    </table>
+  </div>
+  
+  <div class="span6">
+    <h1>Event locations</h1>
+    <div class="moreactions">
+      <%= mylinkbutton "New location",new_event_location_path,{},'btn-small' %>
+    </div>
+
+    <table class="table">
+      <tr><th>Title</th><th></th></tr>
+      <% @event_locations.each do |el|%>
+      <tr>
+	<td><%= link_to el.title, el%></td><td></td>
+	<td><%= mylinkbutton "Edit",edit_event_location_path(el),{},'btn-mini' %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+
+</div>

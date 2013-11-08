@@ -23,6 +23,11 @@ class DashboardController < ApplicationController
     @post_categories=PostCategory.order("name asc")  #TODO pagination
   end
 
+  def manage_calendar
+    @events=Event.where("event_start > ?",Time.now)
+    @event_locations=EventLocation.all
+  end
+
   def titles
     if ! params[:searchquery].blank? 
       searchquery=params[:searchquery]

@@ -1,4 +1,12 @@
 Borges::Application.routes.draw do
+  resources :events do 
+    get :autocomplete_event_location_title, :on => :collection
+  end
+
+
+  resources :event_locations
+
+
   resources :category_title_list_memberships
 
 
@@ -131,6 +139,7 @@ Borges::Application.routes.draw do
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
   get '/content/', :to => 'dashboard#content'
+  get '/manage_calendar/', :to => 'dashboard#manage_calendar'
   get '/books/', :to => 'home#books'
 
   authenticated :user do

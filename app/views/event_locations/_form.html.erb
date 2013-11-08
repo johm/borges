@@ -1,0 +1,19 @@
+<%= form_for(@event_location,:html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @event_location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_location.errors.count, "error") %> prohibited this event_location from being saved:</h2>
+
+      <ul>
+      <% @event_location.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= mytextfield f,:name_of_location,:title, {:class=>"input-xxlarge"} %>
+  <%= mytextfield f,:url_of_location,:url, {:class=>"input-xxlarge"} %>
+  <%= mytextarea f,:address_of_location,:address %>
+  <%= mytextarea f,:description_of_location,:description %>
+  <%= mysubmit f, "Save" %>
+<% end %>

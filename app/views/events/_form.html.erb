@@ -1,0 +1,37 @@
+<%= nested_form_for(@event, :html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= mytextfield f,:event_title,:title, {:class=>"input-xxlarge"} %>
+  <%= mytextarea f,:event_short_description,:introduction %>
+  <%= mytextarea f,:event_description,:description %>
+  <%= myselectfield f,:event_location,:event_location,autocomplete_event_location_title_events_path, new_event_location_path() %> 
+  
+  <%= mydatetimefield f,:event_starts_at,:event_start %>
+  <%= mydatetimefield f,:event_ends_at,:event_end %>
+
+  <div class="well">
+  <div class="field control-group">
+    <%= f.label :picture,:class=>"control-label" %>
+    <div class="controls">
+      <%= f.file_field :picture %>
+      <%= image_tag f.object.picture_url, {:width=>"30%"} %> 
+    </div>
+  </div>
+  <%= mytextfield f,:remote_picture_url,:remote_picture_url %>
+  </div>
+  
+  <%= mycheckbox f,:published,:published %>
+  
+  <%= mysubmit f,:save %>
+
+<% end %>

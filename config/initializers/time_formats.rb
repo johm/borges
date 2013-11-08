@@ -1,2 +1,5 @@
 Time::DATE_FORMATS[:just_date] = '%-m/%e/%y'
 Time::DATE_FORMATS[:long_date] = '%B %e, %Y'
+Time::DATE_FORMATS[:readable_date] = '%A %b %e'
+Time::DATE_FORMATS[:long_readable_date] = '%A %B %e'
+Time::DATE_FORMATS[:just_time] = '%l:%M%p'

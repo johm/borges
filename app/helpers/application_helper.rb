@@ -12,6 +12,20 @@ module ApplicationHelper
       :class=>"field control-group")
   end
 
+
+  def mydatetimefield(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            f.text_field(m,options.merge({"data-format"=>"yyyy-MM-dd HH:mm PP"})) + 
+                            content_tag(:span,
+                                        content_tag(:i," ",{"data-time-icon"=>"icon-time","data-date-icon"=>"icon-calendar"}),
+                                        :class=>"add-on"),
+                            :class=>"controls input-append datetime date"),
+                :class=>"field control-group")
+  end
+
+
   def mymoneyfield(f,l,m,options={})
     content_tag(:div,
       f.label(l,:class=>"control-label") +
