@@ -1,0 +1,18 @@
+
+<div class="event">
+  <div class="eventinner" style="background-color:#ddd;background-image:url('<%= event.picture_url(:reasonable) rescue "" %>')">
+    <a href="<%= event_path(event) %>">
+      <div class="eventborder"></div>
+    </a>
+  </div>
+    <div class="eventoverlay">
+      <div><%= event.event_start.to_formatted_s(:readable_date) %> @ <%= event.event_location %></div>
+    </div>
+</div>
+
+<div class="event_description">
+<h1><%= link_to event.title, event %></h1>
+<h4><%= event.event_start.to_formatted_s(:long_readable_date) %>, <%= event.event_start.to_formatted_s(:just_time) %> @ <%= link_to event.event_location,event.event_location %></h4>
+<%= event.introduction.html_safe %>
+<div class="listmore"><%= link_to "More info...", event %></div>
+</div>

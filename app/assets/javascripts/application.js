@@ -21,6 +21,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require ckeditor/init
+//= require bootstrap-datetimepicker
 //= require_tree .
 
 

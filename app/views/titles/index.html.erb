@@ -1,15 +1,16 @@
-<h1>Listing titles</h1>
+    <div class="span2">
 
-<div class="container">
 
-  <div class="row">
+    </div>
+
     <div class="span7">
+      <h1>Listing titles</h1>
       <% @titles.each do |title| %>
       <%= render title  %>
       <% end %>
     <%= paginate @titles %>
     </div>
-    <div class="span5">
+    <div class="span3">
       <%=  mylinkbutton "<i class='icon-plus'></i> New Title", new_title_path   if can? :create, Title %>
       <%= form_tag '/titles',method: :get,:html=>{:class=>"form-horizontal"} %>
       <div class="fields">
@@ -21,7 +22,6 @@
 	</div>
       </div>
       </form>
-    </div>
-  </div>
+
   
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030120626) do
+ActiveRecord::Schema.define(:version => 20131108180541) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -117,6 +117,30 @@ ActiveRecord::Schema.define(:version => 20131030120626) do
 
   add_index "editions", ["publisher_id"], :name => "index_editions_on_publisher_id"
   add_index "editions", ["title_id"], :name => "index_editions_on_title_id"
+
+  create_table "event_locations", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "address"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "event_location_id"
+    t.datetime "event_start"
+    t.datetime "event_end"
+    t.boolean  "published"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "picture"
+    t.text     "introduction"
+  end
+
+  add_index "events", ["event_location_id"], :name => "index_events_on_event_location_id"
 
   create_table "images", :force => true do |t|
     t.string   "title"

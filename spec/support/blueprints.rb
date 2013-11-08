@@ -115,3 +115,11 @@ end
 CategoryTitleListMembership.blueprint do
   # Attributes here
 end
+
+EventLocation.blueprint do
+  # Attributes here
+end
+
+Event.blueprint do
+  # Attributes here
+end

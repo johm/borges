@@ -1,0 +1,39 @@
+<div class="span7">
+<p id="notice"><%= notice %></p>
+
+<h1>Event Location:   <%= @event_location.title %>
+  <div style="float:right;"><%=  link_to raw("<i class='icon-edit'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %> 
+</h1>
+</div>
+</div>
+
+<div class="row">
+  <div class="span2"></div>
+  <div class="span4">
+    <h2>About this location:</h2>
+    <%= @event_location.description.html_safe %>
+    <%= link_to "More info about this location",@event_location.url if @event_location.url %>
+  </div>
+  <div class="span3">
+    <h2>Address:</h2>
+    <%= @event_location.address.html_safe %>
+    <p><%= link_to "Map", "http://maps.google.com/?q=#{strip_tags(@event_location.address)},{:target=>'_blank'}" %>  </p>
+  </div>
+</div>
+<div class="row">
+  <div class="span2"></div>
+  <div class="span7">
+<hr >
+<h2>Upcoming events at this location:</h2>
+<% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each do |event| %> 
+  <%= render :partial=>'events/event',:locals => {:event=>event} %>
+<% end %>
+
+</div>
+</div>
+
+
+
+
+
+

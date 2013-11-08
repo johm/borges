@@ -1,5 +1,10 @@
 jQuery('document').ready(function (){
-
+    
+        $('.datetime').datetimepicker({
+	    pick12HourFormat: true,   // enables the 12-hour format time picker
+	    pickSeconds: false,
+	    minuteStep:15
+	    });
 
 
 

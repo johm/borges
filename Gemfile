@@ -67,3 +67,4 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem "sunspot_with_kaminari"
 gem "debugger"
+gem 'bootstrap-datetimepicker-rails', :git=>"git://github.com/johm/bootstrap-datetimepicker-rails"

@@ -1,0 +1,17 @@
+
+
+<div class="span7">
+<h1><%= @event.title %>
+  <div style="float:right;"><small><%= "Not published" unless @event.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_event_path(@event)   if can? :edit, Event %> 
+</h1>
+<h4><%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %> @ <%= link_to @event.event_location,@event.event_location %></h4>
+<%= @event.introduction.html_safe %>
+<%= @event.description.html_safe %>
+<%= theme_partial :social %>
+</div>
+
+<div class="span3">
+<% if !@event.picture.nil? %>
+<img src="<%= @event.picture_url %>">
+<% end %>
+</div>

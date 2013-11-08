@@ -1,0 +1,29 @@
+<h1>Listing event_locations</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Url</th>
+    <th>Address</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_locations.each do |event_location| %>
+  <tr>
+    <td><%= event_location.title %></td>
+    <td><%= event_location.url %></td>
+    <td><%= event_location.address %></td>
+    <td><%= event_location.description %></td>
+    <td><%= link_to 'Show', event_location %></td>
+    <td><%= link_to 'Edit', edit_event_location_path(event_location) %></td>
+    <td><%= link_to 'Destroy', event_location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event location', new_event_location_path %>
