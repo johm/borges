@@ -48,14 +48,17 @@ class SaleOrderLineItemsController < ApplicationController
   # POST /sale_order_line_items.json
   def create
     @sale_order_line_item = SaleOrderLineItem.new(params[:sale_order_line_item])
+    @sale_order_line_item.sale_price=@sale_order_line_item.copy.price * ((100-( @sale_order_line_item.sale_order.discount_percent || 0)) /100)
 
     respond_to do |format|
       if @sale_order_line_item.save
         format.html { redirect_to @sale_order_line_item, notice: 'Sale order line item was successfully created.' }
         format.json { render json: @sale_order_line_item, status: :created, location: @sale_order_line_item }
+        format.js {}
       else
         format.html { render action: "new" }
         format.json { render json: @sale_order_line_item.errors, status: :unprocessable_entity }
+        format.js {}
       end
     end
   end

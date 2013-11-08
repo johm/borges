@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108180541) do
+ActiveRecord::Schema.define(:version => 20131108202504) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -299,8 +299,9 @@ ActiveRecord::Schema.define(:version => 20131108180541) do
   create_table "sale_order_line_items", :force => true do |t|
     t.integer  "sale_order_id"
     t.integer  "copy_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "sale_price_in_cents"
   end
 
   add_index "sale_order_line_items", ["copy_id"], :name => "index_sale_order_line_items_on_copy_id"

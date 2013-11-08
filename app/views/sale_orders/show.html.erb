@@ -1,23 +1,38 @@
-<div class="container">
-  <div class="row">
-    
-    <div class="span8">
-      <p id="notice"><%= notice %></p>
-      <h1>Sale: <%= @sale_order.id %></h1>
+<div class="span8">
+  <p id="notice"><%= notice %></p>
+  <h1>Sale: <%= @sale_order.id %></h1>
+  
+  <% if ! @sale_order.posted? %>
+  <%= nested_form_for(SaleOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+  
+  <%= f.hidden_field(:sale_order_id,:value => @sale_order.id) %>
+  <%= f.hidden_field(:copy_id) %>
+  
+  <%= my_autocomplete_field_tag f,
+      :item,:copy,
+      autocomplete_copies_path(:sale_order_id=>@sale_order.id),
+      link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+  "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+  {:class=>'btn'}) %>
       
-      <% if ! @sale_order.posted? %>
-      <%= nested_form_for(SaleOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
-      
-      
-      <%= my_autocomplete_field_tag f,
-	  :item,:copy,
-	  autocomplete_copies_path,
-	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
-      "window.open('#{new_title_path}?isbn='+$('#item').val())", 
-      {:class=>'btn'}) %>
-      
-      <% end %>
-      <% end %>
+  <script>
+    $('#item').bind('railsAutocomplete.select', function(event, data){
+    $("#sale_order_line_item_copy_id").val(data.item.id);
+    });
+  </script>
+  
+  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_sale_order_line_item"}) %> 
+  
+  
+  <% end %>
+  <% end %>
+  
+  <table class="table" id="sale_order_line_items">
+    <tr><th>Item</th><th>ISBN</th><th>List price</th><th>Sale price</th></tr>
+    <% @sale_order.sale_order_line_items.each do |li| %>
+    <%= render li %>
+    <% end %>
+  </table>
 
   </div>
     
