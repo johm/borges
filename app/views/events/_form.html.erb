@@ -24,7 +24,7 @@
     <%= f.label :picture,:class=>"control-label" %>
     <div class="controls">
       <%= f.file_field :picture %>
-      <%= image_tag f.object.picture_url, {:width=>"30%"} %> 
+      <%= image_tag f.object.picture_url, {:width=>"30%"} if f.object.picture? %> 
     </div>
   </div>
   <%= mytextfield f,:remote_picture_url,:remote_picture_url %>
