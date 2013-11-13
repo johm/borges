@@ -6,6 +6,7 @@
     <th>Edition</th>
     <th>Cost</th>
     <th>Price</th>
+    <th>Status</th>
     <th>Notes</th>
     <th>Distributor</th>
     <th>Owner</th>
@@ -27,6 +28,7 @@
     <td><%= link_to copy.edition,copy.edition %></td>
     <td>$<%= copy.cost %></td>
     <td>$<%= copy.price %></td>
+    <td><%= copy.status %></td>
     <td><%= copy.notes %></td>
     <td><%= link_to copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %></td>
     <td><%= link_to copy.owner.name_and_id, copy.owner %></td>
