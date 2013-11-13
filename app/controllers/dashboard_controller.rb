@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
 
   def index
     @purchase_orders=PurchaseOrder.order("created_at DESC").limit(10)
+    @sale_orders=SaleOrder.order("created_at DESC").limit(10)
     @invoices=Invoice.order("created_at DESC").limit(10)
     @title_lists=TitleList.order("created_at DESC").limit(10)
     @categories=Category.order("name DESC")

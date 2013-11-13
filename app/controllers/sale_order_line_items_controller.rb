@@ -48,7 +48,7 @@ class SaleOrderLineItemsController < ApplicationController
   # POST /sale_order_line_items.json
   def create
     @sale_order_line_item = SaleOrderLineItem.new(params[:sale_order_line_item])
-    @sale_order_line_item.sale_price=@sale_order_line_item.copy.price * ((100-( @sale_order_line_item.sale_order.discount_percent || 0)) /100)
+    @sale_order_line_item.sale_price=@sale_order_line_item.copy.price 
 
     respond_to do |format|
       if @sale_order_line_item.save
@@ -83,11 +83,14 @@ class SaleOrderLineItemsController < ApplicationController
   # DELETE /sale_order_line_items/1.json
   def destroy
     @sale_order_line_item = SaleOrderLineItem.find(params[:id])
+    @id=@sale_order_line_item.id
     @sale_order_line_item.destroy
-
+    
+    
     respond_to do |format|
       format.html { redirect_to sale_order_line_items_url }
       format.json { head :no_content }
+      format.js {}
     end
   end
 end
