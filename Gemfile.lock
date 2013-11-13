@@ -94,6 +94,7 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fattr (2.2.1)
     figaro (0.6.4)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -103,6 +104,7 @@ GEM
     friendly_id (4.0.9)
     googlebooks (0.0.6)
       httparty
+    highline (1.6.20)
     hike (1.2.2)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -145,9 +147,14 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.5.9)
     nori (2.2.0)
+    options (2.3.0)
+      fattr
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
+    progress_bar (1.0.0)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -276,6 +283,7 @@ DEPENDENCIES
   mysql
   mysql2
   nested_form
+  progress_bar
   quiet_assets (>= 1.0.2)
   rails (= 3.2.13)
   rails3-jquery-autocomplete
