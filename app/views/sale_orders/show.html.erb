@@ -46,9 +46,10 @@
       <% else %>
       <b>Posted:</b> <%= @sale_order.posted_when %>
       <% end %>
-
-      <%= render :partial=>"meta",:object=>@sale_order %>
-
+      
+      <div id="sale_order_meta">
+	<%= render :partial=>"meta",:locals=>{:sale_order=>@sale_order} %>
+      </div>
     </div>
 
 </div>

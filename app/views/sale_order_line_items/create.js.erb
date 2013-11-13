@@ -1,3 +1,5 @@
-$("#sale_order_line_items").append("<%= escape_javascript(render :partial=>'sale_order_line_item',:object => @sale_order_line_item) %>");
+$("#sale_order_line_items tr:first-child").after("<%= escape_javascript(render :partial=>'sale_order_line_item',:object => @sale_order_line_item) %>")
 $("#item").val("");
-//should i do some things to update display of totals here?
+$("#sale_order_meta").html("<%= escape_javascript(render :partial=>"sale_orders/meta",:locals=>{:sale_order=>@sale_order_line_item.sale_order}) %>");
+$("#sale_order_line_item_<%= @sale_order_line_item.id %>").effect("highlight");
+

@@ -1,2 +1,3 @@
 $("#sale_order_line_item_<%= @id %>").effect("fade");
-//should i do some things to update display of totals here?
+$("#sale_order_meta").html("<%= escape_javascript(render :partial=>"sale_orders/meta",:locals=>{:sale_order=>@sale_order_line_item.sale_order}) %>");
+

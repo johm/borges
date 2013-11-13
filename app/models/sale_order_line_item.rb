@@ -5,6 +5,8 @@ class SaleOrderLineItem < ActiveRecord::Base
   attr_accessible :copy_id,:sale_order_id,:sale_price
   monetize :sale_price_in_cents,:as=>:sale_price
 
-
+  def sell
+    copy.sell(sale_price)
+  end
 
 end
