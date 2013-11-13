@@ -45,7 +45,7 @@ class InvoiceLineItemsController < ApplicationController
   # POST /invoice_line_items.json
   def create
     @invoice_line_item = InvoiceLineItem.new(params[:invoice_line_item])
-    @invoice_line_item.quantity=1 if @invoice_live_item.quantity.nil?
+    @invoice_line_item.quantity=1 if @invoice_line_item.quantity.nil?
 
     begin
       @invoice_line_item.discount=@invoice_line_item.invoice.invoice_line_items.last().discount
