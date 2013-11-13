@@ -4,15 +4,19 @@ class SaleOrder < ActiveRecord::Base
   attr_accessible :customer_po, :discount_percent, :posted,:notes
 
   def subtotal
-    "TK"
+    sale_order_line_items.inject(Money.new(0)) {|sum,soli| sum+soli.sale_price }
   end
 
+  def subtotal_after_discount 
+    subtotal * ((100-(discount_percent || 0))/100.0)
+  end
+  
   def tax_amount
-    "TK"
+    subtotal_after_discount * (ENV["TAX"].to_f || 0.0)
   end
 
   def total
-    "TK"
+    subtotal_after_discount + tax_amount
   end
 
 end

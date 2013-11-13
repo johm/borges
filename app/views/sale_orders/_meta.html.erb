@@ -1,0 +1,32 @@
+      <table class="table">
+	<tr>
+	  <th>Subtotal</th>
+	  <td id="sale_order_subtotal"><%= sale_order.subtotal %></td>
+	</tr>
+	<tr>
+	  <th>Discount</th>
+	  <td><%= best_in_place_if (! sale_order.posted?),sale_order, :discount_percent, :type => :input %>%</td>
+	</tr>
+	<tr>
+	  <th>Tax</th>
+	  <td ><%= sale_order.tax_amount %></td>
+	</tr>
+	<tr>
+	  <th>Total</th>
+	  <td id="sale_order_total"><%= sale_order.total %></td>
+	</tr>
+
+	<th>Source</th>
+	  <td><%= if sale_order.from_pos? 
+		  "POS"
+		  elsif sale_order.from_web?
+		  "WEB"
+		  end
+		  %> 
+	  </td>
+	</tr>
+	<tr>
+	  <th>Customer</th>
+	  <td><%= sale_order.customer %></td>
+	</tr>
+      </table>

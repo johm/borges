@@ -1,5 +1,28 @@
 <h1>Sales</h1>
 
+<table class="table">
+<tr>
+  <th>#</th>
+  <th>Total</th>
+  <th>Posted?</th>
+</tr>
+
+<% @sale_orders.each do |so| %>
+<tr>
+  <td><%= link_to so.id,so %></td>
+  <td><%= so.total %></td>
+  <td><%= so.posted?  ? so.posted_when.to_formatted_s(:just_date) : "No" %></td>
+</tr>
+<% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New sale",new_sale_order_path,{},'btn-small' %>
+<%= mylinkbutton "All sales",sale_orders_path,{},'btn-small' %>
+<%= mylinkbutton "Customers",customers_path,{},'btn-small' %> 
+</div>
+
+
 <div>Graph of daily sales</div>
 
 <div>10 most recent books sold</div>

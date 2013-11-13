@@ -93,11 +93,9 @@ class CopiesController < ApplicationController
     
     @copies_data=@edition_search.results.collect do |edition|
       @copies=edition.copies.instock.order("price_in_cents desc")
-      if params[:sale_order_id] && (@sale_order=SaleOrder.find(params[:sale_order_id]))
-        #get all the copies that aren't already on the sales order
-        @copies=@copies.find_all {|c| !(@sale_order.sale_order_line_items.collect{|soli| soli.copy.id }.include? c.id)} 
-        puts @copies.collect {|c| c.id}
-      end
+      # you can't sell a copy someone else is trying to sell!
+      copies_on_sale_orders= SaleOrder.where(:posted=>false).collect {|so| so.sale_order_line_items.collect {|soli| soli.copy_id}}.flatten
+      @copies=@copies.find_all {|c| !(copies_on_sale_orders.include? c.id)} 
       @copies.collect do |copy|
         hash = {"id" => copy.id.to_s, "label" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]", "value" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]"}
       end
