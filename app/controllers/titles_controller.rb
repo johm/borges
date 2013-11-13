@@ -200,15 +200,10 @@ class TitlesController < ApplicationController
         end
       end
 
-      begin
-        @publisher_name=params[:title][:editions_attributes]["0"][:publisher]
-        params[:title][:editions_attributes].each do |k,v|
-          params[:title][:editions_attributes][k].delete :publisher
-        end
-      rescue
-        @publisher_name=params[:title][:editions_attributes][:publisher]
-        params[:title][:editions_attributes].delete :publisher
+      params[:title][:editions_attributes].each do |k,v|
+        params[:title][:editions_attributes][k].delete :publisher
       end
+      
 
       @authornames={}
       params[:title][:contributions_attributes].each do |k,v|
