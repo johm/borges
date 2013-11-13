@@ -12,9 +12,9 @@ class DashboardController < ApplicationController
     @purchase_orders=PurchaseOrder.order("created_at DESC").limit(10)
     @sale_orders=SaleOrder.order("created_at DESC").limit(10)
     @invoices=Invoice.order("created_at DESC").limit(10)
-    @title_lists=TitleList.order("created_at DESC").limit(10)
-    @categories=Category.order("name DESC")
-    @titles=Title.order("created_at DESC").limit(50)
+    @title_lists=TitleList.includes(:titles => [:editions => [:copies]]).order("created_at DESC").limit(10)
+    @categories=Category.includes(:titles => [:editions => [:copies]]).order("name DESC")
+    @titles=Title.includes(:editions => [:copies]).order("created_at DESC").limit(50)
     @owners=Owner.order("name asc")
   end
 

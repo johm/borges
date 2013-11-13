@@ -3,6 +3,8 @@ class SaleOrder < ActiveRecord::Base
   has_many :sale_order_line_items
   attr_accessible :customer_po, :discount_percent, :posted,:notes
 
+  default_scope  includes(:sale_order_line_items)
+
   def subtotal
     sale_order_line_items.inject(Money.new(0)) {|sum,soli| sum+soli.sale_price }
   end
