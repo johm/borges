@@ -90,4 +90,20 @@ class SaleOrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  
+  def post
+    unless @sale_order.posted? 
+      @sale_order = SaleOrder.find(params[:id])
+      @sale_order.sale_order_line_items.each do |soli|
+        soli.sell
+      end
+      @sale_order.posted=true
+      @sale_order.posted_when=DateTime.now
+      @sale_order.save!
+    end
+    respond_to do |format|
+      format.html { redirect_to @sale_order, notice: 'Sale was successfully posted!' }
+    end
+  end
 end

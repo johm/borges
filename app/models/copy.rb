@@ -14,6 +14,13 @@ class Copy < ActiveRecord::Base
   def info
     "$#{price}" + (notes || is_used? ? " [#{notes} #{'USED' if is_used?}]" : "" )
   end
+
+  def sell(sale_price)
+    self.price=sale_price # this comes from the line item
+    self.status="SOLD"
+    self.deinventoried_when=DateTime.now
+    self.save!
+  end
   
 
 end

@@ -9,6 +9,8 @@ class PurchaseOrder < ActiveRecord::Base
   has_many :purchase_order_line_items
   attr_accessible :notes, :number, :ordered, :ordered_when, :distributor_id,:owner_id
 
+  default_scope  includes(:purchase_order_line_items)
+
   def estimated_total
     purchase_order_line_items.inject(Money.new(0)) {|sum,li| sum+li.ext_price   }
   end
