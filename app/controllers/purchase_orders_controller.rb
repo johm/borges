@@ -125,7 +125,7 @@ class PurchaseOrdersController < ApplicationController
         i_li.edition=po_li.edition
         i_li.purchase_order_line_item=po_li
         i_li.discount=40
-        i_li.price = i_li.edition.list_price * i_li.quantity
+        i_li.price = i_li.edition.list_price 
         @invoice.invoice_line_items << i_li
       end
     end
