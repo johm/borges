@@ -31,7 +31,7 @@ class SaleOrdersController < ApplicationController
   # GET /sale_orders/new.json
   def new
     @sale_order = SaleOrder.new
-
+    @sale_order.discount_percent=0
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sale_order }
