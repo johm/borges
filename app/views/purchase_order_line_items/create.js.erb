@@ -1,4 +1,5 @@
-$("#line_items").append("<%= escape_javascript(render :partial=>"purchase_order_line_item",:object => @purchase_order_line_item) %>");
+$("#line_items tr:first-child").after("<%= escape_javascript(render :partial=>"purchase_order_line_item",:object => @purchase_order_line_item) %>");
 $("#item").val("");
 $("#total").html("<%= escape_javascript(@purchase_order_line_item.purchase_order.estimated_total_string) %>");
 $("#number_of_copies").html("<%= escape_javascript(@purchase_order_line_item.purchase_order.number_of_copies.to_s) %>");
+$("#purchase_order_line_item_<%= @purchase_order_line_item.id %>").effect("highlight");
