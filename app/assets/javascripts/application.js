@@ -22,6 +22,9 @@
 //= require best_in_place
 //= require ckeditor/init
 //= require bootstrap-datetimepicker
+//= require highcharts/highcharts                                                           
+//= require highcharts/highcharts-more                                                         
+//= require highcharts/highstock
 //= require_tree .
 
 

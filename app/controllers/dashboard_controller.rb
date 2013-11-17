@@ -18,6 +18,24 @@ class DashboardController < ApplicationController
     @owners=Owner.order("name asc")
   end
 
+  def sales 
+    @sales_by_date=SaleOrder.where(:posted => true).order("created_at DESC").where("posted_when > ? ",8.days.ago ).group_by{ |so| so.posted_when.to_date } 
+    
+    @days=@sales_by_date.keys
+    
+    @saleschart = LazyHighCharts::HighChart.new('column') do |f|
+      f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.total).to_f)} } )
+      f.title({ :text=>"Sales"})
+      f.xAxis(:categories => @days)
+              
+
+      #f.options[:chart][:defaultSeriesType] = "line"
+
+      
+  end    
+
+  end
+
   def content 
     @top_level_pages=Page.where("parent_id is ?",nil)
     @posts=Post.order("created_at desc")  #TODO pagination
