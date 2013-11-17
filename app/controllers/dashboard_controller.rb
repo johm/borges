@@ -24,7 +24,7 @@ class DashboardController < ApplicationController
     @days=@sales_by_date.keys
     
     @saleschart = LazyHighCharts::HighChart.new('column') do |f|
-      f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.total).to_f)} } )
+      f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.total).to_f} } )
       f.title({ :text=>"Sales"})
       f.xAxis(:categories => @days)
               
