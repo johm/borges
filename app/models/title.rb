@@ -98,12 +98,23 @@ class Title < ActiveRecord::Base
 
   def probably_on_order 
     purchase_order_line_items.inject(0) do |sum,li| 
-      if li.purchase_order.nil? || li.purchase_order.ordered?  
+      if li.purchase_order.nil? || li.purchase_order.ordered?
         sum
       else
         sum+li.quantity-li.received
       end
     end
+  end
+  
+  
+  def whichorders 
+    purchase_order_line_items.collect do |x|
+      if x.purchase_order.nil?  || (x.quantity-x.received <= 0)
+        nil
+      else 
+        "#{x.quantity-x.received} on #{x.purchase_order.number}"
+      end
+    end.join("|")
   end
   
 
