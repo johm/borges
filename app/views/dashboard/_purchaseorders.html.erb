@@ -9,7 +9,7 @@
 <% @purchase_orders.each do |po| %>
 <tr>
   <td><%= link_to po.number,po %></td>
-  <td><%= link_to po.distributor.name,po.distributor %></td>
+  <td><%= link_to po.distributor.name,po.distributor unless po.distributor.nil?%></td>
   <td><%= po.ordered?  ? po.ordered_when.to_formatted_s(:just_date) : "No" %></td>
 
 </tr>
