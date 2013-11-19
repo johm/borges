@@ -136,12 +136,14 @@ Borges::Application.routes.draw do
   get 'authors/search' => 'authors#search'
   resources :authors
 
+  get '/dashboard/search', :to => 'dashboard#search'
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
   get '/content/', :to => 'dashboard#content'
   get '/sales/', :to => 'dashboard#sales'
   get '/manage_calendar/', :to => 'dashboard#manage_calendar'
   get '/books/', :to => 'home#books'
+
 
   authenticated :user do
     root :to=>'home#frontpage' 

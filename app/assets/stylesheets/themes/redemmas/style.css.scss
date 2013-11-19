@@ -578,7 +578,7 @@ border-radius: 3px;
 	margin-top:24px;
     }
 
-       .navbar li:last-child a:after	{
+       .navbar>ul li:last-child a:after	{
           content:" NORMAL";   
 }	  		             
 
@@ -586,7 +586,7 @@ border-radius: 3px;
 
 /* Large desktop */
 @media (min-width: 1200px) {
-       .navbar li:last-child a:after {
+       .navbar>ul li:last-child a:after {
           content:" LARGE";   
 }	  		             
 
@@ -675,7 +675,7 @@ border-radius: 3px;
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
-       .navbar li:last-child a:after{
+       .navbar>ul li:last-child a:after{
            content:" BIG TABLET";   
        }	  		             
        #mce-EMAIL {
@@ -795,7 +795,7 @@ border-radius: 3px;
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
-              .navbar li:last-child a:after {
+              .navbar>ul li:last-child a:after {
           content:" BIG PHONE";   
 }	  		             
 
@@ -934,7 +934,7 @@ margin-bottom:33px;
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
-              .navbar li:last-child a:after {
+              .navbar>ul li:last-child a:after {
           content:" SMALL PHONE";   
 }	  		             
 

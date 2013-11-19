@@ -142,7 +142,7 @@ class TitlesController < ApplicationController
 
 
   def search
-    @title_search_object=SearchObject.new(params[:search_object].merge({:publisher=>params[:publisher],:distributor=>params[:distributor]}))
+    @title_search_object=SearchObject.new((params[:search_object]).merge({:publisher=>params[:publisher],:distributor=>params[:distributor]}))
     title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block
 
     @title_search = Title.search do
