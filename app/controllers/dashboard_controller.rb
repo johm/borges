@@ -18,6 +18,9 @@ class DashboardController < ApplicationController
     @owners=Owner.order("name asc")
   end
 
+  def search 
+  end
+
   def sales 
     @sales_by_date=SaleOrder.where(:posted => true).order("created_at DESC").where("posted_when > ? ",8.days.ago ).group_by{ |so| so.posted_when.to_date } 
     
