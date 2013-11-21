@@ -21,9 +21,9 @@
     <td><%= link_to invoice.number,invoice %></td>
     <td><%= link_to invoice.distributor,invoice.distributor %></td>
     <td><%= invoice.notes %></td>
-    <td><%= i.total_copies %></td>
-    <td><%= @invoice.total_cost+@invoice.shipping_cost %></td>
-    <td><%= i.received?  ? i.received_when.to_formatted_s(:just_date) : "No" %></td>
+    <td><%= invoice.total_copies %></td>
+    <td><%= invoice.total_cost+invoice.shipping_cost %></td>
+    <td><%= invoice.received?  ? invoice.received_when.to_formatted_s(:just_date) : "No" %></td>
 
     <td><%= mylinkbutton 'Edit', edit_invoice_path(invoice),{},"btn-small" %></td>
   </tr>
