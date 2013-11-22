@@ -2,8 +2,8 @@
   <div class="span12">
     <h1><%= link_to "«",daily_path({:day=>@day - 1.day}) %> Sales for <%= @day %> <%= link_to "»",daily_path({:day=>@day + 1.day}) %></h1>
     
-    <h2>Total: $<%= @total %></h2>
-
+    <h3>Total: $<%= @total %></h3>
+    <br />
 
     <table class="table">
     <% @sales_for_day.each do |s| %>
