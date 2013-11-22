@@ -83,14 +83,21 @@ class SaleOrderLineItemsController < ApplicationController
   # DELETE /sale_order_line_items/1.json
   def destroy
     @sale_order_line_item = SaleOrderLineItem.find(params[:id])
-    @id=@sale_order_line_item.id
-    @sale_order_line_item.destroy
+    
+    
+    
     
     
     respond_to do |format|
-      format.html { redirect_to sale_order_line_items_url }
-      format.json { head :no_content }
-      format.js {}
-    end
+      if @sale_order_line_item.sale_order.posted? 
+        format.js {}
+      else
+        @id=@sale_order_line_item.id
+        @sale_order_line_item.destroy
+        format.html { redirect_to sale_order_line_items_url }
+        format.json { head :no_content }
+        format.js {}
+      end
+      end
   end
 end

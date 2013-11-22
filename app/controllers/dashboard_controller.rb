@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
   end
 
   def sales 
-    @sales_by_date=SaleOrder.where(:posted => true).order("created_at asc").where("posted_when > ? ",8.days.ago ).group_by{ |so| so.posted_when.in_time_zone("America/New_York").to_date } 
+    @sales_by_date=SaleOrder.where(:posted => true).order("created_at asc").where("posted_when > ? ",8.days.ago ).group_by{ |so| so.posted_when.to_date } 
     
     @days=@sales_by_date.keys
     
