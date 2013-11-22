@@ -1,15 +1,15 @@
+</div>
+<div class="row">
+  <div class="span8">
+
 <h1>Listing sale_orders</h1>
 
 <table>
   <tr>
-    <th>From pos</th>
-    <th>From web</th>
-    <th>Customer po</th>
-    <th>Customer</th>
-    <th>Total in cents</th>
+    <th>Number</th>
+    <th>Source</th>
+    <th>Total</th>
     <th>Posted</th>
-    <th>Discount percent</th>
-    <th>Tax amount in cents</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,21 +17,17 @@
 
 <% @sale_orders.each do |sale_order| %>
   <tr>
-    <td><%= sale_order.from_pos %></td>
-    <td><%= sale_order.from_web %></td>
-    <td><%= sale_order.customer_po %></td>
-    <td><%= sale_order.customer %></td>
-    <td><%= sale_order.total_in_cents %></td>
-    <td><%= sale_order.posted %></td>
-    <td><%= sale_order.discount_percent %></td>
-    <td><%= sale_order.tax_amount_in_cents %></td>
-    <td><%= link_to 'Show', sale_order %></td>
-    <td><%= link_to 'Edit', edit_sale_order_path(sale_order) %></td>
-    <td><%= link_to 'Destroy', sale_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to sale_order.id, sale_order %></td>
+    <td><%= "POS" if sale_order.from_pos  %><%= "WEB" if sale_order.from_web %></td>
+    <td><%= sale_order.total %></td>
+    <td><%= sale_order.posted? ? "#{sale_order.posted_when.to_formatted_s(:just_date)}  #{sale_order.posted_when.to_formatted_s(:just_time)}" : "No"  %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+</div>
+<div class="span4">
 
-<%= link_to 'New Sale order', new_sale_order_path %>
+  <%= link_to 'New Sale order', new_sale_order_path %>
+</div>
+</div>
