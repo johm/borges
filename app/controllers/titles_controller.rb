@@ -69,10 +69,13 @@ class TitlesController < ApplicationController
       params[:title][:editions_attributes]["0"][:publisher_id]=Publisher.find_or_create_by_name(@publisher_name).id
     end
 
+
     # do a more complicated dance to deal with contributions and authornames
 
     params[:title][:contributions_attributes].each do |k,v|
-      params[:title][:contributions_attributes][k][:author_id]=Author.find_or_create_by_full_name(@authornames[k]).id
+      if params[:title][:contributions_attributes][k][:author_id].blank?
+        params[:title][:contributions_attributes][k][:author_id]=Author.find_or_create_by_full_name(@authornames[k]).id
+      end
     end
 
 
@@ -199,6 +202,8 @@ class TitlesController < ApplicationController
           params[:title][:title_category_memberships_attributes][k].delete :category
         end
       end
+
+      @publishername = params[:title][:editions_attributes]["0"][:publisher] 
 
       params[:title][:editions_attributes].each do |k,v|
         params[:title][:editions_attributes][k].delete :publisher
