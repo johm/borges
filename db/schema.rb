@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113135724) do
+ActiveRecord::Schema.define(:version => 20131124165239) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20131113135724) do
     t.string   "cover"
     t.integer  "list_price_cents"
     t.integer  "publisher_id"
+    t.text     "number"
   end
 
   add_index "editions", ["publisher_id"], :name => "index_editions_on_publisher_id"
