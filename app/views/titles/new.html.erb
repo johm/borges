@@ -90,7 +90,9 @@
     <%= mytextfield edition_form,:list_price,:list_price %>
     <%= mytextfield edition_form,:year_of_publication,:year_of_publication %>
     <%= myselector edition_form,:format,:format,Edition.formats %>
-
+    <%= mytextfield edition_form,:number,:number,{},"Use for issue of magazine or size of clothing" %>
+    
+    
 
     <div class="control-group">
       <label class="control-label">Cover</label>

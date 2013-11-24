@@ -3,11 +3,11 @@ module ApplicationHelper
     render options.merge(:partial => "themes/#{theme}/#{partial_name}")
   end
 
-  def mytextfield(f,l,m,options={})
+  def mytextfield(f,l,m,options={},help=nil)
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
-        f.text_field(m,options),
+        f.text_field(m,options) + (help.nil? ? "" : content_tag(:p,help,:class=>"help-block")) ,
         :class=>"controls"),
       :class=>"field control-group")
   end

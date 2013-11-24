@@ -14,7 +14,7 @@
     <% end %>
 
 
-      <h1 class="booktitle"><%= @title.title %> (<%= @edition.format %>)</h1>
+      <h1 class="booktitle"><%= @title.title %> <%= @edition.number %> (<%= @edition.format %>)</h1>
       <h2 class="contributors">
 	<%= sanitize contributors_list(@title) %>
       </h2>

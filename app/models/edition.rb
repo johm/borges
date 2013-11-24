@@ -8,7 +8,7 @@ class Edition < ActiveRecord::Base
 
   belongs_to :publisher
 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id,:number
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
@@ -51,7 +51,7 @@ class Edition < ActiveRecord::Base
   end
 
   def to_s
-    "#{format} (#{year_of_publication})"
+    "#{number}  (#{format} #{year_of_publication})"
   end
 
   def isbn

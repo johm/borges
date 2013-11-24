@@ -76,7 +76,7 @@
 	  </div>
 	  
 	  <%= myselectfield edition_form,:publisher,:publisher,autocomplete_publisher_name_titles_path %>
-	  
+	  <%= mytextfield edition_form,:number,:number,{},"Use for issue of magazine or size of clothing" %>
 	  <div class="control-group">
 	    <label class="control-label">Notes (public)</label>
 	    <div class="controls"><%= edition_form.text_area :notes,:placeholder=>"Notes",:rows=>3 %></div>
