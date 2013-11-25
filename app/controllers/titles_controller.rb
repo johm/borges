@@ -7,6 +7,7 @@ class TitlesController < ApplicationController
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
   autocomplete :category,:name,:full=>true,:display_value=>:name
 
+
   # GET /titles
   # GET /titles.json
   def index

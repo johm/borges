@@ -31,9 +31,8 @@ class DashboardController < ApplicationController
       f.title({ :text=>"Sales"})
       f.xAxis(:categories => @days)
               
-
-      #f.options[:chart][:defaultSeriesType] = "line"
-
+      @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.total} }
+      @cost=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.cost} }
       
   end    
 
