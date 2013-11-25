@@ -1,7 +1,7 @@
 <% unless title.nil? %>
 <div class="titleshort row">
   <div class="span1">
-    <%= link_to(image_tag(title.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),title) unless title.latest_published_edition.try(:cover_url,:medium).nil? unless title.latest_published_edition.nil? %>
+    <%= link_to(image_tag(title.latest_published_edition.try(:cover_url,:medium),:class=>"bookcover"),title) unless (title.latest_published_edition.try(:cover_url,:medium).nil? || title.latest_published_edition.cover_url.end_with?('php') ) unless title.latest_published_edition.nil? %>
   </div>
   <div class="span6">
     <% if can? :edit, Title %>
