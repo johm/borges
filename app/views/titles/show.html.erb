@@ -8,7 +8,7 @@
     </div>
     <div class="span6">
     <% if can? :edit, Title && ! @edition.nil? %>
-    <div class="hiddenactions">
+    <div class="hiddenactions ">
       <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(@edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless @edition.nil? %>
     </div>
     <% end %>
@@ -36,21 +36,22 @@
   <%= buy_or_order(@edition) unless @edition.nil? %>  
   <table class="table">
     <% if can? :edit, Title %>
-    <tr>
-      <th>On order (all editions)</th>
-      <td><%= @title.on_order %></td>
-    </tr>
-    
-    <tr>
-      <th>In stock (all editions)</th>
-      <td><%= @title.in_stock %></td>
-    </tr>
-
-    <tr>
-      <th>Sold (all editions)</th>
-      <td><%= @title.sold %></td>
-    </tr>
-
+    <tbody class="">
+      <tr>
+	<th>On order (all editions)</th>
+	<td><%= @title.on_order %></td>
+      </tr>
+      
+      <tr>
+	<th>In stock (all editions)</th>
+	<td><%= @title.in_stock %></td>
+      </tr>
+      
+      <tr>
+	<th>Sold (all editions)</th>
+	<td><%= @title.sold %></td>
+      </tr>
+    </tbody>
 
     <% end %>
   <tr>
@@ -71,7 +72,7 @@
   </tr>
   
   <% if can? :edit,Edition %>
-  <tr>
+  <tr class="">
     <th>
       <%=  mylinkbutton "<i class='icon-edit'></i> Edit this title", edit_title_path(@title),{},"btn-mini"   if can? :edit, Title %> 
       <% unless @edition.nil? %>
@@ -83,7 +84,7 @@
   <% end %>
 
     <% if can? :edit,Edition && ! @edition.nil? %>
-    <tr>
+    <tr class="">
       <th>Copies</th>
       <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) unless @edition.nil? %></td>
     </tr>
@@ -137,7 +138,7 @@
 
   <h2>On our lists</h2>
   <% @title.title_lists.each do |l| %>
-  <% if l.public? || (can? :edit, TitleList) %>
+  <% if l.public? %>
   <h3><%= link_to l.name,l %></h3>
   <div>
     <%= sanitize l.description %>

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery.fittext.js
+//= require jquery.cookie
 //= require autocomplete-rails
 //= require bootstrap
 //= require bootstrap-switch

@@ -5,6 +5,11 @@ class SaleOrder < ActiveRecord::Base
 
   default_scope  includes(:sale_order_line_items)
 
+  def cost
+    sale_order_line_items.inject(Money.new(0)) {|sum,soli| sum+soli.copy.cost }
+  end
+    
+
   def subtotal
     sale_order_line_items.inject(Money.new(0)) {|sum,soli| sum+soli.sale_price }
   end
