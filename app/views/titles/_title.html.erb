@@ -2,9 +2,8 @@
 <div class="titleshort row">
   <div class="span1">
     <%= link_to(
-	image_tag(title.latest_published_edition.cover_url),
-	title,
-	:class => :bookcover)  unless title.latest_published_edition.nil? || title.latest_published_edition.cover_url.nil? || title.latest_published_edition.cover_url.end_with?('php')  %>
+	image_tag(title.latest_published_edition.cover_url, :class => :bookcover),
+	title)  unless title.latest_published_edition.nil? || title.latest_published_edition.cover_url.nil?  %>
   </div>
   <div class="span6">
     <% if can? :edit, Title %>
