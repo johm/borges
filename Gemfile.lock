@@ -131,6 +131,10 @@ GEM
     lisbn (0.1.3)
       nokogiri
       nori (~> 2.0)
+    lol_dba (1.6.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      railties (>= 3.0)
     machinist (2.0)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -282,6 +286,7 @@ DEPENDENCIES
   lazy_high_charts
   libv8 (>= 3.11.8)
   lisbn
+  lol_dba
   machinist (>= 2.0)
   mini_magick
   money-rails

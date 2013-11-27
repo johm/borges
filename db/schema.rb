@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131124165239) do
+ActiveRecord::Schema.define(:version => 20131127201914) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -65,6 +65,10 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "contributions", ["author_id", "title_id"], :name => "index_contributions_on_author_id_and_title_id"
+  add_index "contributions", ["author_id"], :name => "index_contributions_on_author_id"
+  add_index "contributions", ["title_id"], :name => "index_contributions_on_title_id"
+
   create_table "copies", :force => true do |t|
     t.integer  "edition_id"
     t.integer  "cost_in_cents"
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
   end
 
   add_index "copies", ["edition_id"], :name => "index_copies_on_edition_id"
+  add_index "copies", ["invoice_line_item_id"], :name => "index_copies_on_invoice_line_item_id"
   add_index "copies", ["owner_id"], :name => "index_copies_on_owner_id"
 
   create_table "customers", :force => true do |t|
@@ -154,6 +159,8 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
     t.string   "link"
   end
 
+  add_index "images", ["imagey_id", "imagey_type"], :name => "index_images_on_imagey_id_and_imagey_type"
+
   create_table "invoice_line_items", :force => true do |t|
     t.integer  "quantity"
     t.integer  "edition_id"
@@ -184,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
   end
 
   add_index "invoices", ["distributor_id"], :name => "index_invoices_on_distributor_id"
+  add_index "invoices", ["owner_id"], :name => "index_invoices_on_owner_id"
 
   create_table "owners", :force => true do |t|
     t.string   "name"
@@ -248,6 +256,7 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
     t.datetime "updated_at",       :null => false
   end
 
+  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
   add_index "posts", ["published"], :name => "index_posts_on_published"
   add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
 
@@ -285,6 +294,7 @@ ActiveRecord::Schema.define(:version => 20131124165239) do
   end
 
   add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"
+  add_index "purchase_orders", ["owner_id"], :name => "index_purchase_orders_on_owner_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
