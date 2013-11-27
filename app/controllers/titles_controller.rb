@@ -14,13 +14,13 @@ class TitlesController < ApplicationController
     if ! params[:searchquery].blank?
       searchquery=params[:searchquery]
       @searchquery=searchquery
-      @title_search = Title.search do
+      @title_search = Title.search(:include => [:editions]) do
         fulltext searchquery
         paginate :page => params[:page], :per_page => 200
       end
       @titles=@title_search.results
     else
-      @titles = Title.page(params[:page]).per(20)
+      @titles = Title.includes(:editions => [:copies]).page(params[:page]).per(20)
     end
 
     respond_to do |format|
