@@ -1,0 +1,5 @@
+$("#return_order_line_items tr:first-child").after("<%= escape_javascript(render :partial=>'return_order_line_item',:object => @return_order_line_item) %>")
+$("#item").val("");
+$("#return_order_meta").html("<%= escape_javascript(render :partial=>"return_orders/meta",:locals=>{:return_order=>@return_order_line_item.return_order}) %>");
+$("#return_order_line_item_<%= @return_order_line_item.id %>").effect("highlight");
+

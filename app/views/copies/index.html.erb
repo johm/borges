@@ -31,16 +31,33 @@
     <td><%= copy.status %></td>
     <td><%= copy.notes %></td>
     <td><%= link_to copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %></td>
-    <td><%= link_to copy.owner.name_and_id, copy.owner %></td>
+    <td><%= link_to copy.owner.name_and_id, copy.owner rescue "" %></td>
     <td><%= copy.is_used %></td>
     <td><%= copy.invoice_line_item.purchase_order_line_item.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %></td>
     <td><%= link_to copy.invoice_line_item.purchase_order_line_item.purchase_order.number,copy.invoice_line_item.purchase_order_line_item.purchase_order  rescue "" %></td>
     <td><%= copy.invoice_line_item.invoice.received_when.to_formatted_s(:just_date) rescue "" %></td>
     <td><%= link_to copy.invoice_line_item.invoice.id,copy.invoice_line_item.invoice rescue "" %></td>
-    <td>TODO</td>
-    <td>TODO</td>
-    <td>TODO</td>
-    <td>TODO</td>
+    <td>
+      <% if copy.status=="SOLD" && copy.sale_order_line_item %>
+      <%= copy.sale_order_line_item.sale_order.posted_when %>
+      <% end %>
+    </td>
+    <td>
+      <% if copy.status=="SOLD" && copy.sale_order_line_item %>
+      <%= link_to copy.sale_order_line_item.sale_order.id, copy.sale_order_line_item.sale_order %>
+      <% end %>
+    </td>
+ <td>
+      <% if copy.status=="RETURNED" && copy.return_order_line_item %>
+      <%= copy.return_order_line_item.return_order.posted_when %>
+      <% end %>
+    </td>
+    <td>
+      <% if copy.status=="RETURNED" && copy.return_order_line_item %>
+      <%= link_to copy.return_order_line_item.return_order.id, copy.return_order_line_item.return_order %>
+      <% end %>
+    </td>
+
     <td><%= mylinkbutton "<i class='icon-edit'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %></td>
   </tr>
 <% end %>

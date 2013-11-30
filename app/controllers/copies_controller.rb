@@ -95,7 +95,13 @@ class CopiesController < ApplicationController
       @copies=edition.copies.instock.order("price_in_cents desc")
       # you can't sell a copy someone else is trying to sell!
       copies_on_sale_orders= SaleOrder.where(:posted=>false).collect {|so| so.sale_order_line_items.collect {|soli| soli.copy_id}}.flatten
-      @copies=@copies.find_all {|c| !(copies_on_sale_orders.include? c.id)} 
+
+      # you can't sell a copy someone else is trying to return!
+      copies_on_return_orders= ReturnOrder.where(:posted=>false).collect {|ro| ro.return_order_line_items.collect {|roli| roli.copy_id}}.flatten
+
+      @copies=@copies.find_all {|c| !(copies_on_sale_orders.include? c.id)}
+      @copies=@copies.find_all {|c| !(copies_on_return_orders.include? c.id)}
+
       @copies.collect do |copy|
         hash = {"id" => copy.id.to_s, "label" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.number} #{edition.format}} [#{edition.isbn13}]", "value" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.number} #{edition.format}} [#{edition.isbn13}]"}
       end

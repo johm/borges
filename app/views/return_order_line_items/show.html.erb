@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Return order:</b>
+  <%= @return_order_line_item.return_order %>
+</p>
+
+<p>
+  <b>Copy:</b>
+  <%= @return_order_line_item.copy %>
+</p>
+
+
+<%= link_to 'Edit', edit_return_order_line_item_path(@return_order_line_item) %> |
+<%= link_to 'Back', return_order_line_items_path %>

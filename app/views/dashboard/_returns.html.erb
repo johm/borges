@@ -1,3 +1,30 @@
+
 <h1>Returns</h1>
 
-10 most recent returns (shipped and not)
+<h1>Sales</h1>
+
+<table class="table">
+<tr>
+  <th>#</th>
+  <th>Total</th>
+  <th>Distributor</th>
+  <th>Posted?</th>
+</tr>
+
+<% @return_orders.each do |ro| %>
+<tr>
+  <td><%= link_to ro.id,ro %></td>
+  <td><%= link_to ro.distributor.name,ro.distributor %></td>
+  <td><%= ro.total %></td>
+  <td><%= ro.posted?  ? ro.posted_when.to_formatted_s(:just_date) : "No" %></td>
+</tr>
+<% end %>
+</table>
+
+<div class="moreactions">
+<%= mylinkbutton "New return",new_return_order_path,{},'btn-small' %>
+<%= mylinkbutton "All returns",return_orders_path,{},'btn-small' %>
+</div>
+
+
+
