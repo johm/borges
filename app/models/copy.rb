@@ -2,6 +2,8 @@ class Copy < ActiveRecord::Base
   belongs_to :edition
   delegate :title, :to => :edition
   belongs_to :invoice_line_item
+  has_one :sale_order_line_item
+  has_one :return_order_line_item
   belongs_to :owner
   attr_accessible :cost_in_cents, :is_used, :notes, :price_in_cents , :cost, :price, :inventoried_when, :deinventoried_when, :status, :owner,:edition_id,:invoice_line_item_id
   
@@ -22,5 +24,12 @@ class Copy < ActiveRecord::Base
     self.save!
   end
   
+  def do_return()
+    self.status="RETURNED"
+    self.deinventoried_when=DateTime.now
+    self.save!
+  end
+
+
 
 end

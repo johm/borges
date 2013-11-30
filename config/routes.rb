@@ -20,6 +20,17 @@ Borges::Application.routes.draw do
 
   end
 
+  resources :return_order_line_items
+
+ 
+  resources :return_orders do
+    member do
+      post :post
+    end
+
+  end
+
+
 
   resources :owners do
     get :autocomplete_owner_name, :on => :collection

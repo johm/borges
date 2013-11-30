@@ -9,3 +9,5 @@ jQuery ->
   $("a#add_sale_order_line_item").on "click", (e, data, status, xhr) ->
     $("#new_sale_order_line_item").trigger("submit.rails")
 
+  $("a#add_return_order_line_item").on "click", (e, data, status, xhr) ->
+    $("#new_return_order_line_item").trigger("submit.rails")

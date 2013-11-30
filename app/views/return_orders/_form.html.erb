@@ -1,0 +1,19 @@
+<%= nested_form_for(@return_order,:html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @return_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@return_order.errors.count, "error") %> prohibited this return_order from being saved:</h2>
+      <ul>
+      <% @return_order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  
+  <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, "" %> 
+  <%= mytextfield f,:notes,:notes %>
+
+  <%= mysubmit f,"Save" %>
+
+<% end %>

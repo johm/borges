@@ -1,0 +1,28 @@
+</div>
+<div class="row">
+  <div class="span8">
+
+<h1>Listing return_orders</h1>
+
+<table class="table">
+  <tr>
+    <th>Number</th>
+    <th>Total</th>
+    <th>Posted</th>
+  </tr>
+
+<% @return_orders.each do |return_order| %>
+  <tr>
+    <td><%= link_to return_order.id, return_order %></td>
+    <td><%= return_order.total %></td>
+    <td><%= return_order.posted? ? "#{return_order.posted_when.to_formatted_s(:full_datetime)}" : "No"  %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>
+<div class="span4">
+
+  <%= link_to 'New Return order', new_return_order_path %>
+</div>
+</div>

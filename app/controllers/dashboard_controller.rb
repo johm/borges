@@ -11,6 +11,7 @@ class DashboardController < ApplicationController
   def index
     @purchase_orders=PurchaseOrder.order("created_at DESC").limit(10)
     @sale_orders=SaleOrder.order("created_at DESC").limit(10)
+    @return_orders=ReturnOrder.order("created_at DESC").limit(10)
     @invoices=Invoice.order("created_at DESC").limit(10)
     @title_lists=TitleList.includes(:titles => [:editions => [:copies]]).order("created_at DESC").limit(10)
     @categories=Category.includes(:titles => [:editions => [:copies]]).order("name DESC")

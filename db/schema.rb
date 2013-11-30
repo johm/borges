@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131127201914) do
+ActiveRecord::Schema.define(:version => 20131130173015) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -295,6 +295,27 @@ ActiveRecord::Schema.define(:version => 20131127201914) do
 
   add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"
   add_index "purchase_orders", ["owner_id"], :name => "index_purchase_orders_on_owner_id"
+
+  create_table "return_order_line_items", :force => true do |t|
+    t.integer  "return_order_id"
+    t.integer  "copy_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "return_order_line_items", ["copy_id"], :name => "index_return_order_line_items_on_copy_id"
+  add_index "return_order_line_items", ["return_order_id"], :name => "index_return_order_line_items_on_return_order_id"
+
+  create_table "return_orders", :force => true do |t|
+    t.boolean  "posted"
+    t.datetime "posted_when"
+    t.text     "notes"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "distributor_id"
+  end
+
+  add_index "return_orders", ["posted"], :name => "index_return_orders_on_posted"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

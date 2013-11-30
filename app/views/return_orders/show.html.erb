@@ -1,0 +1,54 @@
+<div class="span8">
+  <p id="notice"><%= notice %></p>
+  <h1>Return: <%= @return_order.id %></h1>
+  
+  <% if ! @return_order.posted? %>
+  <%= nested_form_for(ReturnOrderLineItem.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+  
+  <%= f.hidden_field(:return_order_id,:value => @return_order.id) %>
+  <%= f.hidden_field(:copy_id) %>
+  
+  <%= my_autocomplete_field_tag f,
+      :item,:copy,
+      autocomplete_copies_path(:return_order_id=>@return_order.id),
+      "","input-xxlarge" %>
+      
+  <script>
+    $('#item').bind('railsAutocomplete.select', function(event, data){
+    $("#return_order_line_item_copy_id").val(data.item.id);
+    });
+  </script>
+  
+  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_return_order_line_item"}) %> 
+  
+  
+  <% end %>
+  <% end %>
+  
+  <table class="table" id="return_order_line_items">
+    <tr><th>Item</th><th>ISBN</th><th>List price</th><th>Return price</th><th></th></tr>
+    <% @return_order.return_order_line_items.each do |li| %>
+    <%= render li %>
+    <% end %>
+  </table>
+
+  </div>
+    
+    <div class="span2">
+    </div>
+
+    <div class="span2">
+      <% if ! @return_order.posted? %>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Complete return",post_return_order_path(@return_order)) %>
+      <% else %>
+      <b>Posted:</b> <%= @return_order.posted_when %>
+      <% end %>
+      
+      <div id="return_order_meta">
+	<%= render :partial=>"meta",:locals=>{:return_order=>@return_order} %>
+      </div>
+    </div>
+
+</div>
+
+
