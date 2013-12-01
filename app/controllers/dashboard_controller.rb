@@ -24,7 +24,7 @@ class DashboardController < ApplicationController
 
   def sales 
     @date_range_object=DateRangeObject.new
-    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 8.days.ago.to_date
+    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
     @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
 
     @sales_by_date=SaleOrder.where(:posted => true).order("created_at asc").where("posted_when > ? && posted_when < ?",@date_range_object.range_start,@date_range_object.range_end+1.days).group_by{ |so| so.posted_when.to_date } 
