@@ -8,6 +8,17 @@ class SaleOrder < ActiveRecord::Base
   def cost
     sale_order_line_items.inject(Money.new(0)) {|sum,soli| sum+soli.copy.cost }
   end
+
+  def cost_by_owner(owner)
+    sale_order_line_items.inject(Money.new(0)) do |sum,soli| 
+      if soli.copy.owner==owner
+        sum+soli.copy.cost 
+      else
+        sum
+      end
+    end
+  end
+
     
 
   def subtotal
@@ -25,5 +36,8 @@ class SaleOrder < ActiveRecord::Base
   def total
     subtotal_after_discount + tax_amount
   end
+
+
+
 
 end

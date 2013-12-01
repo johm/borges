@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="span12">
+    <h1>Consignment Sales</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :consignment,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:from,:range_start %>
+    <%= mydatefield f,:to,:range_end %>
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "" %> 
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+
+  <table class="table">
+    <% @sales.each do |s| %>
+    <% s.sale_order_line_items.each do |l| %>
+    <% if l.copy.owner==@date_range_object.owner %>
+    <tr>
+      <td><%= l.sale_order.posted_when.to_formatted_s(:just_date) %></td>
+      <td><%= l.copy.edition.title.title %></td>
+      <td><%= l.copy.edition.isbn13 %></td>
+      <td>$<%= l.cost_price %></td>
+    </tr>
+    <% end %>
+    <% end %>
+    <% end %>
+  </table>
+  <div>
+    Cost of consigment goods sold: $<%= @cost %>
+  </div>
+
+  </div>
+</div>
+
+
+</div>

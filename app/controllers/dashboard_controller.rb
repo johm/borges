@@ -72,6 +72,22 @@ class DashboardController < ApplicationController
     end
   end
 
+  def consignment
+    @date_range_object=DateRangeObject.new
+    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
+    @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
+    @date_range_object.owner=Owner.find(params[:date_range_object][:owner]) rescue Owner.first
+    
+    @sales=SaleOrder.where(:posted => true).order("created_at asc").where("posted_when > ? && posted_when < ?",@date_range_object.range_start,@date_range_object.range_end+1.days)
+    
+    @cost=@sales.inject(Money.new(0)) {|sum2,s| sum2 + s.cost_by_owner(@date_range_object.owner)}
+    
+
+
+
+
+  end
+
   def daily 
     @day=params[:day] ? Date.parse(params[:day]) : DateTime.now.to_date
     @sales_for_day=SaleOrder.where(:posted => true).order("created_at asc").where("date(convert_tz(posted_when,'UTC',?)) = ? ", ::Rails.application.config.time_zone || "UTC", @day)
