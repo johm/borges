@@ -18,7 +18,7 @@
       <td><%= l.sale_order.posted_when.to_formatted_s(:just_date) %></td>
       <td><%= l.copy.edition.title.title %></td>
       <td><%= l.copy.edition.isbn13 %></td>
-      <td>$<%= l.cost_price %></td>
+      <td>$<%= l.copy.cost %></td>
     </tr>
     <% end %>
     <% end %>
