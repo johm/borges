@@ -2,12 +2,12 @@
 
 class DateRangeObject < OpenStruct
   def self.model_name
-    FakeActiveModelName.new
+    DRFakeActiveModelName.new
   end
 end
 
 
-class FakeActiveModelName
+class DRFakeActiveModelName
   def param_key
     "date_range_object"
   end
