@@ -25,6 +25,19 @@ module ApplicationHelper
                 :class=>"field control-group")
   end
 
+  def mydatefield(f,l,m,options={})
+    content_tag(:div,
+                f.label(l,:class=>"control-label") +
+                content_tag(:div,
+                            f.text_field(m,options.merge({"data-format"=>"yyyy-MM-dd"})) + 
+                            content_tag(:span,
+                                        content_tag(:i," ",{"data-date-icon"=>"icon-calendar"}),
+                                        :class=>"add-on"),
+                            :class=>"controls input-append date datetime"),
+                :class=>"field control-group")
+  end
+
+
 
   def mymoneyfield(f,l,m,options={})
     content_tag(:div,
@@ -142,6 +155,11 @@ module ApplicationHelper
         :class=>"controls"),
       :class=>"field control-group")
   end
+
+
+
+
+
 
 
   def sortable(column, title = nil)

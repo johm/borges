@@ -1,6 +1,13 @@
 <div class="row">
   <div class="span12">
-    <h1>Sales in past week</h1>
+    <h1>Sales</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :sales,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:from,:range_start %>
+    <%= mydatefield f,:to,:range_end %>
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
 
   <%= high_chart("saleschart", @saleschart) %>
   
