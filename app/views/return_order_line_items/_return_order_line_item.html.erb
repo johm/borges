@@ -1,3 +1,4 @@
+<%= unless return_order_line_item.copy.nil? %>
 <tr id="return_order_line_item_<%= return_order_line_item.id %>">
   <td><%= link_to return_order_line_item.copy.edition.title.title, return_order_line_item.copy.edition, :target=>"blank" %> <small>(Copy #<%= return_order_line_item.copy.id%>)</small></td>
   <td><%= return_order_line_item.copy.edition.isbn %></td> 
@@ -5,3 +6,4 @@
   <td><%= link_to("<i class='icon-remove-circle'></i>".html_safe, return_order_line_item, :remote=>true, :method => :delete,:class=>"") if can? :destroy, ReturnOrderLineItem && !return_order_line_item.return_order.posted? %>
   </td>
 </tr>
+<% end %>
