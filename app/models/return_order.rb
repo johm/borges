@@ -6,7 +6,7 @@ class ReturnOrder < ActiveRecord::Base
   default_scope  includes(:return_order_line_items)
 
   def total
-    return_order_line_items.inject(Money.new(0)) {|sum,roli| sum+roli.copy.cost }
+    return_order_line_items.inject(Money.new(0)) {|sum,roli| roli.copy.nil? ? sum : sum+roli.copy.cost }
   end
 
 end
