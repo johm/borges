@@ -66,7 +66,7 @@ class Title < ActiveRecord::Base
   end
 
   def by_the_same_authors 
-    authors.collect {|a| a.titles}.flatten.find_all {|t| t.id != self.id}.uniq.sort_by {|x| x.title}
+    authors.collect {|a| a.titles unless a.first_name.blank? && a.last_name.blank?}.flatten.find_all {|t| t.id != self.id}.uniq.sort_by {|x| x.title}
   end
 
   [:authors, :publisher, :distributor,:copies_sold_or_more,:copies_sold_or_less,:copies_stock_or_more,:copies_stock_or_less].each do |attr|
