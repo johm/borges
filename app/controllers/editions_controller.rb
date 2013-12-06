@@ -92,7 +92,7 @@ class EditionsController < ApplicationController
     end
     
     @editions_data=@edition_search.results.collect do |edition|
-      hash = {"id" => edition.id.to_s, "label" => "#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]", "value" => "#{edition.title.title} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]"}
+      hash = {"id" => edition.id.to_s, "label" => "#{edition.title.title} #{edition.number} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]", "value" => "#{edition.title.title} #{edition.number} (#{edition.year_of_publication}) {#{edition.format}} [#{edition.isbn13}]"}
     end
     respond_to do |format|
       format.json { render json: @editions_data }
