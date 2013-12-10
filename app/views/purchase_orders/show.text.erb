@@ -4,3 +4,10 @@ Our PO number: <%= @purchase_order.number %>
 <%= li.quantity %> x <%= li.edition.title.title %> (<%= li.isbn %>) 
 <% end %>
 
+
+For Random House import:
+
+<% @purchase_order.purchase_order_line_items.where("quantity > 0").each do |li| %>
+<%= li.isbn %>,<%= li.quantity %> 
+<% end %>
+
