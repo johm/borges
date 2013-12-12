@@ -10,7 +10,9 @@
       <div class="span8">
 	<div id="menubar">
 	  <div class="menubar copse">
+	    <% cache("menubar", :expires_in => 10.minutes) do %>
 	    <%= raw menubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:menu=>['/pages/menu',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{}]}) %>
+	  <% end %>
 	  </div>
 	</div>
       </div>
