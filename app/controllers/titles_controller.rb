@@ -12,7 +12,11 @@ class TitlesController < ApplicationController
   # GET /titles.json
   def index
     if ! params[:searchquery].blank?
-      searchquery=params[:searchquery]
+      searchquery=params[:searchquery]  
+    elsif params[:search_object] && ! params[:search_object][:searchquery].blank? 
+      searchquery=params[:search_object][:searchquery]
+    end
+    if ! searchquery.blank?
       @searchquery=searchquery
       @title_search = Title.search(:include => [:editions]) do
         fulltext searchquery
