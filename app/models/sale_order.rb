@@ -33,8 +33,11 @@ class SaleOrder < ActiveRecord::Base
     subtotal_after_discount * (ENV["TAX"].to_f || 0.0)
   end
 
+  
   def total
-    subtotal_after_discount + tax_amount
+    Rails.cache.fetch("/sale_order/#{id}-#{updated_at}/total", :expires_in => 12.hours) do
+      subtotal_after_discount + tax_amount
+    end
   end
 
 

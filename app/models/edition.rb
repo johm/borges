@@ -1,5 +1,5 @@
 class Edition < ActiveRecord::Base
-  belongs_to :title
+  belongs_to :title,   :touch=>true
   has_many :copies
   has_many :purchase_order_line_items
   has_many :invoice_line_items
