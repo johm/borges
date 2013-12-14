@@ -97,7 +97,7 @@ class EventsController < ApplicationController
     cal=MyCalendar.new(Event.where("event_start > ?",DateTime.now))
     respond_to do |format|
       format.html 
-      format.ics { render :text => cal.to_ical  }
+      format.ics { render :text => cal.export  }
     end
   end
 
