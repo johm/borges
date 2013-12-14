@@ -1,5 +1,5 @@
 class SaleOrderLineItem < ActiveRecord::Base
-  belongs_to :sale_order
+  belongs_to :sale_order,:touch => true
   belongs_to :copy
 
   attr_accessible :copy_id,:sale_order_id,:sale_price

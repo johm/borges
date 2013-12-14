@@ -34,7 +34,7 @@ jQuery('document').ready(function (){
 	}, 400);
 	
 	jQuery(this).children('a').css("color","#cb3e38");
-	jQuery(this).find('a').css("background-color","#ffffff");
+	jQuery(this).children('a').css("background-color","#ffffff");
 	jQuery(this).find('a').css("opacity","1");
 
 	jQuery(this).find("img").hide("fade");
