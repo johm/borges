@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   autocomplete :event_location,:title,:full=>true,:display_value=>:name_and_id
-
-  before_filter :authenticate_user!, :except=>[:index,:show]
+  before_filter :authenticate_user!, :except=>[:index,:show,:calendar]
   before_filter :hack_out_params , :only=>[:create,:update]
 
   load_and_authorize_resource
@@ -93,6 +92,15 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def calendar
+    cal=MyCalendar.new(Event.where("event_start > ?",DateTime.now))
+    respond_to do |format|
+      format.html 
+      format.ics { render :text => cal.to_ical  }
+    end
+  end
+
 
   private
   

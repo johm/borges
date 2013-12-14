@@ -111,6 +111,7 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.1)
+    icalendar (1.5.0)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
@@ -280,6 +281,7 @@ DEPENDENCIES
   fontsquirrel-download
   friendly_id (= 4.0.9)
   googlebooks
+  icalendar
   jquery-rails
   jquery-ui-rails
   kaminari
