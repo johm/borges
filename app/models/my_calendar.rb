@@ -4,8 +4,8 @@ class MyCalendar
     RiCal.Calendar do 
       events.each do |e|
         event do    
-          dtstart       e.event_start
-          dtend         e.event_end
+          dtstart       e.event_start + 5.hours
+          dtend         e.event_end + 5.hours
           summary     e.title
           description "From redemmas"
         end
