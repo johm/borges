@@ -149,7 +149,7 @@
   <% end %>
 </div>
 <h2>On our blog</h2>
-<% @title.posts.each do |p| %>
+<% @title.posts.each do |post| %>
 <h2 class="posttitle"><%= link_to post.title,post %></h2>
 <h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
 <% post.images.limit(1).each do |i| %>
