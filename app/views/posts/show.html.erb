@@ -39,9 +39,9 @@
     </div>
       <div class="span2">
 	
-	<% if @post.post_category %>
-	<h2>More posts in <%= @post.post_category.name %></h2>
-	<% moreposts = @post.post_category.posts.published.where('id != ?',@post.id).order("created_at desc") %>
+	<% if @post.post_categories.length > 0 %>
+	<h2>More posts in <%= link_to @post.post_categories[0].name, @post.post_categories[0] %></h2>
+	<% moreposts = @post.post_categories[0].posts.published.where('posts.id != ?',@post.id).order("created_at desc") %>
 	<% else %>
 	<h2>More posts</h2>
 	<% moreposts = Post.where('id != ?',@post.id).order("created_at desc").limit(10) %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131130173015) do
+ActiveRecord::Schema.define(:version => 20131216023653) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -224,6 +224,16 @@ ActiveRecord::Schema.define(:version => 20131130173015) do
     t.datetime "updated_at", :null => false
     t.string   "layout"
   end
+
+  create_table "post_category_memberships", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "post_category_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "post_category_memberships", ["post_category_id"], :name => "index_post_category_memberships_on_post_category_id"
+  add_index "post_category_memberships", ["post_id"], :name => "index_post_category_memberships_on_post_id"
 
   create_table "post_title_links", :force => true do |t|
     t.integer  "post_id"

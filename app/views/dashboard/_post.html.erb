@@ -2,6 +2,10 @@
   <td><%= link_to post.title,post %></td>
   <td><%= post.created_at %> </td>
   <td><%= post.published %> </td>
-  <td><%= link_to post.post_category.name,post.post_category unless post.post_category.nil? %></td>
+  <td> 
+    <% post.post_categories.each do |cat| %>
+    <%= link_to cat.name,cat %>
+    <% end %>
+  </td>
   <td><%= mylinkbutton "Edit",edit_post_path(post),{},'btn-small' %></td>
 </tr>
