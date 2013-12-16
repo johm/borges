@@ -11,7 +11,7 @@
 
 <div class="grid">
   <% @title_list.title_list_memberships.each do |tlm| %>
-  <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>tlm.notes} %>
+  <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>tlm.notes} unless tlm.title.nil? %>
   <% end %>
 </div>
 <%= theme_partial :social %>
