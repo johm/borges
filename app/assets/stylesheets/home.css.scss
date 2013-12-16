@@ -154,3 +154,55 @@ margin-left:0px;
 
 margin-bottom:7px;
 }
+
+
+#topdetails {
+margin-top:42px;
+text-align:right;
+}
+#topdetails p {
+margin:0px;
+}
+
+
+.span6 .introduction,.span4 .introduction {
+font-size:16px;
+line-height:20px;
+}
+
+.blogbarimage {
+float:right;
+width:40%;
+padding-left:5px;	
+}
+
+.thumbnails li:nth-child(4) {
+clear:both;
+}
+
+.menusubinner a {
+display:block;
+}
+
+
+.bigsearch h2{
+font-size:40px;
+}
+
+.bigsearch input {
+font-size:32px;
+height:40px;
+line-height:40px;
+position:relative;
+top:-10px;
+
+}
+
+.bigsearch input[type="text"] {
+width:300px;
+font-family:adobe-garamond-pro;	
+}
+
+.bigsearch btn-primary {
+height:60px;
+}

@@ -94,6 +94,10 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     fattr (2.2.1)
     figaro (0.6.4)
       bundler (~> 1.0)
@@ -105,12 +109,18 @@ GEM
     googlebooks (0.0.6)
       httparty
     hash-deep-merge (0.1.1)
+    hashie (2.0.5)
     highline (1.6.20)
     hike (1.2.2)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.1)
+    instagram (0.10.0)
+      faraday (>= 0.7, < 0.9)
+      faraday_middleware (~> 0.8)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
@@ -150,6 +160,7 @@ GEM
       railties (>= 3.0)
     multi_json (1.7.4)
     multi_xml (0.5.4)
+    multipart-post (1.2.0)
     mysql (2.9.1)
     mysql2 (0.3.11)
     nested_form (0.3.2)
@@ -281,6 +292,7 @@ DEPENDENCIES
   fontsquirrel-download
   friendly_id (= 4.0.9)
   googlebooks
+  instagram
   jquery-rails
   jquery-ui-rails
   kaminari
