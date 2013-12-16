@@ -14,7 +14,7 @@
 <% @return_orders.each do |ro| %>
 <tr>
   <td><%= link_to ro.id,ro %></td>
-  <td><%= link_to ro.distributor.name,ro.distributor unless ro.name.nil? %></td>
+  <td><%= link_to ro.distributor.name,ro.distributor unless ro.distributor.nil? %></td>
   <td><%= ro.total %></td>
   <td><%= ro.posted?  ? ro.posted_when.to_formatted_s(:just_date) : "No" %></td>
 </tr>
