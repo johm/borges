@@ -21,7 +21,10 @@ class HomeController < ApplicationController
     user = client.user
     
     html = "<h1>Recently delicious</h1><ul class='thumbnails'>"
-    for media_item in client.user_recent_media
+    i=0
+    for media_item in client.user_recent_media()
+      break if i>8
+      i=i+1
       tags = media_item.tags
       if tags.include?("food") || tags.include?("vegan")  || tags.include?("cafe") 
         html << "<li class='span2'><div class='thumbnail'><div style='margin-bottom:10px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url}'></div>#{media_item.caption.text}</a></div></li>"

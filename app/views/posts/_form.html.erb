@@ -14,7 +14,13 @@
   <%= mytextfield f,"Post title",:title,{:class=>"input-xxlarge"} %>
   <%= mytextfield f,"Post slug",:slug,{:class=>"input-xxlarge",:placeholder=>"Will be generated automatically"} %>
   
-  <%= myselector f,"Post Category",:post_category_id, options_from_collection_for_select(PostCategory.all,:id,:name) %>
+  <div class="field control-group">
+    <label class="control-label" for="post_Post title">Post category</label>
+    <div class="controls">
+      <%= f.select :post_category_ids, PostCategory.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+  </div></div>
+  
+
 
   <%= mytextarea f,"Introductory text",:introduction %>
   <%= mytextarea f,"Body text",:body %>

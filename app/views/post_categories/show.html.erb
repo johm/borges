@@ -23,7 +23,9 @@
 	  <%= raw post.introduction %>
 	</div>
 	<%= link_to "Read more...",post %>
-	<%= link_to "Posted in #{post.post_category.name}",post.post_category, {:style=>"float:right;"} %>
+	<div style="float:right;">Posted in <%= post.post_categories.collect{|cat|  link_to cat.name,cat}.join(", ").html_safe %>
+	</div> 
+
 	<hr style="clear:both;">
       </div>
       <div class="span3">
