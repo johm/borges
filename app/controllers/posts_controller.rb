@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, :except=>[:index,:show]  
+  before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
 
-  before_filter :hack_out_params , :only=>[:create,:update]
+
 
   # GET /posts
   # GET /posts.json
