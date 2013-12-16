@@ -157,6 +157,8 @@ Borges::Application.routes.draw do
   get '/daily/', :to => 'dashboard#daily', :as => "daily"
   get '/manage_calendar/', :to => 'dashboard#manage_calendar'
   get '/books/', :to => 'home#books'
+  get '/food/', :to => 'home#food'
+  get '/blog/', :to => 'posts#index'
 
 
   authenticated :user do

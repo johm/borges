@@ -1,28 +1,30 @@
-<div class="span6">
-  <h1 style="font-size:100px;margin-bottom:50px;margin-top:20px !important;">Books!</h1>
-  <h2 style="float:left;margin-right:20px;">Find a book:</h2>
+</div>
+<div class="row">
+<div class="span8">
+  <h1 style="font-size:100px;margin-bottom:50px;margin-top:20px !important;"><span class="span2"></span>Books!</h1>
+  <div>
+  <h2 class="span2" style="float:left;">Find a book:</h2>
   <%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :index,:controller => :titles } do |f| %>
-  <%= f.text_field :searchquery, :placeholder=>"Title,Author, or ISBN" %>
-  <input class="btn btn-primary btn-medium" name="commit" type="submit" value="search" >
+  <%= f.text_field :searchquery, :placeholder=>"Title,Author, or ISBN",:style=>"width:50%" %>
+  <input class="btn btn-primary btn-medium" name="commit" type="submit" value="Search" style="width:15%" >
   <% end %>
-  
+  </div>
 </div>
 
 <div class="span4">
   <h3>Your questions, answered:</h3>
   <ul class="bookfaq">
-    <li><a href="">How do I order a book that's not listed as in stock?</a>
-    <li><a href="">Can I buy books online from Red Emma's?</a>
-    <li><a href="">Will you sell books for my class?</a>
-    <li><a href="">Will you sell books at my event?</a>
-    <li><a href="">Can I do an event for my book at Red Emma's?</a>
-    <li><a href="">Are you hiring?</a>
+    <li><a href="/pages/books-frequently-asked-questions#specialorders">How do I order a book that's not listed as in stock?</a>
+    <li><a href="/pages/books-frequently-asked-questions#onlineorders">Can I buy books online from Red Emma's?</a>
+    <li><a href="/pages/books-frequently-asked-questions#courseorders">Will you sell books for my class?</a>
+    <li><a href="/pages/books-frequently-asked-questions#eventorders">Will you sell books at my event?</a>
+    <li><a href="/pages/books-frequently-asked-questions#bookevents">Can I do an event for my book at Red Emma's?</a>
+    <li><a href="/pages/books-frequently-asked-questions#hiring">Are you hiring?</a>
   </ul>
 </div>
 </div>
 <hr>
 <div class="row" >
-  <div class="span2"></div>
   <div class="span8">
     <% Category.find_by_name("main").title_lists.order("position ASC").each do |tl| %>
   <h2><%= link_to tl.name,tl %></h2>
@@ -35,7 +37,7 @@
 <hr style="clear:both;">
   <% end %>
 </div>
-<div class="span2">
+<div class="span4">
   <h2>The Books Blog</h2>
   <% PostCategory.find_by_name("Books").posts.where(:published=>true).order("created_at DESC").limit(5).each do |post| %>
   
@@ -43,7 +45,7 @@
   <h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
   <% post.images.limit(1).each do |i| %>
   <div class="item">
-    <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
+    <%= image_tag i.the_image_url(:reasonable),{:class=>'blogbarimage'} %>
   </div>  
   <% end %>
   <div class="introduction">

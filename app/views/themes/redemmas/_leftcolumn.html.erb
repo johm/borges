@@ -1,4 +1,6 @@
+
 <div class="container">
+
   <div class="row">
       <div class="span2" id="frontleft">
 	<% if controller_name=="pages" && @page && (@page.slug=="welcome-to-thread-coffee" || (@page.parent && @page.parent.slug=="welcome-to-thread-coffee")) %>
@@ -7,13 +9,22 @@
 	<%= image_tag "redemmas/emmas.png" %>
 	<% end %>
       </div>
-      <div class="span8">
+      <div class="span7">
 	<div id="menubar">
 	  <div class="menubar copse">
 	    <% cache("menubar", :expires_in => 10.minutes) do %>
-	    <%= raw menubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:menu=>['/pages/menu',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{}]}) %>
+	    <%= raw menubar({:books=>['/books',{:search=>'/books',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/blog',{}],:about=>['/pages/about',{}],:contact=>['/pages/contact',{}]}) %>
 	  <% end %>
 	  </div>
+	</div>
+      </div>
+      <div class="span3">
+	<div id="topdetails">
+	  <p class="adobegaramondpro" style="font-size:18px;">Red Emma's</p>
+	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">30 W. North Avenue, Baltimore</p>
+	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">Tues-Thurs 8:30AM-10PM</p>
+	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">Fri-Sat 8:30AM-11PM</p>
+	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">Sunday 8:30-10PM</p>
 	</div>
       </div>
   </div>

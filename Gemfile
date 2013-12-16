@@ -72,3 +72,4 @@ gem 'bootstrap-datetimepicker-rails', :git=>"git://github.com/johm/bootstrap-dat
 gem "progress_bar"
 gem 'lazy_high_charts'
 gem 'ri_cal'
+gem 'instagram'

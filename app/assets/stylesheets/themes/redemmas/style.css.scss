@@ -507,7 +507,6 @@ border-radius: 3px;
 
     #front_1 {
 	font-size:45px;
-	border-right:1px solid black;
     }
 
     #front_2 {
@@ -578,21 +577,21 @@ border-radius: 3px;
 	margin-top:24px;
     }
 
-       .navbar>ul li:last-child a:after	{
-          content:" NORMAL";   
-}	  		             
+/*       .navbar>ul li:last-child a:after	{
+        content:" NORMAL";   
+}*/	  		             
 
 /* end for "normal desktops" */
 
 /* Large desktop */
 @media (min-width: 1200px) {
+       /*
        .navbar>ul li:last-child a:after {
           content:" LARGE";   
-}	  		             
+}	 */ 		             
 
     #front_1 {
 	font-size:55px;
-	border-right:1px solid red;
     }
 
     #front_2 {
@@ -675,9 +674,10 @@ border-radius: 3px;
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
+/*
        .navbar>ul li:last-child a:after{
            content:" BIG TABLET";   
-       }	  		             
+       }	  		             */
        #mce-EMAIL {
 	   width:100px !important;
 	   min-width:100px !important;
@@ -694,7 +694,6 @@ border-radius: 3px;
 
     #front_1 {
 	font-size:40px;
-	border-right:1px solid green;
     }
 
     #front_2 {
@@ -795,9 +794,9 @@ border-radius: 3px;
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
-              .navbar>ul li:last-child a:after {
+/*              .navbar>ul li:last-child a:after {
           content:" BIG PHONE";   
-}	  		             
+}*/	  		             
 
 .bottommenuwrapper {
 float:none;
@@ -805,6 +804,20 @@ width:100%;
 margin-bottom:33px;
 }
 
+      #frontleft img {
+      		 width:150px;
+      }	
+
+      #menubar {
+      margin-top:70px;
+      }
+      
+
+#topdetails {
+position:absolute;
+top:0px;
+right:0px;
+}
 
 #bottomtag {
     margin-left:40px;
@@ -824,9 +837,6 @@ margin-bottom:33px;
     	padding-top:40px;
     }
 
-    #front_1 {
-	border-right:3px solid purple;
-    }
 
     #front_1 {
 	font-size:40px;
@@ -934,15 +944,15 @@ margin-bottom:33px;
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
-              .navbar>ul li:last-child a:after {
+/*              .navbar>ul li:last-child a:after {
           content:" SMALL PHONE";   
-}	  		             
+}*/	  		             
+      #frontleft img {
+      		 width:100px;
+      }	
 
+				     
 
-
-    #front_1 {
-	border-right:3px solid orange;
-    }
         #front_1 {
 	font-size:30px;
 	line-height:30px;

@@ -7,7 +7,22 @@ jQuery('document').ready(function (){
 	    });
 
 
-
+    jQuery('#menubar .menuwrapper>a').each(function(){
+	if (jQuery(location).attr('pathname')==jQuery(this).attr('href')){
+	    jQuery(this).find("img").show();
+	    jQuery(this).data("active","yes");
+	}
+	else{
+	    var toplevel=jQuery(this);
+	    jQuery(this).siblings().find("a").each(function(){
+		if (jQuery(location).attr('pathname')==jQuery(this).attr('href')){
+		    toplevel.find("img").show();
+		    toplevel.data("active","yes");
+		}
+	    });
+	}
+    });
+    
     jQuery('#menubar .menuwrapper').hover(function() {
 	jQuery(this).stop().animate({
             "top": "10px",
@@ -37,7 +52,11 @@ jQuery('document').ready(function (){
 	jQuery(this).children('a').css("background-color","#ffffff");
 	jQuery(this).find('a').css("opacity","1");
 
-	jQuery(this).find("img").hide("fade");
+	jQuery(this).children('a').each(function(){
+	if (jQuery(this).data("active") != "yes"){
+	    jQuery(this).find("img").hide("fade");
+	    }
+	});
 	jQuery(this).find(".menusub").slideUp();
     });
 
