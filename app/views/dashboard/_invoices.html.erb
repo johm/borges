@@ -10,7 +10,7 @@
 <% @invoices.each do |i| %>
 <tr>
   <td><%= link_to i.number,i %></td>
-  <td><%= link_to i.distributor.name,i.distributor %></td>
+  <td><%= link_to i.distributor.name,i.distributor unless i.distributor.nil? %></td>
   <td><%= link_to i.invoice_line_items.inject(0) {|sum,li| sum+li.quantity} %></td>
   <td><%= i.received?  ? i.received_when.to_formatted_s(:just_date) : "No" %></td>
 </tr>
