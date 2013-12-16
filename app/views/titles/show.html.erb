@@ -118,9 +118,9 @@
 <div class="span8">
   <h2>By the same author(s)</h2>
   <div class="grid">
-  <% @title.by_the_same_authors.each do |t| %>
-  <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
-  <% end %>
+    <% @title.by_the_same_authors.each do |t| %>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+    <% end %>
   </div>
 </div>
 
@@ -146,9 +146,9 @@
   <b><%= link_to "Go to the list",l %></b>
   <hr>
   <% end %>
-  <% end %>
 
-<h2>On our blog</h2>
+  
+  <h2>On our blog</h2>
 <% @title.posts.each do |post| %>
 <h2 class="posttitle"><%= link_to post.title,post %></h2>
 <h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
@@ -168,3 +168,4 @@
 </div>
 </div>
 <% end %>
+  <% end %>
