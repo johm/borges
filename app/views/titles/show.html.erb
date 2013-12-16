@@ -3,36 +3,36 @@
 <% end %>
 
     <div class="span2">
-
-
+      
+      
     </div>
     <div class="span6">
-    <% if can? :edit, Title && ! @edition.nil? %>
-    <div class="hiddenactions ">
-      <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(@edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless @edition.nil? %>
-    </div>
-    <% end %>
-
-
+      <% if can? :edit, Title && ! @edition.nil? %>
+      <div class="hiddenactions ">
+	<%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(@edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless @edition.nil? %>
+      </div>
+      <% end %>
+      
+      
       <h1 class="booktitle"><%= @title.title %> <%= @edition.number %> (<%= @edition.format %>)</h1>
       <h2 class="contributors">
 	<%= sanitize contributors_list(@title) %>
       </h2>
-
-<div class="introduction">
-  <%= sanitize @title.introduction %>
-</div>
-
-
-<div class="description">
-  <%= sanitize @title.description %>
-</div>
+      
+      <div class="introduction">
+	<%= sanitize @title.introduction %>
+      </div>
+      
+      
+      <div class="description">
+	<%= sanitize @title.description %>
+      </div>
     </div>
     <div class="span2">
       <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
     </div>
-<div class="span2">
-  <%= status_and_price(@edition) unless @edition.nil? %>
+    <div class="span2">
+      <%= status_and_price(@edition) unless @edition.nil? %>
   <%= buy_or_order(@edition) unless @edition.nil? %>  
   <table class="table">
     <% if can? :edit, Title %>
@@ -147,7 +147,7 @@
   <hr>
   <% end %>
   <% end %>
-</div>
+
 <h2>On our blog</h2>
 <% @title.posts.each do |post| %>
 <h2 class="posttitle"><%= link_to post.title,post %></h2>
@@ -166,5 +166,5 @@
   
 
 </div>
-
+</div>
 <% end %>
