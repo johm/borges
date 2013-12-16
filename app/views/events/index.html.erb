@@ -1,5 +1,5 @@
 <div class="span6">
-  <h1 style="font-size:100px;margin-bottom:50px;margin-top:20px !important;">Events</h1>
+  <h1 style="font-size:50px;margin-bottom:50px;">Events at Red Emma's</h1>
 </div>
 
 <div class="span4">
@@ -20,7 +20,7 @@
     <h5><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> | <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]} »", :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h5>
     <% @events.each do |event| %>
     <%= render event %>
-    <hr>
+    <hr style="clear:right;">
     <% end %>
   </div>
   <div class="span4">
