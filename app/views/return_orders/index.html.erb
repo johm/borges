@@ -7,6 +7,7 @@
 <table class="table">
   <tr>
     <th>Number</th>
+    <th>Distributor</th>
     <th>Total</th>
     <th>Posted</th>
   </tr>
@@ -14,6 +15,7 @@
 <% @return_orders.each do |return_order| %>
   <tr>
     <td><%= link_to return_order.id, return_order %></td>
+    <td><%= link_to return_order.distributor.name, return_order.distributor unless return_order.distributor.nil? %></td>
     <td><%= return_order.total %></td>
     <td><%= return_order.posted? ? "#{return_order.posted_when.to_formatted_s(:full_datetime)}" : "No"  %></td>
   </tr>
