@@ -165,9 +165,13 @@ margin:0px;
 }
 
 
-.span6 .introduction,.span4 .introduction {
+.span6 .introduction,.span4 .introduction,.span5 .introduction, .posts .span5 .introduction p,.posts .introduction p {
 font-size:16px;
 line-height:20px;
+}
+
+.postshort {
+margin-top:20px;
 }
 
 .blogbarimage {
