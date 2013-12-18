@@ -30,13 +30,13 @@
     </div>
     <div class="span2">
       <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
+      <%= theme_partial :social %>
     </div>
     <div class="span2">
       <%= status_and_price(@edition) unless @edition.nil? %>
   <%= buy_or_order(@edition) unless @edition.nil? %>  
   <table class="table">
     <% if can? :edit, Title %>
-    <tbody class="">
       <tr>
 	<th>On order (all editions)</th>
 	<td><%= @title.on_order %></td>
@@ -46,13 +46,10 @@
 	<th>In stock (all editions)</th>
 	<td><%= @title.in_stock %></td>
       </tr>
-      
-      <tr>
-	<th>Sold (all editions)</th>
-	<td><%= @title.sold %></td>
-      </tr>
-    </tbody>
-
+    <tr>
+      <th>Sold (all editions)</th>
+      <td><%= @title.sold %></td>
+    </tr>
     <% end %>
   <tr>
     <th>ISBN</th>
@@ -105,7 +102,7 @@
 
 </table>
 
-<%= theme_partial :social %>
+
 
 </div>
 </div>
@@ -162,7 +159,7 @@
   <% end %>
   <% end %>
 
-  <% if @title.title_lists.length > 0 %>
+  <% if @title.title_lists.where(:public=>true).length > 0 %>
   <h2>On our lists</h2>
   <% @title.title_lists.each do |l| %>
   <% if l.public? %>

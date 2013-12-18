@@ -29,7 +29,7 @@ class DashboardController < ApplicationController
 
     @sales_by_date=SaleOrder.where(:posted => true).order("created_at asc").where("posted_when > ? && posted_when < ?",@date_range_object.range_start,@date_range_object.range_end+1.days).group_by{ |so| so.posted_when.to_date } 
 
-    @days=@sales_by_date.keys
+    @days=@sales_by_date.keys.sort
     
     @saleschart = LazyHighCharts::HighChart.new('column') do |f|
       f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.total).to_f} } )
