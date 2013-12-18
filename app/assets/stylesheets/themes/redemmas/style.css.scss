@@ -68,6 +68,11 @@ h4.contributors {
 //font-weight:normal;
 }
 
+h3.contributors{
+font-weight:normal;
+}
+
+
 .pages .introduction {
 margin-top:30px;
 }
@@ -1174,4 +1179,16 @@ width:80px;
 .frontpage .menubar a:hover {
 color:$nearblack;	
 
+}
+
+
+
+h2 a,h3 a, h4 a, h5 a,h6 a {
+font-weight:normal;
+}
+
+
+.span2 .addthis_toolbox {
+margin-top:10px;
+float:right;
 }

@@ -23,7 +23,7 @@ module EditionsHelper
                   :class=>"not-available")
       
     end 
-    
+    return ""
   end
   
 end
