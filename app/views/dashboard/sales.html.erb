@@ -12,10 +12,13 @@
   <%= high_chart("saleschart", @saleschart) %>
   
   <div>
-    Revenue: $<%= @revenue %> 
+    <strong>Revenue: $<%= @revenue %></strong>  (does not include sales tax collected)
   </div>
   <div>
-    Cost: $<%= @cost %>
+    <strong>Cost: $<%= @cost %></strong>
+  </div>
+  <div>
+    <strong>Average discount: <%= 100 - (100 * (cost/revenue) )%></strong>
   </div>
 
   </div>
