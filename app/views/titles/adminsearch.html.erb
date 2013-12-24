@@ -12,9 +12,9 @@
 	  <th>Categorized?</th>
 	</tr>
 	<% @titles.each do |title| %>
-	<tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
+	<tr class="<%= 'warning' if title.in_stock==0 %>">
 	  <td>
-	    <%= link_to title.title,title%>
+	    <%= link_to title.title,title%> 
 	  </td>
 	  <td><small><%= sanitize contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
