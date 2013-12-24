@@ -21,6 +21,25 @@
     <strong>Average discount: <%= 100 - (100 * (@cost/@revenue) )%></strong>
   </div>
 
+  <h2>Items sold</h2>
+  <table>
+    <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th></th></tr>
+    <% @titles_sold_with_count.each do |x| %>
+    <% title=x[0] %>
+    <% count=x[1] %>
+    <tr>
+      <td><%= link_to title.title,title%></td>
+      <td><%= count %></td>
+      <td><%= title.in_stock %></td>
+      <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
+      <td><small><%= sanitize category_status(title) %></small>	    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
+    </tr>
+
+    <% end %>
+    
+  </table>
+
+
   </div>
     
 
