@@ -18,6 +18,9 @@ class Event < ActiveRecord::Base
     where('extract(year from event_start) = ?', year)
   end
 
+  def start_time
+    event_start
+  end
 
 
 

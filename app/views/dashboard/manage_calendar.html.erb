@@ -1,4 +1,11 @@
 <div class="row">
+  <div class="span12">
+    <%= calendar @calendar_events do |event| %>
+    <div><%= link_to event.title, event %></div>
+    <% end %>    
+  </div>
+</div>
+<div class="row">
   <div class="span6">
     <h1>Events</h1>
     <div class="moreactions">
