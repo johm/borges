@@ -1,7 +1,12 @@
 <div class="row">
   <div class="span12">
     <%= calendar @calendar_events do |event| %>
-    <div><%= link_to event.title, event %></div>
+    <div>
+      <%= link_to event.title, event %>
+      <% if !event.published? %>
+      <div class="muted">Not published</div>
+      <% end %>
+    </div>
     <% end %>    
   </div>
 </div>
