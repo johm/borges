@@ -27,7 +27,7 @@
     <% @titles_sold_with_count.each do |x| %>
     <% title=x[0] %>
     <% count=x[1] %>
-    <tr>
+    <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
       <td><%= link_to title.title,title%></td>
       <td><%= count %></td>
       <td><%= title.in_stock %></td>
