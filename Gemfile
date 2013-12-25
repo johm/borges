@@ -73,3 +73,4 @@ gem "progress_bar"
 gem 'lazy_high_charts'
 gem 'ri_cal'
 gem 'instagram'
+gem "simple_calendar", "~> 0.1.9"

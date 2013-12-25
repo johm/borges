@@ -57,6 +57,11 @@ class DashboardController < ApplicationController
   def manage_calendar
     @events=Event.where("event_start > ?",Time.now)
     @event_locations=EventLocation.all
+
+    @year = (params[:year] || DateTime.now.year).to_i
+    @month = (params[:month] || DateTime.now.month).to_i
+    
+    @calendar_events = Event.by_year(@year).by_month(@month)
   end
 
   def titles
