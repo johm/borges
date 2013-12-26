@@ -11,6 +11,10 @@ class HomeController < ApplicationController
     render :layout => "frontpage"
   end
 
+  def thread
+    @coffees=Edition.find_by_format("Coffee")
+  end
+
   def food
     Instagram.configure do |config|
       config.client_id =     ENV["INSTAGRAM_ID"]
