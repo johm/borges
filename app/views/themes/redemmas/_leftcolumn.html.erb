@@ -3,7 +3,7 @@
 
   <div class="row">
       <div class="span2" id="frontleft">
-	<% if controller_name=="pages" && @page && (@page.slug=="welcome-to-thread-coffee" || (@page.parent && @page.parent.slug=="welcome-to-thread-coffee")) %>
+	<% if (controller_name=="home" && controller.action_name=="thread") || (controller_name=="pages" && @page && (@page.slug=="welcome-to-thread-coffee" || (@page.parent && @page.parent.slug=="welcome-to-thread-coffee"))) %>
 	<%= image_tag "redemmas/threadlogo_web.png" %>
 	<% else %>
 	<%= image_tag "redemmas/emmas.png" %>
@@ -13,7 +13,7 @@
 	<div id="menubar">
 	  <div class="menubar copse">
 	    <% cache("menubar", :expires_in => 10.minutes) do %>
-	    <%= raw menubar({:books=>['/books',{:search=>'/books',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/blog',{}],:about=>['/pages/about',{}],:contact=>['/pages/contact',{}]}) %>
+	    <%= raw menubar({:books=>['/books',{:search=>'/books',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/thread',{}],:events=>['/events',{}],:news=>['/blog',{}],:about=>['/pages/about',{}],:contact=>['/pages/contact',{}]}) %>
 	  <% end %>
 	  </div>
 	</div>
