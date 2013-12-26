@@ -39,7 +39,7 @@
   <div class="span6">
     <h2>Our coffees</h2>
     <%= @coffees.each do |c| %>
-    <%= render :partial=>'titles/gridtitle', :locals => {:title=>c.title,:text=>""}%>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>c.title,:text=>""} %>
     <% end %>
   </div>
 <div class="span6">
