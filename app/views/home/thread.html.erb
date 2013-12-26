@@ -6,31 +6,18 @@
 <i>Thread Coffee is a collectively-owned and operated small-batch coffee roaster committed to a transparent model of trade that promotes dignity, sustainability, and solidarity. Through hand-crafted, quality coffee we sew together organizational models based on participatory democracy and self- management.</i>
   </p>
   <p>Thread Coffee works to create relationships directly with farmers, ensuring that producers receive a just price for their beans, and that their coffee is grown in a way that’s good for both the environment and the culture. Thread is a part of the Red Emma’s family of projects, and is roasting onsite at the new Red Emma’s Bookstore Coffeehouse at 30 W. North Avenue.</p>
- 
-  <h3>Beyond Fair Trade:</h3>
-
-  <p>Thread goes above and beyond fair trade standards to provide a model of trade that is more than just a logo.  More and more farmers are expressing that fair trade minimum standards are not, in fact, fair.  Thread strives to build a better model by:</p>
-<ul>
-<li>paying higher prices than the fair trade minimum
-<li>establishing long-term, direct relationships with farmers
-<li>supporting practices that protect the environment and the culture
-<li>making a commitment to participatory democracy and collective structure, both here in the workplace and with the farmers
-</li>
-
-<h3>Transparency:</h3>
-
-<p>In striving to create a better model of trade, transparency is key. Thread works to provide information about our coffee’s journey every step of the way.  All of our contracts and financials are open and available to the public.</p>
-
-
-  
+   
 </div>
 
 <div class="span4">
 <h3>Things you might want to do:</h3>
   <ul class="bookfaq"> 
-    <li><a href="/pages/TK">Learn more about X</a>
+    <li><a href="/pages/transparent-trade">Learn more about our principles and transparent trade</a>
     <li><%= link_to "Read our blog",PostCategory.find_by_name("Thread") %>
+    <li><a href="/pages/where-to-buy">Find out where you can enjoy our coffee or purchase a bag</a>
     <li><a href="/pages/thread_wholesale">Talk to us about wholesale</a>
+    <li><a href="/pages/community-supported-coffee">Join our Community Supported Coffee program</a>
+    <li><a href="/pages/contact-thread-coffee">Contact the Thread team</li>
   </ul>
 </div>
 </div>
@@ -38,7 +25,7 @@
 <div class="row" >
   <div class="span6">
     <h2>Our coffees</h2>
-    <%= @coffees.each do |c| %>
+    <% @coffees.each do |c| %>
     <%= render :partial=>'titles/gridtitle', :locals => {:title=>c.title,:text=>""} %>
     <% end %>
   </div>
