@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <h2><%= copy.edition %>, Copy #<%= copy.id %></h2>
+  <h2><%= @copy.edition %>, Copy #<%= @copy.id %></h2>
   <table class="table">
-    <tr><th>Inventoried</th><td><%= copy.inventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
-    <tr><th>Deinventoried</th><td><%= copy.deinventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
+    <tr><th>Inventoried</th><td><%= @copy.inventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
+    <tr><th>Deinventoried</th><td><%= @copy.deinventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
   </table>
   
 
