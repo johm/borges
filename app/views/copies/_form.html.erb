@@ -1,4 +1,4 @@
-<%= form_for(@copy) do |f| %>
+<%= nested_form_for(@copy,:html=>{:class=>"form-horizontal"}) do |f| %>
   <% if @copy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@copy.errors.count, "error") %> prohibited this copy from being saved:</h2>
@@ -11,35 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :edition %><br />
-    <%= f.text_field :edition %>
-  </div>
-  <div class="field">
-    <%= f.label :cost_in_cents %><br />
-    <%= f.number_field :cost_in_cents %>
-  </div>
-  <div class="field">
-    <%= f.label :price_in_cents %><br />
-    <%= f.number_field :price_in_cents %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :distributor %><br />
-    <%= f.text_field :distributor %>
-  </div>
-  <div class="field">
-    <%= f.label :owner %><br />
-    <%= f.text_field :owner %>
-  </div>
-  <div class="field">
-    <%= f.label :is_used %><br />
-    <%= f.check_box :is_used %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <h2><%= copy.edition %>, Copy #<%= copy.id %></h2>
+  <table class="table">
+    <tr><th>Inventoried</th><td><%= copy.inventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
+    <tr><th>Deinventoried</th><td><%= copy.deinventoried_when.to_formatted_s(:just_date) rescue "" %></td></tr>
+  </table>
+  
+
+  <%= mymoneyfield f,:cost,:cost %>
+  <%= mymoneyfield f,:price,:price %>
+  <%= mytextarea f,:notes,:notes %> 
+  <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, new_owner_path() %> 
+  <%= mycheckbox f,:is_used,:is_used %> 
+  <%= mysubmit(f,"Update") %>
+
 <% end %>
