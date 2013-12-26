@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   end
 
   def thread
-    @coffees=Edition.find_by_format("Coffee")
+    @coffees=Edition.where(:format => "Coffee")
   end
 
   def food
