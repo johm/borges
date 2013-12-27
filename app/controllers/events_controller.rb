@@ -11,7 +11,7 @@ class EventsController < ApplicationController
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
-    @events = Event.by_year(@year).by_month(@month).where(:published=>true)
+    @events = Event.by_year(@year).by_month(@month).where(:published=>true).order("event_start asc")
 
     respond_to do |format|
       format.html # index.html.erb
