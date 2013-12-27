@@ -161,6 +161,8 @@ Borges::Application.routes.draw do
   get '/coffee/', :to => 'home#thread'
   get '/thread/', :to => 'home#thread'
   get '/blog/', :to => 'posts#index'
+  get '/about/', :to => 'home#about'
+  get '/pages/about/', :to => 'home#about'
 
 
   authenticated :user do

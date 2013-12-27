@@ -1162,6 +1162,7 @@ padding:5px;
 }
 
 
+
 #menubar .menuwrapper:last-child .menusub,#menubar .menuwrapper:nth-child(6) .menusub {
 
 }
@@ -1229,3 +1230,22 @@ font-weight:normal;
 margin-top:10px;
 float:right;
 }
+
+
+.about h2 {
+color:white;
+font-family:chunk;
+font-size:80px;
+line-height:80px;
+padding-top:60px;
+text-shadow:2px 2px #000000;
+}
+
+.about p, .about li {
+font-size: 20px;
+line-height: 28px;
+opacity:0.7;
+font-family: "adobe-caslon-pro";
+text-align:justify;
+}
+
