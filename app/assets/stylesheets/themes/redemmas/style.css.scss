@@ -272,6 +272,10 @@ font-size:16px;
     color:$lightred;
 }
 
+.menubar a:hover {
+    text-decoration:none;
+}
+
 .menubar>.menuwrapper>a:hover {
     color:$nearwhite; 
     text-decoration:none;
@@ -454,6 +458,7 @@ top:-60px;
 background-color:#1f2020;
 background-color:rgba(31,32,32,.75);
 color:$nearwhite;
+font-size:14px;
 }
 
 
@@ -508,7 +513,14 @@ border-radius: 3px;
 }
 
 
+
 /* for "normal desktops" */
+
+
+    .frontpage .menubar a{
+	font-size:19px;
+    }   	       
+
 
     #front_1 {
 	font-size:45px;
@@ -534,7 +546,7 @@ border-radius: 3px;
     #front_5 {
 	margin-top:20px;
 	margin-bottom:25px;
-	line-height:40px;
+	line-height:24px;
 	font-size:36px;
     }
 
@@ -595,6 +607,8 @@ border-radius: 3px;
           content:" LARGE";   
 }	 */ 		             
 
+
+
     #front_1 {
 	font-size:55px;
     }
@@ -636,6 +650,11 @@ border-radius: 3px;
 //	margin-bottom:20px;
 	margin-top:100px;
     }
+
+    .frontpage .menubar a{
+	font-size:24px;
+    }   	       
+
     
     .menubar a{
 //	margin-right:13px;
@@ -675,6 +694,9 @@ border-radius: 3px;
 
     }
 
+    
+
+
 }
  
 /* Portrait tablet to landscape and desktop */
@@ -683,6 +705,13 @@ border-radius: 3px;
        .navbar>ul li:last-child a:after{
            content:" BIG TABLET";   
        }	  		             */
+
+
+    .frontpage .menubar a {
+font-size:16px;
+	}
+
+
        #mce-EMAIL {
 	   width:100px !important;
 	   min-width:100px !important;
@@ -710,7 +739,7 @@ border-radius: 3px;
 
     #front_3 {
 	margin-top:20px;
-	line-height:31px;
+	line-height:10px;
 	font-size:30.5px;
     }
 
@@ -723,7 +752,7 @@ border-radius: 3px;
     #front_5 {
 	margin-top:15px;
 	margin-bottom:25px;
-	line-height:40px;
+	line-height:20px;
 	font-size:32px;
     }
 
@@ -803,6 +832,10 @@ border-radius: 3px;
           content:" BIG PHONE";   
 }*/	  		             
 
+.frontpage .menubar a {
+font-size:16.5px;
+}
+
 .bottommenuwrapper {
 float:none;
 width:100%;
@@ -834,6 +867,10 @@ right:0px;
 }	      
            
 
+.frontpage .menubar {
+padding-bottom:0px;
+}
+
     .frontpage #frontleft {
 	padding-top:20px;
     }
@@ -856,7 +893,7 @@ right:0px;
 
     #front_3 {
 	margin-top:20px;
-	line-height:31px;
+	line-height:10px;
 	font-size:30.5px;
     }
 
@@ -869,7 +906,7 @@ right:0px;
     #front_5 {
 	margin-top:15px;
 	margin-bottom:25px;
-	line-height:40px;
+	line-height:10px;
 	font-size:32px;
     }
 

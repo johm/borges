@@ -27,6 +27,7 @@
 <h2>Upcoming events at this location:</h2>
 <% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each do |event| %> 
   <%= render :partial=>'events/event',:locals => {:event=>event} %>
+  <hr>
 <% end %>
 
 </div>
