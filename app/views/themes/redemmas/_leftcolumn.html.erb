@@ -4,9 +4,9 @@
   <div class="row">
       <div class="span2" id="frontleft">
 	<% if (controller_name=="home" && controller.action_name=="thread") || (controller_name=="pages" && @page && (@page.slug=="welcome-to-thread-coffee" || (@page.parent && @page.parent.slug=="welcome-to-thread-coffee"))) %>
-	<%= image_tag "redemmas/threadlogo_web.png" %>
+	<a href="/thread"><%= image_tag "redemmas/threadlogo_web.png" %></a>
 	<% else %>
-	<%= image_tag "redemmas/emmas.png" %>
+	<a href="/"><%= image_tag "redemmas/emmas.png" %></a>
 	<% end %>
       </div>
       <div class="span7">
