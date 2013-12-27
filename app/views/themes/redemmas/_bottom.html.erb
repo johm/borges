@@ -24,11 +24,11 @@
 	</div>
 	<div class="span8">
 	  <p class="bottommenubar copse">
-	    <a href="#">{catering}</a>
-	    <a href="#">{meeting space}</a>
-	    <a href="#">{propose an event}</a>
-	    <a href="#">{trainings}</a>
-	    <a href="#">{cooperatives}</a>
+	    <a href="/pages/catering">{catering}</a>
+	    <a href="/pages/meeting_space">{meeting space}</a>
+	    <a href="/pages/propose_an_event">{propose an event}</a>
+	    <a href="/pages/trainings">{trainings}</a>
+	    <a href="/pages/cooperatives">{cooperatives}</a>
 	  </p>
 	  <p class="proxima" id="bottomtag">Red Emma's is a worker cooperative and a family of projects dedicated to autonomy, sustainability, participatory democracy, and solidarity.</p>
 	</div>
@@ -40,7 +40,7 @@
       
       <div>
 	<p class="mobilemenubar copse">
-	  <%= raw mobilemenubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:menu=>['/pages/menu',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{}]}) %>
+	  <%= raw mobilemenubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:food=>['/food',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{}]}) %>
 	</p>
       </div>
 
