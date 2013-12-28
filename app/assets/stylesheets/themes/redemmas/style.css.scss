@@ -10,8 +10,7 @@ $lightred:#e59179;
 $lightred:#cb3e38; //
 $lightishgrey:#80807f;
 $johnsgrey:#444a50;
-//@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
-//@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
 
 
 .faint {
@@ -42,31 +41,6 @@ font-weight:500;
 
 
 
-.posts .introduction p{
-//font-family:"Source Sans Pro";
-//font-weight:300;
-}
-
-.posts .body p{
-//font-family:"Source Sans Pro";
-//font-weight:300;
-}
-
-
-
-
-.shortorder .status_and_price {
-//font-weight:500; 
-//font-family:"Raleway";
-}
-
-.shortorder .status_and_price th, .shortorder .status_and_price td{
-//font-weight:500; 
-}
-
-h4.contributors {
-//font-weight:normal;
-}
 
 h3.contributors{
 font-weight:normal;
@@ -108,11 +82,7 @@ font-weight:300;
 line-height:28px;
 }
 
-h3 {
-//font-family:"minion-pro";
-//font-weight:300;
-//color:$nearblack;
-}
+
 
 .content h2 a, .content h2 a:visited{
 color:$nearblack;
@@ -122,15 +92,7 @@ color:$nearblack;
 color:$nearblack;
 }
 
-@font-face {
-    font-family: "Tablet Gothic SemiCondensed";
-    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot');
-    src: font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
-          font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.ttf') format('truetype'),
-         font-url('typetogether_-_tabletgothicsemicondensed-extrabold-webfont.svg#tablet_gothic_semicondenseXBd') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 #top {
 background-color:$lightgrey;
