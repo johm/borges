@@ -198,6 +198,11 @@ content:"}";
 }
 
 
+
+#menubar a:hover {
+color:#ccc !important;
+}
+
 .menubar>div:hover>a:before{
 content:"{";
 color:$lightred;
@@ -1218,3 +1223,23 @@ font-family: "adobe-caslon-pro";
 text-align:justify;
 }
 
+.blogcolumn h2 {
+//border-bottom:1px solid #eee;
+margin-bottom:20px;
+}
+
+.blogcolumn h2.posttitle {
+border-bottom:0px solid #eee;
+font-size:28px;
+line-height:36px;
+font-weight:500;
+font-family:"garamond-premier-pro-display";
+}
+
+.blogcolumn h3.postdate {
+font-weight:normal;
+font-size:18px;
+line-height:18px;
+float:right;
+margin-left:10px;
+}
