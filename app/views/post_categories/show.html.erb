@@ -7,7 +7,6 @@
 
     <% @post_category.posts.order("created_at desc").each do |post| %>
     <div class="row">
-      <div class="span2"></div>
       <div class="span2">
 	<% post.images.each do |i| %>
 	<div class="item">
@@ -16,7 +15,7 @@
 	<% end %>
 
       </div>
-      <div class="span5 postshort">
+      <div class="span7 postshort">
 	<h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
 	<h2 class="posttitle"><%= link_to post.title,post %></h2>
 	<div class="introduction">
