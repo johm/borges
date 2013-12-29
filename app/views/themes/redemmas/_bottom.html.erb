@@ -41,7 +41,7 @@
       <div>
 	<p class="mobilemenubar copse">
 	  <% cache("mobilemenubar", :expires_in => 10.minutes) do %>
-	  <%= raw mobilemenubar({:books=>['/books',{:browse=>'/books',:search=>'/search',"special orders"=>'/pages/special_orders'}],:food=>['/food',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{:directions=>'/pages/directions'}]}) %>
+	  <%= raw mobilemenubar({:books=>['/books',{:browse=>'/books',:search=>'/search','special orders'=>'/pages/special_orders',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/pages/thread',{}],:events=>['/events',{}],:news=>['/posts',{}],:about=>['/about',{}],:contact=>['/contact',{:directions=>'/pages/directions'}]}) %>
 	  <% end %>
 	</p>
       </div>
