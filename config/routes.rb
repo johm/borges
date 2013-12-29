@@ -1,4 +1,6 @@
 Borges::Application.routes.draw do
+
+
   resources :events do 
     get :autocomplete_event_location_title, :on => :collection
   end
@@ -162,6 +164,8 @@ Borges::Application.routes.draw do
   get '/thread/', :to => 'home#thread'
   get '/blog/', :to => 'posts#index'
   get '/about/', :to => 'home#about'
+  get '/2640/', :to => 'home#twentysixforty'
+  get '/newsletter/', :to => 'home#newsletter'
   get '/pages/about/', :to => 'home#about'
 
 

@@ -19,6 +19,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def twentysixforty
+    @year = (params[:year] || DateTime.now.year).to_i
+    @month = (params[:month] || DateTime.now.month).to_i
+    
+    @events = Event.by_year(@year).by_month(@month).where(:published=>true).where(:location_id => 3).order("event_start asc")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @events }
+    end
+  end
+
+
   # GET /events/1
   # GET /events/1.json
   def show
