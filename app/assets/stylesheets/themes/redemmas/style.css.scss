@@ -1242,7 +1242,7 @@ text-align:justify;
 margin-bottom:20px;
 }
 
-.blogcolumn h2.posttitle {
+ h2.posttitle {
 border-bottom:0px solid #eee;
 font-size:28px;
 line-height:36px;
@@ -1250,10 +1250,15 @@ font-weight:500;
 font-family:"garamond-premier-pro-display";
 }
 
-.blogcolumn h3.postdate {
+ h3.postdate {
 font-weight:normal;
 font-size:18px;
 line-height:18px;
 float:right;
 margin-left:10px;
+}
+
+
+.item {
+margin-bottom:10px;
 }

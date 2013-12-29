@@ -13,7 +13,7 @@
 	<div id="menubar">
 	  <div class="menubar copse">
 	    <% cache("menubar", :expires_in => 10.minutes) do %>
-	    <%= raw menubar({:books=>['/books',{:search=>'/books',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/thread',{}],:events=>['/events',{}],:news=>['/blog',{}],:about=>['/about',{}],:contact=>['/pages/contact',{'contact us'=>'/pages/contact',:directions=>'/pages/directions'}]}) %>
+	    <%= raw menubar({:books=>['/books',{:browse=>'/books',:search=>'/books','special orders'=>'/pages/special_orders','course orders'=>'/pages/books-frequently-asked-questions#courseorders',:faq=>'/pages/books-frequently-asked-questions'}],:food=>['/food',{}],:coffee=>['/thread',{}],:events=>['/events',{}],:news=>['/blog',{}],:about=>['/about',{}],:contact=>['/pages/contact',{'contact us'=>'/pages/contact',:directions=>'/pages/directions'}]}) %>
 	  <% end %>
 	  </div>
 	</div>

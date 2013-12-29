@@ -17,8 +17,8 @@
 
       </div>
       <div class="span5 postshort">
+	<h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
 	<h2 class="posttitle"><%= link_to post.title,post %></h2>
-	<h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
 	<div class="introduction">
 	  <%= raw post.introduction %>
 	</div>
