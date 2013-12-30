@@ -8,7 +8,7 @@
     <% @post_category.posts.order("created_at desc").each do |post| %>
     <div class="row">
       <div class="span2">
-	<% post.images.each do |i| %>
+	<% post.images.limit(1).each do |i| %>
 	<div class="item">
 	  <%= image_tag i.the_image_url(:reasonable),{:width => "100%"} %>
 	</div>  
