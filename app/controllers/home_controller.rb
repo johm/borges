@@ -8,6 +8,9 @@ class HomeController < ApplicationController
 
   def newsletter
   end
+
+  def twentysixforty
+  end
   
   def frontpage
     Instagram.configure do |config|
