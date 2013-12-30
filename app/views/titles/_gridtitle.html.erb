@@ -4,7 +4,9 @@
 	<div class="gridborder"></div>
       </a>
     </div>
+    <% if !title.latest_published_edition.nil? && title.latest_published_edition.format!="Coffee" %>
     <div class="griditemtitle"><%= title.in_stock > 0 ? "IN STOCK" : "SPECIAL ORDER" %></div>
+    <% end %>
     <div class="griditemdescription">
           <% if can? :edit, Title %>
     <div class="hiddenactions">
