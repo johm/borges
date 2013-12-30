@@ -20,7 +20,7 @@ class Ability
       can :read, Post, :published => true
       can :read, PostCategory
       can :read, Category
-      can [:read,:calendar], Event
+      can [:read,:calendar,:twentysixforty], Event
       can :read, EventLocation
 
       if !user.id.blank?  # guests can't create shopping carts 
