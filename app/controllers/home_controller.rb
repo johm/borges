@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       for media_item in client.user_recent_media()
         break if i>2
         i=i+1
-        html << "<li class='span2'><div class='thumbnail'><div><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;')}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url}'></div></a></div></li>"
+        html << "<li class='span2'><div class='thumbnail'><div><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;')}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div></a></div></li>"
       end
       html << "</ul>"
       html
@@ -61,7 +61,7 @@ class HomeController < ApplicationController
       i=i+1
       tags = media_item.tags
       if tags.include?("food") || tags.include?("vegan")  || tags.include?("cafe") 
-        html << "<li class='span2'><div class='thumbnail'><div style='margin-bottom:10px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url}'></div>#{media_item.caption.text}</a></div></li>"
+        html << "<li class='span2'><div class='thumbnail'><div style='margin-bottom:10px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div>#{media_item.caption.text}</a></div></li>"
       end
     end
     html << "</ul>"
