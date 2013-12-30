@@ -1,11 +1,11 @@
 <div class="span6">
-  <h1 style="font-size:50px;margin-bottom:50px;">Events at 2640</h1>
+  <h1 style="font-size:50px;margin-bottom:50px;">All about 2640</h1>
 </div>
 
 <div class="span4">
   <h3>Your questions, answered:</h3>
   <ul class="bookfaq">
-    This new site for 2640 is under construction!  To get in touch with 2640 while we build it out, email us at 2640@redemmas.org.
+    Contact us at 2640@redemmas.org
   </ul>
 </div>
 
@@ -21,7 +21,7 @@
     <% end %>
   </div>
   <div class="span4 blogcolumn">
-  <h2>2640 Blog</h2>
+  <h2>Events Blog</h2>
 
   <% PostCategory.find_by_name("Events").posts.where(:published=>true).order("created_at DESC").limit(5).each do |post| %>
   <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
