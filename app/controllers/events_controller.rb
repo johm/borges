@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   autocomplete :event_location,:title,:full=>true,:display_value=>:name_and_id
-  before_filter :authenticate_user!, :except=>[:index,:show,:calendar]
+  before_filter :authenticate_user!, :except=>[:index,:show,:calendar,:twentysixforty]
   before_filter :hack_out_params , :only=>[:create,:update]
 
   load_and_authorize_resource
