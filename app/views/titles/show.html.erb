@@ -1,6 +1,8 @@
 <%= content_for :title do %>
- <%= @title.title %>
+ <%= @title.title %> by <%= sanitize(contributors_list(@title),:tags=>[]) %>
 <% end %>
+
+<% content_for :description do%><%=h truncate(sanitize("#{@title.introduction}", :tags=>[]),:length => 250) %><% end %>
 
     <div class="span2">
       
