@@ -1,3 +1,8 @@
+<% content_for :title do%>
+    Event: <%= @event.title %>
+<% end %>
+
+<% content_for :description do%><%=h truncate(sanitize(@event.introduction, :tags=>[]),:length => 250) %><% end %>
 
 
 <div class="span7">

@@ -1,3 +1,7 @@
+<% content_for :title do %>
+Events at 2640
+<% end %>
+
 <div class="span6">
   <h1 style="font-size:50px;margin-bottom:50px;">Events at 2640</h1>
 </div>
@@ -5,7 +9,7 @@
 <div class="span4">
   <h3>Your questions, answered:</h3>
   <ul class="bookfaq">
-    This new site for 2640 is under construction!  To get in touch with 2640 while we build it out, email us at 2640@redemmas.org.
+    This new site for 2640 is under construction!  To get in touch with 2640 while we build it out, email us at 2640@redemmas.org.  For updates on our upcoming events, head over to our <a href="https://www.facebook.com/twentysixforty">Facebook page</a>.
   </ul>
 </div>
 
@@ -23,6 +27,7 @@
   <div class="span4 blogcolumn">
   <h2>2640 Blog</h2>
 
+  <% begin %>
   <% PostCategory.find_by_name("2640").posts.where(:published=>true).order("created_at DESC").limit(5).each do |post| %>
   <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
     <h2 class="posttitle"><%= link_to post.title,post %></h2>
@@ -38,7 +43,9 @@
   <%= link_to "Read more...",post %>
   <hr style="clear:both;">
   <% end %>
-
+  <% rescue %>
+  No posts
+  <% end %>
 
 </div>
 
