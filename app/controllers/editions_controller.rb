@@ -115,6 +115,46 @@ class EditionsController < ApplicationController
     end
   end
 
+
+
+  def add_to_title_list
+    @edition = Edition.find(params[:id])
+    @title_list = TitleList.find(params[:title_list])
+    
+    if ! @title_list.titles.include? @edition.title
+      @title_list.titles << @edition.title 
+    else
+      @title_list.touch #touch it anyway  
+    end      
+
+    respond_to do |format| 
+      format.html { redirect_to @edition.title, notice: "Title was successfully added to title list <a href='#{url_for(@title_list)}'>#{@title_list.name}</a>".html_safe }
+      format.js {}
+    end
+  end
+
+
+  def add_to_category
+    @edition = Edition.find(params[:id])
+    @category = Category.find(params[:category])
+    
+    if ! @category.titles.include? @edition.title
+      @category.titles << @edition.title
+    else
+      @category.touch #touch it anyway
+    end
+
+
+
+    respond_to do |format| 
+      format.html { redirect_to @edition.title, notice: "Title was successfully added to category <a href='#{url_for(@category)}'>#{@category.name}</a>".html_safe }
+      format.js {}
+    end
+  end
+
+
+
+
   def hidden_actions
     @edition = Edition.find(params[:id])
 

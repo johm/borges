@@ -8,3 +8,25 @@
     </div>
   </div>
 <% end %>
+
+
+<%= nested_form_for @edition,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :add_to_title_list,:controller => :editions } do |f| %>
+  <div class="field control-group">
+    <%= f.label :title_list,"Add to title list", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :title_list, options_from_collection_for_select(TitleList.order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Add", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+
+<%= nested_form_for @edition,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :add_to_category,:controller => :editions } do |f| %>
+  <div class="field control-group">
+    <%= f.label :category,"Add to category", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :category, options_from_collection_for_select(Category.order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Add", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+

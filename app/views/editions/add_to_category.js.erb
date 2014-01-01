@@ -1,0 +1,8 @@
+$("#modal-window").modal('hide');
+$("#notificationcontent").html("<%= escape_javascript("Title was successfully added to title list <a href='#{url_for(@category)}'>#{@category.name}</a>").html_safe %>");
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+

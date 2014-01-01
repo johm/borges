@@ -127,6 +127,8 @@ Borges::Application.routes.draw do
     member do
       get :hidden_actions 
       put :add_to_purchase_order
+      put :add_to_title_list
+      put :add_to_category
     end
   end
 
