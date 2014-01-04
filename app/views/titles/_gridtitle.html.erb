@@ -11,7 +11,7 @@
           <% if can? :edit, Title %>
     <div class="hiddenactions">
       <%= unless title.latest_published_edition.nil?  
-	 link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  
+	 link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window',:title=>title.latest_published_edition.publisher}  
       end %>
     </div>
     <% end %>
