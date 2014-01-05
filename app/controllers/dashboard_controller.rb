@@ -22,12 +22,15 @@ class DashboardController < ApplicationController
   def search 
   end
 
-  def sales 
+  def sales
     @date_range_object=DateRangeObject.new
     @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
     @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
 
-    @sales_by_date=SaleOrder.includes(:sale_order_line_items => [:copy => [:edition => [:title]]]).where(:posted => true).order("created_at asc").where("posted_when > ? && posted_when < ?",@date_range_object.range_start,@date_range_object.range_end+1.days).group_by{ |so| so.posted_when.to_date }
+    timezone=::Rails.application.config.time_zone || "UTC"
+    
+
+    @sales_by_date=SaleOrder.includes(:sale_order_line_items => [:copy => [:edition => [:title]]]).where(:posted => true).order("created_at asc").where("convert_tz(posted_when,'UTC','#{timezone}') > ? && convert_tz(posted_when,'UTC','#{timezone}') < ?",@date_range_object.range_start,@date_range_object.range_end+1.days).group_by{ |so| so.posted_when.to_date }
 
     @days=@sales_by_date.keys.sort
     
