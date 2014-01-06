@@ -26,7 +26,9 @@ class SaleOrder < ActiveRecord::Base
   end
 
   def subtotal_after_discount 
-    subtotal * ((100-(discount_percent || 0))/100.0)
+    Rails.cache.fetch("/sale_order/#{id}-#{updated_at}/subtotal_after_discount", :expires_in => 12.hours) do
+      subtotal * ((100-(discount_percent || 0))/100.0)
+    end
   end
   
   def tax_amount

@@ -39,7 +39,7 @@ class DashboardController < ApplicationController
       f.title({ :text=>"Sales"})
       f.xAxis(:categories => @days)
               
-      @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.total} }
+      @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.subtotal_after_discount} }
       @cost=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.cost} }
       
       @titles_sold_with_count=@days.collect {|d| @sales_by_date[d].collect {|s| s.sale_order_line_items.collect {|li| li.copy.edition.title  }}}.flatten.flatten.flatten.inject(Hash.new(0)) {|h,i| h[i] += 1; h}.sort_by{|k,v| v}.reverse      
@@ -104,8 +104,7 @@ class DashboardController < ApplicationController
   def daily 
     @day=params[:day] ? Date.parse(params[:day]) : DateTime.now.to_date
     @sales_for_day=SaleOrder.where(:posted => true).order("created_at asc").where("date(convert_tz(posted_when,'UTC',?)) = ? ", ::Rails.application.config.time_zone || "UTC", @day)
-    @total=@sales_for_day.inject(Money.new(0)) {|sum,s| sum+s.total}
-    
+    @total=@sales_for_day.inject(Money.new(0)) {|sum,s| sum+s.subtotal_after_discount}
   end
 
 
