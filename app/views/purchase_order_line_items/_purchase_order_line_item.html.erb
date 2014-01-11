@@ -1,4 +1,4 @@
-<% unless if purchase_order_line_item.edition.nil? %>
+<% if ! purchase_order_line_item.edition.nil? %>
 	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>">
 	   <td>
 	     <%= best_in_place_if (! purchase_order_line_item.purchase_order.ordered?),purchase_order_line_item, :quantity, :type => :input, :inner_class=>"input-tiny", :data => {:purchase_order_line_item => purchase_order_line_item.id,:purchase_order => purchase_order_line_item.purchase_order.id} %>
