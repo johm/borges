@@ -123,10 +123,11 @@ class EventsController < ApplicationController
         params[:event].delete :event_location
       end
       
-      params[:event][:event_shifts_attributes].each do |k,v|
-        params[:event][:event_shifts_attributes][k].delete :event_staffer
+      unless params[:event][:event_shifts_attributes].nil?
+        params[:event][:event_shifts_attributes].each do |k,v|
+          params[:event][:event_shifts_attributes][k].delete :event_staffer
+        end
       end
-
       
     end
   end
