@@ -61,10 +61,12 @@ class DashboardController < ApplicationController
     @events=Event.where("event_start > ?",Time.now)
     @event_locations=EventLocation.all
 
+
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
     @calendar_events = Event.by_year(@year).by_month(@month)
+    @calendar_event_shifts=@calendar_events.collect {|x| x.event_shifts}.flatten.sort {|x,y| x.event_staffer.name <=> y.event_staffer.name}
   end
 
   def titles

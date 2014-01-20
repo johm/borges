@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140119214236) do
+ActiveRecord::Schema.define(:version => 20140120163634) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -167,6 +167,8 @@ ActiveRecord::Schema.define(:version => 20140119214236) do
     t.text     "internal_notes"
     t.datetime "event_setup_starts"
     t.datetime "event_breakdown_ends"
+    t.text     "rental_payment_info"
+    t.text     "facebook_url"
   end
 
   add_index "events", ["event_location_id"], :name => "index_events_on_event_location_id"

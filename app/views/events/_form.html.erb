@@ -30,6 +30,8 @@
   <%= mytextfield f,:remote_picture_url,:remote_picture_url %>
   </div>
   
+  <%= mytextfield f,:facebook_url,:facebook_url, {:class=>"input-xxlarge"} %>
+
   <%= mycheckbox f,:published,:published %>
 
   <%= mycheckbox f,:show_on_red_emmas_page,:show_on_red_emmas_page %>
@@ -46,6 +48,7 @@
   <br />
     <div class="collapse" id="internal_details">
       <div class="well">
+	<%= mytextfield f,:rental_payment_info,:rental_payment_info, {:class=>"input-xxlarge"} %>
 	<%= mytextarea f,:internal_notes,:internal_notes %>
 	<%= mydatetimefield f,:event_setup_starts_at,:event_setup_starts %>
 	<%= mydatetimefield f,:event_breakdown_ends_at,:event_breakdown_ends %>
@@ -62,6 +65,8 @@
 	    <div class="verticaloffset">
 	      <%= f.link_to_add raw("<i class='icon-plus'></i> Add a shift"), :event_shifts, {:class=>:btn} %>
 	    </div>
+	  </div>
+	</div>
       </div>
     </div>
   <%= mysubmit f,:save %>
