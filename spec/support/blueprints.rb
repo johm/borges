@@ -123,3 +123,19 @@ end
 Event.blueprint do
   # Attributes here
 end
+
+ShoppingCart.blueprint do
+  # Attributes here
+end
+
+ShoppingCartLineItem.blueprint do
+  # Attributes here
+end
+
+EventStaffer.blueprint do
+  # Attributes here
+end
+
+EventShift.blueprint do
+  # Attributes here
+end
