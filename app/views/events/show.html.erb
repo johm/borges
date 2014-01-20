@@ -13,6 +13,32 @@
 <%= @event.introduction.html_safe %>
 <%= @event.description.html_safe %>
 <%= theme_partial :social %>
+
+<% if can? :edit, Event %>
+<br />
+<div class="well">
+<h2>Internal Details</h2>
+
+<b>Setup begins:</b> <%= @event.event_setup_starts.to_formatted_s(:long_readable_date) %>, <%= @event.event_setup_starts.to_formatted_s(:just_time) %><br />
+<b>Breakdown ends:</b> <%= @event.event_breakdown_ends.to_formatted_s(:long_readable_date) %>, <%= @event.event_breakdown_ends.to_formatted_s(:just_time) %><br /> 
+<br /> 
+
+<%= @event.internal_notes.html_safe %>
+
+<h3>Shifts</h3>
+<table class="table">
+<% @event.event_shifts.each do |s| %>
+<tr>
+  <td><%= mail_to s.event_staffer.email,s.event_staffer.name %></td>
+  <td><%= s.notes %></td>
+</tr>
+<% end %>
+</table>
+
+
+</div>
+<% end %>
+
 </div>
 
 <div class="span3">

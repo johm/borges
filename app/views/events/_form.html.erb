@@ -31,7 +31,39 @@
   </div>
   
   <%= mycheckbox f,:published,:published %>
+
+  <%= mycheckbox f,:show_on_red_emmas_page,:show_on_red_emmas_page %>
+  <%= mycheckbox f,:show_on_2640_page,:show_on_2640_page %>
   
+
+  <div class="controls">
+    <a href="#" onClick="$('#internal_details').collapse('toggle');return false;">
+      <button type="button" class="btn btn-info">
+	Internal Event Details <span class="caret"></span>
+      </button>
+    </a>
+    </div>
+  <br />
+    <div class="collapse" id="internal_details">
+      <div class="well">
+	<%= mytextarea f,:internal_notes,:internal_notes %>
+	<%= mydatetimefield f,:event_setup_starts_at,:event_setup_starts %>
+	<%= mydatetimefield f,:event_breakdown_ends_at,:event_breakdown_ends %>
+	<div class="field control-group">
+	  <%= f.label :Shifts, :class=>"control-label" %><br />
+	  <div class="controls">
+	    <%= f.fields_for :event_shifts do |shift_form| %>
+	    <div class="well">
+	      <%= shift_form.link_to_remove raw("<i class='icon-minus'></i> Remove this shift"), :class=>"btn",:style=>"float:right;" %>	    
+	      <%= myselectfield shift_form,:event_staffer,:staffer,autocomplete_event_staffer_name_event_staffers_path,new_event_staffer_path() %>
+	      <%= mytextfield shift_form,:what,:notes, {:class=>"input-xxlarge"} %>
+	    </div>
+	    <% end %>
+	    <div class="verticaloffset">
+	      <%= f.link_to_add raw("<i class='icon-plus'></i> Add a shift"), :event_shifts, {:class=>:btn} %>
+	    </div>
+      </div>
+    </div>
   <%= mysubmit f,:save %>
 
 <% end %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event staffer:</b>
+  <%= @event_shift.event_staffer %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @event_shift.event %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @event_shift.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_shift_path(@event_shift) %> |
+<%= link_to 'Back', event_shifts_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131216023653) do
+ActiveRecord::Schema.define(:version => 20140119214236) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -133,6 +133,24 @@ ActiveRecord::Schema.define(:version => 20131216023653) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "event_shifts", :force => true do |t|
+    t.integer  "event_staffer_id"
+    t.integer  "event_id"
+    t.text     "notes"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "event_shifts", ["event_id"], :name => "index_event_shifts_on_event_id"
+  add_index "event_shifts", ["event_staffer_id"], :name => "index_event_shifts_on_event_staffer_id"
+
+  create_table "event_staffers", :force => true do |t|
+    t.text     "name"
+    t.text     "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -140,10 +158,15 @@ ActiveRecord::Schema.define(:version => 20131216023653) do
     t.datetime "event_start"
     t.datetime "event_end"
     t.boolean  "published"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "picture"
     t.text     "introduction"
+    t.boolean  "show_on_red_emmas_page"
+    t.boolean  "show_on_2640_page"
+    t.text     "internal_notes"
+    t.datetime "event_setup_starts"
+    t.datetime "event_breakdown_ends"
   end
 
   add_index "events", ["event_location_id"], :name => "index_events_on_event_location_id"
@@ -378,6 +401,31 @@ ActiveRecord::Schema.define(:version => 20131216023653) do
 
   add_index "section_title_list_memberships", ["section_id_id"], :name => "index_section_title_list_memberships_on_section_id_id"
   add_index "section_title_list_memberships", ["title_list_id_id"], :name => "index_section_title_list_memberships_on_title_list_id_id"
+
+  create_table "shopping_cart_line_items", :force => true do |t|
+    t.integer  "shopping_cart_id"
+    t.integer  "edition_id"
+    t.integer  "quantity"
+    t.integer  "cost_in_cents"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "shopping_cart_line_items", ["edition_id"], :name => "index_shopping_cart_line_items_on_edition_id"
+  add_index "shopping_cart_line_items", ["shopping_cart_id"], :name => "index_shopping_cart_line_items_on_shopping_cart_id"
+
+  create_table "shopping_carts", :force => true do |t|
+    t.string   "session_id"
+    t.string   "submitted"
+    t.string   "shipping_name"
+    t.string   "shipping_address_1"
+    t.string   "shipping_address_2"
+    t.string   "shipping_state"
+    t.string   "shipping_city"
+    t.string   "shipping_zip"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "title_category_memberships", :force => true do |t|
     t.integer  "title_id"
