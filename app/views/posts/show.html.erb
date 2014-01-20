@@ -66,18 +66,25 @@
   </div>
 
 <% @post.title_lists.each do |title_list| %>
-<div style="float:right;">
-  <%= mylinkbutton 'Edit', edit_title_list_path(title_list) if can? :edit,TitleList %>
-</div>  
-<h1><%= link_to title_list.name,title_list %></h1>
-<p>
-  <%= sanitize title_list.description %>
-</p>
-
-<% title_list.titles.each do |t| %>
-<%= render :partial=>'titles/title', :object=>t %>
-<% end %>
-<% end %>
+<div class="row">
+  <div class="span3"></div>
+  <div class="span6">
+    <h1><%= link_to title_list.name,title_list %></h1>
+    <p>
+      <%= sanitize title_list.description %>
+    </p>
+    
+    <div class="grid">
+      <% title_list.title_list_memberships.each do |tlm| %>
+      <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>(tlm.notes || "") } unless tlm.title.nil? %>
+      <% end %>
+    </div>
+</div>
+  <div class="span3">
+      <%= mylinkbutton 'Edit', edit_title_list_path(title_list) if can? :edit,TitleList %>
+</div>
+</div>
+    <% end %>
 
 
 
