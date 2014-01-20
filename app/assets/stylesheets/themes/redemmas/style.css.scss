@@ -1132,6 +1132,11 @@ margin-left:auto;
 margin-right:auto;
 }
 
+#menubar div.menuwrapper:last-child img {
+width:50px !important;
+}
+
+
 #menubar .menusub {
 font-family:Copse;
 font-weight:bold;
@@ -1237,7 +1242,7 @@ padding-top:60px;
 text-shadow:2px 2px #000000;
 }
 
-.about p, .about li {
+.about #main p, .about #main li {
 font-size: 20px;
 line-height: 28px;
 opacity:0.7;

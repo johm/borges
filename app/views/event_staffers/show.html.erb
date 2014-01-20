@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @event_staffer.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @event_staffer.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_staffer_path(@event_staffer) %> |
+<%= link_to 'Back', event_staffers_path %>

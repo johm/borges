@@ -1,6 +1,14 @@
 Borges::Application.routes.draw do
 
 
+  resources :event_shifts
+
+
+  resources :event_staffers do
+    get :autocomplete_event_staffer_name, :on => :collection
+  end
+
+
   resources :events do 
     get :autocomplete_event_location_title, :on => :collection
   end

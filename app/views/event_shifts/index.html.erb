@@ -1,0 +1,27 @@
+<h1>Listing event_shifts</h1>
+
+<table>
+  <tr>
+    <th>Event staffer</th>
+    <th>Event</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_shifts.each do |event_shift| %>
+  <tr>
+    <td><%= event_shift.event_staffer %></td>
+    <td><%= event_shift.event %></td>
+    <td><%= event_shift.notes %></td>
+    <td><%= link_to 'Show', event_shift %></td>
+    <td><%= link_to 'Edit', edit_event_shift_path(event_shift) %></td>
+    <td><%= link_to 'Destroy', event_shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event shift', new_event_shift_path %>
