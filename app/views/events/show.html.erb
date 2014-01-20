@@ -29,7 +29,7 @@
 <b>Rental payment info:</b> <%= @event.rental_payment_info %>
 
 <hr />
-<%= @event.internal_notes.html_safe %>
+<%= @event.internal_notes.html_safe rescue "" %>
 
 <h3>Shifts</h3>
 <table class="table">
