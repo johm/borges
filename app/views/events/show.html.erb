@@ -21,10 +21,10 @@
 <div class="well">
 <h2>Internal Details</h2>
 
-<b>Setup begins:</b> <%= @event.event_setup_starts.to_formatted_s(:long_readable_date) %>, <%= @event.event_setup_starts.to_formatted_s(:just_time) %><br />
+<b>Setup begins:</b> <%= @event.event_setup_starts.to_formatted_s(:long_readable_date) rescue "" %>, <%= @event.event_setup_starts.to_formatted_s(:just_time) rescue "" %><br />
 <b>Event starts:</b> <%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %><br />
 <b>Event ends:</b> <%= @event.event_end.to_formatted_s(:long_readable_date) %>, <%= @event.event_end.to_formatted_s(:just_time) %><br />
-<b>Breakdown ends:</b> <%= @event.event_breakdown_ends.to_formatted_s(:long_readable_date) %>, <%= @event.event_breakdown_ends.to_formatted_s(:just_time) %><br /> 
+<b>Breakdown ends:</b> <%= @event.event_breakdown_ends.to_formatted_s(:long_readable_date) rescue ""%>, <%= @event.event_breakdown_ends.to_formatted_s(:just_time) rescue "" %><br /> 
 <br /> 
 <b>Rental payment info:</b> <%= @event.rental_payment_info %>
 
