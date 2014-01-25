@@ -1,7 +1,13 @@
 <div class="row">
   <div class="span12">
+<div style="float:right">
+<% EventLocation.all.each do |location|%>
+<%= link_to_function location.title, "jQuery('.event_location_#{location.id}').toggle()" %>
+<% end %>
+
+</div>
     <%= calendar @calendar_events do |event| %>
-    <div style="border:1px solid #ccc;padding:2px;">
+    <div style="border:1px solid #ccc;padding:2px;" class="event_location_<%= event.event_location.id %>">
       <%= link_to event.title, event %>
       <div style="height:12px;"><small style="font-size:12px;line-height:8px;"><%= link_to event.event_location, event.event_location %></small></div>
       <div  style="height:12px;"><small style="font-size:12px;line-height:8px;"><%= event.event_start.to_formatted_s(:just_time)%> - <%= event.event_end.to_formatted_s(:just_time)  %></small></div>
