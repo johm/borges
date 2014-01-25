@@ -12,6 +12,12 @@ class Ability
       can [:read, :create, :destroy], Ckeditor::Picture
       can [:read, :create, :destroy], Ckeditor::AttachmentFile
     else
+      if user.has_role? :scheduler 
+        can :manage, Event
+        can :manage, EventLocation
+        can :manage, EventStaffer
+        can :manage_calendar, :dashboard
+      end
       can :read, Title 
       can :read, Author
       can :read, Image

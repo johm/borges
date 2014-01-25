@@ -211,4 +211,14 @@ module ApplicationHelper
   def layouts
     YAML.load(ENV["LAYOUTS"] || "") || ["application"]
   end
+
+  def user_is_admin?
+    current_user.roles.include?(Role.find_by_name('admin'))
+  end
+
+  def user_is_scheduler?
+    current_user.roles.include?(Role.find_by_name('scheduler'))
+  end
+  
+
 end
