@@ -2,7 +2,9 @@
   <div class="span12">
 <div style="float:right">
 <% EventLocation.all.each do |location|%>
-<%= link_to_function location.title, "jQuery('.event_location_#{location.id}').toggle()" %>
+<span style="border:1px solid #ccc;padding:2px;" class="event_location_<%= location.id %>"> 
+<%= link_to_function location.title, "jQuery('div.event_location_#{location.id}').toggle()" %>
+</span>
 <% end %>
 
 </div>
