@@ -213,11 +213,11 @@ module ApplicationHelper
   end
 
   def user_is_admin?
-    current_user.roles.include?(Role.find_by_name('admin'))
+    curent_user && current_user.roles.include?(Role.find_by_name('admin'))
   end
 
   def user_is_scheduler?
-    current_user.roles.include?(Role.find_by_name('scheduler'))
+    curent_user && current_user.roles.include?(Role.find_by_name('scheduler'))
   end
   
 
