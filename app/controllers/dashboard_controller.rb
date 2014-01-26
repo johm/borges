@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
   autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
-
+ 
   # GET /titles
   # GET /titles.json
 
@@ -64,9 +64,34 @@ class DashboardController < ApplicationController
 
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
-    
-    @calendar_events = Event.by_year(@year).by_month(@month)
+
+
+    @calendar_events = Event.by_year(@year).by_month(@month)    
     @calendar_event_shifts=@calendar_events.collect {|x| x.event_shifts}.flatten.sort {|x,y| x.event_staffer.name <=> y.event_staffer.name}
+    
+    # do the awesome for scheduling
+    @ical=nil
+    open("http://freeschool.redemmas.org/course_calendar.ics")do |cal|
+      @ical = RiCal.parse(cal)
+    end
+    
+    if @import_to_location=EventLocation.find_by_title("Free School Classroom") #because otherwise you don't care!
+      @ical.each do |calendar|
+        calendar.events.each do |event|
+        fake_event = Event.new
+          fake_event.event_location = @import_to_location
+          fake_event.event_start=event.dtstart
+          fake_event.event_end=event.dtend
+          fake_event.title=event.summary
+          @previous=@calendar_events.find_all {|c| c.title==fake_event.title && c.event_start==fake_event.event_start}# weird duplication in the feed 
+          if  @previous.length==0
+            @calendar_events << fake_event
+          end
+        end
+      end    
+    end
+
+
   end
 
   def titles
