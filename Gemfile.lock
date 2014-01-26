@@ -4,6 +4,12 @@ GIT
   specs:
     bootstrap-datetimepicker-rails (0.0.11)
 
+GIT
+  remote: git://github.com/johm/ri_cal
+  revision: 1a40f16a666f5995ad02bcf97502687104aa282e
+  specs:
+    ri_cal (0.8.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -204,7 +210,6 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    ri_cal (0.8.8)
     rmagick (2.13.2)
     rolify (3.2.0)
     rsolr (1.0.9)
@@ -312,7 +317,7 @@ DEPENDENCIES
   quiet_assets (>= 1.0.2)
   rails (= 3.2.13)
   rails3-jquery-autocomplete
-  ri_cal
+  ri_cal!
   rmagick
   rolify (>= 3.2.0)
   rspec-rails (>= 2.12.2)

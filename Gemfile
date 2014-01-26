@@ -71,6 +71,6 @@ gem "debugger"
 gem 'bootstrap-datetimepicker-rails', :git=>"git://github.com/johm/bootstrap-datetimepicker-rails"
 gem "progress_bar"
 gem 'lazy_high_charts'
-gem 'ri_cal'
+gem 'ri_cal', :git=>"git://github.com/johm/ri_cal"
 gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"
