@@ -1,22 +1,25 @@
-<div class="row">
-<div class="span8">
+
+
 <h1>Listing invoices</h1>
+
+<%= mylinkbutton 'New Invoice', new_invoice_path %>
 
 <table class="table">
   <tr>
-    <th>Our id</th>
-    <th>Vendor Number</th>
-    <th>Distributor</th>
+    <th><%= sortable "created_at", "Created" %></th>
+    <th><%= sortable "id","Our id" %></th>
+    <th><%= sortable "number","Vendor Number" %></th>
+    <th><%= sortable "distributors.name","Distributor" %></th>
     <th>Notes</th>
     <th># of books</th>
     <th>Total</th>
-    <th>Received?</th>
-
+    <th><%= sortable "received_when","Received?" %></th>
     <th></th>
   </tr>
 
 <% @invoices.each do |invoice| %>
   <tr>
+    <td><%= invoice.created_at.to_formatted_s(:just_date) %>
     <td><%= link_to invoice.id,invoice %>
     <td><%= link_to invoice.number,invoice %></td>
     <td><%= link_to invoice.distributor,invoice.distributor %></td>
@@ -29,10 +32,10 @@
   </tr>
 <% end %>
 </table>
+<br />
+<%= paginate @invoices %>
 
-</div>
-<div class="span4">
 
-<%= mylinkbutton 'New Invoice', new_invoice_path %>
-</div>
-</div>
+
+
+

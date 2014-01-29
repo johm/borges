@@ -154,7 +154,7 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def sort_column
-    %w[created_at].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[created_at number distributors.name ordered ordered_when].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
 end
