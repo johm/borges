@@ -18,7 +18,7 @@
     <td><%= link_to purchase_order.number,purchase_order %></td>
     <td><%= purchase_order.notes %></td>
     <td><%= link_to purchase_order.distributor,purchase_order.distributor %></td>
-    <td><%= purchase_order.ordered %></td>
+    <td><span class="label <%= purchase_order.ordered? ? 'label-success' : ''%>"><%= purchase_order.ordered? ? 'Yes' : 'Not yet' %></span></td>
     <td><%= purchase_order.ordered_when.to_formatted_s(:just_date) rescue "-" %></td>
   </tr>
 <% end %>
