@@ -4,12 +4,14 @@ class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user! 
   before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource 
+  helper_method :sort_column, :sort_direction
+
   
 
   # GET /purchase_orders
   # GET /purchase_orders.json
   def index
-    @purchase_orders = PurchaseOrder.all
+    @purchase_orders = PurchaseOrder.includes([:purchase_order_line_items,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -146,5 +148,13 @@ class PurchaseOrdersController < ApplicationController
     params[:purchase_order].delete :owner
   end
 
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
+
+  def sort_column
+    %w[created_at].include?(params[:sort]) ? params[:sort] : "created_at"
+  end
 
 end
