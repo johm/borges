@@ -8,10 +8,16 @@ class EventsController < ApplicationController
   # GET /events.json
 
   def index
+    @upcoming = params[:month].blank?
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
     @events = Event.by_year(@year).by_month(@month).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc")
+    
+
+    if @upcoming
+      @events = @events.where("event_start > ?",DateTime.now)      
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,10 +26,15 @@ class EventsController < ApplicationController
   end
 
   def twentysixforty
+    @upcoming = params[:month].blank?
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
     @events = Event.by_year(@year).by_month(@month).where(:published=>true).where(:show_on_2640_page => true).order("event_start asc")
+
+    if @upcoming
+      @events = @events.where("event_start > ?",DateTime.now)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
