@@ -11,7 +11,7 @@ class EventsController < ApplicationController
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
-    @events = Event.by_year(@year).by_month(@month).where(:published=>true).order("event_start asc")
+    @events = Event.by_year(@year).by_month(@month).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
-    @events = Event.by_year(@year).by_month(@month).where(:published=>true).where(:event_location_id => 3).order("event_start asc")
+    @events = Event.by_year(@year).by_month(@month).where(:published=>true).where(:show_on_2640_page => true).order("event_start asc")
 
     respond_to do |format|
       format.html # index.html.erb
