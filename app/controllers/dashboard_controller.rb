@@ -67,7 +67,7 @@ class DashboardController < ApplicationController
 
 
     @calendar_events = Event.by_year(@year).by_month(@month)    
-    @calendar_event_shifts=@calendar_events.collect {|x| x.event_shifts}.flatten.sort {|x,y| x.event_staffer.name <=> y.event_staffer.name}
+    @calendar_event_shifts=@calendar_events.collect {|x| x.event_shifts}.flatten.sort {|x,y| x.event_staffer.name <=> y.event_staffer.name rescue ""}
     
     # do the awesome for scheduling
     @ical=nil
