@@ -23,7 +23,13 @@ Events
 <hr>
 <div class="row" >
   <div class="span8">
-    <h1>Events for <%= Date::MONTHNAMES[@month] %> <%= @year %></h1>
+    <h1>
+      <% if @upcoming %>
+      Upcoming events in <%= Date::MONTHNAMES[@month] %> <%= @year %>
+      <% else %>
+      Events for <%= Date::MONTHNAMES[@month] %> <%= @year %>
+      <% end %>
+    </h1>
     <h5><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> | <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]} »", :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h5>
     <% @events.each do |event| %>
     <%= render event %>
