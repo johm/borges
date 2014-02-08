@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       for media_item in client.user_recent_media()
         break if i>2
         i=i+1
-        html << "<li class='span2'><div class='thumbnail'><div><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;')}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div></a></div></li>"
+        html << "<li class='span2'><div class='thumbnail'><div><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;') unless media_item.caption.nil?}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div></a></div></li>"
       end
       html << "</ul>"
       html
