@@ -1,5 +1,8 @@
 jQuery('document').ready(function (){
     
+    $('video,audio').mediaelementplayer();
+
+
         $('.datetime').datetimepicker({
 	    pick12HourFormat: true,   // enables the 12-hour format time picker
 	    pickSeconds: false,

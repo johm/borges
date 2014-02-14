@@ -23,6 +23,7 @@
 //= require ckeditor/init
 //= require bootstrap-datetimepicker
 //= require highcharts/highcharts                                                           
+//= require mediaelement_rails
 //= require_tree .
 
 
