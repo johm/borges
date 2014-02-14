@@ -31,7 +31,7 @@ CKEDITOR.editorConfig = function( config )
   // The location of a script that handles file uploads.
   config.filebrowserUploadUrl = "/ckeditor/attachment_files";
   
-  config.allowedContent='p h1 h2 h3 h4 h5 span div table tr th td i b em strong blockquote br{font-style,font-weight}; a[href] ; img[alt,src,width]{width,height};iframe[*]; audio[src]; video[src]; '
+  config.allowedContent='p h1 h2 h3 h4 h5 span div table tr th td i b em strong blockquote br{font-style,font-weight}; a[href] ; img[alt,src,width]{width,height};iframe[*]; audio[*]; video[*]; '
 
   // Rails CSRF token
   config.filebrowserParams = function(){
