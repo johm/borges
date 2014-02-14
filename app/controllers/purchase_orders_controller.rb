@@ -11,7 +11,7 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders
   # GET /purchase_orders.json
   def index
-    @purchase_orders = PurchaseOrder.includes([:purchase_order_line_items,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    @purchase_orders = PurchaseOrder.includes([:purchase_order_line_items,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(40)
 
     respond_to do |format|
       format.html # index.html.erb
