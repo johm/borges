@@ -28,6 +28,10 @@
 	<%= raw @post.introduction %>
       </div>
       
+      <% if !@post.audio.blank? %>
+      <audio src="<%= @post.audio%>" />
+      <% end %>
+
       <div class="body">
 	<%= raw @post.body %>
       </div>
