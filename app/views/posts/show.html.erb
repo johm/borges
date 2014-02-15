@@ -29,12 +29,15 @@
       </div>
       
       <% if !@post.audio.blank? %>
-      <audio src="<%= @post.audio%>" />
+      <div>
+	<audio src="<%= @post.audio %>" />
+      </div>
       <% end %>
 
       <div class="body">
 	<%= raw @post.body %>
       </div>
+
       <%= theme_partial :social %>      
 <hr>
       
