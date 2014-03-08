@@ -2,8 +2,8 @@ class TitlesController < ApplicationController
   before_filter :authenticate_user!, :except=>[:index,:show]
   before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
-  autocomplete :publisher,:name,:full=>true,:display_value=>:name
-  autocomplete :distributor,:name,:full=>true,:display_value=>:name
+  autocomplete :publisher,:name,:full=>true,:display_value=>:name,:limit => 20
+  autocomplete :distributor,:name,:full=>true,:display_value=>:name,:limit => 20
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
   autocomplete :category,:name,:full=>true,:display_value=>:name
 
