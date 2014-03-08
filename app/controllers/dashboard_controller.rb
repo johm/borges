@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   before_filter :authenticate_user! 
   authorize_resource :class => false
 
-  autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id
+  autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_id,:limit => 20
   autocomplete :title_list,:name,:full=>true,:display_value=>:name
  
   # GET /titles
