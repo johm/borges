@@ -3,7 +3,7 @@
   <div class="field control-group">
     <%= f.label :purchase_order,"Move to purchase order", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false),:id,:number) %>
+      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false).order("updated_at desc"),:id,:number) %>
       <%= f.submit "Add", {:class=>"btn btn-primary"} %>
     </div>
   </div>
