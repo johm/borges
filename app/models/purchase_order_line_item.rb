@@ -1,7 +1,7 @@
 class PurchaseOrderLineItem < ActiveRecord::Base
   belongs_to :edition
   has_one :title, :through => :edition
-  belongs_to :purchase_order
+  belongs_to :purchase_order, :touch => true
   belongs_to :customer
   attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer
   has_many :invoice_line_items
