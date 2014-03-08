@@ -6,6 +6,7 @@ class Invoice < ActiveRecord::Base
   attr_accessible :notes, :number, :distributor_id,:shipping_cost,:owner_id
   monetize :shipping_cost_in_cents, :as => "shipping_cost"
   validates :owner,:presence=>true
+  validates :distributor,:presence=>true
   
   default_scope includes(:invoice_line_items => [:edition]) 
 

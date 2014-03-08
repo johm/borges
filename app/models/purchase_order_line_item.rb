@@ -5,6 +5,8 @@ class PurchaseOrderLineItem < ActiveRecord::Base
   belongs_to :customer
   attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer
   has_many :invoice_line_items
+  validates :edition,:presence=>true
+  validates :purchase_order,:presence=>true
 
   default_scope includes(:title).order('titles.title asc')
 
