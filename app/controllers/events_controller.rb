@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     
 
     if @upcoming
-      @events = @events.where("event_start > ?",DateTime.now)      
+      @events = @events.where("event_start > ?",DateTime.now + 1.day)      
     end
 
     respond_to do |format|
