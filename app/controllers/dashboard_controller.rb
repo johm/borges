@@ -123,9 +123,6 @@ class DashboardController < ApplicationController
     @cost=@sales.inject(Money.new(0)) {|sum2,s| sum2 + s.cost_by_owner(@date_range_object.owner)}
     
 
-
-
-
   end
 
   def daily 
@@ -133,6 +130,29 @@ class DashboardController < ApplicationController
     @sales_for_day=SaleOrder.where(:posted => true).order("created_at asc").where("date(convert_tz(posted_when,'UTC',?)) = ? ", ::Rails.application.config.time_zone || "UTC", @day)
     @total=@sales_for_day.inject(Money.new(0)) {|sum,s| sum+s.subtotal_after_discount}
   end
+
+  def purchases_by_date_and_owner
+    @date_range_object=DateRangeObject.new
+    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
+    @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
+    @owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
+    
+    @invoices=[]
+    
+    if !@owner.nil?
+      @invoices=Invoice.where(:received => true,:owner_id=> @owner).where(:received_when => @date_range_object.range_start..@date_range_object.range_end) 
+      @cost=@invoices.inject(Money.new(0)) {|sum,i| sum+i.total_cost}
+      @shipping=@invoices.inject(Money.new(0)) {|sum,i| sum+i.shipping_cost}
+    end
+  end
+
+  def inventory_value_by_date_and_owner
+    Date.parse(params[:at_date]) rescue Date.now
+    @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) 
+    
+
+  end
+
 
 
 end

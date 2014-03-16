@@ -166,6 +166,8 @@ Borges::Application.routes.draw do
   get '/sales/', :to => 'dashboard#sales'
   get '/events_calendar', :to => 'events#calendar'
   get '/consignment/', :to => 'dashboard#consignment'
+  get '/purchases_by_date_and_owner/', :to => 'dashboard#purchases_by_date_and_owner'
+  get '/inventory_value_by_date_and_owner/', :to => 'dashboard#inventory_value_by_date_and_owner'
   get '/daily/', :to => 'dashboard#daily', :as => "daily"
   get '/manage_calendar/', :to => 'dashboard#manage_calendar'
   get '/books/', :to => 'home#books'
