@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="span12">
+    <h1>Inventory value on date by owner</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :inventory_value_by_date_and_owner,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:date,:date %>
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "" %> 
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+<% if !@cost.nil? %>
+  <div>
+    <b>Cost of items in inventory on this date: $<%= @cost %></b> <br />
+  </div>
+<% end %>
+  </div>
+</div>
+
+
+</div>

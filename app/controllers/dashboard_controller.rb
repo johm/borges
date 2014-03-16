@@ -147,10 +147,19 @@ class DashboardController < ApplicationController
   end
 
   def inventory_value_by_date_and_owner
-    Date.parse(params[:at_date]) rescue Date.now
-    @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) 
-    
+    @date_range_object=DateRangeObject.new
+    @date_range_object.date=Date.parse(params[:date_range_object][:date]) rescue 0.days.ago.to_date
+    @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
 
+    if ! @date_range_object.owner.nil?
+      cost_of_inventoried_items_inventoried_before_the_date_which_are_still_in_stock=Copy.instock.where(:inventoried_when => (DateTime.now-100.years)..@date_range_object.date).inject(Money.new(0)) {|sum,c| sum + c.cost}
+      cost_of_deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date=Copy.where(:inventoried_when => (DateTime.now-100.years)..@date_range_object.date).where("status ='SOLD' or status='RETURNED' or status='LOST' ").where(:deinventoried_when => @date_range_object.date..(DateTime.now+100.years)).inject(Money.new(0)) {|sum,c| sum + c.cost}
+      @cost = 
+        cost_of_inventoried_items_inventoried_before_the_date_which_are_still_in_stock +
+        cost_of_deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date
+      
+      
+    end
   end
 
 
