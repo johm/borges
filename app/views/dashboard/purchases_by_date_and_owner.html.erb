@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="span12">
+    <h1>Purchases By Date And Owner</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :purchases_by_date_and_owner,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:from,:range_start %>
+    <%= mydatefield f,:to,:range_end %>
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "" %> 
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th>Invoice</th>
+      <th>Distributor</th>
+      <th>Date received</th>
+      <th>Cost</th>
+      <th>Shipping charges</th>
+    </tr>
+    
+    <% @invoices.each do |i| %>
+    <tr>
+      <td><%= link_to i.number,i %></td>
+      <td><%= link_to i.distributor,i.distributor %></td>
+      <td><%= i.received_when %></td>
+      <td><%= i.total_cost %></td>
+      <td><%= i.shipping_cost %></td>
+    </tr>
+    <% end %>
+  </table>
+  <div>
+    <b>Cost of items inventoried: $<%= @cost %></b> <br />
+    <b>Shipping charges : $<%= @shipping %></b>
+  </div>
+
+  </div>
+</div>
+
+
+</div>
