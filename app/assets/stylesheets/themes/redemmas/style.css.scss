@@ -971,12 +971,12 @@ padding-bottom:0px;
     }
 
     .events .event_description {
-    margin-left:0px;
+	margin-left:0px;
     }
     
     .events .event {
-    float:none;
-}	
+    	float:none;
+    }   	
 
 }
  
@@ -985,6 +985,15 @@ padding-bottom:0px;
 /*              .navbar>ul li:last-child a:after {
           content:" SMALL PHONE";   
 }*/	  		             
+    .events .event_description {
+	margin-left:0px;
+    }
+    
+    .events .event {
+    	float:none;
+    }   	
+
+
       #frontleft img {
       		 width:100px;
       }	
