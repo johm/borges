@@ -14,6 +14,7 @@
     <th># of books</th>
     <th>Total</th>
     <th><%= sortable "received_when","Received?" %></th>
+    <th>Sold to date</th>
     <th></th>
   </tr>
 
@@ -27,7 +28,7 @@
     <td><%= invoice.total_copies %></td>
     <td><%= invoice.total_cost+invoice.shipping_cost %></td>
     <td><%= invoice.received?  ? invoice.received_when.to_formatted_s(:just_date) : "No" %></td>
-
+    <td><%= invoice.received? ? invoice.sales_to_date : "n/a" %></td>
     <td><%= mylinkbutton 'Edit', edit_invoice_path(invoice),{},"btn-small" %></td>
   </tr>
 <% end %>
