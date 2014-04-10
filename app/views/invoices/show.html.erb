@@ -59,6 +59,7 @@
 	 <tr><th>Cost of books</th><td>$<%= @invoice.total_cost %></td></tr>
 	 <tr><th>Shipping costs</th><td>$<%= best_in_place @invoice, :shipping_cost, :type => :input %></td></tr>
 	 <tr><th>Total</th><th>$<%= @invoice.total_cost+@invoice.shipping_cost %></th></tr>
+	 <tr><th>Sales to date</th><th>$<%= @invoice.sales_to_date %></th></tr>
 	 <tr><th>Notes</th><td><%= best_in_place @invoice, :notes, :type => :textarea %></td></tr>
        </table>
  
