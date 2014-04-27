@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
+<h1>
   <%= @distributor.name %>
-</p>
+</h1>
+
+  <div style="float:right;"><%=  link_to raw("<i class='icon-edit'></i>"), edit_distributor_path(@distributor)   if can? :edit, Distributor %></div>
 
 <p>
   <b>Our account number:</b>
@@ -12,9 +13,63 @@
 
 <p>
   <b>Notes:</b>
-  <%= @distributor.notes.html_safe %>
+  <%= @distributor.notes.html_safe rescue "" %>
 </p>
 
+<div class="span6">
+<h2>Listing purchase orders</h2>
 
-<%= link_to 'Edit', edit_distributor_path(@distributor) %> |
-<%= link_to 'Back', distributors_path %>
+<%= mylinkbutton 'New Purchase order', new_purchase_order_path(:distributor=>@distributor) %>
+
+<table class="table">
+  <tr>
+    <th><%= sortable "created_at", "Created" %></th>
+    <th><%= sortable "number", "Number" %></th>
+    <th>Notes</th>
+    <th>Ordered?</th>
+    <th>Ordered When</th>
+  </tr>
+
+<% @distributor.purchase_orders.order(sort_column + ' ' + sort_direction).each do |purchase_order| %>
+  <tr>
+    <td><%= purchase_order.created_at.to_formatted_s(:just_date) %></td>
+    <td><%= link_to purchase_order.number,purchase_order %></td>
+    <td><%= purchase_order.notes %></td>
+    <td><span class="label <%= purchase_order.ordered? ? 'label-success' : ''%>"><%= purchase_order.ordered? ? 'Yes' : 'Not yet' %></span></td>
+    <td><%= purchase_order.ordered_when.to_formatted_s(:just_date) rescue "-" %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<div class="span6">
+<h2>Listing invoices</h2>
+
+<%= mylinkbutton 'New Invoice', new_invoice_path(:distributor => @distributor) %>
+
+<table class="table">
+  <tr>
+    <th><%= sortable "created_at", "Created" %></th>
+    <th><%= sortable "id","Our id" %></th>
+    <th><%= sortable "number","Vendor Number" %></th>
+    <th>Notes</th>
+    <th># of books</th>
+    <th>Total</th>
+    <th>Received?</th>
+    <th>Sold to date</th>
+  </tr>
+
+<% @distributor.invoices.order(sort_column + ' ' + sort_direction).each do |invoice| %>
+  <tr>
+    <td><%= invoice.created_at.to_formatted_s(:just_date) %>
+    <td><%= link_to invoice.id,invoice %>
+    <td><%= link_to invoice.number,invoice %></td>
+    <td><%= invoice.notes %></td>
+    <td><%= invoice.total_copies %></td>
+    <td><%= invoice.total_cost+invoice.shipping_cost %></td>
+    <td><%= invoice.received?  ? invoice.received_when.to_formatted_s(:just_date) : "No" %></td>
+    <td><%= invoice.received? ? invoice.sales_to_date : "n/a" %></td>
+  </tr>
+<% end %>
+</table>
+

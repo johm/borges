@@ -3,7 +3,8 @@ class Distributor < ActiveRecord::Base
 
   has_many :copies
   has_many :editions, :through => :copies
-
+  has_many :purchase_orders
+  has_many :invoices
 
   def to_s 
     name_and_id
