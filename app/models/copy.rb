@@ -31,5 +31,13 @@ class Copy < ActiveRecord::Base
   end
 
 
+  def mark_lost()
+    if self.status=="STOCK"
+      self.status="LOST"
+      self.deinventoried_when=DateTime.now
+      self.save!
+    end
+  end
+
 
 end
