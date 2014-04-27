@@ -1,0 +1,4 @@
+$("#copy_<%= @copy.id %> .copy-status").html("<%= escape_javascript(@copy.status) %>")
+$("#copy_<%= @copy.id %> .copy-removed-when").html("<%= escape_javascript(@copy.deinventoried_when.to_formatted_s(:just_date)) %>")
+$("#copy_<%= @copy.id %> .copy-mark-lost").remove()
+$("#copy_<%= @copy.id %> ").effect("highlight")

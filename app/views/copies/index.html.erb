@@ -17,18 +17,18 @@
     <th>Invoice #</th>
     <th>Sold</th>
     <th>Sales Order #</th>
-    <th>Returned</th>
+    <th>Returned or Removed</th>
     <th>Return #</th>
     <th></th>
   </tr>
 
 <% @copies.each do |copy| %>
-  <tr>
+  <tr id="copy_<%= copy.id %>">
     <td><%= link_to copy.title,copy.title %></td>
     <td><%= link_to copy.edition,copy.edition %></td>
     <td>$<%= copy.cost %></td>
     <td>$<%= copy.price %></td>
-    <td><%= copy.status %></td>
+    <td class="copy-status"><%= copy.status %></td>
     <td><%= copy.notes %></td>
     <td><%= link_to copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %></td>
     <td><%= link_to copy.owner.name_and_id, copy.owner rescue "" %></td>
@@ -47,18 +47,23 @@
       <%= link_to copy.sale_order_line_item.sale_order.id, copy.sale_order_line_item.sale_order %>
       <% end %>
     </td>
- <td>
+ <td class="copy-removed-when">
       <% if copy.status=="RETURNED" && copy.return_order_line_item %>
       <%= copy.return_order_line_item.return_order.posted_when %>
+      <% elsif copy.status=="LOST" %>
+      <%= copy.deinventoried_when.to_formatted_s(:just_date) %>
       <% end %>
-    </td>
+     </td>
     <td>
       <% if copy.status=="RETURNED" && copy.return_order_line_item %>
       <%= link_to copy.return_order_line_item.return_order.id, copy.return_order_line_item.return_order %>
       <% end %>
     </td>
 
-    <td><%= mylinkbutton "<i class='icon-edit'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %></td>
+    <td>
+      <%= mylinkbutton "<i class='icon-edit'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %>
+      <%= mypostlinkbutton "<i class='icon-warning-sign'></i> Mark lost", mark_lost_copy_path(copy),{:remote=>true},{},"btn-mini copy-mark-lost"  if (copy.status=="STOCK" && (can? :edit, Copy)) %>
+    </td>
   </tr>
 <% end %>
 </table>

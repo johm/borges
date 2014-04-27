@@ -125,6 +125,10 @@ Borges::Application.routes.draw do
 
   resources :copies do 
     get :autocomplete,:on => :collection
+    member do
+      post :mark_lost
+    end
+
   end
 
 

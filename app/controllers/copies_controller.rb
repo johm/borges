@@ -74,6 +74,15 @@ class CopiesController < ApplicationController
     end
   end
 
+  def mark_lost
+    @copy = Copy.find(params[:id])
+    @copy.mark_lost()
+    respond_to do |format|
+      format.js {}
+    end
+  end
+      
+
   # DELETE /copies/1
   # DELETE /copies/1.json
   def destroy
