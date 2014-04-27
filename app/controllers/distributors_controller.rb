@@ -2,7 +2,7 @@ class DistributorsController < ApplicationController
 
   before_filter :authenticate_user! 
   load_and_authorize_resource
-
+  helper_method :sort_column, :sort_direction
 
 
   # GET /distributors
@@ -86,4 +86,15 @@ class DistributorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
+  def sort_column
+    %w[created_at number id].include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  
+
 end
