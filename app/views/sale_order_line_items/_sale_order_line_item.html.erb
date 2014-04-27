@@ -1,4 +1,4 @@
-<tr id="sale_order_line_item_<%= sale_order_line_item.id %>">
+<tr id="sale_order_line_item_<%= sale_order_line_item.id %>"   class="<%= 'warning' if sale_order_line_item.copy.edition.title.in_stock==0 && sale_order_line_item.copy.edition.title.on_order==0 %>" >
   <td><%= link_to sale_order_line_item.copy.edition.title.title, sale_order_line_item.copy.edition, :target=>"blank" %> <small>(Copy #<%= sale_order_line_item.copy.id%>)</small></td>
   <td><%= sale_order_line_item.copy.edition.isbn %></td> 
   <td><%= sale_order_line_item.copy.edition.list_price %></td> 
