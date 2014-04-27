@@ -16,7 +16,7 @@
     </tr>
     
     <% s.sale_order_line_items.each do |l| %>
-    <tr>
+    <tr class="<%= 'warning' if l.copy.edition.title.in_stock==0 && l.copy.edition.title.on_order==0 %>">
         <td></td>
       <td></td>
         <td><%= link_to l.copy.edition.title.title, l.copy.edition %></td>
