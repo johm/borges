@@ -5,6 +5,7 @@ class Distributor < ActiveRecord::Base
   has_many :editions, :through => :copies
   has_many :purchase_orders
   has_many :invoices
+  has_many :return_orders
 
   def to_s 
     name_and_id
