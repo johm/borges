@@ -9,4 +9,8 @@ class ReturnOrder < ActiveRecord::Base
     return_order_line_items.inject(Money.new(0)) {|sum,roli| roli.copy.nil? ? sum : sum+roli.copy.cost }
   end
 
+  def number 
+    id
+  end
+
 end
