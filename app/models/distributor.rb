@@ -15,8 +15,6 @@ class Distributor < ActiveRecord::Base
     "#{name} (#{id})"
   end
   
-  def number 
-    id
-  end
+
 
 end
