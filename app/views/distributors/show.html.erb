@@ -52,19 +52,16 @@
     <th>Total</th>
     <th>Posted when</th>
   </tr>
-
-<% @distributor.return_orders.order(sort_column + ' ' + sort_direction).each do |return_order| %>
+  
+  <% @distributor.return_orders.order(sort_column + ' ' + sort_direction).each do |return_order| %>
   <tr>
     <td><%= return_order.created_at.to_formatted_s(:just_date) %></td>
     <td><%= link_to return_order.number,return_order %></td>
     <td><%= return_order.total %></td>
     <td><%= return_order.posted_when.to_formatted_s(:just_date) rescue "-" %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-</div>
-
-
 
 </div>
  
