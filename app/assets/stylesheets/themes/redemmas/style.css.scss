@@ -407,7 +407,7 @@ margin-left:300px;
 }
 
 
-.griditem:nth-child(4),.griditem:nth-child(7),.griditem:nth-child(10),.griditem:nth-child(13){
+.griditem:nth-child(3n+1){
 clear:left;
 }
 
@@ -785,7 +785,7 @@ font-size:16px;
 	width:32px;
     }
 
-    .griditem:nth-child(4),.griditem:nth-child(7),.griditem:nth-child(10),.griditem:nth-child(13){
+    .griditem:nth-child(3n+1) {
 	clear:none;
     }
     
