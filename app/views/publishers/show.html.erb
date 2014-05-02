@@ -1,20 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
+<div class="span8">
+<h1>
   <%= @publisher.name %>
-</p>
+</h1>
 
 <p>
-  <b>Description:</b>
-  <%= @publisher.description %>
+  <%= @publisher.description.html_safe rescue "" %>
 </p>
 
+  <div class="grid">  
+    <% @publisher.titles.order('id desc').each do |t| %>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+    <% end %>
+  </div>
+
+
+</div>
+
+
+<div class="span2">
+<% if can? :edit, Publisher %>
+<%= link_to raw("<i class='icon-edit'></i> Edit"), edit_publisher_path(@publisher),{:class=>"btn btn-large btn-primary" }%> 
+<hr />
+<h2>Notes</h2>
 <p>
-  <b>Notes:</b>
-  <%= @publisher.notes.html_safe %>
+  <%= @publisher.notes.html_safe rescue ""%>
 </p>
+<hr />
+<%= nested_form_for(@publisher,:html => {:class=>"form"},:url=>{:action=>:merge_editions_from}) do |f| %>
+    <div class="field control-group">
+      <%= f.label :merge_editions_from, :class=>"control-label" %>
+    <div class="controls">
+      <%= autocomplete_field_tag :unneeded_publisher, "", autocomplete_publisher_name_titles_path,:id_element => "#unneeded_publisher_id",  :class=>'a_contribution' %>
+      <%= hidden_field_tag :unneeded_publisher_id  %>
+    </div>
+    </div>
 
+    <%= mysubmit f,"Merge" %>
+<% end %>
 
-<%= link_to 'Edit', edit_publisher_path(@publisher) %> |
-<%= link_to 'Back', publishers_path %>
+<% end %>
+</div>
+

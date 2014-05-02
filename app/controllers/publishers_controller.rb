@@ -1,5 +1,5 @@
 class PublishersController < ApplicationController
-  before_filter :authenticate_user! 
+  before_filter :authenticate_user! , :except=>[:show]
   load_and_authorize_resource
 
   # GET /publishers
@@ -68,6 +68,18 @@ class PublishersController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @publisher.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def merge_editions_from
+    @publisher = Publisher.find(params[:id])
+    @unneeded_publisher_id=params[:unneeded_publisher_id]
+    respond_to do |format|
+      if @publisher.merge_stuff_from_publisher(@unneeded_publisher_id)
+        format.html { redirect_to @publisher,notice: 'Successfully merged editions and deleted unneeded publisher.' } 
+      else
+        format.html { redirect_to @publisher,alert: 'I could not make the requested merge.' } 
       end
     end
   end
