@@ -21,6 +21,7 @@ class Ability
       can :read, Title 
       can :read, Author
       can :read, Image
+      can :read, Publisher
       can :read, Page, :published => true
       can :read, TitleList, :public => true
       can :read, Post, :published => true

@@ -1,29 +1,18 @@
-<%= form_for(@publisher) do |f| %>
+<%= nested_form_for(@publisher,:html=>{:class=>"form-horizontal"}) do |f| %>
   <% if @publisher.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
-
-      <ul>
+  <div id="error_explanation">
+    <h2><%= pluralize(@publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
+    <ul>
       <% @publisher.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <li><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= mytextfield f,:name,:name %>
+  <%= mytextarea f,:description,:description %>
+  <%= mytextarea f,:notes,:notes %>
+  <%= mysubmit f,:save %>
+
 <% end %>

@@ -1,23 +1,17 @@
-<h1>Listing publishers</h1>
+<h1>Publishers</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Name</th>
-    <th>Description</th>
-    <th>Notes</th>
-    <th></th>
-    <th></th>
+    <th># of Editions</th>
     <th></th>
   </tr>
 
 <% @publishers.each do |publisher| %>
   <tr>
-    <td><%= publisher.name %></td>
-    <td><%= publisher.description %></td>
-    <td><%= publisher.notes %></td>
-    <td><%= link_to 'Show', publisher %></td>
-    <td><%= link_to 'Edit', edit_publisher_path(publisher) %></td>
-    <td><%= link_to 'Destroy', publisher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to publisher.name,publisher %></td>
+    <td><%= publisher.editions.count %></td>
+    <td><%=  link_to raw("<i class='icon-edit'></i>"), edit_publisher_path(publisher)   if can? :edit, Publisher %> </td>
   </tr>
 <% end %>
 </table>

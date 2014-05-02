@@ -85,7 +85,11 @@ Borges::Application.routes.draw do
   end
 
 
-  resources :publishers
+  resources :publishers do 
+    member do
+      put :merge_editions_from
+    end
+  end
 
 
   resources :customers do 
