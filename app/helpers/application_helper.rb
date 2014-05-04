@@ -131,13 +131,13 @@ module ApplicationHelper
 
 
 
-  def myselectfield (f,m,l,p,a=false)
+  def myselectfield (f,m,l,p,a=false,id=nil)
     my_unique_id=SecureRandom.uuid
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
         f.autocomplete_field(m,p,:id_element=>"##{m}-#{my_unique_id}",:class=>"theautocomplete")+
-        f.hidden_field("#{m}_id",:id=>"#{m}-#{my_unique_id}",:class=>"theid") +
+        f.hidden_field("#{m}_id",:id=>"#{m}-#{my_unique_id}",:class=>"theid",:value=>id) +
         " " +
         (a ? content_tag(:a,
             "+",

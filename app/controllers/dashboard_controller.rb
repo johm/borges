@@ -146,6 +146,22 @@ class DashboardController < ApplicationController
     end
   end
 
+  def ownerflow
+    @date_range_object=DateRangeObject.new
+    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
+    @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
+    @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
+    @owner = @date_range_object.owner
+    if ! @date_range_object.owner.nil?
+      @purchases=Invoice.where(:received => true,:owner_id=> @owner).where(:received_when => @date_range_object.range_start..@date_range_object.range_end).inject(Money.new(0)) {|sum,i| sum+i.total_cost}
+      @returns=Copy.where(:status => "RETURNED",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end).inject(Money.new(0)) {|sum,c| sum+c.cost}
+      @sales_cost=Copy.where(:status => "SOLD",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end).inject(Money.new(0)) {|sum,c| sum+c.cost}
+      @sales_price=Copy.where(:status => "SOLD",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end).inject(Money.new(0)) {|sum,c| sum+c.price}
+
+      
+    end
+  end
+
   def inventory_value_by_date_and_owner
     @date_range_object=DateRangeObject.new
     @date_range_object.date=Date.parse(params[:date_range_object][:date]) rescue 0.days.ago.to_date
