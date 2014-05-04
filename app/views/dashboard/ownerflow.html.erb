@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="span12">
+    <h1>Flow by owner <%= @owner rescue "" %></h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :ownerflow,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:from,:range_start %>
+    <%= mydatefield f,:to,:range_end %>
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "",@owner.id %> 
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+  <% if ! @owner.nil? %>
+  <table class="table">
+    <tr>
+      <th>Total retail sales for this owner</th>
+      <td><%= @sales_price %></td>
+    </tr>
+
+    <tr>
+      <th>Total cost of items sold for this owner</th>
+      <td><%= @sales_cost %></td>
+    </tr>
+
+    <tr>
+      <th>Value of purchases for this owner</th>
+      <td><%= @purchases %></td>
+    </tr>
+    <tr>
+      <th>Value of returns for this owner</th>
+      <td><%= @returns %></td>
+    </tr>
+
+    <tr>
+      <th>Balance (Cost+Returns-Purchases)</th>
+      <td><%= @sales_cost+@returns-@purchases %></td>
+    </tr>
+
+    
+
+  </table>
+  <% end %>
+
+</div>
