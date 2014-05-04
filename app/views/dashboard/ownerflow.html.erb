@@ -31,8 +31,13 @@
     </tr>
 
     <tr>
-      <th>Balance (Cost+Returns-Purchases)</th>
+      <th>Real Balance (Cost+Returns-Purchases)</th>
       <td><%= @sales_cost+@returns-@purchases %></td>
+    </tr>
+
+    <tr>
+      <th>Expansion budget balance (60% of sale price+Returns-Purchases)</th>
+      <td><%= (@sales_price*.6)+@returns-@purchases %></td>
     </tr>
 
     
