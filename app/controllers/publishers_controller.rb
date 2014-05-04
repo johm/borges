@@ -5,7 +5,7 @@ class PublishersController < ApplicationController
   # GET /publishers
   # GET /publishers.json
   def index
-    @publishers = Publisher.all.order("name") 
+    @publishers = Publisher.order("name") 
 
     respond_to do |format|
       format.html # index.html.erb
