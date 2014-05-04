@@ -5,7 +5,7 @@
     <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :ownerflow,:controller => :dashboard } do |f| %>
     <%= mydatefield f,:from,:range_start %>
     <%= mydatefield f,:to,:range_end %>
-    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "",@owner.id %> 
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "",(@owner.id rescue nil )%> 
     <%= mysubmit f,"Get report" %>
   <% end %>
 
