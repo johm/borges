@@ -1,0 +1,24 @@
+RETURN ORDER
+
+From:
+-----
+Red Emma's 
+30 W. North Ave.
+Baltimore, MD 21201
+books@redemmas.org
+
+To:
+---
+<%= @return_order.distributor.name %> 
+
+Our Account #: <%= @return_order.distributor.our_account_number %> 
+Our Return #:<%= @return_order.id %> 
+Date: <%= @return_order.posted_when.to_formatted_s(:just_date) %> 
+
+
+Items in return:
+----------------
+
+<% @return_order.line_item_editions_with_counts.each do |x| %>
+<%= x[0] %> x <%= x[1].title %> (<%= x[1].isbn13 %>)
+<% end %>

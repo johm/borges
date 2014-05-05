@@ -19,9 +19,11 @@ class ReturnOrdersController < ApplicationController
   # GET /return_orders/1.json
   def show
     @return_order = ReturnOrder.find(params[:id])
+    
 
     respond_to do |format|
       format.html # show.html.erb
+      format.text
       format.json { render json: @return_order }
     end
   end
