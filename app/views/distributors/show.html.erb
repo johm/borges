@@ -95,4 +95,14 @@
   </tr>
 <% end %>
 </table>
+</div>
+<div class="span8">
+<h2>Titles we have receieved through this distributor</h2>
+  <div class="grid">  
+    <% @distributor.titles.order('id desc').each do |t,i| %>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+    <% end %>
+  </div>
 
+
+</div>
