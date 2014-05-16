@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140120163634) do
+ActiveRecord::Schema.define(:version => 20140428114952) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(:version => 20140120163634) do
     t.boolean  "published"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "audio"
   end
 
   add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
@@ -350,6 +351,7 @@ ActiveRecord::Schema.define(:version => 20140120163634) do
     t.integer  "distributor_id"
   end
 
+  add_index "return_orders", ["distributor_id"], :name => "index_return_orders_on_distributor_id"
   add_index "return_orders", ["posted"], :name => "index_return_orders_on_posted"
 
   create_table "roles", :force => true do |t|
