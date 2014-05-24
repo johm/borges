@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def current_cart
+    begin
+      ShoppingCart.find(session[:shopping_cart_id])
+    rescue ActiveRecord::RecordNotFound
+      shopping_cart = ShoppingCart.create
+      session[:shopping_cart_id] = shopping_cart.id
+      shopping_cart
+    end
+  end
+
+
   def theme_partial(partial_name,options={})
     render options.merge(:partial => "themes/#{theme}/#{partial_name}")
   end

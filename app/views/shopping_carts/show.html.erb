@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Session:</b>
+  <%= @shopping_cart.session_id %>
+</p>
+
+<p>
+  <b>Submitted:</b>
+  <%= @shopping_cart.submitted %>
+</p>
+
+<p>
+  <b>Shipping name:</b>
+  <%= @shopping_cart.shipping_name %>
+</p>
+
+<p>
+  <b>Shipping address 1:</b>
+  <%= @shopping_cart.shipping_address_1 %>
+</p>
+
+<p>
+  <b>Shipping address 2:</b>
+  <%= @shopping_cart.shipping_address_2 %>
+</p>
+
+<p>
+  <b>Shipping state:</b>
+  <%= @shopping_cart.shipping_state %>
+</p>
+
+<p>
+  <b>Shipping city:</b>
+  <%= @shopping_cart.shipping_city %>
+</p>
+
+<p>
+  <b>Shipping zip:</b>
+  <%= @shopping_cart.shipping_zip %>
+</p>
+
+
+<%= link_to 'Edit', edit_shopping_cart_path(@shopping_cart) %> |
+<%= link_to 'Back', shopping_carts_path %>

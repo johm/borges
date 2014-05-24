@@ -1,0 +1,38 @@
+<div class="span6">
+<h1>My cart</h1>
+<table class="table">
+  <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
+<% @shopping_cart.shopping_cart_line_items.each do |li| %>
+  <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
+    <td><%= best_in_place_if (!@shopping_cart.ordered?), li, :quantity, :type => :input %></td>
+    <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
+    <td>$<%= li.cost %></td>
+    <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
+    <td><%= link_to raw(content_tag(:i,"",{:class=>"icon-remove"})),li,:method=>:delete  %></td>
+  </tr>
+<% end %>
+<tr>
+  <td></td>
+  <td></td>
+  <td><strong>Total:</strong></td>
+  <td><strong>$<span id="cart_total"><%= @shopping_cart.total %></span></strong></td>
+</tr>
+</table>
+</div>
+
+
+<script>
+$('.shopping_cart_line_item .best_in_place').bind("ajax:success", function (evt, data, status, xhr) {
+$(this).closest('tr').effect('highlight'); 
+$(this).closest('tr').find(".ext").html("$"+$.parseJSON(data).new_ext);
+$('#cart_total').html($.parseJSON(data).new_total);
+});
+
+</script>
+
+<div class="span4">
+<h2>Ready to checkout?</h2>
+How would you like to recieve this order?
+
+
+</div>

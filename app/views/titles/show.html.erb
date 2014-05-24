@@ -44,8 +44,8 @@
     </div>
     <div class="span2">
       <%= status_and_price(@edition) unless @edition.nil? %>
-  <%= buy_or_order(@edition) unless @edition.nil? %>  
-  <table class="table">
+      <div style="float:right;"><%= buy_or_order(@edition) unless @edition.nil? %> </div>
+      <table class="table">
     <% if can? :edit, Title %>
       <tr>
 	<th>On order (all editions)</th>
@@ -63,7 +63,7 @@
     <% end %>
   <tr>
     <th>ISBN</th>
-    <td><%= @edition.isbn13 unless @edition.nil? %></td>
+    <td style="font-size:12px;"><%= @edition.isbn13 unless @edition.nil? %></td>
   </tr>
   <tr>
     <th>List price</th>

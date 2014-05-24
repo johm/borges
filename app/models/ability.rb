@@ -23,6 +23,7 @@ class Ability
         can :manage_calendar, :dashboard
       end
       can :read, Title 
+      can :read, Edition
       can :read, Author
       can :read, Image
       can :read, Publisher
@@ -33,6 +34,7 @@ class Ability
       can :read, Category
       can [:read,:calendar,:twentysixforty], Event
       can :read, EventLocation
+      can [:update,:destroy], ShoppingCartLineItem #further checks in controller!
 
       if !user.id.blank?  # guests can't create shopping carts 
         can :create, SaleOrder

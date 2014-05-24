@@ -5,4 +5,16 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  protected 
+  def current_cart
+    begin
+      ShoppingCart.find(session[:shopping_cart_id])
+    rescue ActiveRecord::RecordNotFound
+      shopping_cart = ShoppingCart.create
+      session[:shopping_cart_id] = shopping_cart.id
+      shopping_cart
+    end
+  end
+
+  
 end
