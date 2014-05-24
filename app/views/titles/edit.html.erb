@@ -75,7 +75,7 @@
 	    <div class="controls"><%= edition_form.text_field :year_of_publication,:placeholder=>"Year",:class=>"input-small" %></div>
 	  </div>
 	  
-	  <%= myselectfield edition_form,:publisher,:publisher,autocomplete_publisher_name_titles_path %>
+	  <%= myselectfield edition_form,:publisher,:publisher,autocomplete_publisher_name_titles_path  %>
 	  <%= mytextfield edition_form,:number,:number,{},"Use for issue of magazine or size of clothing" %>
 	  <div class="control-group">
 	    <label class="control-label">Notes (public)</label>
@@ -109,7 +109,7 @@
     <%= f.label :categories_this_title_is_in, :class=>"control-label" %><br />
     <div class="controls">
       <%= f.fields_for :title_category_memberships do |member_form| %>
-      <%= myselectfield member_form,:category,:name,autocomplete_category_name_titles_path %>
+      <%= myselectfield member_form,:category,:name,autocomplete_category_name_titles_path  %>
       <% end %>
       <div class="verticaloffset">
 	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a category"), :title_category_memberships, {:class=>:btn} %>
