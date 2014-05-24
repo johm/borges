@@ -120,6 +120,13 @@ class Title < ActiveRecord::Base
       end
     end.join("|")
   end
-  
 
+  def is_in_print?
+    editions.index {|e| e.in_print?}.nil? ? false : true  
+  end
+  
+  def is_in_stock?
+    in_stock > 0
+  end
+  
 end

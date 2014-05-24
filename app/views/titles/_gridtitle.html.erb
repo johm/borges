@@ -5,7 +5,13 @@
       </a>
     </div>
 
-    <div class="griditemtitle"><%= title.in_stock > 0 ? "IN STOCK" : "SPECIAL ORDER" %></div>
+    <div class="griditemtitle"><%= if title.is_in_stock? 
+				   "IN STOCK" 
+				   elsif title.is_in_print? 
+				   "SPECIAL ORDER"
+				   else 
+				   "OUT OF PRINT"
+				   end %></div>
 
     <div class="griditemdescription">
           <% if can? :edit, Title %>
