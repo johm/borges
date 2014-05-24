@@ -133,6 +133,7 @@ module ApplicationHelper
 
   def myselectfield (f,m,l,p,a=false,id=nil)
     my_unique_id=SecureRandom.uuid
+    (id=f.object.send(m).id unless f.object.send(m).nil?)  if id.nil?
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
