@@ -39,7 +39,13 @@ class Edition < ActiveRecord::Base
   end
 
   def my_stock_status
-    has_copies_in_stock? ? "In stock" : "Out of stock"
+    if has_copies_in_stock? 
+      "In stock" 
+    elsif in_print?
+      "Out of stock"
+    else
+      "Out of print"
+    end
   end
 
   def my_online_price
