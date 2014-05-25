@@ -13,11 +13,13 @@
       end %>
     </div>
     <% end %>
+    <h5 style="float:right;"><%= link_to title.latest_edition.publisher.name,title.latest_edition.publisher rescue "" %> </h5>
     <h2 class="booktitle"><%= link_to title.title, title %></h2>
     <h3 class="contributors">
       <%= raw contributors_list(title) %>
       </h3>
     
+
     <div class="shortorder">
       <%= status_and_price(title.latest_published_edition) unless title.latest_published_edition.nil?  %>
       <%= buy_or_order(title.latest_published_edition) unless title.latest_published_edition.nil? %>  
