@@ -51,7 +51,7 @@
       </li>
     <% end %>
 
-    <% if can? :edit,Event %>
+    <% if can? :manage_calendar,:dashboard %>
       <li>
       <%= link_to 'Calendar', '/manage_calendar' %>
       </li>

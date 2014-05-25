@@ -220,6 +220,10 @@ module ApplicationHelper
   def user_is_scheduler?
     current_user && current_user.roles.include?(Role.find_by_name('scheduler'))
   end
+
+  def user_views_calendar?
+    current_user && current_user.roles.include?(Role.find_by_name('checkcalendar'))
+  end
   
 
   def sortable(column, title = nil)
