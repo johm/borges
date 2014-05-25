@@ -18,6 +18,10 @@ class Ability
         can :manage, EventStaffer
         can :manage_calendar, :dashboard
       end
+      if user.has_role? :checkcalendar
+        can :read, Event
+        can :manage_calendar, :dashboard
+      end
       can :read, Title 
       can :read, Author
       can :read, Image

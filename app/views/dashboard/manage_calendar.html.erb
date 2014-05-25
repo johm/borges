@@ -24,7 +24,7 @@
   <div class="span6">
     <h1>Events</h1>
     <div class="moreactions">
-      <%= mylinkbutton "New event",new_event_path,{},'btn-small' %>
+      <%= mylinkbutton "New event",new_event_path,{},'btn-small' if can? :edit,Event  %>
     </div>
 
     <table class="table">
@@ -44,7 +44,7 @@
   <div class="span6">
     <h1>Event locations</h1>
     <div class="moreactions">
-      <%= mylinkbutton "New location",new_event_location_path,{},'btn-small' %>
+      <%= mylinkbutton "New location",new_event_location_path,{},'btn-small' if can? :edit,EventLocation %>
     </div>
 
     <table class="table">
@@ -52,7 +52,7 @@
       <% @event_locations.each do |el|%>
       <tr>
 	<td><%= link_to el.title, el%></td><td></td>
-	<td><%= mylinkbutton "Edit",edit_event_location_path(el),{},'btn-mini' %></td>
+	<td><%= mylinkbutton "Edit",edit_event_location_path(el),{},'btn-mini' if can? :edit,EventLocation %></td>
       </tr>
       <% end %>
     </table>
