@@ -28,7 +28,7 @@
   <% end %>
   
   <table class="table" id="sale_order_line_items">
-    <tr><th>Item</th><th>ISBN</th><th>List price</th><th>Sale price</th><th></th></tr>
+    <tr><th>Item</th><th>ISBN</th><th>List price</th><th>Sale price</th><th><%= "Categorized?" if sale_order.posted? %></th><th></th></tr>
     <% @sale_order.sale_order_line_items.each do |li| %>
     <%= render li %>
     <% end %>
