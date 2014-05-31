@@ -30,7 +30,7 @@ module TitlesHelper
                   "Dist: " +
                   (copy.nil? || copy.invoice_line_item.nil? ? "?" : link_to(copy.invoice_line_item.invoice.distributor,copy.invoice_line_item.invoice.distributor.try(:name))),
                   :class=>"small ordering_from_info"
-                  )
+                  ).html_safe
 
   end
 end
