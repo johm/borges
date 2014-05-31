@@ -13,6 +13,7 @@
       <td></td>
       <td></td>
       <td></td>
+      <td></td>
     </tr>
     
     <% s.sale_order_line_items.each do |l| %>
@@ -25,7 +26,9 @@
 	
 	<small>[<%= l.copy.edition.title.in_stock %> in stock, <span title="<%= l.copy.edition.title.whichorders %>"><%= l.copy.edition.title.on_order %><span class="faint">+<%= l.copy.edition.title.probably_on_order %></span></span> on order ]</small>
 	<%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(l.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless l.copy.edition.title.latest_published_edition.nil? %>
-	<div style="float:right;width:20%;"><%= ordering_from_info(l.copy.edition.title) %></div>
+      </td>
+      <td>
+	<%= ordering_from_info(l.copy.edition.title) %>
       </td>
       
       <td>

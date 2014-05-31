@@ -28,19 +28,21 @@
   <hr>
   <h2>Items sold</h2>
   <table class="table">
-    <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th></th></tr>
+    <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th></th><th></th></tr>
     <% @titles_sold_with_count.each do |x| %>
     <% title=x[0] %>
     <% count=x[1] %>
     <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
       <td>
 	<%= link_to title.title,title%>
-	<div style="float:right;width:20%;"><%= ordering_from_info(title) %></div>
       </td>
       <td><%= count %></td>
       <td><%= title.in_stock %></td>
       <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
       <td><%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
+      <td>
+	<%= ordering_from_info(title) %>
+      </td>
     </tr>
 
     <% end %>
