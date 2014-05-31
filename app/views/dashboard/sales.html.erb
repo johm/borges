@@ -33,7 +33,10 @@
     <% title=x[0] %>
     <% count=x[1] %>
     <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
-      <td><%= link_to title.title,title%></td>
+      <td>
+	<%= link_to title.title,title%>
+	<%= ordering_from_info(l.copy.edition.title) %>
+      </td>
       <td><%= count %></td>
       <td><%= title.in_stock %></td>
       <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
