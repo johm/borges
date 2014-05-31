@@ -21,7 +21,7 @@ module TitlesHelper
   end
 
   def ordering_from_info(title)
-    begin
+
       edition=title.latest_published_edition
       copy=edition.copies.last
       content_tag(:div,
@@ -31,8 +31,6 @@ module TitlesHelper
                   link_to(copy.distributor,copy.distributor.name),
                   :class=>"small ordering_from_info"
                   )
-      rescue
-      ""
-    end
+
   end
 end
