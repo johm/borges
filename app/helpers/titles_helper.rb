@@ -28,7 +28,7 @@ module TitlesHelper
                   "Pub: " +
                   (edition.publisher.nil? ? "?" : link_to(edition.publisher.name, edition.publisher)) + 
                   "Dist: " +
-                  (copy.invoice_line_item.nil? ? "?" : link_to(copy.invoice_line_item.invoice.distributor,copy.invoice_line_item.invoice.distributor.try(:name))),
+                  (copy.nil? || copy.invoice_line_item.nil? ? "?" : link_to(copy.invoice_line_item.invoice.distributor,copy.invoice_line_item.invoice.distributor.try(:name))),
                   :class=>"small ordering_from_info"
                   )
 
