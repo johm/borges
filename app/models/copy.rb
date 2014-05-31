@@ -2,7 +2,6 @@ class Copy < ActiveRecord::Base
   belongs_to :edition, :touch => true
   delegate :title, :to => :edition
   belongs_to :invoice_line_item
-  belongs_to :invoice,:through => :invoice_line_item
   has_one :sale_order_line_item
   has_one :return_order_line_item
   belongs_to :owner
