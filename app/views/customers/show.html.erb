@@ -20,6 +20,19 @@
   <%= @customer.notes %>
 </p>
 
+<h2>Orders</h2>
+
+<table class="table">
+  <tr><th>Title</th><th>Date ordered</th><th>Purchase order</th></tr>
+  <% @customer.purchase_order_line_items.each do |li| %>
+  <tr>
+    <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title %></td>
+    <td>li.purchase_order.created_at.to_formatted_s(:just_date)</td>
+    <td><%= link_to li.purchase_order.number,li.purchase_order </td>
+  </tr>
+  <% end %>
+  
+</table>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
