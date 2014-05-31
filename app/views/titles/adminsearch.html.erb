@@ -15,9 +15,11 @@
 	<tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
 	  <td>
 	    <%= link_to title.title,title%> 
+	  </td>
+	  <td>
+	    <small><%= sanitize contributors_list(title)%></small>
 	    <%= ordering_from_info(title) %>
 	  </td>
-	  <td><small><%= sanitize contributors_list(title)%></small></td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
 	  <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
