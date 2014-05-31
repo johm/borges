@@ -27,8 +27,8 @@
   <% @customer.purchase_order_line_items.each do |li| %>
   <tr>
     <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title %></td>
-    <td>li.purchase_order.created_at.to_formatted_s(:just_date)</td>
-    <td><%= link_to li.purchase_order.number,li.purchase_order </td>
+    <td><%= li.purchase_order.created_at.to_formatted_s(:just_date) %></td>
+    <td><%= link_to li.purchase_order.number,li.purchase_order %></td>
   </tr>
   <% end %>
   
