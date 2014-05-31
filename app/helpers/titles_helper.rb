@@ -26,7 +26,7 @@ module TitlesHelper
       copy=edition.copies.last
       content_tag(:div,
                   "Pub: " +
-                  link_to(edition.publisher.name, edition.publisher)
+                  link_to(edition.publisher.name, edition.publisher) + 
                   "Dist: " +
                   link_to(copy.distributor,copy.distributor.name),
                   :class=>"small ordering_from_info"
