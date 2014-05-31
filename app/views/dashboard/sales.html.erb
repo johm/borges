@@ -35,7 +35,7 @@
     <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
       <td>
 	<%= link_to title.title,title%>
-	<div style="float:right"><%= ordering_from_info(title) %></div>
+	<div style="float:right;width:20%;"><%= ordering_from_info(title) %></div>
       </td>
       <td><%= count %></td>
       <td><%= title.in_stock %></td>
