@@ -23,12 +23,13 @@
 <h2>Orders</h2>
 
 <table class="table">
-  <tr><th>Title</th><th>Date ordered</th><th>Purchase order</th></tr>
+  <tr><th>Title</th><th>Date ordered by customer</th><th>Purchase order</th><th>PO submitted?</th></tr>
   <% @customer.purchase_order_line_items.each do |li| %>
   <tr>
     <td><%= link_to "#{li.edition.title.title} #{li.edition.number}", li.edition.title %></td>
     <td><%= li.purchase_order.created_at.to_formatted_s(:just_date) %></td>
     <td><%= link_to li.purchase_order.number,li.purchase_order %></td>
+    <td><%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "-" %></td>
   </tr>
   <% end %>
   
