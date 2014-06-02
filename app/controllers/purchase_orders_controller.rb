@@ -85,7 +85,7 @@ class PurchaseOrdersController < ApplicationController
   # DELETE /purchase_orders/1.json
   def destroy
     @purchase_order = PurchaseOrder.find(params[:id])
-    @purchase_order.destroy
+    @purchase_order.destroy unless @purchase_order.ordered?
 
     respond_to do |format|
       format.html { redirect_to purchase_orders_url }
