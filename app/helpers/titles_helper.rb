@@ -22,16 +22,20 @@ module TitlesHelper
 
   def ordering_from_info(title)
 
-      edition=title.latest_published_edition
+    edition=title.latest_published_edition
+    begin 
       copy=edition.copies.last
-    content_tag(:div,
-                content_tag(:small,
-                            "Pub: ".html_safe +
-                            (edition.publisher.nil? ? "?" : link_to(edition.publisher.name, edition.publisher)).html_safe + 
-                            "<br /> Dist: ".html_safe + 
-                            (copy.nil? || copy.invoice_line_item.nil? ? "?" : link_to(copy.invoice_line_item.invoice.distributor.try(:name),copy.invoice_line_item.invoice.distributor)).html_safe,
-                            :class=>"ordering_from_info muted"
-                            ).html_safe
-                ).html_safe
+      content_tag(:div,
+                  content_tag(:small,
+                              "Pub: ".html_safe +
+                              (edition.publisher.nil? ? "?" : link_to(edition.publisher.name, edition.publisher)).html_safe + 
+                              "<br /> Dist: ".html_safe + 
+                              (copy.nil? || copy.invoice_line_item.nil? ? "?" : link_to(copy.invoice_line_item.invoice.distributor.try(:name),copy.invoice_line_item.invoice.distributor)).html_safe,
+                              :class=>"ordering_from_info muted"
+                              ).html_safe
+                  ).html_safe
+    rescue 
+      ""
+    end
   end
 end
