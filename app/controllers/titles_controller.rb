@@ -106,20 +106,28 @@ class TitlesController < ApplicationController
     if ! params[:merge_title].blank?
       @old_title_string = @title.title_and_id
       @title_to_keep=Title.find(params[:merge_title])
-
-      ["editions","title_list_memberships","post_title_links","title_category_memberships"].each do |foo|
-        @title.send(foo).each do |bar|
-          bar.title=@title_to_keep
-          bar.save!
+      
+      successful=false
+      if !(@title.id==@title_to_keep.id)
+        
+        ["editions","title_list_memberships","post_title_links","title_category_memberships"].each do |foo|
+          @title.send(foo).each do |bar|
+            bar.title=@title_to_keep
+            bar.save!
+          end
         end
+        @title.destroy
+
+        @title_to_keep.save #trigger sunspot
+        successful=true #yay
       end
-      @title.destroy
-
-      @title_to_keep.save #trigger sunspot
-
 
       respond_to do |format|
-        format.html { redirect_to @title_to_keep, notice: "Title #{@old_title_string} was successfully merged here, and deleted." }
+        if successful
+          format.html { redirect_to @title_to_keep, notice: "Title #{@old_title_string} was successfully merged here, and deleted." }
+        else
+          format.html { redirect_to @title,alert: 'I could not make the requested merge.' } 
+        end
       end
     else
 
