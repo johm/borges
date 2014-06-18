@@ -30,7 +30,7 @@
   <table class="table">
     <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th></th><th></th></tr>
     <% @titles_sold_with_count.each do |x| %>
-    <% unless x.nil? %>
+    <% unless x[0].nil? %>
     <% title=x[0] %>
     <% count=x[1] %>
     <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
