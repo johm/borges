@@ -2,8 +2,7 @@ class ShoppingCart < ActiveRecord::Base
   attr_accessible :session_id, :shipping_address_1, :shipping_address_2, :shipping_city, :shipping_name, :shipping_state, :shipping_zip,:shipping_method,:shipping_email,:shipping_subscribe
   has_many :shopping_cart_line_items
   
-  SHIPPING_OPTIONS=[["Pick up at the store","pickup"],["Have it delivered by bicycle (within TK miles of the store)","bike"],["Ship it via USPS Priority mail
-","usps"]]
+  SHIPPING_OPTIONS=[["Pick up at the store","pickup"],["Have it delivered by bicycle (within TK miles of the store)","bike"],["Ship it via USPS Priority mail","usps"]]
   validates_inclusion_of :shipping_method, :in => SHIPPING_OPTIONS
 
   
