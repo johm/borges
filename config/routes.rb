@@ -1,6 +1,15 @@
 Borges::Application.routes.draw do
 
 
+  resources :inventory_copy_confirmations
+
+
+  resources :inventories do
+    member do 
+      get :section
+    end
+  end
+
   resources :event_shifts
 
 
@@ -129,6 +138,7 @@ Borges::Application.routes.draw do
 
   resources :copies do 
     get :autocomplete,:on => :collection
+    get :inventory_autocomplete,:on => :collection
     member do
       post :mark_lost
     end

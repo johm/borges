@@ -1,0 +1,57 @@
+</div>
+<div class="row">
+<div class="span10">
+  <p id="notice"><%= notice %></p>
+  
+  
+  <h1>Inventory session: <%= @inventory.name %></h1>
+  
+  <%= nested_form_for(InventoryCopyConfirmation.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>    
+  
+  <%= f.hidden_field(:inventory_id,:value => @inventory.id) %>
+  <%= f.hidden_field(:copy_id) %>
+  
+
+  <%= my_autocomplete_field_tag f,
+      :item,:copy,
+      inventory_autocomplete_copies_path(:inventory_id=>@inventory.id),
+  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+  "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+  {:class=>'btn'}),"input-xxlarge" %>
+  
+  <script>
+    $('#item').bind('railsAutocomplete.select', function(event, data){
+    $("#inventory_copy_confirmation_copy_id").val(data.item.id);
+    });
+  </script>
+  
+  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_inventory_copy_confirmation"}) %> 
+  <% end %>
+
+  <%= paginate @inventory_confirmations %>
+  <table class="table" id="inventory_copy_confirmations">
+    <tr><th><%= sortable "titles.title","Item & copy" %></th><th>ISBN</th><th><%= sortable "status","Status" %></th><th></th></tr>
+    <% @inventory_confirmations.each do |c| %>
+    <%= render c %>
+    <% end %>
+  </table>
+  <%= paginate @inventory_confirmations %>
+  
+</div>
+
+<div class="span2">
+  <h4>Section</h4>
+  <%= hidden_field_tag :inventory_id_for_section, @inventory.id %>
+  <%= select_tag :inventory_section, options_from_collection_for_select(Category.order("name asc"), "id", "name"),:include_blank=>true %>
+    <div id="open_copies">
+    </div>
+  <p>
+    <h4>Notes:</h4>
+<%=     best_in_place @inventory, :notes, :type => :textarea  %>
+  </p>
+  
+  
+</div>
+
+
+

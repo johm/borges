@@ -1,0 +1,29 @@
+<%= form_for(@inventory_copy_confirmation) do |f| %>
+  <% if @inventory_copy_confirmation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inventory_copy_confirmation.errors.count, "error") %> prohibited this inventory_copy_confirmation from being saved:</h2>
+
+      <ul>
+      <% @inventory_copy_confirmation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :inventory %><br />
+    <%= f.text_field :inventory %>
+  </div>
+  <div class="field">
+    <%= f.label :copy %><br />
+    <%= f.text_field :copy %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.check_box :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

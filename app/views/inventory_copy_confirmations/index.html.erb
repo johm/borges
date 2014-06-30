@@ -1,0 +1,27 @@
+<h1>Listing inventory_copy_confirmations</h1>
+
+<table>
+  <tr>
+    <th>Inventory</th>
+    <th>Copy</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @inventory_copy_confirmations.each do |inventory_copy_confirmation| %>
+  <tr>
+    <td><%= inventory_copy_confirmation.inventory %></td>
+    <td><%= inventory_copy_confirmation.copy %></td>
+    <td><%= inventory_copy_confirmation.status %></td>
+    <td><%= link_to 'Show', inventory_copy_confirmation %></td>
+    <td><%= link_to 'Edit', edit_inventory_copy_confirmation_path(inventory_copy_confirmation) %></td>
+    <td><%= link_to 'Destroy', inventory_copy_confirmation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Inventory copy confirmation', new_inventory_copy_confirmation_path %>

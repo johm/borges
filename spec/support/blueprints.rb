@@ -139,3 +139,11 @@ end
 EventShift.blueprint do
   # Attributes here
 end
+
+Inventory.blueprint do
+  # Attributes here
+end
+
+InventoryCopyConfirmation.blueprint do
+  # Attributes here
+end

@@ -96,6 +96,25 @@ class CopiesController < ApplicationController
     end
   end
 
+  def inventory_autocomplete
+    @edition_search=Edition.search do
+      fulltext params[:term]
+    end
+    
+    @copies_data=@edition_search.results.collect do |edition|
+      @copies=edition.copies.instock.order("price_in_cents desc")
+      copies_on_inventory_already= Inventory.find(params[:inventory_id]).copies.collect {|c| c.id}
+      @copies=@copies.find_all {|c| !(copies_on_inventory_already.include? c.id)}
+      @copies.collect do |copy|
+        hash = {"id" => copy.id.to_s, "label" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.number} #{edition.format}} [#{edition.isbn13}]", "value" => "#{copy.info}—#{edition.title.title} (#{edition.year_of_publication}) {#{edition.number} #{edition.format}} [#{edition.isbn13}]"}
+      end
+    end
+    respond_to do |format|
+      format.json { render json: @copies_data.flatten }
+    end
+    
+  end
+
   def autocomplete
     @edition_search=Edition.search do
       fulltext params[:term]

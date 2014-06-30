@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Inventory:</b>
+  <%= @inventory_copy_confirmation.inventory %>
+</p>
+
+<p>
+  <b>Copy:</b>
+  <%= @inventory_copy_confirmation.copy %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @inventory_copy_confirmation.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_inventory_copy_confirmation_path(@inventory_copy_confirmation) %> |
+<%= link_to 'Back', inventory_copy_confirmations_path %>
