@@ -23,7 +23,7 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/1.json
   def show
     @purchase_order = PurchaseOrder.find(params[:id])
-
+    @purchase_order_line_items=@purchase_order.purchase_order_line_items.where("quantity > 0").page(params[:page]).per(40)
     respond_to do |format|
       format.html # show.html.erb
       format.text

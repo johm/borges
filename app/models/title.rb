@@ -81,7 +81,7 @@ class Title < ActiveRecord::Base
   
 
   def in_stock
-    copies.find_all {|c| c.status=="STOCK"}.length
+    copies.instock.length
   end
 
   def sold
