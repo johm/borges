@@ -128,5 +128,9 @@ class Title < ActiveRecord::Base
   def is_in_stock?
     in_stock > 0
   end
+
+  def copies_info 
+    copies.instock.collect {|c| "$#{c.price} [#{c.edition.isbn}]" }.join("\n")
+  end
   
 end
