@@ -3,7 +3,7 @@
 	   <td>
 	     <%= best_in_place_if (! purchase_order_line_item.purchase_order.ordered?),purchase_order_line_item, :quantity, :type => :input, :inner_class=>"input-tiny", :data => {:purchase_order_line_item => purchase_order_line_item.id,:purchase_order => purchase_order_line_item.purchase_order.id} %>
 	  </td>
-	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>purchase_order_line_item.edition.publisher %></td>
+	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>"#{purchase_order_line_item.edition.publisher}\nIn stock (all editions): #{purchase_order_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{purchase_order_line_item.edition.title.on_order}" %></td>
 	  <td><%= purchase_order_line_item.isbn %></td> 
 	  <td><%= purchase_order_line_item.edition.list_price %></td>
 	  <td class="ext_price"><%= purchase_order_line_item.ext_price %></td>
