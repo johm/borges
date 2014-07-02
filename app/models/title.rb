@@ -6,6 +6,11 @@ class Title < ActiveRecord::Base
     text :authors do
       authors.map { |a| a.full_name }
     end  
+
+    integer :category_count do 
+      categories.length
+    end
+
     text :publisher do
       editions.map { |e| e.publisher }
     end  
