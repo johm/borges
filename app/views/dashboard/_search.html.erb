@@ -10,6 +10,7 @@
 <%= mytextfield f,"<= Sold",:my_copies_sold_or_less %>
 <%= mytextfield f,">= In Stock" ,:my_copies_stock_or_more %>
 <%= mytextfield f,"<= In Stock",:my_copies_stock_or_less %>
+<%= mycheckbox f,"Uncatgeorized",:uncategorized %>
 
 <%= mysubmit f, :search,{},"btn-medium" %>
 <% end %>

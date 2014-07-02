@@ -166,6 +166,7 @@ class TitlesController < ApplicationController
       with(:copies_sold).less_than(title_search_object.my_copies_sold_or_less.to_i+1) unless title_search_object.my_copies_sold_or_less.blank?
       with(:copies_in_stock).greater_than(title_search_object.my_copies_stock_or_more.to_i-1) unless title_search_object.my_copies_stock_or_more.blank?
       with(:copies_in_stock).less_than(title_search_object.my_copies_stock_or_less.to_i+1) unless title_search_object.my_copies_stock_or_less.blank?
+      with(:category_count,0) if title_search_object.uncategorized=="1"
 
       fulltext title_search_object.title do
         fields(:title)
@@ -190,6 +191,8 @@ class TitlesController < ApplicationController
       paginate :page => params[:page], :per_page => 200
     end
     @titles=@title_search.results
+
+#    @titles=@titles.find_all {|t| t.categories.length==0} title_search_object.uncategorized=="1"
 
     respond_to do |format|
       format.html {render 'adminsearch'} # search.html.erb
