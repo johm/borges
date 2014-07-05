@@ -2,7 +2,7 @@
 
 <p>
   <b>Edition:</b>
-  <%= @copy.edition %>
+  <%= link_to "#{@copy.edition.title.title} #{@copy.edition.number} #{@copy.edition}", @copy.edition %>
 </p>
 
 <p>
