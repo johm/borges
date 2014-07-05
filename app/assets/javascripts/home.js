@@ -95,7 +95,7 @@ jQuery('document').ready(function (){
     jQuery("#invoice_line_items").on("ajax:success",".best_in_place",recalculate_invoice_line_item); 
     jQuery("#line_items").on("ajax:success",".best_in_place",afterQuantityChange); //purchase_orders
 
-    
+    //this doesn't really work.    
     jQuery('#sale_order_meta .best_in_place').on("ajax:success", function ()
 						 {window.location.reload();});
     
