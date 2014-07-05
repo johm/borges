@@ -32,8 +32,9 @@ class SaleOrdersController < ApplicationController
   def new
     @sale_order = SaleOrder.new
     @sale_order.discount_percent=0
+    @sale_order.save!
     respond_to do |format|
-      format.html # new.html.erb
+      format.html  { redirect_to @sale_order, notice: 'Sale order was successfully created.' }
       format.json { render json: @sale_order }
     end
   end
