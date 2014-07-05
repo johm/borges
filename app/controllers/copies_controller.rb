@@ -2,6 +2,7 @@
 class CopiesController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
+  before_filter :hack_out_params , :only=>[:create,:update]
 
   # GET /copies
   # GET /copies.json
@@ -119,5 +120,14 @@ class CopiesController < ApplicationController
       format.json { render json: @copies_data.flatten }
     end
   end
+
+
+
+  private
+  
+  def hack_out_params
+    params[:copy].delete :owner
+   end
+
   
 end
