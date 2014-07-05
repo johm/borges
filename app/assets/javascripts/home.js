@@ -94,6 +94,11 @@ jQuery('document').ready(function (){
     
     jQuery("#invoice_line_items").on("ajax:success",".best_in_place",recalculate_invoice_line_item); 
     jQuery("#line_items").on("ajax:success",".best_in_place",afterQuantityChange); //purchase_orders
+
+    
+    jQuery('#sale_order_meta .best_in_place').on("ajax:success", function ()
+						 {window.location.reload();});
+    
     
     makefrontpagerespond();
     setTimeout(makefrontpagerespond, 750); //twice for good measure!
@@ -123,6 +128,9 @@ function recalculate_invoice_line_item(event, data, status, xhr){
 	$("#invoice_line_item_"+jQuery(event.target).data('invoice-line-item')+" .ext_price").html(data.ext_price_string);
     });
 }
+
+
+
 
 $(document).on('nested:fieldAdded', function(event){
   //this is a kludge to make link_to_add generate some unique ids
