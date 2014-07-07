@@ -64,7 +64,7 @@ jQuery('document').ready(function (){
     });
 
 
-    
+    jQuery("iframe[src*='archive.org/embed']").each(function(){ jQuery(this).height(3/4*jQuery(this).width());});    
 
     jQuery("#footer").css("top",jQuery(document).height()-jQuery("#footer").height());
 
