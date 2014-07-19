@@ -7,7 +7,7 @@ class PurchaseOrder < ActiveRecord::Base
   belongs_to :owner #who gets the books
 
   has_many :purchase_order_line_items,dependent: :destroy
-  attr_accessible :notes, :number, :ordered, :ordered_when, :distributor_id,:owner_id
+  attr_accessible :notes, :number, :ordered, :ordered_when,:order_by_when, :distributor_id,:owner_id
 
   default_scope  includes(:purchase_order_line_items)
 
