@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140428114952) do
+ActiveRecord::Schema.define(:version => 20140719215308) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -186,6 +186,24 @@ ActiveRecord::Schema.define(:version => 20140428114952) do
 
   add_index "images", ["imagey_id", "imagey_type"], :name => "index_images_on_imagey_id_and_imagey_type"
 
+  create_table "inventories", :force => true do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "inventory_copy_confirmations", :force => true do |t|
+    t.integer  "inventory_id"
+    t.integer  "copy_id"
+    t.boolean  "status"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "inventory_copy_confirmations", ["copy_id"], :name => "index_inventory_copy_confirmations_on_copy_id"
+  add_index "inventory_copy_confirmations", ["inventory_id"], :name => "index_inventory_copy_confirmations_on_inventory_id"
+
   create_table "invoice_line_items", :force => true do |t|
     t.integer  "quantity"
     t.integer  "edition_id"
@@ -327,6 +345,7 @@ ActiveRecord::Schema.define(:version => 20140428114952) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "owner_id"
+    t.datetime "order_by_when"
   end
 
   add_index "purchase_orders", ["distributor_id"], :name => "index_purchase_orders_on_distributor_id"
@@ -429,6 +448,10 @@ ActiveRecord::Schema.define(:version => 20140428114952) do
     t.string   "shipping_zip"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "shipping_method"
+    t.string   "shipping_email"
+    t.boolean  "shipping_subscribe"
+    t.string   "shipping_stripe_id"
   end
 
   create_table "title_category_memberships", :force => true do |t|

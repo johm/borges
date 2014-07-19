@@ -75,6 +75,12 @@
 	  <td><span id="number_of_copies"><%= @purchase_order.number_of_copies %></span></td>
 	</tr>
 
+
+	<tr>
+	  <th>Order this by:</th>
+	  <td><%= @purchase_order.order_by_when.to_formatted_s(:just_date) rescue "n/a" %></td>
+	</tr>
+
 	
 	<tr>
 	  <th>Ordered?</th>

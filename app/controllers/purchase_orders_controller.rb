@@ -98,6 +98,7 @@ class PurchaseOrdersController < ApplicationController
     
     @purchase_order.ordered=true
     @purchase_order.ordered_when=DateTime.now
+    @purchase_order.order_by_when=nil
 
     @purchase_order.save!
 
@@ -154,7 +155,7 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def sort_column
-    %w[created_at number distributors.name ordered ordered_when].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[created_at number distributors.name ordered ordered_when order_by_when].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
 end
