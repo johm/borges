@@ -11,3 +11,6 @@ jQuery ->
 
   $("a#add_return_order_line_item").on "click", (e, data, status, xhr) ->
     $("#new_return_order_line_item").trigger("submit.rails")
+
+  $("a#add_inventory_copy_confirmation").on "click", (e, data, status, xhr) ->
+    $("#new_inventory_copy_confirmation").trigger("submit.rails")

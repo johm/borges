@@ -1,0 +1,7 @@
+$("#inventory_copy_confirmations tr:first-child").after("<%= escape_javascript(render :partial=>"inventory_copy_confirmation",:object => @inventory_copy_confirmation) %>");
+$("#item").val("");
+$("#inventory_copy_confirmation_<%= @inventory_copy_confirmation.id %> .switch").bootstrapSwitch();
+$("#inventory_copy_confirmation_<%= @inventory_copy_confirmation.id %>").effect("highlight");
+$("#inventory_section_copy_<%= @inventory_copy_confirmation.copy.id %>").fadeOut('fast',function(){
+$(this).remove();
+});

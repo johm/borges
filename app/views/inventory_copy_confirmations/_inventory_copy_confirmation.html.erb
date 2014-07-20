@@ -1,0 +1,20 @@
+<tr id="inventory_copy_confirmation_<%= inventory_copy_confirmation.id %>" >
+  <td><%= link_to inventory_copy_confirmation.copy.edition.title.title, inventory_copy_confirmation.copy.edition, :target=>"blank" %> <small>(Copy #<%= inventory_copy_confirmation.copy.id%>)</small></td>
+  <td><%= inventory_copy_confirmation.copy.edition.isbn %></td> 
+  <td >
+    <%= form_for(inventory_copy_confirmation, :remote=>true) do |f| %>
+    <%= 
+    content_tag(:div,
+          f.check_box(:status),
+          {:class=>"switch switch-inventory","data-on"=>"success","data-off"=>"danger","data-on-label"=>"HERE","data-off-label"=>"GONE"})
+    %>
+    <div class="inventory_trash">
+      <%= link_to raw('<i class="icon-trash"></i>'),inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:delete,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
+    </div>
+    <% end %>
+  </td>
+  <td>
+    <small><%= sanitize category_status( inventory_copy_confirmation.copy.edition.title)%></small>
+    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(inventory_copy_confirmation.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless inventory_copy_confirmation.copy.edition.title.latest_published_edition.nil? %>
+  </td>
+</tr>

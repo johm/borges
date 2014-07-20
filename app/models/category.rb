@@ -3,6 +3,7 @@ class Category < ActiveRecord::Base
   has_many :title_category_memberships
   has_many :titles,:through => :title_category_memberships
 
+
   has_many :category_title_list_memberships
   has_many :title_lists, :through => :category_title_list_memberships
   accepts_nested_attributes_for :category_title_list_memberships, :allow_destroy => true  
