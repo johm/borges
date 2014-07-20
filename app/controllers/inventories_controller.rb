@@ -18,7 +18,13 @@ class InventoriesController < ApplicationController
   # GET /inventories/1.json
   def show
     @inventory = Inventory.find(params[:id])
-    @inventory_confirmations = @inventory.inventory_copy_confirmations.includes([:copy => [{:edition => :title }]]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
+    if @query = params[:query] 
+      @inventory_confirmations = @inventory.inventory_copy_confirmations.includes([:copy => [{:edition => :title }]]).where("titles.title like ? or editions.isbn13 = ? or editions.isbn10 = ?","%#{@query}%",@query,@query).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
+     else
+      @inventory_confirmations = @inventory.inventory_copy_confirmations.includes([:copy => [{:edition => :title }]]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
+    end
+  
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inventory }
@@ -112,7 +118,7 @@ class InventoriesController < ApplicationController
   end
 
   def sort_column
-    %w[titles.title status].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[titles.title status].include?(params[:sort]) ? params[:sort] : "inventory_copy_confirmations.created_at"
   end
 
 

@@ -40,6 +40,11 @@
 </div>
 
 <div class="span2">
+  <h4>Search/limit</h4>
+  <%= form_tag(inventory_path(@inventory.id),:method=>:get) do %>
+    <%= text_field_tag(:query,@query,:placeholder=>"Title or ISBN") %>
+  <% end %>
+
   <h4>Section</h4>
   <%= hidden_field_tag :inventory_id_for_section, @inventory.id %>
   <%= select_tag :inventory_section, options_from_collection_for_select(Category.order("name asc"), "id", "name"),:include_blank=>true %>
