@@ -10,6 +10,7 @@ jQuery('document').ready(function (){
 	    });
 
 
+   
     jQuery('#menubar .menuwrapper>a').each(function(){
 	if (jQuery(location).attr('pathname')==jQuery(this).attr('href')){
 	    jQuery(this).find("img").show();
@@ -92,6 +93,10 @@ jQuery('document').ready(function (){
     
     jQuery(window).resize();
     
+    jQuery("#inventory_copy_confirmations").on("change",".switch-inventory input",function(){
+	jQuery(this).closest(".edit_inventory_copy_confirmation").find(".inventory_trash a").toggle();
+    }); 
+
     jQuery("#invoice_line_items").on("ajax:success",".best_in_place",recalculate_invoice_line_item); 
     jQuery("#line_items").on("ajax:success",".best_in_place",afterQuantityChange); //purchase_orders
 

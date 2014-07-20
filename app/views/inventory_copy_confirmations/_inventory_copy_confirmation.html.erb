@@ -8,7 +8,9 @@
           f.check_box(:status),
           {:class=>"switch switch-inventory","data-on"=>"success","data-off"=>"danger","data-on-label"=>"HERE","data-off-label"=>"GONE"})
     %>
-
+    <div class="inventory_trash">
+      <%= link_to raw('<i class="icon-trash"></i>'),inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:delete,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
+    </div>
     <% end %>
   </td>
   <td>

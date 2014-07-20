@@ -40,6 +40,11 @@
 </div>
 
 <div class="span2">
+  <h4>Fill</h4>
+  <%= form_tag(fill_inventory_path(@inventory.id),:method=>:post) do %>
+  <%= submit_tag "Fill with all copies not here",:confirm=>"Are you really freaking sure you want to do this?",:class=>"btn btn-mini" %>
+  <% end %>
+  
   <h4>Search/limit</h4>
   <%= form_tag(inventory_path(@inventory.id),:method=>:get) do %>
     <%= text_field_tag(:query,@query,:placeholder=>"Title or ISBN") %>

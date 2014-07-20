@@ -79,11 +79,20 @@ class InventoryCopyConfirmationsController < ApplicationController
   # DELETE /inventory_copy_confirmations/1.json
   def destroy
     @inventory_copy_confirmation = InventoryCopyConfirmation.find(params[:id])
+    @inventory_copy_confirmation_id =    @inventory_copy_confirmation.id
+    @inventory=@inventory_copy_confirmation.inventory
+    
+    # mark the copy as lost
+
+    @inventory_copy_confirmation.copy.mark_lost()
+
+    # delete the confirmation
     @inventory_copy_confirmation.destroy
 
     respond_to do |format|
       format.html { redirect_to inventory_copy_confirmations_url }
       format.json { head :no_content }
+      format.js {}
     end
   end
 end
