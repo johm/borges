@@ -118,7 +118,7 @@
   <% if @title.by_the_same_authors.length > 0 %>
   <h2>By the same author(s)</h2>
   <div class="grid">
-    <% @title.by_the_same_authors.each do |t| %>
+    <% usefully_sorted(@title.by_the_same_authors).each do |t| %>
     <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
     <% end %>
   </div>
@@ -144,7 +144,7 @@
   <% end %>
 
   <% if @title.title_lists.where(:public=>true).length > 0 %>
-  <h2>On our lists</h2>
+  <h2 style="clear:both;">On our lists</h2>
   <% @title.title_lists.each do |l| %>
   <% if l.public? %>
   <h3><%= link_to l.name,l %></h3>
