@@ -143,6 +143,24 @@
   <% end %>
   <% end %>
 
+  <% if @title.title_lists.where(:public=>true).length > 0 %>
+  <h2>On our lists</h2>
+  <% @title.title_lists.each do |l| %>
+  <% if l.public? %>
+  <h3><%= link_to l.name,l %></h3>
+  <div>
+    <%= sanitize l.description %>
+  </div>
+  <div class="grid">  
+    <% usefully_sorted(l.titles).first(6).each do |t| %>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+    <% end %>
+    <%= link_to "More like this...",l,{:class=>"listmore",:style=>"clear:both;"} %>
+  </div>
+  <hr>
+  <% end %>
+  <% end %>
+
 
 </div>
 
@@ -161,22 +179,7 @@
   <% end %>
   <% end %>
 
-  <% if @title.title_lists.where(:public=>true).length > 0 %>
-  <h2>On our lists</h2>
-  <% @title.title_lists.each do |l| %>
-  <% if l.public? %>
-  <h3><%= link_to l.name,l %></h3>
-  <div>
-    <%= sanitize l.description %>
-  </div>
-  <b><%= link_to "Go to the list",l %></b>
-  <hr>
-  <% end %>
-  <% end %>
- 
-
   
-
 </div>
 </div>
 <% end %>
