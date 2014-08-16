@@ -4,6 +4,11 @@ module TitlesHelper
     title.contributions.collect {|x| link_to(x,x.author)}.to_sentence
   end
 
+  def usefully_sorted(titles)
+    titles.sort_by {|x| [-x.in_stock,-(x.latest_published_edition.nil? || x.latest_published_edition.year_of_publication.nil? ? 0 : x.latest_published_edition.year_of_publication) ]}
+  end
+
+
   def blurb_status(title)
     if title.introduction.blank?
       raw "<span class='label label-important'>No</span>"
