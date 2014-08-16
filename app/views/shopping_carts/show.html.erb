@@ -1,44 +1,92 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Session:</b>
-  <%= @shopping_cart.session_id %>
-</p>
-
-<p>
-  <b>Submitted:</b>
-  <%= @shopping_cart.submitted %>
-</p>
-
-<p>
-  <b>Shipping name:</b>
+</div>
+<div class="row">
+  <div class="span6">
+<h1>Who is this order for?</h1>
+<pre>
   <%= @shopping_cart.shipping_name %>
-</p>
-
-<p>
-  <b>Shipping address 1:</b>
   <%= @shopping_cart.shipping_address_1 %>
-</p>
-
-<p>
-  <b>Shipping address 2:</b>
   <%= @shopping_cart.shipping_address_2 %>
-</p>
+  <%= @shopping_cart.shipping_city %> <%= @shopping_cart.shipping_state %>   <%= @shopping_cart.shipping_zip %>
+</pre>
 
-<p>
-  <b>Shipping state:</b>
-  <%= @shopping_cart.shipping_state %>
-</p>
+<table class="table">
+  <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
+<% @shopping_cart.shopping_cart_line_items.each do |li| %>
+  <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
+    <td><%= li.quantity %></td>
+    <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
+    <td>$<%= li.cost %></td>
+    <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
+     </tr>
+<% end %>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Subtotal:</td>
+  <td>$<span id="cart_subtotal"><%= @shopping_cart.subtotal %></span></strong></td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td>Shipping: <strong><span id='shipping_method'><%= @shopping_cart.shipping_method %></strong></td>
+  <td></td>
+  <td>$<span id='shipping_cost'><%= @shopping_cart.shipping_cost %></span></td>
+  <td></td>
+</tr>
 
-<p>
-  <b>Shipping city:</b>
-  <%= @shopping_cart.shipping_city %>
-</p>
+<tr>
+  <td></td>
+  <td>Sales tax:</td>
+  <td></td>
+  <td>$<span id='tax'><%= @shopping_cart.tax %></span></td>
+  <td></td>
 
-<p>
-  <b>Shipping zip:</b>
-  <%= @shopping_cart.shipping_zip %>
-</p>
+</tr>
+
+
+<tr>
+  <td></td>
+  <td></td>
+  <td><strong>Total:</strong></td>
+  <td><strong>$<span id="cart_total"><%= @shopping_cart.total %></span></strong></td>
+  <td></td>
+</tr>
+
+
+
+</table>
+
+
+  </div>
+  <div class="span6">
+<table class="table">
+  <tr>
+    <th>Ordered?</th>
+    <td><%= @shopping_cart.ordered? ? @shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
+  </tr>
+
+  <tr>
+    <th>Completed?</th>
+    <td>
+      <div><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Mark order as complete",complete_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.completed?) %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Defer?</th>
+    <td>
+      <div><%= @shopping_cart.deferred? ? "Yes" : ""  %></div>
+      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Dismiss the order alert",defer_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (@shopping_cart.ordered? && !@shopping_cart.deferred? && !@shopping_cart.completed?) %>
+    </td>
+  </tr>
+   <tr><th>Notes</th><td><%= best_in_place @shopping_cart, :notes, :type => :textarea %></td></tr>
+</table>
+  </div>
+</div>
+
 
 
 <%= link_to 'Edit', edit_shopping_cart_path(@shopping_cart) %> |

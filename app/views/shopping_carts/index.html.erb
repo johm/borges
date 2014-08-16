@@ -1,33 +1,34 @@
 <h1>Listing shopping_carts</h1>
 
-<table>
+<table class="table">
   <tr>
-    <th>Session</th>
-    <th>Submitted</th>
+    <th>Cart #id</th>
+    <th>Ordered?</th>
+    <th>Shipping method</th>
     <th>Shipping name</th>
-    <th>Shipping address 1</th>
-    <th>Shipping address 2</th>
     <th>Shipping state</th>
     <th>Shipping city</th>
-    <th>Shipping zip</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Items</th>
+    <th>Total</th>
   </tr>
 
 <% @shopping_carts.each do |shopping_cart| %>
   <tr>
-    <td><%= shopping_cart.session_id %></td>
-    <td><%= shopping_cart.submitted %></td>
+    <td><%= link_to shopping_cart.id, shopping_cart %></td>
+    <td><%= shopping_cart.ordered? ? shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
+    <td><%= shopping_cart.shipping_method %></td>
     <td><%= shopping_cart.shipping_name %></td>
-    <td><%= shopping_cart.shipping_address_1 %></td>
-    <td><%= shopping_cart.shipping_address_2 %></td>
     <td><%= shopping_cart.shipping_state %></td>
     <td><%= shopping_cart.shipping_city %></td>
-    <td><%= shopping_cart.shipping_zip %></td>
-    <td><%= link_to 'Show', shopping_cart %></td>
-    <td><%= link_to 'Edit', edit_shopping_cart_path(shopping_cart) %></td>
-    <td><%= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= shopping_cart.number_of_items %></td>
+    <td><%= shopping_cart.total %></td>
+    <td>
+      <% if shopping_cart.completed? %>
+      <span class="label label-success">Yes</span>
+      <% else %>
+      <span class="label label-important">No</span>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

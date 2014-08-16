@@ -34,13 +34,15 @@ class Ability
       can :read, Category
       can [:read,:calendar,:twentysixforty], Event
       can :read, EventLocation
+      can [:current,:update_current], ShoppingCart
       can [:update,:destroy], ShoppingCartLineItem #further checks in controller!
 
-      if !user.id.blank?  # guests can't create shopping carts 
-        can :create, SaleOrder
-        can :update, SaleOrder, :user_id => user.id
-        can [:create,:update], SaleOrderLineItem, :sale_order => {:user_id => user.id}
-      end
+# move this out, probably, since ShoppingCarts are their own beasties now
+#      if !user.id.blank?  # guests can't create shopping carts 
+#        can :create, SaleOrder
+#        can :update, SaleOrder, :user_id => user.id
+#        can [:create,:update], SaleOrderLineItem, :sale_order => {:user_id => user.id}
+#      end
       
 
     end

@@ -10,11 +10,17 @@ class ApplicationController < ActionController::Base
     begin
       ShoppingCart.find(session[:shopping_cart_id])
     rescue ActiveRecord::RecordNotFound
-      shopping_cart = ShoppingCart.create
-      session[:shopping_cart_id] = shopping_cart.id
-      shopping_cart
+      new_cart
     end
   end
+  
+  def new_cart
+    shopping_cart = ShoppingCart.create(:shipping_method=>"Pickup",:shipping_subscribe=>true)
+    session[:shopping_cart_id] = shopping_cart.id
+    shopping_cart
+  end
+    
+  
 
   
 end

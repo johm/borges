@@ -27,7 +27,7 @@ class TitlesController < ApplicationController
       @titles = Title.includes(:editions => [:copies]).page(params[:page]).per(20)
     end
 
-    respond_to do |format|
+    respond_to do |format|i
       format.html # index.html.erb
       format.json { render json: @titles }
     end

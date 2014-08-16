@@ -14,8 +14,8 @@ module EditionsHelper
     if edition.has_copies_in_stock?
       content_tag(:div,
                   button_to("Add to cart",
-                          shopping_cart_line_items_path(:edition=>edition),
-                          :class=>"btn btn-large  block"),
+                            shopping_cart_line_items_path(:edition=>edition),
+                            :class=>"btn btn-large btn-success block"),
                   :class=>"control-group")
     else
       content_tag(:div,

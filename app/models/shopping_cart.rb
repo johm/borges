@@ -2,24 +2,61 @@ class ShoppingCart < ActiveRecord::Base
   attr_accessible :session_id, :shipping_address_1, :shipping_address_2, :shipping_city, :shipping_name, :shipping_state, :shipping_zip,:shipping_method,:shipping_email,:shipping_subscribe
   has_many :shopping_cart_line_items
   
-  SHIPPING_OPTIONS=[["Pick up at the store","pickup"],["Have it delivered by bicycle (within TK miles of the store)","bike"],["Ship it via USPS Priority mail","usps"]]
-  validates_inclusion_of :shipping_method, :in => SHIPPING_OPTIONS
+  SHIPPING_OPTIONS=[["Pick up at the store<div><small>We'll confirm over email that your book is being held, and you can pick it up any time we are open.</small></div>","Pickup"],["Have it delivered by bike!<div><small>Same day delivery for orders placed before 2pm. Click here for restrictions and delivery area map</small></div>","Bike"],["Ship it via USPS Priority mail <div><small>US orders only.</small></div>","USPS"]]
+  validates_inclusion_of :shipping_method, :in => SHIPPING_OPTIONS.collect {|x| x[1]}
 
   
   def active?
     shopping_cart_line_items != []
   end
+
+  def empty? 
+    number_of_items==0
+  end
   
   def number_of_items
-    shopping_cart_line_items.length
+    shopping_cart_line_items.inject(0) {|sum,li| sum+ li.quantity}
+  end
+
+  def subtotal
+    shopping_cart_line_items.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
+  end
+  
+  def tax
+    subtotal * 0.06
   end
 
   def total
-    shopping_cart_line_items.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
+    subtotal+shipping_cost+tax
+  end
+
+  def shipping_cost
+    case shipping_method
+    when "Pickup"
+      Money.new(0)
+    when "Bike"
+      Money.new(1000)
+    when "USPS"
+      Money.new(600)*number_of_items
+    else
+      warn "WTF"
+      Money.new(0)
+    end
   end
 
   def ordered?
     submitted?
+  end
+
+  def submit_order
+    self.submitted=true
+    self.submitted_when=DateTime.now
+    self.deferred=false
+    self.completed=false
+
+    #send an email
+
+    self.save!
   end
 
 end

@@ -1,3 +1,18 @@
+<% if can? :edit,ShoppingCart %>
+<% outstanding_carts=ShoppingCart.where(:submitted=>true,:deferred=>false,:completed=>false).order(:created_at) %>
+
+<% if !outstanding_carts.empty? %>
+<div id="outstanding_orders">
+  <h1><blink>Online orders!</blink></h1>
+  <% outstanding_carts.each do |s|  %>
+  <div class='order_alert'>New order: 
+    <%= link_to s.submitted_when.to_formatted_s(:full_date_time),s %>
+  </div>
+  <% end %>
+</div>
+<% end %>
+<% end %>
+
 <%= link_to "Borges", root_path, :class => 'brand' %>
 <ul class="nav">
   <% if user_signed_in? %>

@@ -1,5 +1,5 @@
 class ShoppingCartLineItemsController < ApplicationController
-  before_filter :authenticate_user!,:except=>[:update,:destroy]
+  before_filter :authenticate_user!,:except=>[:create,:update,:destroy]
 
   # GET /shopping_cart_line_items
   # GET /shopping_cart_line_items.json
@@ -67,19 +67,28 @@ class ShoppingCartLineItemsController < ApplicationController
 
     raise "can't change quantities for ordered cart" if @shopping_cart_line_item.shopping_cart.ordered?
 
+    wanted=params[:shopping_cart_line_item][:quantity].to_i
+    instock=@shopping_cart_line_item.edition.copies.where("status"=>"STOCK").length
+    
+    if wanted > instock
+      @shopping_cart_line_item.quantity=instock
+      flash[:notice]="We only have #{instock} of this edition available at the moment."
+    else
+      @shopping_cart_line_item.quantity=wanted
+    end
+
+    @shopping_cart_line_item.save!
     respond_to do |format|
-      if @shopping_cart_line_item.update_attributes(params[:shopping_cart_line_item])
         format.html { redirect_to @shopping_cart_line_item, notice: 'Shopping cart line item was successfully updated.' }
         format.json { render json: {
-            new_ext: (@shopping_cart_line_item.cost * @shopping_cart_line_item.quantity).to_s,
-            new_total: @shopping_cart_line_item.shopping_cart.total.to_s
+          new_ext: (@shopping_cart_line_item.cost * @shopping_cart_line_item.quantity).to_s,
+          new_subtotal: @shopping_cart_line_item.shopping_cart.subtotal.to_s,
+          new_tax: @shopping_cart_line_item.shopping_cart.tax.to_s,
+          new_total: @shopping_cart_line_item.shopping_cart.total.to_s,
+          new_shipping_cost: @shopping_cart_line_item.shopping_cart.shipping_cost.to_s,
+          new_quantity: @shopping_cart_line_item.quantity
           } 
         }
-        
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @shopping_cart_line_item.errors, status: :unprocessable_entity }
-      end
     end
   end
 

@@ -183,7 +183,12 @@ Borges::Application.routes.draw do
   get 'authors/search' => 'authors#search'
   resources :authors
 
-  resources :shopping_carts
+  resources :shopping_carts do
+    member do
+      post :complete
+      post :defer
+    end
+  end
   resources :shopping_cart_line_items
 
   get '/dashboard/search', :to => 'dashboard#search'
@@ -209,6 +214,7 @@ Borges::Application.routes.draw do
   get '/newsletter/', :to => 'home#newsletter'
   get '/pages/about/', :to => 'home#about'
   get '/cart', :to => "shopping_carts#current"
+  put '/update_cart', :to => "shopping_carts#update_current"
 
   authenticated :user do
     root :to=>'home#frontpage' 
