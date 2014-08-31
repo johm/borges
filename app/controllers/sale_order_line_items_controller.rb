@@ -2,9 +2,6 @@ class SaleOrderLineItemsController < ApplicationController
   before_filter :authenticate_user! 
   load_and_authorize_resource
   
-  # We'll want to make it possible for users to create sales order line items via the web
-  
-
 
   # GET /sale_order_line_items
   # GET /sale_order_line_items.json
@@ -49,6 +46,12 @@ class SaleOrderLineItemsController < ApplicationController
   def create
     @sale_order_line_item = SaleOrderLineItem.new(params[:sale_order_line_item])
     @sale_order_line_item.sale_price=@sale_order_line_item.copy.price 
+    
+    sale_order=SaleOrder.find(params[:sale_order_line_item][:sale_order_id])
+    
+    if sale_order.sale_order_line_items.collect {|li| li.copy.id }.include? @sale_order_line_item.copy.id
+      raise "Can't add same copy to order twice!"
+    end
 
     respond_to do |format|
       if @sale_order_line_item.save
