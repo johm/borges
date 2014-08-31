@@ -2,6 +2,8 @@ class Owner < ActiveRecord::Base
 
   attr_accessible :name, :notes
   has_many :copies
+  has_many :editions, :through => :copies
+  has_many :titles, :through => :editions
   has_many :purchase_orders
   has_many :invoices
 

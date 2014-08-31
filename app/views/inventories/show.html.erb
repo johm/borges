@@ -53,6 +53,12 @@
   <h4>Section</h4>
   <%= hidden_field_tag :inventory_id_for_section, @inventory.id %>
   <%= select_tag :inventory_section, options_from_collection_for_select(Category.order("name asc"), "id", "name"),:include_blank=>true %>
+
+  <h4>Owner</h4>
+  <%= hidden_field_tag :inventory_id_for_owner, @inventory.id %>
+  <%= select_tag :inventory_owner, options_from_collection_for_select(Owner.order("name asc"), "id", "name"),:include_blank=>true %>
+
+
     <div id="open_copies">
     </div>
   <p>
