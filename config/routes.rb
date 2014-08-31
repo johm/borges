@@ -7,6 +7,7 @@ Borges::Application.routes.draw do
   resources :inventories do
     member do 
       get :section
+      get :owner
       post :fill
     end
   end

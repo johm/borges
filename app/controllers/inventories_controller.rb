@@ -105,11 +105,14 @@ class InventoriesController < ApplicationController
     end
   end
 
+
+    
   def section
     @section=Category.find(params[:section])
     @inventory = Inventory.find(params[:id])
-    copies_on_inventory_already= @inventory.copies.collect {|c| c.id}
     titles=@section.titles
+    copies_on_inventory_already= @inventory.copies.collect {|c| c.id}
+
     sorted_titles=titles.sort_by do |title|
       title.authors.first.last_name rescue ""
     end
@@ -124,6 +127,28 @@ class InventoriesController < ApplicationController
       format.html { render :layout => false }
     end
   end
+
+
+  def owner
+    @owner=Owner.find(params[:owner])
+    @inventory = Inventory.find(params[:id])
+    copies_on_inventory_already= @inventory.copies.collect {|c| c.id}
+    titles=@owner.titles
+    sorted_titles=titles.sort_by do |title|
+      title.authors.first.last_name rescue ""
+    end
+    
+    editions=sorted_titles.collect {|t| t.editions}.flatten
+
+    copies=editions.collect {|e| e.copies.instock}.flatten
+    @open_copies=copies.find_all {|c| !(copies_on_inventory_already.include? c.id)}
+
+
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
 
 
   def sort_direction
