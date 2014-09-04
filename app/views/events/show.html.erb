@@ -2,6 +2,15 @@
     Event: <%= @event.title %>
 <% end %>
 
+<% content_for :og do%>
+<% if !@event.picture.nil? %>
+<meta property="og:image" content="<%= @event.picture_url %>">
+<% end %>
+
+
+<% end %>
+
+
 <% content_for :description do%><%=h truncate(sanitize(@event.introduction, :tags=>[]),:length => 250) %><% end %>
 
 
