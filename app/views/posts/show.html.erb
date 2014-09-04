@@ -2,6 +2,13 @@
     <%= @post.title %>
 <% end %>
 
+<% content_for :og do%>
+<% if ! @post.images.first.nil? %>
+<meta property="og:image" content="https://redemmas.org/<%= @post.images.first.the_image_url(:medium) %>">
+<% end %>
+<% end %>
+ 
+
 <% content_for :description do%><%=h truncate(sanitize(@post.introduction, :tags=>[]),:length => 250) %><% end %>
 
 <div class="span8">
