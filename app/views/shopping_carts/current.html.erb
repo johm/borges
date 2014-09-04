@@ -81,25 +81,37 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <% end %>
 <br />
 <h4>Who is this order for?</h4>
-<div style="margin-left:-100px">
+<div style="margin-left:-0px">
 <%= mytextfield f,"Name",:shipping_name %>
 </div>
 <br />
 <div id="shipping_address" style="<%= 'display:none' if @shopping_cart.shipping_method=='Pickup' %>">
 <h4>Where should this order be delivered?</h4>
-<div style="margin-left:-100px">
+<div style="margin-left:-0px">
 <%= mytextfield f,"Address 1",:shipping_address_1 %>
 <%= mytextfield f,"Address 2",:shipping_address_2 %>
 <%= mytextfield f,"City",:shipping_city %>
 <%= myselector f,"State",:shipping_state,us_states %>
 <%= mytextfield f,"Zipcode",:shipping_zip %>
+<%= mytextfield f,"Phone",:shipping_phone %>
+<%= myselector f,"Business or residential?",:shipping_address_type,['Residential','Business'] %>
 </div>
 </div>
+<div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
+<div style="margin-left:-0px">
+<%= myselector f,"OK to leave outside?",:shipping_ok_to_leave,['Yes (specific instructions below)','No (desired delivery time below)'] %>
+</div>
+</div>
+
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<button id="customButton" class="btn btn-success" style="margin-left:30px;" >Proceed to checkout</button>
+<button id="customButton" class="btn btn-success" style="margin-left:180px;" >Proceed to checkout</button>
 <div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
+
+<div style="margin-left:-0px">
+<%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
+</div>
 
 <script>
   var handler = StripeCheckout.configure({
@@ -134,6 +146,17 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 	      }
 	  });
       }
+
+      if ($("#shopping_cart_shipping_method_bike").prop("checked")) {
+ 	  // we need a phone, too!
+	  $("#shopping_cart_shipping_phone, #shopping_cart_bike_ok_to_leave").each(function(){
+	      if ($(this).val()=="" || $(this).val()== null){
+		  $(this).css("border","1px solid red");
+		  errorful=true;
+	      }
+	  });
+      }
+
 	  
       
       if (!errorful) {
@@ -158,8 +181,8 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 </script>
 
 
-  <div style="margin-top:20px;">
-    Get updates? &nbsp;
+  <div style="margin-top:20px;margin-left:100px;">
+    <small>Get updates? &nbsp;</small>
     <%= f.check_box :shipping_subscribe %> 
   </div>
 </form>
@@ -175,12 +198,15 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
   switch($(this).val()){
   case "Pickup":
   $("#shipping_address").slideUp();
+  $("#shipping_bike").slideUp();
   break;
   case "Bike":
   $("#shipping_address").slideDown();
+  $("#shipping_bike").slideDown();
   break;
   case "USPS":
   $("#shipping_address").slideDown();
+  $("#shipping_bike").slideUp();
   break;
   }
 

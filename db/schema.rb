@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140731224619) do
+ActiveRecord::Schema.define(:version => 20140831203439) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -446,8 +446,8 @@ ActiveRecord::Schema.define(:version => 20140731224619) do
     t.string   "shipping_state"
     t.string   "shipping_city"
     t.string   "shipping_zip"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "shipping_method"
     t.string   "shipping_email"
     t.boolean  "shipping_subscribe"
@@ -457,6 +457,10 @@ ActiveRecord::Schema.define(:version => 20140731224619) do
     t.datetime "completed_when"
     t.boolean  "completed"
     t.text     "notes"
+    t.string   "shipping_phone"
+    t.string   "shipping_address_type"
+    t.string   "shipping_ok_to_leave"
+    t.text     "shipping_notes"
   end
 
   create_table "title_category_memberships", :force => true do |t|
