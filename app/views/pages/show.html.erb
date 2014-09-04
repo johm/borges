@@ -1,3 +1,17 @@
+<% content_for :title do%>
+    <%= @page.title %>
+<% end %>
+
+<% content_for :og do%>
+<% if ! @page.images.first.nil? %>
+<meta property="og:image" content="https://redemmas.org/<%= @page.images.first.the_image_url(:medium) %>">
+<% end %>
+<% end %>
+
+
+<% content_for :description do%><%=h truncate(sanitize(@page.introduction, :tags=>[]),:length => 250) %><% end %>
+
+
 
 <div class="span8">
 <h1 id="pagetitle"><%= @page.title %>
