@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= sitename %>: <%= content_for?(:title) ? yield(:title) : "#{controller.controller_name} #{controller.action_name}" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Borges" %>">
+    <%= yield(:og) %> 
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
