@@ -113,7 +113,7 @@ class ShoppingCartsController < ApplicationController
       end
       
     # record payment
-    @shopping_cart.submit_order
+      @shopping_cart.submit_order
       new_shopping_cart = ShoppingCart.new(:shipping_method=>"Pickup",:shipping_subscribe=>true)
       new_shopping_cart.save!
       session[:shopping_cart_id] = new_shopping_cart.id

@@ -23,7 +23,11 @@ class ShoppingCart < ActiveRecord::Base
   end
   
   def tax
-    subtotal * 0.06
+    if (shipping_method=="Pickup" || shipping_method=="Bike" || shipping_state=="MD")
+        subtotal * 0.06
+    else #no tax due, we need a report to pull these out!
+      Money.new(0)
+    end
   end
 
   def total
