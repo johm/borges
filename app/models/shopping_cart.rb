@@ -55,6 +55,7 @@ class ShoppingCart < ActiveRecord::Base
     self.completed=false
 
     #send an email
+    OrderMailer.confirmation_email(self).deliver
 
     self.save!
   end
