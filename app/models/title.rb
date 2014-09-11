@@ -115,7 +115,10 @@ class Title < ActiveRecord::Base
     end
   end
   
-  
+  def outstandingorderlines
+    purchase_order_line_items.find_all {|x| ! x.purchase_order.nil?  && x.quantity-x.received > 0}
+  end
+
   def whichorders 
     purchase_order_line_items.collect do |x|
       if x.purchase_order.nil?  || (x.quantity-x.received <= 0)
