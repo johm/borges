@@ -5,7 +5,11 @@
   <tr>
     <th>Name</th>
     <th>Our account number</th>
-    <th>Notes</th>
+    <th># of Open Orders</th>
+    <th># of Orders</th>
+    <th># of Invoices</th>
+    <th># of Returns</th>
+    <th></th>
     <th></th>
   </tr>
 
@@ -13,8 +17,15 @@
   <tr>
     <td><%= link_to distributor.name, distributor %></td>
     <td><%= distributor.our_account_number %></td>
-    <td><%= distributor.notes %></td>
+    <td><%= distributor.purchase_orders.where(:ordered=>false).length %></td>
+    <td><%= distributor.purchase_orders.length %></td>
+    <td><%= distributor.invoices.length %></td>
+    <td><%= distributor.return_orders.length %></td>
     <td><%= mylinkbutton 'Edit', edit_distributor_path(distributor) , {}, "btn-small" %></td>
+    <td>
+      <% if distributor.purchase_orders.size == 0 && distributor.return_orders.size == 0 && distributor.invoices.size == 0 %>
+        <%= link_to('Destroy', distributor, :method => :delete, :data => { :confirm => 'Are you sure?' },:class=>"btn btn-small btn-warning") if can? :destroy, Distributor %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
