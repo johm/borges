@@ -79,8 +79,9 @@ class DistributorsController < ApplicationController
   # DELETE /distributors/1.json
   def destroy
     @distributor = Distributor.find(params[:id])
-    @distributor.destroy
-
+    if @distributor.purchase_orders.size == 0 && @distributor.return_orders.size == 0 && @distributor.invoices.size == 0 
+        @distributor.destroy 
+    end
     respond_to do |format|
       format.html { redirect_to distributors_url }
       format.json { head :no_content }
