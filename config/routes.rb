@@ -108,7 +108,12 @@ Borges::Application.routes.draw do
   end
 
 
-  resources :distributors
+  resources :distributors do
+    member do
+      put :merge_orders_from
+    end
+  end
+
 
 
   resources :invoice_line_items

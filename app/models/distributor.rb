@@ -18,7 +18,39 @@ class Distributor < ActiveRecord::Base
   def name_and_id
     "#{name} (#{id})"
   end
-  
+
+
+
+  def merge_stuff_from_distributor(unneeded_distributor_id)
+    
+    begin
+      unneeded_distributor=Distributor.find(unneeded_distributor_id)
+    rescue
+      unneeded_distributor=nil
+    end
+
+    if self.id==unneeded_distributor_id.to_i || unneeded_distributor.nil?
+      return false
+    end
+    
+    [:return_orders,:purchase_orders,:invoices].each do |m|
+      unneeded_distributor.send(m).each do |e|
+        e.distributor = self
+        e.save!
+      end
+    end
+    
+    if self.our_account_number.blank? && ! unneeded_distributor.our_account_number.blank?
+      self.our_account_number=unneeded_distributor.our_account_number
+    end
+
+    if self.notes.blank? && ! unneeded_distributor.notes.blank?
+      self.notes=unneeded_distributor.notes
+    end
+    self.save!
+    unneeded_distributor.destroy
+  end
+
 
 
 end

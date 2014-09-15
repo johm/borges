@@ -87,6 +87,20 @@ class DistributorsController < ApplicationController
     end
   end
 
+  def merge_orders_from
+    @distributor = Distributor.find(params[:id])
+    @unneeded_distributor_id=params[:unneeded_distributor_id]
+    respond_to do |format|
+      if @distributor.merge_stuff_from_distributor(@unneeded_distributor_id)
+        format.html { redirect_to @distributor,notice: 'Successfully merged orders and deleted unneeded distributor.' } 
+      else
+        format.html { redirect_to @distributor,alert: 'I could not make the requested merge.' } 
+      end
+    end
+  end
+
+
+
   private
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
