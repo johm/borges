@@ -8,5 +8,7 @@ class ReturnOrderLineItem < ActiveRecord::Base
   def do_return
     copy.do_return()
   end
+  
+  
 
 end

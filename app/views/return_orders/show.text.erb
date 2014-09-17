@@ -20,5 +20,5 @@ Items in return:
 ----------------
 
 <% @return_order.line_item_editions_with_counts.each do |x| %>
-<%= x[0] %> x <%= x[1].title %> (<%= x[1].isbn13 %>)
+<%= x[0] %> x <%= x[1].title %> (<%= x[1].isbn13 %>) <%= "[From Invoice(s) #{x[2].join(',')}]" unless x[2].empty? %>
 <% end %>
