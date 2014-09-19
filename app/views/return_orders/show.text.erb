@@ -13,7 +13,7 @@ To:
 
 Our Account #: <%= @return_order.distributor.our_account_number %> 
 Our Return #:<%= @return_order.id %> 
-Date: <%= @return_order.posted_when.to_formatted_s(:just_date) %> 
+Date: <%= @return_order.posted_when.to_formatted_s(:just_date) rescue "Not Yet Posted!"%> 
 
 
 Items in return:
