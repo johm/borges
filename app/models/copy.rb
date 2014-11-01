@@ -4,7 +4,9 @@ class Copy < ActiveRecord::Base
   belongs_to :invoice_line_item
   has_one :invoice,:through => :invoice_line_item 
   has_one :sale_order_line_item
+  has_one :sale_order,:through => :sale_order_line_item 
   has_one :return_order_line_item
+  has_one :return_order,:through => :return_order_line_item 
   belongs_to :owner
   attr_accessible :cost_in_cents, :is_used, :notes, :price_in_cents , :cost, :price, :inventoried_when, :deinventoried_when, :status, :owner,:edition_id,:invoice_line_item_id, :owner_id
   has_many :inventory_copy_confirmations  
@@ -12,6 +14,9 @@ class Copy < ActiveRecord::Base
   monetize :price_in_cents, :as => "price"
 
   scope :instock, where("status"=>"STOCK")
+  scope :lost, where("status"=>"LOST")
+  scope :returned, where("status"=>"RETURNED")
+  scope :sold, where("status"=>"SOLD")
   
 
   def info
