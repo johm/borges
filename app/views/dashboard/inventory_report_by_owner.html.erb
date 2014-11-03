@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="span12">
+    <h1>Inventory report by owner</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :inventory_report_by_owner,:controller => :dashboard } do |f| %>
+    <!-- mydatefield f,:date,:date  -->
+    <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "" %> 
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+<% if !@owner.nil? %>
+
+<% [[@copies_in_stock,"in stock"],
+[@copies_sold,"sold"],
+[@copies_returned,"returned"],
+[@copies_lost,"lost"]
+   ].each do |copies,label|%>
+<h2><%= label %></h2>
+
+<table class="table nopadding">
+    <tr>
+    <th>Title</th>
+    <th>Isbn</th>
+    <th>Inventoried</th>
+    <th>Deinventoried</th>
+    </tr>
+
+    <% last_edition=nil %>
+    <% copy_count=0 %>
+
+    <% copies.each do |copy| %>
+    <% last_edition=copy.edition if last_edition.nil? %>
+    
+    <% if last_edition.id != copy.edition.id %>
+    <tr style="background-color:#ccc;">
+      <td colspan="1"></td>
+      <td colspan="2">Total copies <%= label %></td>
+      <td colspan="1"><%= copy_count %></td>
+    </tr>
+    <% copy_count = 0 %>
+    <% end %>    
+
+    <tr>
+      <td><%= link_to copy.title,copy %></td>
+      <td><%= link_to "#{copy.edition.isbn13} #{copy.edition}",copy.edition %></td>
+      <td><%= link_to copy.inventoried_when.to_formatted_s(:just_date),copy.invoice %></td>
+      <td>
+	<% if copy.status=="SOLD" %>
+	<%= link_to copy.deinventoried_when.to_formatted_s(:just_date), copy.sale_order  %></td>
+	<% elsif copy.status=="RETURNED" %>
+	<%= link_to copy.deinventoried_when.to_formatted_s(:just_date), copy.return_order  %></td>
+      <% else %>
+	<%= copy.deinventoried_when.to_formatted_s(:just_date) rescue "-" %>
+	<% end %>
+</td>
+    </tr>
+
+
+    <% last_edition=copy.edition %>
+    <% copy_count = copy_count + 1 %>
+    <% end %>
+    <tr style="background-color:#ccc;">
+      <td colspan="1"></td>
+      <td colspan="2">Total copies <%= label %></td>
+      <td colspan="1"><%= copy_count %></td>
+    </tr>
+</table>
+
+<% end %>
+<% end %>
+  </div>
+</div>
