@@ -218,7 +218,7 @@ class TitlesController < ApplicationController
         end
       end
 
-      @publishername = params[:title][:editions_attributes]["0"][:publisher] 
+      @publisher_name = params[:title][:editions_attributes]["0"][:publisher] 
 
       params[:title][:editions_attributes].each do |k,v|
         params[:title][:editions_attributes][k].delete :publisher
