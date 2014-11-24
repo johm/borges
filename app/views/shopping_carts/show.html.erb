@@ -45,7 +45,7 @@
 
 </tr>
 
-
+ 
 <tr>
   <td></td>
   <td></td>
@@ -63,6 +63,10 @@
   <div class="span6">
 <table class="table">
   <tr>
+    <th>Customer email</th>
+    <td><%= mail_to @shopping_cart.shipping_email,nil,{:subject=>"About Your Red Emma's Order"} %></td>
+  </tr>
+  <tr>
     <th>Ordered?</th>
     <td><%= @shopping_cart.ordered? ? @shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
   </tr>
@@ -75,6 +79,7 @@
     </td>
   </tr>
 
+  <% if !@shopping_cart.completed? %>
   <tr>
     <th>Defer?</th>
     <td>
@@ -82,6 +87,8 @@
       <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Dismiss the order alert",defer_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (@shopping_cart.ordered? && !@shopping_cart.deferred? && !@shopping_cart.completed?) %>
     </td>
   </tr>
+  <% end %>
+
    <tr><th>Notes</th><td><%= best_in_place @shopping_cart, :notes, :type => :textarea %></td></tr>
 </table>
   </div>

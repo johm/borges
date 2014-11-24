@@ -10,7 +10,7 @@
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>
   <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
-    <td><%= best_in_place_if (!@shopping_cart.ordered?), li, :quantity, :type => :input %></td>
+    <td><%= best_in_place_if (!@shopping_cart.ordered?), li, :quantity, :type => :input  %></td>
     <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
     <td>$<%= li.cost %></td>
     <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
@@ -97,12 +97,13 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= myselector f,"Business or residential?",:shipping_address_type,['Residential','Business'] %>
 </div>
 </div>
-<div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
-<div style="margin-left:-0px">
-<%= myselector f,"OK to leave outside?",:shipping_ok_to_leave,['Yes (specific instructions below)','No (desired delivery time below)'] %>
-</div>
-</div>
-
+<!-- 
+     <div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
+       <div style="margin-left:-0px">
+	 <%= myselector f,"OK to leave outside?",:shipping_ok_to_leave,['Yes (specific instructions below)','No (desired delivery time below)'] %>
+       </div>
+     </div>
+-->
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -204,7 +205,11 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
   $("#shipping_address").slideDown();
   $("#shipping_bike").slideDown();
   break;
-  case "USPS":
+  case "USPS Media Mail":
+  $("#shipping_address").slideDown();
+  $("#shipping_bike").slideUp();
+  break;
+  case "USPS Priority":
   $("#shipping_address").slideDown();
   $("#shipping_bike").slideUp();
   break;

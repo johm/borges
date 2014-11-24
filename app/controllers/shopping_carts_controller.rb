@@ -150,8 +150,10 @@ class ShoppingCartsController < ApplicationController
   def complete
     @shopping_cart = ShoppingCart.find(params[:id])
     @shopping_cart.completed=true
+    @shopping_cart.completed_when=DateTime.now
     if @shopping_cart.save
       respond_to do |format|
+        format.html {redirect_to @shopping_cart, notice: 'Shopping cart is marked as complete!  Make sure you really deal with this!!!!' }
         format.js {}
       end
     else
