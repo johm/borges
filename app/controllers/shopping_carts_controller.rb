@@ -90,6 +90,11 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.shipping_state=params[:shopping_cart][:shipping_state] 
     @shopping_cart.shipping_zip=params[:shopping_cart][:shipping_zip] 
     @shopping_cart.shipping_email=params[:stripe_email]
+    @shopping_cart.shipping_notes=params[:shopping_cart][:shipping_notes]
+    @shopping_cart.shipping_address_type=params[:shopping_cart][:shipping_address_type] 
+    @shopping_cart.shipping_subscribe=params[:shopping_cart][:shipping_subscribe]
+
+
     @shopping_cart.save!
 
     #do the stripe stuff
@@ -106,13 +111,14 @@ class ShoppingCartsController < ApplicationController
                                        :description => "Red Emma's Bookstore Coffeehouse Order # #{@shopping_cart.id}",
                                        :currency    => 'usd'
                                        )
-        
+        @shopping_cart.shipping_stripe_id=charge.id
+        @shopping_cart.save!
       rescue Stripe::CardError => e
         flash[:error] = e.message
         redirect_to "/cart"
       end
       
-    # record payment
+      # record payment
       @shopping_cart.submit_order
       new_shopping_cart = ShoppingCart.new(:shipping_method=>"Pickup",:shipping_subscribe=>true)
       new_shopping_cart.save!
@@ -166,11 +172,26 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.deferred=true
     if @shopping_cart.save
       respond_to do |format|
+        format.html {redirect_to @shopping_cart, notice: 'Shopping cart is marked as deferred!  Do not forget about this one!!!!' }
         format.js {}
       end
     else
       raise "couldn't save cart"
     end
   end
+
+  def subscribe
+    @shopping_cart = ShoppingCart.find(params[:id])
+    @shopping_cart.shipping_subscribed=true
+    if @shopping_cart.save
+      respond_to do |format|
+        format.html {redirect_to @shopping_cart, notice: 'Shopping cart is marked as subscribed!' }
+        format.js {}
+      end
+    else
+      raise "couldn't save cart"
+    end
+  end
+
 
 end

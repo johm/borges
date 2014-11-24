@@ -187,6 +187,7 @@ Borges::Application.routes.draw do
     member do
       post :complete
       post :defer
+      post :subscribe
     end
   end
   resources :shopping_cart_line_items

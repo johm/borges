@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140831203439) do
+ActiveRecord::Schema.define(:version => 20141124125521) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -461,6 +461,7 @@ ActiveRecord::Schema.define(:version => 20140831203439) do
     t.string   "shipping_address_type"
     t.string   "shipping_ok_to_leave"
     t.text     "shipping_notes"
+    t.boolean  "shipping_subscribed"
   end
 
   create_table "title_category_memberships", :force => true do |t|

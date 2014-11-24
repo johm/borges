@@ -11,6 +11,11 @@
   <%= @shopping_cart.shipping_city %> <%= @shopping_cart.shipping_state %>   <%= @shopping_cart.shipping_zip %>
 </pre>
 
+<h2>Customer notes:</h2>
+<div class="well">
+<%= @shopping_cart.shipping_notes %>
+</div>
+
 <table class="table">
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>
@@ -72,6 +77,16 @@
   </tr>
 
   <tr>
+    <th>Stripe payment token</th>
+    <td><% if !@shopping_cart.shipping_stripe_id.blank?%>
+      <%= link_to @shopping_cart.shipping_stripe_id, "https://dashboard.stripe.com/test/payments/"+@shopping_cart.shipping_stripe_id,{:target=>"_blank"} %>
+      <% else %>
+      <span class="label label-important">Something wrong: no payment for this order!</span> 
+      <% end %>
+</td>
+  </tr>
+
+  <tr>
     <th>Completed?</th>
     <td>
       <div><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
@@ -89,7 +104,17 @@
   </tr>
   <% end %>
 
-   <tr><th>Notes</th><td><%= best_in_place @shopping_cart, :notes, :type => :textarea %></td></tr>
+<% if @shopping_cart.shipping_subscribe? && ! @shopping_cart.shipping_subscribed? %>  
+  <tr>
+    <th>Subscribe to our list</th>
+    <td>
+      <%= link_to "Add to list",ENV["MAILCHIMP_URL"],{:class=>"btn btn-success btn-mini",:target=>"_blank"} %>
+      <br /><br />
+   <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Mark as subscribed",subscribe_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (! @shopping_cart.shipping_subscribed?) %>
+    </td>
+  </tr>
+<% end %>
+   <tr><th>Our notes</th><td><%= best_in_place @shopping_cart, :notes, :type => :textarea %></td></tr>
 </table>
   </div>
 </div>
