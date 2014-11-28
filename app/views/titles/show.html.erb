@@ -3,11 +3,15 @@
 <% end %>
 
 <% content_for :og do%>
-
+<%= tag "meta", :property=>"og:title",:content=>@title.title %>
+<%= tag "meta", :property=>"og:type",:content=>"website" %>
       <% if !(@edition.nil? || @edition.cover_url.blank?) %>
       <meta property="og:image" content="https://redemmas.org/<%= @edition.cover_url(:medium) %>">
       <% end %>
-      <% end %>
+<%= tag "meta", :property=>"og:url",:content=>"https://redemmas.org/titles/#{@title.id}" %>
+<%= tag "meta", :property=>"og:description",:content=>(sanitize("#{@title.introduction}", :tags=>[]) unless @title.inroduction.blank? %>
+
+<% end %>
       
 
 <% content_for :description do%><%=h truncate(sanitize("#{@title.introduction}", :tags=>[]),:length => 250) %><% end %>
