@@ -3,10 +3,13 @@
 <% end %>
 
 <% content_for :og do%>
+<%= tag "og:title",:content=>@event.title %>
+<%= tag "og:type",:content=>"website" %>
 <% if !@event.picture.nil? %>
 <meta property="og:image" content="https://redemmas.org/<%= @event.picture_url %>">
 <% end %>
 
+<%= tag "og:url",:content=>"https://redemmas.org/events/#{@event.id}" %>
 
 <% end %>
 
