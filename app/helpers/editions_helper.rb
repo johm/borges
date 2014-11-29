@@ -16,7 +16,8 @@ module EditionsHelper
                   button_to("Add to cart",
                             shopping_cart_line_items_path(:edition=>edition),
                             :class=>"btn btn-large btn-success block"),
-                  :class=>"control-group")
+                  :class=>"control-group") +
+        content_tag(:small,ENV["ADDTOCARTMESSAGE"].html_safe || "")
     else
       content_tag(:div,
                   "Sorry, not available",

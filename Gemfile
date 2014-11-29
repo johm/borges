@@ -75,3 +75,4 @@ gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem "addressable"

@@ -6,6 +6,7 @@
 <div class="span6">
 
 <h1>My cart</h1>
+<%= ENV["ADDTOCARTMESSAGE"].html_safe %>
 <table class="table">
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>

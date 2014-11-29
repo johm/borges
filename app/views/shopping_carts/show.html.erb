@@ -11,6 +11,10 @@
   <%= @shopping_cart.shipping_city %> <%= @shopping_cart.shipping_state %>   <%= @shopping_cart.shipping_zip %>
 </pre>
 
+<% if ! @shopping_cart.shipping_address_1.blank? %>
+<%= link_to "Print postage via Endicia", endicia_url(@shopping_cart),:class=>"btn btn-mini btn-success" %>
+<% end %>
+<br /><br />
 <h2>Customer notes:</h2>
 <div class="well">
 <%= @shopping_cart.shipping_notes %>
