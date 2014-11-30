@@ -1,0 +1,10 @@
+$("#shipping_method").html('<%= @shopping_cart.shipping_method %>');
+$("#shipping_cost").html('<%= @shopping_cart.shipping_cost %>');
+$("#cart_total").html('<%= @shopping_cart.total %>');
+
+
+<% if @shopping_cart.ordered? %>
+$("#CheckoutPane").html('<h1>Your order has been placed successfully!</h1>');
+// do a modal popup, with a button that redirects to /books
+$("#OrderConfirmation").modal();
+<% end %>

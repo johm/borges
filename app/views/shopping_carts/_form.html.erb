@@ -1,0 +1,53 @@
+<%= form_for(@shopping_cart) do |f| %>
+  <% if @shopping_cart.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shopping_cart.errors.count, "error") %> prohibited this shopping_cart from being saved:</h2>
+
+      <ul>
+      <% @shopping_cart.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :session_id %><br />
+    <%= f.text_field :session_id %>
+  </div>
+  
+  <%= f.input :shipping_method, :as => :select, :collection => ShoppingCart::SHIPPING_OPTIONS %>
+
+
+  <div class="field">
+    <%= f.label :submitted %><br />
+    <%= f.text_field :submitted %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_name %><br />
+    <%= f.text_field :shipping_name %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_address_1 %><br />
+    <%= f.text_field :shipping_address_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_address_2 %><br />
+    <%= f.text_field :shipping_address_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_state %><br />
+    <%= f.text_field :shipping_state %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_city %><br />
+    <%= f.text_field :shipping_city %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_zip %><br />
+    <%= f.text_field :shipping_zip %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

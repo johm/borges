@@ -2,15 +2,18 @@
     Event: <%= @event.title %>
 <% end %>
 
+
 <% content_for :og do%> 
 <%= tag "meta", :property=>"og:title",:content=>@event.title %>
 <%= tag "meta", :property=>"og:type",:content=>"website" %>
+
+
 <% if !@event.picture.nil? %>
 <meta property="og:image" content="https://redemmas.org/<%= @event.picture_url %>">
 <% end %>
 
-<%= tag "meta", :property=>"og:url",:content=>"https://redemmas.org/events/#{@event.id}" %>
 
+<%= tag "meta", :property=>"og:url",:content=>"https://redemmas.org/events/#{@event.id}" %>
 <% end %>
 
 

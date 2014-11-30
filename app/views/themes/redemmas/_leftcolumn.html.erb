@@ -28,6 +28,11 @@
 	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">Cafe: (443) 602-7611</p>
 	  <p class="adobegaramondpro" style="font-size:12px;line-height:14px;">Books & General info: (443) 602-7585</p>
 	</div>
+	<% if current_cart.active? and @oncart.nil? %>
+	<a href="/cart" class="btn" style="float:right;margin-top:10px;">
+	  <i class="icon-shopping-cart"></i>My cart: <%= current_cart.number_of_items %> item<%= current_cart.number_of_items>1 ? 's' : ''%>
+	</a>
+	<% end %>
       </div>
   </div>
   <div class="row" id="realcontentinner realcontent"
