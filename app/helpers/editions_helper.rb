@@ -10,6 +10,16 @@ module EditionsHelper
                 )
   end
   
+  def buy_mini(edition) 
+    if edition.has_copies_in_stock?
+      content_tag(:div,
+                  button_to("Add to cart",
+                            shopping_cart_line_items_path(:edition=>edition),
+                            :class=>"btn btn-mini btn-success block"),
+                  :class=>"control-group",:style=>"float:right")
+    end
+  end
+  
   def buy_or_order(edition)
     if edition.has_copies_in_stock?
       content_tag(:div,

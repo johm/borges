@@ -14,6 +14,7 @@
 				   end %></div>
 
     <div class="griditemdescription">
+    <%= buy_mini(title.latest_published_edition) unless title.latest_published_edition.nil? %>
           <% if can? :edit, Title %>
     <div class="hiddenactions">
       <%= unless title.latest_published_edition.nil?  
