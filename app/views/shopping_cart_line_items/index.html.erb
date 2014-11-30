@@ -1,0 +1,29 @@
+<h1>Listing shopping_cart_line_items</h1>
+
+<table>
+  <tr>
+    <th>Shopping cart</th>
+    <th>Edition</th>
+    <th>Quantity</th>
+    <th>Cost in cents</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shopping_cart_line_items.each do |shopping_cart_line_item| %>
+  <tr>
+    <td><%= shopping_cart_line_item.shopping_cart %></td>
+    <td><%= shopping_cart_line_item.edition %></td>
+    <td><%= shopping_cart_line_item.quantity %></td>
+    <td><%= shopping_cart_line_item.cost_in_cents %></td>
+    <td><%= link_to 'Show', shopping_cart_line_item %></td>
+    <td><%= link_to 'Edit', edit_shopping_cart_line_item_path(shopping_cart_line_item) %></td>
+    <td><%= link_to 'Destroy', shopping_cart_line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Shopping cart line item', new_shopping_cart_line_item_path %>

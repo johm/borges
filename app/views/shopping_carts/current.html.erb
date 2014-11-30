@@ -1,0 +1,246 @@
+<% if @shopping_cart.empty? %>
+<h1>Your cart is empty.</h1>
+
+<% else %>
+
+<div class="span6">
+
+<h1>My cart</h1>
+<%= ENV["ADDTOCARTMESSAGE"].html_safe %>
+<table class="table">
+  <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
+<% @shopping_cart.shopping_cart_line_items.each do |li| %>
+  <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
+    <td><%= best_in_place_if (!@shopping_cart.ordered?), li, :quantity, :type => :input  %></td>
+    <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
+    <td>$<%= li.cost %></td>
+    <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
+    <td><%= link_to raw(content_tag(:i,"",{:class=>"icon-remove"})),li,:method=>:delete  %></td>
+  </tr>
+<% end %>
+<tr>
+  <td></td>
+  <td></td>
+  <td>Subtotal:</td>
+  <td>$<span id="cart_subtotal"><%= @shopping_cart.subtotal %></span></strong></td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td>Shipping: <strong><span id='shipping_method'><%= @shopping_cart.shipping_method %></strong></td>
+  <td></td>
+  <td>$<span id='shipping_cost'><%= @shopping_cart.shipping_cost %></span></td>
+  <td></td>
+</tr>
+
+<tr>
+  <td></td>
+  <td>Sales tax:</td>
+  <td></td>
+  <td>$<span id='tax'><%= @shopping_cart.tax %></span></td>
+  <td></td>
+
+</tr>
+
+
+<tr>
+  <td></td>
+  <td></td>
+  <td><strong>Total:</strong></td>
+  <td><strong>$<span id="cart_total"><%= @shopping_cart.total %></span></strong></td>
+  <td></td>
+</tr>
+
+
+
+</table>
+</div>
+
+
+<script>
+$('.shopping_cart_line_item .best_in_place').bind("ajax:success", function (evt, data, status, xhr) {
+$(this).closest('tr').effect('highlight'); 
+$(this).html($.parseJSON(data).new_quantity);
+$(this).closest('tr').find(".ext").html("$"+$.parseJSON(data).new_ext);
+$('#cart_total').html($.parseJSON(data).new_total);
+$('#shipping_cost').html($.parseJSON(data).new_shipping_cost);
+$('#tax').html($.parseJSON(data).new_tax);
+$('#cart_subtotal').html($.parseJSON(data).new_subtotal);
+$("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show();
+});
+
+</script>
+
+<div class="span4" id="CheckoutPane">
+<% if ! @shopping_cart.ordered? %>
+<h2>Ready to checkout...</h2>
+<h4>How would you like to recieve this order?</h4>
+<%= nested_form_for @shopping_cart,:url=>{:action => "update_current"},:remote=>true,:html=>{:class=>"form-horizontal checkoutform"} do |f| %>
+
+<% ShoppingCart::SHIPPING_OPTIONS.each do |x| %>
+<div class='a_shipping_method'><%= radio_button 'shopping_cart','shipping_method',x[1] %> <%= raw(x[0]) %></div>
+<% end %>
+<br />
+<h4>Who is this order for?</h4>
+<div style="margin-left:-0px">
+<%= mytextfield f,"Name",:shipping_name %>
+</div>
+<br />
+<div id="shipping_address" style="<%= 'display:none' if @shopping_cart.shipping_method=='Pickup' %>">
+<h4>Where should this order be delivered?</h4>
+<div style="margin-left:-0px">
+<%= mytextfield f,"Address 1",:shipping_address_1 %>
+<%= mytextfield f,"Address 2",:shipping_address_2 %>
+<%= mytextfield f,"City",:shipping_city %>
+<%= myselector f,"State",:shipping_state,us_states %>
+<%= mytextfield f,"Zipcode",:shipping_zip %>
+<%= mytextfield f,"Phone",:shipping_phone %>
+<%= myselector f,"Business or residential?",:shipping_address_type,['Residential','Business'] %>
+</div>
+</div>
+<!-- 
+     <div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
+       <div style="margin-left:-0px">
+	 <%= myselector f,"OK to leave outside?",:shipping_ok_to_leave,['Yes (specific instructions below)','No (desired delivery time below)'] %>
+       </div>
+     </div>
+-->
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button id="customButton" class="btn btn-success" style="margin-left:180px;" >Proceed to checkout</button>
+<div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
+
+<div style="margin-left:-0px">
+<%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
+</div>
+
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+    image: "/assets/redemmas/emmas.png",
+    token: function(token) {
+   // Use the token to create the charge with a server-side script.
+  // You can access the token ID with `token.id`
+  var input_token = $("<input>").attr("type", "hidden").attr("name","stripe_token").val(token.id);
+  var input_email = $("<input>").attr("type", "hidden").attr("name","stripe_email").val(token.email);
+  $('.checkoutform').append($(input_token));
+  $('.checkoutform').append($(input_email));
+  $('.checkoutform').submit();
+    }
+  });
+
+  document.getElementById('customButton').addEventListener('click', function(e) {
+  e.preventDefault();
+  // Open Checkout with further options
+      errorful=false
+      if ($("#shopping_cart_shipping_name").val()=="" || $("#shopping_cart_shipping_name").val()== null){
+	  $("#shopping_cart_shipping_name").css("border","1px solid red");
+	  errorful=true;
+      }
+
+      if (! $("#shopping_cart_shipping_method_pickup").prop("checked")) {
+ 	  // we need an address
+	  $("#shopping_cart_shipping_address_1, #shopping_cart_shipping_city, #shopping_cart_shipping_name, #shopping_cart_shipping_state, #shopping_cart_shipping_zip").each(function(){
+	      if ($(this).val()=="" || $(this).val()== null){
+		  $(this).css("border","1px solid red");
+		  errorful=true;
+	      }
+	  });
+      }
+
+      if ($("#shopping_cart_shipping_method_bike").prop("checked")) {
+ 	  // we need a phone, too!
+	  $("#shopping_cart_shipping_phone, #shopping_cart_bike_ok_to_leave").each(function(){
+	      if ($(this).val()=="" || $(this).val()== null){
+		  $(this).css("border","1px solid red");
+		  errorful=true;
+	      }
+	  });
+      }
+
+	  
+      
+      if (!errorful) {
+	  handler.open({
+	      name: "Red Emma's",
+	      description: 'Bookstore Coffeehouse',
+	      amount: parseFloat($("#cart_total").html())*100
+  });
+  }
+  else{
+  $("#warning").html("Please fill in the fields in red above!");
+  }
+
+  });
+
+
+  $("input,select").on('focus', function(e) {
+      $(this).css('border','1px solid #ccc');
+        $("#warning").html("");
+  });
+
+</script>
+
+
+  <div style="margin-top:20px;margin-left:100px;">
+    <small>Get updates? &nbsp;</small>
+    <%= f.check_box :shipping_subscribe %> 
+  </div>
+</form>
+<% end %>
+<% end %>
+</div>
+
+
+<script>
+
+  $('input[type=radio]').on("change",function(){
+  
+  switch($(this).val()){
+  case "Pickup":
+  $("#shipping_address").slideUp();
+  $("#shipping_bike").slideUp();
+  break;
+  case "Bike":
+  $("#shipping_address").slideDown();
+  $("#shipping_bike").slideDown();
+  break;
+  case "USPS Media Mail":
+  $("#shipping_address").slideDown();
+  $("#shipping_bike").slideUp();
+  break;
+  case "USPS Priority":
+  $("#shipping_address").slideDown();
+  $("#shipping_bike").slideUp();
+  break;
+  }
+
+  $.ajax( {url: "/update_cart", 
+  data: JSON.stringify({ shopping_cart: { shipping_method: $(this).val()}}),
+  type: 'PUT',
+  processData: false,
+  contentType: 'application/json', 
+  dataType: 'script'
+  });
+
+
+  });
+</script>
+
+
+
+<div id="OrderConfirmation" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Thanks for your order!</h3>
+  </div>
+  <div class="modal-body">
+    <p>You will receive an automated email confirming your order soon (and a manual one if we have any questions about your order). Thank you for supporting a worker-owned radical business!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <a href="/books" class="btn btn-primary">Back to our books section!</a>
+  </div>
+</div>
+<% end %>

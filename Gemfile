@@ -27,7 +27,7 @@ group :assets do
 end
 
 group :test do
-  gem "capybara", ">= 2.0.3"
+#  gem "capybara", ">= 2.0.3"
   gem "database_cleaner", ">= 1.0.0.RC1"
   gem "email_spec", ">= 1.4.0"
   gem "machinist", ">= 2.0"
@@ -60,7 +60,7 @@ gem "default_value_for"
 gem 'ckeditor'
 gem "mini_magick"
 gem 'kaminari'
-gem "bootstrap-switch-rails"
+gem "bootstrap-switch-rails", "= 0.1.1"
 gem 'sequel'
 gem 'mysql'
 gem 'googlebooks'
@@ -74,3 +74,5 @@ gem 'ri_cal', :git=>"git://github.com/johm/ri_cal"
 gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem "addressable"

@@ -411,6 +411,16 @@ margin-left:300px;
 clear:left;
 }
 
+.span6 {
+.griditem:nth-child(3n+1){
+clear:none;
+}
+
+.griditem:nth-child(2n){ 
+clear:left;			 
+}
+}
+
 .griditem:nth-child(2),.griditem:nth-child(5),.griditem:nth-child(8),.griditem:nth-child(11){  
 
 }

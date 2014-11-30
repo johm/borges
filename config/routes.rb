@@ -38,7 +38,6 @@ Borges::Application.routes.draw do
     member do
       post :post
     end
-
   end
 
   resources :return_order_line_items
@@ -184,6 +183,15 @@ Borges::Application.routes.draw do
   get 'authors/search' => 'authors#search'
   resources :authors
 
+  resources :shopping_carts do
+    member do
+      post :complete
+      post :defer
+      post :subscribe
+    end
+  end
+  resources :shopping_cart_line_items
+
   get '/dashboard/search', :to => 'dashboard#search'
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
@@ -206,7 +214,8 @@ Borges::Application.routes.draw do
   get '/2640/', :to => 'events#twentysixforty'
   get '/newsletter/', :to => 'home#newsletter'
   get '/pages/about/', :to => 'home#about'
-
+  get '/cart', :to => "shopping_carts#current"
+  put '/update_cart', :to => "shopping_carts#update_current"
 
   authenticated :user do
     root :to=>'home#frontpage' 
