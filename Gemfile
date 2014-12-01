@@ -57,7 +57,7 @@ gem 'rmagick'
 gem 'best_in_place'
 gem "default_value_for"
 
-gem 'ckeditor'
+gem 'ckeditor', "= 4.0.2"
 gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails", "= 0.1.1"
