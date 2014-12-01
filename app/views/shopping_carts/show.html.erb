@@ -83,7 +83,7 @@
   <tr>
     <th>Stripe payment token</th>
     <td><% if !@shopping_cart.shipping_stripe_id.blank?%>
-      <%= link_to @shopping_cart.shipping_stripe_id, "https://dashboard.stripe.com/test/payments/"+@shopping_cart.shipping_stripe_id,{:target=>"_blank"} %>
+      <%= link_to @shopping_cart.shipping_stripe_id, "https://dashboard.stripe.com/payments/"+@shopping_cart.shipping_stripe_id,{:target=>"_blank"} %>
       <% else %>
       <span class="label label-important">Something wrong: no payment for this order!</span> 
       <% end %>
