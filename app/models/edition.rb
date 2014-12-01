@@ -30,7 +30,7 @@ class Edition < ActiveRecord::Base
     text :isbn10,:isbn13
 
     text :title do
-      title.title
+      title.title rescue ""
     end
   end
 
