@@ -76,8 +76,17 @@ class DashboardController < ApplicationController
         calendar.events.each do |event|
         fake_event = Event.new
           fake_event.event_location = @import_to_location
-          fake_event.event_start=event.dtstart
-          fake_event.event_end=event.dtend
+          
+          add_this_to_time=0
+          if ::Rails.application.config.time_zone=="America/New_York"
+            if !event.dtstart.isdst
+              add_this_to_time=1
+            end
+          end
+ 
+          fake_event.event_start=event.dtstart+add_this_to_time.hour
+          fake_event.event_end=event.dtend+add_this_to_time.hour
+          
           fake_event.title=event.summary
           @previous=@calendar_events.find_all {|c| c.title==fake_event.title && c.event_start==fake_event.event_start}# weird duplication in the feed 
           if  @previous.length==0
