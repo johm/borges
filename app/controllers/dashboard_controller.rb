@@ -89,7 +89,7 @@ class DashboardController < ApplicationController
           
           fake_event.title=event.summary
           @previous=@calendar_events.find_all {|c| c.title==fake_event.title && c.event_start==fake_event.event_start}# weird duplication in the feed 
-          if  @previous.length==0
+          if  @previous.length==0 && fake_event.event_start.year == @year && fake_event.event_start.month == @month
             @calendar_events << fake_event
           end
         end
