@@ -32,7 +32,7 @@ module EditionsHelper
       content_tag(:div,
                   "Sorry, not available",
                   :class=>"not-available") +
-       content_tag(:small,link_to("Email us about ordering this title","mailto:books@redemmas.org"))
+       (content_tag(:small,link_to("Email us about ordering this title","mailto:books@redemmas.org")) if edition.in_print?)
     end 
   end
   
