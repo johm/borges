@@ -29,6 +29,19 @@
   </div>
   <%= mytextfield f,:remote_picture_url,:remote_picture_url %>
   </div>
+
+    <div class="field control-group">
+      <%= f.label :books_related_to_this_eventt, :class=>"control-label" %><br />
+      <div class="controls">
+	<%= f.fields_for :event_title_links do |member_form| %>
+	<%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
+	<% end %>
+	<div class="verticaloffset">
+	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a book"), :event_title_links, {:class=>:btn} %>
+	</div>
+      </div>
+    </div>
+
   
   <%= mytextfield f,:facebook_url,:facebook_url, {:class=>"input-xxlarge"} %>
 

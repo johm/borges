@@ -133,6 +133,14 @@ class EventsController < ApplicationController
       if params[:event].has_key?(:event_location)
         params[:event].delete :event_location
       end
+
+      begin
+        params[:event][:event_title_links_attributes].each do |k,v| 
+          params[:event][:event_title_links_attributes][k].delete :title
+        end
+      rescue
+      end
+      
       
       unless params[:event][:event_shifts_attributes].nil?
         params[:event][:event_shifts_attributes].each do |k,v|
