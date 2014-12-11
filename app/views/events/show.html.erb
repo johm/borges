@@ -26,6 +26,11 @@
 </h1>
 <h4><%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %> @ <%= link_to @event.event_location,@event.event_location %></h4>
 <%= @event.introduction.html_safe %>
+
+<% @event.titles.each do |t| %>
+<%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+<% end %>
+
 <%= @event.description.html_safe %>
 
 <%= theme_partial :social %>
