@@ -39,12 +39,56 @@ class DashboardController < ApplicationController
       f.title({ :text=>"Sales"})
       f.xAxis(:categories => @days)
     end    
-    
+
     @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.subtotal_after_discount} }
     @cost=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.cost} }
     
     @titles_sold_with_count=@days.collect {|d| @sales_by_date[d].collect {|s| s.sale_order_line_items.collect {|li| li.copy.edition.title  }}}.flatten.flatten.flatten.inject(Hash.new(0)) {|h,i| h[i] += 1; h}.sort_by{|k,v| v}.reverse      
+  
+    @format_to_total={}
+    @section_to_total={}
 
+    all_line_items=@sales_by_date.collect_concat {|d,sales| sales.collect_concat {|sales| sales.sale_order_line_items}}
+
+    all_line_items.group_by {|l| l.copy.edition.format}.each do |f,items_sold|
+      @format_to_total[f] = items_sold.inject(Money.new(0)) {|formatsum,item| formatsum+item.sale_price}
+    end
+
+    all_line_items.each do |l|
+      my_cats=l.copy.title.categories
+      if my_cats.length > 0 
+        cat_weight=1.0/my_cats.length
+        my_cats.each do |c|
+          @section_to_total[c.name] = Money.new(0) if @section_to_total[c.name].nil?
+          @section_to_total[c.name] += (l.sale_price * cat_weight)
+        end
+      else
+        @section_to_total["uncategorized"] = Money.new(0) if @section_to_total["uncategorized"].nil?
+        @section_to_total["uncategorized"] += l.sale_price
+      end
+      
+    end
+
+    
+    @prediscount_total=@format_to_total.values.inject(Money.new(0)) {|s,v| s+v}
+
+
+
+    @formatchart = LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" } )
+      f.series(:type=>'pie',:name=>'Merchandise',:data=> @format_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
+      f.title({ :text=>"Sales by format"})
+      
+    end    
+
+    @sectionchart = LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" } )
+      f.series(:type=>'pie',:name=>'Merchandise',:data=> @section_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
+      f.title({ :text=>"Sales by section"})
+      
+    end    
+    
+ 
   end
 
   def content 
