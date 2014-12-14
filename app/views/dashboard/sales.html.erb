@@ -24,6 +24,9 @@
     <strong>Days in period with sales: <%= @days.length %> </strong>
   </div>
 
+  <hr>
+  
+  
 
   <hr>
   <h2>Items sold</h2>
@@ -51,8 +54,19 @@
   </table>
 
 
-  </div>
+<h2>Sales by format</h2>
+
+<%= high_chart("formatchart", @formatchart) %>
+
+</div>
     
+<h2>Sales by section</h2>
+
+<%= high_chart("sectionchart", @sectionchart) %>
+
+</div>
+
+
 
 
 </div>
