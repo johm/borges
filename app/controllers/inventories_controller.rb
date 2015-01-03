@@ -19,9 +19,9 @@ class InventoriesController < ApplicationController
   def show
     @inventory = Inventory.find(params[:id])
     if @query = params[:query] 
-      @inventory_confirmations = @inventory.inventory_copy_confirmations.includes([:copy => [{:edition => :title }]]).where("copy.status='STOCK' and (titles.title like ? or editions.isbn13 = ? or editions.isbn10 = ?)","%#{@query}%",@query,@query).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
+      @inventory_confirmations = @inventory.inventory_copy_confirmations.includes([:copy => [{:edition => :title }]]).where("copies.status='STOCK' and (titles.title like ? or editions.isbn13 = ? or editions.isbn10 = ?)","%#{@query}%",@query,@query).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
      else
-      @inventory_confirmations = @inventory.inventory_copy_confirmations.where("copy.status='STOCK'").includes([:copy => [{:edition => :title }]]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
+      @inventory_confirmations = @inventory.inventory_copy_confirmations.where("copies.status='STOCK'").includes([:copy => [{:edition => :title }]]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(100)
     end
   
     
