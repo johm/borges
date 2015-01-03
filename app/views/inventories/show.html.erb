@@ -30,7 +30,7 @@
 
   <%= paginate @inventory_confirmations %>
   <table class="table" id="inventory_copy_confirmations">
-    <tr><th><%= sortable "titles.title","Item & copy" %></th><th>ISBN</th><th><%= sortable "status","Status" %></th><th></th></tr>
+    <tr><th><%= sortable "titles.title","Item & copy" %></th><th>ISBN</th><th><%= sortable "inventory_copy_confirmations.status","Status" %></th><th></th></tr>
     <% @inventory_confirmations.each do |c| %>
     <%= render c %>
     <% end %>

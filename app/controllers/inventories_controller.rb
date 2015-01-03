@@ -175,7 +175,7 @@ class InventoriesController < ApplicationController
   end
 
   def sort_column
-    %w[titles.title status].include?(params[:sort]) ? params[:sort] : "inventory_copy_confirmations.created_at"
+    %w[titles.title inventory_copy_confirmations.status].include?(params[:sort]) ? params[:sort] : "inventory_copy_confirmations.created_at"
   end
 
 
