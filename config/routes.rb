@@ -9,6 +9,7 @@ Borges::Application.routes.draw do
       get :section
       get :owner
       post :fill
+      post :fill_books
     end
   end
 
