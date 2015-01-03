@@ -36,6 +36,15 @@ class Copy < ActiveRecord::Base
     self.save!
   end
 
+  def mark_probablyreturned()
+    if self.status=="STOCK"
+      self.status="PROBABLYRETURNED"
+      self.deinventoried_when=DateTime.now
+      self.save!
+    end
+  end
+
+
 
   def mark_lost()
     if self.status=="STOCK"

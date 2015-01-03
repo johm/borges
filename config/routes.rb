@@ -1,7 +1,11 @@
 Borges::Application.routes.draw do
 
 
-  resources :inventory_copy_confirmations
+  resources :inventory_copy_confirmations do 
+    member do
+      post :probablyreturned
+    end
+  end
 
 
   resources :inventories do
