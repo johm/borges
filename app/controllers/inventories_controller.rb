@@ -112,7 +112,7 @@ class InventoriesController < ApplicationController
     # get all copies in stock
     Copy.instock.each do |copy| 
       unless (@inventory.includes_copy?(copy)) 
-        if copy.edition.format="Paperback" || copy.edition.format="Hardcover"
+        if copy.edition.format=="Paperback" || copy.edition.format=="Hardcover"
           @inventory_copy_confirmation = InventoryCopyConfirmation.new(:inventory_id=>@inventory.id,:copy_id=>copy.id,:status=>false) #we didn't find this one
           @inventory_copy_confirmation.save!
         end
