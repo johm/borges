@@ -106,6 +106,25 @@ class InventoriesController < ApplicationController
   end
 
 
+  def fill_books
+    
+    @inventory = Inventory.find(params[:id])
+    # get all copies in stock
+    Copy.instock.each do |copy| 
+      unless (@inventory.includes_copy?(copy)) 
+        if copy.edition.format="Paperback" || copy.edition.format="Hardcover"
+          @inventory_copy_confirmation = InventoryCopyConfirmation.new(:inventory_id=>@inventory.id,:copy_id=>copy.id,:status=>false) #we didn't find this one
+          @inventory_copy_confirmation.save!
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to @inventory, notice: 'Inventory was successfully filled with books.' }
+    end
+  end
+
+
+
     
   def section
     @section=Category.find(params[:section])
