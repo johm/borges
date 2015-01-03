@@ -48,7 +48,7 @@ class Copy < ActiveRecord::Base
   def confirm(inventory)
     @inventory_copy_confirmation = InventoryCopyConfirmation.new(:copy=>self,:inventory=>inventory)
     @inventory_copy_confirmation.status=true
-    save!
+    @inventory_copy_confirmation.save!
   end
 
 
