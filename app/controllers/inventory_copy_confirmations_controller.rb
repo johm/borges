@@ -95,4 +95,24 @@ class InventoryCopyConfirmationsController < ApplicationController
       format.js {}
     end
   end
+
+  def probablyreturned
+    @inventory_copy_confirmation = InventoryCopyConfirmation.find(params[:id])
+    @inventory_copy_confirmation_id = @inventory_copy_confirmation.id
+    @inventory=@inventory_copy_confirmation.inventory
+    
+
+    @inventory_copy_confirmation.copy.mark_probablyreturned()
+
+    # delete the confirmation
+    @inventory_copy_confirmation.destroy
+
+    respond_to do |format|
+      format.html { redirect_to inventory_copy_confirmations_url }
+      format.json { head :no_content }
+      format.js {}
+    end
+  end
+
+
 end

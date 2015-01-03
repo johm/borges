@@ -10,6 +10,7 @@
     %>
     <div class="inventory_trash">
       <%= link_to raw('<i class="icon-trash"></i>'),inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:delete,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
+      <%= link_to raw('<i class="icon-backward"></i>'),probablyreturned_inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:post,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
     </div>
     <% end %>
   </td>
