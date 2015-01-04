@@ -202,6 +202,7 @@ Borges::Application.routes.draw do
   get '/dashboard/', :to => 'dashboard#index'
   get '/content/', :to => 'dashboard#content'
   get '/sales/', :to => 'dashboard#sales'
+  get '/losses/', :to => 'dashboard#losses'
   get '/events_calendar', :to => 'events#calendar'
   get '/consignment/', :to => 'dashboard#consignment'
   get '/ownerflow/', :to => 'dashboard#ownerflow'
