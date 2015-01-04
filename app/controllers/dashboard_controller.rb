@@ -91,6 +91,21 @@ class DashboardController < ApplicationController
  
   end
 
+
+  def losses
+    @date_range_object=DateRangeObject.new
+    @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
+    @date_range_object.range_end = Date.parse(params[:date_range_object][:range_end]) rescue 0.days.ago.to_date
+    
+    timezone=::Rails.application.config.time_zone || "UTC"
+    @losses=Copy.where(:status => ["RETURNED","PROBABLYRETURNED","LOST"]).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
+    @total_cost_lost=@losses.find_all {|c| c.status=="LOST"}.inject(Money.new(0)) {|sum,c| sum+c.cost}
+    @total_cost_returned=@losses.find_all {|c| c.status=="RETURNED"}.inject(Money.new(0)) {|sum,c| sum+c.cost}
+    @total_cost_probablyreturned=@losses.find_all {|c| c.status=="PROBABLYRETURNED"}.inject(Money.new(0)) {|sum,c| sum+c.cost}
+    
+    end
+
+
   def content 
     @top_level_pages=Page.where("parent_id is ?",nil)
     @posts=Post.order("created_at desc")  #TODO pagination

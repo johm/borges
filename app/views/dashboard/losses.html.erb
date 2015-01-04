@@ -1,0 +1,34 @@
+<h1>Losses</h1>
+
+<%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :losses,:controller => :dashboard } do |f| %>
+<%= mydatefield f,:from,:range_start %>
+<%= mydatefield f,:to,:range_end %>
+<%= mysubmit f,"Get report" %>
+<% end %>
+
+
+<table class="table">
+  <tr>
+    <th>Copy</th>
+    <th>Status</th>
+    <th>Deinventoried when</th>
+    <th>Owner</th>
+    <th>Cost</th>
+  </tr>
+
+  <% @losses.each do |copy| %>
+  <tr>
+    <td><%= link_to copy.edition.title.title, copy.edition, :target=>"blank" %> <small>(Copy #<%= copy.id%>)</small></td>
+    <td><%= copy.status %></td>
+    <td><%= copy.deinventoried_when.to_formatted_s(:just_date) %></td>
+    <td><%= copy.owner %></td>
+    <td><%= copy.cost %></td>
+  </tr>
+  <% end %>
+  
+</table>
+
+Total cost of merchandise lost: <strong><%= @total_cost_lost %></strong> <br />
+Total cost of merchandise returned: <strong><%= @total_cost_returned %></strong> <br />
+Total cost of merchandise probably returned: <strong><%= @total_cost_probablyreturned %></strong>
+    
