@@ -5,7 +5,13 @@
 
 .newevent {
 float:right;
+opacity:0.5;
 }
+
+.newevent:hover {
+opacity:1;
+}
+
 
 .datetime {
 margin-left:20px !important;
