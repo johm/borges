@@ -108,6 +108,12 @@ jQuery('document').ready(function (){
 	$(this).datetimepicker({step:30,value:$(this).val(),formatTime:'g:i a'});
     });
     
+    $('.manage_calendar .calendar td.day').not('.not-current-month').each(function(){
+	$(this).prepend(
+	    "<a class='newevent' href='/events/new?date="+$(this).data('date')+"'><i class='icon-plus-sign'></i></a>"
+	);
+    }); 
+
     
     makefrontpagerespond();
     setTimeout(makefrontpagerespond, 750); //twice for good measure!
