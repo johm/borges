@@ -32,11 +32,10 @@ module ApplicationHelper
     content_tag(:div,
                 f.label(l,:class=>"control-label") +
                 content_tag(:div,
-                            f.text_field(m,options.merge({"data-format"=>"yyyy-MM-dd HH:mm PP"})) + 
-                            content_tag(:span,
-                                        content_tag(:i," ",{"data-time-icon"=>"icon-time","data-date-icon"=>"icon-calendar"}),
-                                        :class=>"add-on"),
-                            :class=>"controls input-append datetime date"),
+                            f.text_field(m,
+                                         options.merge({:value => (f.object.send(m).strftime('%Y/%m/%d %H:%M') if f.object.send(m)),:class => "datetimepicker",:autocomplete => "off"})), 
+                            :class => "controls input-append",
+                            :style => "margin-left:20px"),
                 :class=>"field control-group")
   end
 

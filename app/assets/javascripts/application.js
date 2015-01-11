@@ -21,7 +21,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require ckeditor/init
-//= require bootstrap-datetimepicker
+//= require jquery.datetimepicker
 //= require highcharts/highcharts                                                           
 //= require mediaelement_rails
 //= require_tree .
@@ -30,3 +30,4 @@
 
 // require highcharts/highcharts-more                                                         
 // require highcharts/highstock
+
