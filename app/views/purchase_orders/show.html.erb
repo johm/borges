@@ -14,19 +14,30 @@
 
       <%= f.hidden_field(:purchase_order_id,:value => @purchase_order.id) %>
       <%= f.hidden_field(:edition_id) %>
+      <%= f.hidden_field(:customer_id) %>
       
       <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path , 
-	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+	  link_to_function(content_tag(:i,"",:class=>"icon-plus-sign"),
                            "window.open('#{new_title_path}?isbn='+$('#item').val())", 
                   {:class=>'btn'}) %>
 
 
-      <%= myselectfield f,:customer,:customer,autocomplete_customer_name_customers_path, new_customer_path() %>       
+      <%= my_autocomplete_field_tag f,:customer,:customer,autocomplete_customer_name_customers_path, 
+	  link_to_function(content_tag(:i,"",:class=>"icon-plus-sign"),
+      "window.open('#{new_customer_path}?customer_name='+$('#customer').val())", 
+      {:class=>'btn'}) %>
+
 	   <script>
 	     $('#item').bind('railsAutocomplete.select', function(event, data){
 	     $("#purchase_order_line_item_edition_id").val(data.item.id);
 
 	     });
+	     
+	     $('#customer').bind('railsAutocomplete.select', function(event, data){
+	     $("#purchase_order_line_item_customer_id").val(data.item.id);
+
+	     });
+
 	     
 	   </script>
 

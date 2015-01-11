@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
   # GET /customers/new.json
   def new
     @customer = Customer.new
-
+    @customer.name=params[:customer_name]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @customer }
