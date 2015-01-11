@@ -103,6 +103,10 @@ jQuery('document').ready(function (){
     //this doesn't really work.    
     jQuery('#sale_order_meta .best_in_place').on("ajax:success", function ()
 						 {window.location.reload();});
+
+    $('.datetimepicker').each(function(){ 
+	$(this).datetimepicker({step:30,value:$(this).val(),formatTime:'g:i a'});
+    });
     
     
     makefrontpagerespond();
