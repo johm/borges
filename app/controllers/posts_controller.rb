@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order("created_at desc").page(params[:page]).per(10)
+    @posts = Post.where(:published=>true).order("created_at desc").page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

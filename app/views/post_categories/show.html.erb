@@ -5,7 +5,7 @@
   </div>
   
 
-    <% @post_category.posts.order("created_at desc").each do |post| %>
+    <% @post_category.posts.where(:published=>true).order("created_at desc").each do |post| %>
     <div class="row">
       <div class="span2">
 	<% post.images.limit(1).each do |i| %>
