@@ -7,9 +7,14 @@ class PurchaseOrder < ActiveRecord::Base
   belongs_to :owner #who gets the books
 
   has_many :purchase_order_line_items,dependent: :destroy
-  attr_accessible :notes, :number, :ordered, :ordered_when,:order_by_when, :distributor_id,:owner_id
+  attr_accessible :notes, :number, :ordered, :ordered_when,:order_by_when, :distributor_id,:owner_id,:tag
 
   default_scope  includes(:purchase_order_line_items)
+  
+  def self.tags
+    ['Normal','Frontlist','Course books','Event order','Tabling order','Special order','Used books','Remainders']
+  end
+    
 
   def estimated_total
     purchase_order_line_items.inject(Money.new(0)) {|sum,li| sum+li.ext_price   }
