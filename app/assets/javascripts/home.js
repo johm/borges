@@ -3,11 +3,7 @@ jQuery('document').ready(function (){
     $('video,audio').mediaelementplayer();
 
 
-        $('.datetime').datetimepicker({
-	    pick12HourFormat: true,   // enables the 12-hour format time picker
-	    pickSeconds: false,
-	    minuteStep:15
-	    });
+
 
 
    
@@ -108,6 +104,11 @@ jQuery('document').ready(function (){
 	$(this).datetimepicker({step:30,value:$(this).val(),formatTime:'g:i a'});
     });
     
+    $('.datepicker').datetimepicker({
+	timepicker:false,format:"Y-m-d"
+    });
+
+
     $('.manage_calendar .calendar td.day').not('.not-current-month').each(function(){
 	$(this).prepend(
 	    "<a class='newevent' href='/events/new?date="+$(this).data('date')+"'><i class='icon-plus-sign'></i></a>"
