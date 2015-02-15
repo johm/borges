@@ -38,6 +38,6 @@
   <div class="span2"></div>
   <div class="span7">
   <% @category.titles.order("title asc").each do |t| %>
-  <%= render :partial=>'titles/title', :object=>t %>
+  <%= render :partial=>'titles/gridtitle', :object=>t %>
   <% end %>
   </div>
