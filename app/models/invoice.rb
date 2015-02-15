@@ -4,7 +4,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_line_items
   has_many :editions, :through => :invoice_line_items
   has_many :copies, :through => :invoice_line_items
-  attr_accessible :notes, :number, :distributor_id,:shipping_cost,:owner_id
+  attr_accessible :notes, :number, :distributor_id,:shipping_cost,:owner_id,:received_by
   monetize :shipping_cost_in_cents, :as => "shipping_cost"
   validates :owner,:presence=>true
   validates :distributor,:presence=>true
