@@ -14,6 +14,13 @@
   <%= myselectfield f,:distributor,:distributor,autocomplete_distributor_name_purchase_orders_path, new_distributor_path() %> 
   <%= myselectfield f,:owner,"Who will own these books?",autocomplete_owner_name_owners_path, new_owner_path() %> 
   <%= mydatefield f,"When do we need to order these books by?",:order_by_when %>
+  <div class="field control-group">
+    <%= f.label :tag, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.select :tag, PurchaseOrder.tags %>
+    </div>
+  </div>
+
   <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
 
 <%=  mysubmit(f,"Create") %>
