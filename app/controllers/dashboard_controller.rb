@@ -220,10 +220,10 @@ class DashboardController < ApplicationController
       @invoices_for_period=Invoice.where(:received => true,:owner_id=> @owner).where(:received_when => @date_range_object.range_start..@date_range_object.range_end)
       @purchases=@invoices_for_period.inject(Money.new(0)) {|sum,i| sum+i.total_cost}
 
-      @returns_for_period=Copy.where(:status => "RETURNED",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
+      @returns_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:status => "RETURNED",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
       @returns=@returns_for_period.inject(Money.new(0)) {|sum,c| sum+c.cost}
 
-      @copies_sold_for_period=Copy.where(:status => "SOLD",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
+      @copies_sold_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:status => "SOLD",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
       @sales_cost=@copies_sold_for_period.inject(Money.new(0)) {|sum,c| sum+c.cost}
       @sales_price=@copies_sold_for_period.inject(Money.new(0)) {|sum,c| sum+c.price}
 
