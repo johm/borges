@@ -217,6 +217,7 @@ class DashboardController < ApplicationController
     @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
     @owner = @date_range_object.owner
     if ! @date_range_object.owner.nil?
+      @copies_inventoried_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:owner_id=> @owner).where(:inventoried_when => @date_range_object.range_start..@date_range_object.range_end)
       @invoices_for_period=Invoice.where(:received => true,:owner_id=> @owner).where(:received_when => @date_range_object.range_start..@date_range_object.range_end)
       @purchases=@invoices_for_period.inject(Money.new(0)) {|sum,i| sum+i.total_cost}
 
