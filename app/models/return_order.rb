@@ -1,5 +1,6 @@
 class ReturnOrder < ActiveRecord::Base
   has_many :return_order_line_items
+  has_many :copies, :through => :return_order_line_items
   attr_accessible :posted,:notes,:distributor_id
   belongs_to :distributor #where the books came from
 

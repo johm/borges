@@ -39,8 +39,23 @@
       <th>Expansion budget balance (60% of sale price+Returns-Purchases)</th>
       <td><%= (@sales_price*0.6)+@returns-@purchases %></td>
     </tr>
-
+  </table>
     
+
+  <table class="table">
+    <tr>
+      <th>Tag</th><th>Purchases</th> <th>Sales</th>      <th>Returns</th>
+    </tr>
+    <% PurchaseOrder.tags.push(nil).each do |t| %>
+    <tr>
+      <td><%= t %></td>
+      <td><%= @invoices_for_period.collect{|i| i.copies}.flatten.select {|c| (c.invoice_line_item.purchase_order_line_item.purchase_order.tag == t) rescue (t.nil? ? true : false) }.inject(Money.new(0)) {|sum,c| sum+c.cost} %></td>
+      <td><%= @copies_sold_for_period.select {|c| (c.invoice_line_item.purchase_order_line_item.purchase_order.tag == t) rescue (t.nil? ? true : false) }.inject(Money.new(0)) {|sum,c| sum+c.price} %></td>
+      <td><%= @returns_for_period.select {|c| c.invoice_line_item.purchase_order_line_item.purchase_order.tag == t rescue (t.nil? ? true : false)}.inject(Money.new(0)) {|sum,c| sum+c.cost} %></td>
+
+      
+    </tr>
+    <% end %>
 
   </table>
   <% end %>
