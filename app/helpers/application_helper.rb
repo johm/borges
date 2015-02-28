@@ -34,7 +34,7 @@ module ApplicationHelper
                 content_tag(:div,
                             f.text_field(m,
                                          options.merge({:value => (f.object.send(m).strftime('%Y/%m/%d %H:%M') if f.object.send(m)),:class => "datetimepicker",:autocomplete => "off"})), 
-                            :class => "controls input-append",
+                            :class => "controls ",
                             :style => "margin-left:20px"),
                 :class=>"field control-group")
   end
@@ -48,7 +48,7 @@ module ApplicationHelper
                             content_tag(:span,
                                         content_tag(:i," ",{"data-date-icon"=>"icon-calendar"}),
                                         :class=>"add-on"),
-                            :class=>"controls input-append"),
+                            :class=>"controls "),
                 :class=>"field control-group")
   end
 
