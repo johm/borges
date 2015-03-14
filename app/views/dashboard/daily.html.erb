@@ -13,7 +13,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><%= s.user.name rescue "" %></td>
     </tr>
     
     <% s.sale_order_line_items.each do |l| %>
@@ -51,6 +51,16 @@
     <% end %>
     </table>
 
+    <h2>By cashier</h2>
+    <table class="table">
+      <tr><th>User</th><th>Total</th></tr>
+      <% @sales_for_day.group_by { |s| s.user }.each do |u,sales|  %>
+      <tr>
+	<td><%= u.name rescue "not specified" %></td>
+	<td><%= sales.inject(Money.new(0)) {|sum,sale| sum+sale.total} %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
     
 

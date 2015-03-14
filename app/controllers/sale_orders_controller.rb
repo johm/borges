@@ -51,7 +51,7 @@ class SaleOrdersController < ApplicationController
     @sale_order.from_pos=true  # we will use different controllers for web orders
     @sale_order.from_web=false
     @sale_order.posted=false
-
+    
 
     respond_to do |format|
       if @sale_order.save
@@ -100,6 +100,7 @@ class SaleOrdersController < ApplicationController
         soli.sell
       end
       @sale_order.posted=true
+      @sale_order.user=current_user
       @sale_order.posted_when=DateTime.now
       @sale_order.save!
     end
