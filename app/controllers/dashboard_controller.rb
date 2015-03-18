@@ -139,7 +139,7 @@ class DashboardController < ApplicationController
           add_this_to_time=0
           if ::Rails.application.config.time_zone=="America/New_York"
             if !event.dtstart.isdst
-              add_this_to_time=1
+              # add_this_to_time=1
             end
           end
  
