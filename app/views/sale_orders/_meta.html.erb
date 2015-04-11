@@ -35,3 +35,10 @@
 </tr>
 
       </table>
+<script>
+  $('.best_in_place').bind("ajax:success", function (evt, data,status,xhr){
+  $('#sale_order_meta').html($.parseJSON(data).new_meta);
+  $('#sale_order_meta').effect('highlight'); 
+  return false;
+  });
+</script>

@@ -5,7 +5,7 @@
   <td class="ext_price"><%= best_in_place_if (! sale_order_line_item.sale_order.posted?), sale_order_line_item,:sale_price,:type=>:input, :data => {:sale_order_line_item => sale_order_line_item.id,:sale_order =>sale_order_line_item.sale_order.id} %></td>
   <td>
     <% if sale_order_line_item.sale_order.posted? %>
-    <small><%= sanitize category_status( sale_order_line_item.copy.edition.title)%></small>
+    <small class="somecategories_for_title_<%= sale_order_line_item.copy.edition.title.id %>"><%= sanitize category_status( sale_order_line_item.copy.edition.title)%></small>
       <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(sale_order_line_item.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless sale_order_line_item.copy.edition.title.latest_published_edition.nil? %>
     <% end %>
   </td>

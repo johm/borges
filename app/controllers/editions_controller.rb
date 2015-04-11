@@ -144,8 +144,6 @@ class EditionsController < ApplicationController
       @category.touch #touch it anyway
     end
 
-
-
     respond_to do |format| 
       format.html { redirect_to @edition.title, notice: "Title was successfully added to category <a href='#{url_for(@category)}'>#{@category.name}</a>".html_safe }
       format.js {}

@@ -72,7 +72,8 @@ class SaleOrdersController < ApplicationController
     respond_to do |format|
       if @sale_order.update_attributes(params[:sale_order])
         format.html { redirect_to @sale_order, notice: 'Sale order was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: {
+            new_meta: render_to_string("sale_orders/_meta.html.erb",:locals=>{:sale_order=>@sale_order} )}}
       else
         format.html { render action: "edit" }
         format.json { render json: @sale_order.errors, status: :unprocessable_entity }
