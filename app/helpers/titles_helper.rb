@@ -19,9 +19,9 @@ module TitlesHelper
   
   def category_status(title)
     if title.categories.length==0
-      raw "<span class='label label-important'>No</span>"
+      raw "<span id='nocategories'><span class='label label-important'>No</span></span>"
     else
-      title.categories.collect {|c| link_to(c.name,c).html_safe}.join("<br />").html_safe
+      "<span id='somecategories'>" + title.categories.collect {|c| link_to(c.name,c).html_safe}.join("<br />").html_safe + "</span>"
     end
   end
 

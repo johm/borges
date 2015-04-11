@@ -3,6 +3,8 @@ $("#notificationcontent").html("<%= escape_javascript("Title was successfully ad
 $("#notification").alert();
 $("#notification").show("fade");
 
+$(".somecategories_for_title_<%= @edition.title.id %> .label").remove();
+$(".somecategories_for_title_<%= @edition.title.id %>").prepend("<%= escape_javascript("<a href='#{url_for(@category)}'>#{@category.name}</a><br />").html_safe %>");
 
 
 

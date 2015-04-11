@@ -74,7 +74,8 @@ class SaleOrderLineItemsController < ApplicationController
     respond_to do |format|
       if @sale_order_line_item.update_attributes(params[:sale_order_line_item])
         format.html { redirect_to @sale_order_line_item, notice: 'Sale order line item was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: {
+            new_meta: render_to_string("sale_orders/_meta.html.erb",:locals=>{:sale_order=>@sale_order_line_item.sale_order} )}}
       else
         format.html { render action: "edit" }
         format.json { render json: @sale_order_line_item.errors, status: :unprocessable_entity }
@@ -86,17 +87,15 @@ class SaleOrderLineItemsController < ApplicationController
   # DELETE /sale_order_line_items/1.json
   def destroy
     @sale_order_line_item = SaleOrderLineItem.find(params[:id])
-    
-    
-    
-    
-    
+    @sale_order = @sale_order_line_item.sale_order 
+
     respond_to do |format|
-      if @sale_order_line_item.sale_order.posted? 
+      if @sale_order.posted? 
         format.js {}
       else
         @id=@sale_order_line_item.id
         @sale_order_line_item.destroy
+        @sale_order.reload
         format.html { redirect_to sale_order_line_items_url }
         format.json { head :no_content }
         format.js {}
