@@ -85,7 +85,7 @@ class Title < ActiveRecord::Base
   end
   
   def last_distributor 
-    copies.last.distributor rescue nil 
+    copies.last.invoice.distributor rescue nil 
   end
 
   def in_stock
