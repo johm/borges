@@ -9,7 +9,7 @@
 
   <div class="grid">  
     <% @publisher.titles.order('id desc').each do |t,i| %>
-    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>((("Distributor: " + link_to t.last_distributor.name,t.last_distributor) if can? :edit, Publisher) rescue "")}%>
+    <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>((("Distributor: " + (link_to t.last_distributor.name,t.last_distributor)) if can? :edit, Publisher) rescue "")}%>
     <% end %>
   </div>
 
