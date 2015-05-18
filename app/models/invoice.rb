@@ -37,4 +37,11 @@ class Invoice < ActiveRecord::Base
     all_copies_from_this_invoice.select {|c| c.status=="SOLD"}.inject(Money.new(0)){|sum,li| sum+li.price}
   end
 
+  def returns_to_date
+    return Money.new(0) unless received?
+    all_copies_from_this_invoice=invoice_line_items.collect {|li| li.copies}.flatten
+    all_copies_from_this_invoice.select {|c| c.status=="RETURNED"}.inject(Money.new(0)){|sum,c| sum+c.cost}
+  end
+
+
 end
