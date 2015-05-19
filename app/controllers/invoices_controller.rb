@@ -98,6 +98,31 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def chart 
+    
+    big_distributors=Distributor.all.find_all {|d| d.purchase_orders.where(:ordered=>true).length >= 2}
+    
+    @distributors_to_invoices={}
+    
+    big_distributors.each do |distributor|
+      
+      invoices=[]
+      
+      distributor.invoices.where(:received=>true).each do |i| 
+        total=i.total_cost+i.shipping_cost 
+        sales_to_date=i.sales_to_date 
+        returns_to_date=i.returns_to_date
+        invoice_net=sales_to_date-(total-returns_to_date)
+        invoices.append([i.received_when.to_time.to_i*1000 ,invoice_net.to_f])
+      end
+      
+      @distributors_to_invoices[distributor]=invoices
+    end
+    respond_to do |format|
+      format.html { render action: "chart" }
+    end
+  end
+  
   private
 
   def hack_out_params
