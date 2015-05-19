@@ -122,6 +122,7 @@ Borges::Application.routes.draw do
 
   resources :invoice_line_items
 
+  get 'invoices/chart' => 'invoices#chart'
   resources :invoices do
     member do
       post :receive
