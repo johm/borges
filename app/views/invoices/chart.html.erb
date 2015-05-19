@@ -8,6 +8,7 @@
 		type: 'scatter',
 		zoomType: 'xy'
             },
+	    
             title: {
 		text: 'Net vs Received'
             },
@@ -40,25 +41,9 @@
 
             },
             plotOptions: {
-		scatter: {
-                    marker: {
-			radius: 5,
-			states: {
-                            hover: {
-				enabled: true,
-				lineColor: 'rgb(100,100,100)'
-                            }
-			}
-                    },
-                    states: {
-			hover: {
-                            marker: {
-				enabled: false
-                            }
-			}
-			}}},
-		tooltip: {pointFormat: '<b>{point.x:%b %e %Y}</b>: $<b>{point.y}</b>'},
-legendItemClick: function(event) {
+		
+	scatter: {
+            legendItemClick: function(event) {
     if (!this.visible)
         return false;
 
@@ -76,6 +61,24 @@ legendItemClick: function(event) {
     }
     return false;
 },
+	    marker: {
+			radius: 5,
+			states: {
+                            hover: {
+				enabled: true,
+				lineColor: 'rgb(100,100,100)'
+                            }
+			}
+                    },
+                    states: {
+			hover: {
+                            marker: {
+				enabled: false
+                            }
+			}
+			}}},
+		tooltip: {pointFormat: '<b>{point.x:%b %e %Y}</b>: $<b>{point.y}</b>'},
+
 	    series: [
 		
 				<%= (@distributors_to_invoices.collect {|k,v| "{ name: '#{k.name.gsub(/[^0-9a-z]/i, '')}', data: #{v}}"}.join ",").html_safe %>
