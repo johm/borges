@@ -37,6 +37,7 @@
 		floating: false,
 		backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
 		borderWidth: 1
+
             },
             plotOptions: {
 		scatter: {
@@ -57,6 +58,24 @@
 			}
 			}}},
 		tooltip: {pointFormat: '<b>{point.x:%b %e %Y}</b>: $<b>{point.y}</b>'},
+legendItemClick: function(event) {
+    if (!this.visible)
+        return false;
+
+    var seriesIndex = this.index;
+    var series = this.chart.series;
+
+    for (var i = 0; i < series.length; i++)
+    {
+        if (series[i].index != seriesIndex)
+        {
+            series[i].visible ?
+            series[i].hide() :
+            series[i].show();
+        } 
+    }
+    return false;
+},
 	    series: [
 		
 				<%= (@distributors_to_invoices.collect {|k,v| "{ name: '#{k.name.gsub(/[^0-9a-z]/i, '')}', data: #{v}}"}.join ",").html_safe %>
