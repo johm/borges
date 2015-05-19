@@ -41,8 +41,9 @@
 
             },
             plotOptions: {
+		series: {
+		    events: {
 		
-	scatter: {
             legendItemClick: function(event) {
     if (!this.visible)
         return false;
@@ -60,7 +61,11 @@
         } 
     }
     return false;
+}
+}
 },
+		
+	scatter: {
 	    marker: {
 			radius: 5,
 			states: {
