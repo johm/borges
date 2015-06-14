@@ -101,6 +101,15 @@ class DistributorsController < ApplicationController
   end
 
 
+  def chart
+    @distributor = Distributor.find(params[:id])
+    @title_info=@distributor.titles.collect {|t| t}.uniq.collect {|t| {:instock=>t.in_stock > 0,:title=>t.title,:average_time_on_shelf=>t.average_time_on_shelf,:profit_to_date=>t.net_profit_or_loss}}
+    respond_to do |format|
+      format.html { render action: "chart" }
+    end
+
+  end
+
 
   private
   def sort_direction
