@@ -154,11 +154,11 @@ class Title < ActiveRecord::Base
 
   def average_time_on_shelf
     #copies in stock---how many days ago were they received?
-    stock_on_shelves_for=copies.instock.inject(0) {|sum,c| DateTime.now.to_date.mjd - c.inventoried_when.to_date.mjd}
     #copies sold---how many days did they take to sell?
-    took_this_long_to_sell=copies.sold.inject(0) {|sum,c| c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd}
     #copies lost---how many days did they take to lose?
-    took_this_long_to_lose=copies.lost.inject(0) {|sum,c| c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd}
+    stock_on_shelves_for=copies.instock.inject(0) {|sum,c| sum + (DateTime.now.to_date.mjd - c.inventoried_when.to_date.mjd)}
+    took_this_long_to_sell=copies.sold.inject(0) {|sum,c| sum + (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd)}
+    took_this_long_to_lose=copies.lost.inject(0) {|sum,c| sum + (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd)}
 
     #ignore returned copies
     #add the three numbers, divide by number of copies sold or in stock or lost
