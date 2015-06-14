@@ -1,0 +1,43 @@
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+    $(function () {
+	    $('#container').highcharts({
+		    chart: {
+			type: 'scatter',
+			zoomType: 'xy'
+		    },
+		    
+		    title: {
+			text: 'Average time on shelves vs. profit to date'
+		    },
+		    subtitle: {
+			text: 'for titles from this distributor'
+		    },
+		    xAxis: {
+			title: {
+			    enabled: true,
+			    text: 'Days on shelf'
+			}},
+
+		    yAxis: {
+			title: {
+			    enabled: true,
+			    text: 'Profit to date'
+			}
+		    },
+
+		    plotOptions: {
+		    scatter: {
+			tooltip: {pointFormat: '<b>{point.title}</b>'}}},
+		    
+		    series: [ {name:"Titles in stock",data: [ <%=  raw @title_info.find_all {|t| t[:instock]}.collect {|t| "{ title: '#{t[:title].gsub(/[^0-9a-z ]/i, '')}', x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %> ]},
+    {name:"Titles out of stock",data: [ <%=  raw @title_info.find_all {|t| ! t[:instock]}.collect {|t| "{ title: '#{t[:title].gsub(/[^0-9a-z ]/i, '')}', x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %> ]},
+
+
+]
+		})});
+</script>
+
+

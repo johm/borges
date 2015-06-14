@@ -115,6 +115,7 @@ Borges::Application.routes.draw do
   resources :distributors do
     member do
       put :merge_orders_from
+      get :chart
     end
   end
 

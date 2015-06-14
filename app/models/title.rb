@@ -143,5 +143,28 @@ class Title < ActiveRecord::Base
   def copies_info 
     copies.instock.collect {|c| "$#{c.price} [#{c.edition.isbn}]" }.join("\n")
   end
+
+
+  def net_profit_or_loss
+    cost=copies.inject(Money.new(0)) {|sum,c| sum+c.cost} 
+    income=copies.sold.inject(Money.new(0)) {|sum,c| sum+c.price} 
+    returned=copies.returned.inject(Money.new(0)) {|sum,c| sum+c.cost} 
+    income-cost+returned
+  end
+
+  def average_time_on_shelf
+    #copies in stock---how many days ago were they received?
+    stock_on_shelves_for=copies.instock.inject(0) {|sum,c| DateTime.now.to_date.mjd - c.inventoried_when.to_date.mjd}
+    #copies sold---how many days did they take to sell?
+    took_this_long_to_sell=copies.sold.inject(0) {|sum,c| c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd}
+    #copies lost---how many days did they take to lose?
+    took_this_long_to_lose=copies.lost.inject(0) {|sum,c| c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd}
+
+    #ignore returned copies
+    #add the three numbers, divide by number of copies sold or in stock or lost
+    
+    (stock_on_shelves_for+took_this_long_to_sell+took_this_long_to_lose) / (copies.instock.count+copies.sold.count+copies.lost.count) 
+
+  end
   
 end
