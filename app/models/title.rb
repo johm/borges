@@ -158,7 +158,7 @@ class Title < ActiveRecord::Base
     #copies lost---how many days did they take to lose?
     stock_on_shelves_for=copies.instock.inject(0) {|sum,c| sum + (DateTime.now.to_date.mjd - c.inventoried_when.to_date.mjd)}
     took_this_long_to_sell=copies.sold.inject(0) {|sum,c| sum + (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd)}
-    took_this_long_to_lose=copies.lost.inject(0) {|sum,c| sum + (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd)}
+    took_this_long_to_lose=copies.lost.inject(0) {|sum,c| sum + ((c.deinventoried_when.to_date.mjd rescue c.updated_at.to_date.mjd ) - c.inventoried_when.to_date.mjd)}
 
     #ignore returned copies
     #add the three numbers, divide by number of copies sold or in stock or lost
