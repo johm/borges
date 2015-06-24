@@ -1,6 +1,6 @@
 class Copy < ActiveRecord::Base
   belongs_to :edition, :touch => true
-  delegate :title, :to => :edition
+  has_one :title, :through => :edition
   belongs_to :invoice_line_item
   has_one :invoice,:through => :invoice_line_item 
   has_one :sale_order_line_item
@@ -18,6 +18,7 @@ class Copy < ActiveRecord::Base
   scope :returned, where("status"=>"RETURNED")
   scope :sold, where("status"=>"SOLD")
   
+  after_save :reindex_title
 
   def info
     "$#{price}" + (notes || is_used? ? " [#{notes} #{'USED' if is_used?}]" : "" )
@@ -59,6 +60,12 @@ class Copy < ActiveRecord::Base
     @inventory_copy_confirmation.status=true
     @inventory_copy_confirmation.save!
   end
+
+  private 
+  def reindex_title 
+    self.title.save! # does it reindex?
+  end
+
 
 
 end
