@@ -1,5 +1,5 @@
 class EditionsController < ApplicationController
-  before_filter :authenticate_user! , :except=>[:show]
+  before_filter :authenticate_user! , :except=>[:show,:byisbn]
   load_and_authorize_resource
   autocomplete :title,:title,:full=>true,:display_value=>:title_and_id,:limit => 20
   before_filter :hack_out_params , :only=>[:create,:update]
@@ -12,6 +12,24 @@ class EditionsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @editions }
+    end
+  end
+
+  def byisbn 
+    isbn=params[:isbn]
+    if ! isbn.nil?
+      @edition = Edition.where('isbn13 = ? or isbn10 = ?',isbn,isbn).first
+      if ! @edition.nil?
+        @title = @edition.title 
+      end
+    end
+
+    respond_to do |format|
+      if @edition && @title
+        format.html { redirect_to title_path(@title)}
+      else
+        format.html { redirect_to '/books/', notice: "We couldn't find that title in our system...but here's some other things you might like!  And thanks for supporting local independent bookstores!" }
+      end
     end
   end
 

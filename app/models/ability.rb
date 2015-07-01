@@ -23,7 +23,7 @@ class Ability
         can :manage_calendar, :dashboard
       end
       can :read, Title 
-      can :read, Edition
+      can [:read,:byisbn], Edition
       can :read, Author
       can :read, Image
       can :read, Publisher
