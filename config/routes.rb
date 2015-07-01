@@ -199,6 +199,9 @@ Borges::Application.routes.draw do
   end
   resources :shopping_cart_line_items
 
+  get '/book/:isbn', :to => 'editions#byisbn'
+  get '/book/', :to => 'editions#byisbn'
+
   get '/dashboard/search', :to => 'dashboard#search'
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
