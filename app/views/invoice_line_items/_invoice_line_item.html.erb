@@ -2,6 +2,13 @@
   <td>
     <% if invoice_line_item.invoice.received? %>
     <%= link_to invoice_line_item.purchase_order_line_item.purchase_order.number,invoice_line_item.purchase_order_line_item.purchase_order unless invoice_line_item.purchase_order_line_item.nil? %>
+    <small>
+      <% if invoice_line_item.purchase_order_line_item && ! invoice_line_item.purchase_order_line_item.customer.nil? %>
+      <div><%= link_to invoice_line_item.purchase_order_line_item.customer,invoice_line_item.purchase_order_line_item.customer %> has/had <%= invoice_line_item.purchase_order_line_item.quantity %> of this edition on this purchase order</div>
+      <% end %>
+    </small>
+
+
     <% else %>
     <%= render "/invoice_line_items/po_picker", :invoice_line_item=>invoice_line_item %>
     <% end %>

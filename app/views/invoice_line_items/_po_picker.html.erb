@@ -1,3 +1,8 @@
 <%= form_for invoice_line_item,remote: true do |f|%>
 <%= f.select :purchase_order_line_item_id, [[nil,nil]]+ invoice_line_item.potential_po_matches.collect {|poli| ["#{poli.purchase_order.number} (#{poli.quantity - poli.received} outstanding)",poli.id]},{},onchange: "$(this).parent('form').submit();" %>
-    <% end %>
+<small>
+<% invoice_line_item.potential_special_order_matches.each do |poli| %>
+<div><%= link_to poli.customer,poli.customer %> has <%= poli.quantity %> of this edition on purchase order <%= link_to poli.purchase_order.number,poli.purchase_order%></div>
+<% end %>
+</small>
+<% end %>
