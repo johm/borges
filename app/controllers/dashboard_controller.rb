@@ -190,7 +190,7 @@ class DashboardController < ApplicationController
   end
 
   def daily 
-    @day=params[:day] ? Date.parse(params[:day]) : DateTime.now.to_date
+    @day=params[:day] ? Date.parse(params[:day]) : DateTime.now.in_time_zone(::Rails.application.config.time_zone || "UTC").to_date
     @sales_for_day=SaleOrder.where(:posted => true).order("created_at asc").where("date(convert_tz(posted_when,'UTC',?)) = ? ", ::Rails.application.config.time_zone || "UTC", @day)
     @total=@sales_for_day.inject(Money.new(0)) {|sum,s| sum+s.subtotal_after_discount}
   end
