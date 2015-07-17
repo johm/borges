@@ -31,6 +31,18 @@ class InvoiceLineItem < ActiveRecord::Base
     end
   end
 
+  def potential_special_order_matches 
+    #List of purchase order line items where the quantity ordered-quantity received is greater than zero, and the customer is not nil
+    begin
+      edition.purchase_order_line_items.joins(:purchase_order).where(:purchase_orders => {:ordered => true}).find_all {|x| ((x.quantity-x.received) >= 0) && !x.customer.nil?}
+    rescue
+      []
+    end
+  end
+
+  
+
+
   def receive
     # create copies in stock
     (1..quantity).each do |x|
