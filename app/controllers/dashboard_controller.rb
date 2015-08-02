@@ -112,7 +112,7 @@ class DashboardController < ApplicationController
 
     @sales_by_date=SaleOrder.includes(:sale_order_line_items => [:copy => [:edition => [:title]]]).where(:posted => true).order("created_at asc").where("convert_tz(posted_when,'UTC','#{timezone}') > ? && convert_tz(posted_when,'UTC','#{timezone}') < ?",@date_range_object.range_start,@date_range_object.range_end+1.days)
     @isbns_sold=@sales_by_date.collect {|s| s.sale_order_line_items.find_all {|soli| soli.copy.edition && !soli.copy.edition.isbn13.blank?}}.flatten.collect{|soli| soli.copy.edition.isbn13} 
-    @isbns_sold_with_count=@isbns_sold.inject(Hash.new()){|h,i| h[i] += 1;h}.sort_by{|k,v| v}.reverse
+    @isbns_sold_with_count=@isbns_sold.inject(Hash.new(0)){|h,i| h[i] += 1;h}.sort_by{|k,v| v}.reverse
     
     @csv=CSV.generate do |csv|
       csv << ["Quanity","ISBN13"]
