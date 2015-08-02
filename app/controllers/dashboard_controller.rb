@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+
   before_filter :authenticate_user! 
   authorize_resource :class => false
 
@@ -90,6 +91,51 @@ class DashboardController < ApplicationController
     
  
   end
+
+
+  def report_aba
+    # sunday to saturday
+    @date_range_object=DateRangeObject.new
+    
+    if Date.today.wday==0 # we are reporting on sunday
+      @date_range_object.range_start = Date.today-1.week #get last sunday
+      @date_range_object.range_end = Date.today-1.day # until yesterday
+    elsif Date.today.wday==6 # we are reporting at the end of Saturday
+      @date_range_object.range_start = Date.today-6.days #get last sunday
+      @date_range_object.range_end = Date.today # until today
+    else
+      @date_range_object.range_start = Date.monday-1.day-1.week #get last sunday
+      @date_range_object.range_end = Date.monday-2.days #until the saturday that just past
+    end
+        
+    timezone=::Rails.application.config.time_zone || "UTC"
+
+    @sales_by_date=SaleOrder.includes(:sale_order_line_items => [:copy => [:edition => [:title]]]).where(:posted => true).order("created_at asc").where("convert_tz(posted_when,'UTC','#{timezone}') > ? && convert_tz(posted_when,'UTC','#{timezone}') < ?",@date_range_object.range_start,@date_range_object.range_end+1.days)
+    @isbns_sold=@sales_by_date.collect {|s| s.sale_order_line_items.find_all {|soli| soli.copy.edition && !soli.copy.edition.isbn13.blank?}}.flatten.collect{|soli| soli.copy.edition.isbn13} 
+    @isbns_sold_with_count=@isbns_sold.inject(Hash.new()){|h,i| h[i] += 1;h}.sort_by{|k,v| v}.reverse
+    
+    @csv=CSV.generate do |csv|
+      csv << ["Quanity","ISBN13"]
+      @isbns_sold_with_count.each do |k,v|
+        csv << [v,k]
+      end    
+    end 
+    
+
+
+    respond_to do |format|
+      format.csv { 
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-aba-#{@date_range_object.range_start.strftime('%a-%b-%e')}-to-#{@date_range_object.range_end.strftime('%a-%b-%e-%Y')}.csv\""  
+        render text: @csv 
+      }
+    end
+
+    
+    
+  end
+
+
+
 
 
   def losses
