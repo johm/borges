@@ -104,8 +104,8 @@ class DashboardController < ApplicationController
       @date_range_object.range_start = Date.today-6.days #get last sunday
       @date_range_object.range_end = Date.today # until today
     else
-      @date_range_object.range_start = Date.monday-1.day-1.week #get last sunday
-      @date_range_object.range_end = Date.monday-2.days #until the saturday that just past
+      @date_range_object.range_start = Date.today.monday-1.day-1.week #get last sunday
+      @date_range_object.range_end = Date.today.monday-2.days #until the saturday that just past
     end
         
     timezone=::Rails.application.config.time_zone || "UTC"
