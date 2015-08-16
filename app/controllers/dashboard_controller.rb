@@ -115,7 +115,7 @@ class DashboardController < ApplicationController
     @isbns_sold_with_count=@isbns_sold.inject(Hash.new(0)){|h,i| h[i] += 1;h}.sort_by{|k,v| v}.reverse
     
     @csv=CSV.generate do |csv|
-      csv << ["Quanity","ISBN13"]
+      csv << ["Quantity","ISBN13"]
       @isbns_sold_with_count.each do |k,v|
         csv << [v,k]
       end    
