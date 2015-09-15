@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery Sticky Footer</title>
+
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="assets/css/jquery.stickyfooter.css" />
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.stickyfooter.min.js"></script>
+		<script type="text/javascript">
+
+		$(window).load(function() {
+			$("#footer").stickyFooter();
+		});
+
+		</script>
+	</head>
+	<body>
+		<div id="nav">
+			<div class="container">
+				<h1>jQuery <span>Sticky Footer</span></h1>
+				<ul>
+					<li><a href="https://github.com/miWebb/jQuery.stickyFooter/releases">Download</a></li>
+					<li><a href="https://github.com/miWebb/jQuery.stickyFooter">Documentation</a></li>
+					<li><a href="https://github.com/miWebb">GitHub</a></li>
+					<li><a href="https://www.miwebb.com">miWebb</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="page">
+			<section class="container">
+				<h1>Description</h1>
+				<p>The jQuery sticky footer plugin sticks your footer,<br />with or without set height, to the bottom of your page.<br />You can also use the sticky footer plugin to stick other<br /> elements to the bottom of their parent.</p>
+			</section>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<p>The footer wil stick to the bottom of the frame until it hits the content.</p>
+			</div>
+		</div>
+	</body>
+</html>

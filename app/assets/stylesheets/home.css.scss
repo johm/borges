@@ -220,3 +220,14 @@ margin-bottom:40px;
 .not-current-month div{
 opacity:.4;
 }
+
+.row-no-padding {
+  margin-left: -15px;
+  margin-right: -15px;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+

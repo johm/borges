@@ -180,3 +180,6 @@ function makefrontpagerespond(){
     });
 }
 
+$(window).load(function() {
+    $("#footer").stickyFooter();
+});

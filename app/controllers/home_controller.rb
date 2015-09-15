@@ -22,14 +22,14 @@ class HomeController < ApplicationController
         client = Instagram.client()
         user = client.user
         
-        html = "<ul class='thumbnails frontstagram'>"
+        html = "<div class='row frontstagram row-no-padding'>"
         i=0
         for media_item in client.user_recent_media()
-          break if i>2
+          break if i>3
           i=i+1
-          html << "<li class='span2'><div class='thumbnail'><div><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;') unless media_item.caption.nil?}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div></a></div></li>"
+          html << "<div class='col-md-3 col-xs-3'><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;') unless media_item.caption.nil?}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a></div>"
         end
-        html << "</ul>"
+        html << "</div>"
         html
       end
     rescue

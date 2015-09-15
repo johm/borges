@@ -426,17 +426,6 @@ ActiveRecord::Schema.define(:version => 20150215011655) do
   add_index "sale_orders", ["customer_id"], :name => "index_sale_orders_on_customer_id"
   add_index "sale_orders", ["user_id"], :name => "index_sale_orders_on_user_id"
 
-  create_table "section_title_list_memberships", :force => true do |t|
-    t.integer  "title_list_id_id"
-    t.integer  "section_id_id"
-    t.integer  "index"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "section_title_list_memberships", ["section_id_id"], :name => "index_section_title_list_memberships_on_section_id_id"
-  add_index "section_title_list_memberships", ["title_list_id_id"], :name => "index_section_title_list_memberships_on_title_list_id_id"
-
   create_table "shopping_cart_line_items", :force => true do |t|
     t.integer  "shopping_cart_id"
     t.integer  "edition_id"
