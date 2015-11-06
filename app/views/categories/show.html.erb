@@ -3,6 +3,8 @@
 
 <div style="float:right;">
   <%= mylinkbutton 'Edit', edit_category_path(@category) if can? :edit,Category %>
+<%= mylinkbutton 'Analyze titles for profitability', chart_distributor_path(@distributor), {},"btn-success btn-large"  if can? :edit,Category %>
+
 </div>  
 
 
