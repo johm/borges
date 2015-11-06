@@ -86,6 +86,16 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def chart
+    @category = Category.find(params[:id])
+    @title_info=@category.titles.collect {|t| t}.uniq.collect {|t| {:instock=>t.in_stock > 0,:title=>t.title,:average_time_on_shelf=>t.average_time_on_shelf,:profit_to_date=>t.net_profit_or_loss}}
+    respond_to do |format|
+      format.html { render action: "chart" }
+    end
+
+  end
+
+
 
   private
   def hack_out_params
