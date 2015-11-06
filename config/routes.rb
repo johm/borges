@@ -65,8 +65,11 @@ Borges::Application.routes.draw do
   resources :title_category_memberships
 
 
-  resources :categories
-
+  resources :categories do 
+    member do 
+      get :chart
+    end
+  end
 
   resources :post_title_list_links
 
