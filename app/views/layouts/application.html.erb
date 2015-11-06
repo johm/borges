@@ -13,14 +13,7 @@
 <%= favicon_link_tag 'favicon.ico' %>
   </head>
   <body class="<%= controller_name %> <%= action_name %> <%= 'slider' if @slider %>">
-    <div id="wrap" style="<%= 'padding-top:40px;' if (user_is_admin? || user_is_scheduler? || user_views_calendar?)  %>">
-      <% if user_is_admin? || user_is_scheduler? || user_views_calendar?  %>
-      <div class="navbar navbar-fixed-top navbar-inverse">
-	<div class="navbar-inner">
-	<%= render 'layouts/navigation' %>
-	</div>
-      </div>
-      <% end %>
+    <div id="wrap" style="<%= 'padding-bottom:40px;' if (user_is_admin? || user_is_scheduler? || user_views_calendar?)  %>">
 
       <div id="modal-window" class="modal hide fade" role="dialog">
 	<div class="modal-header">
@@ -66,7 +59,15 @@
       <%= render :partial => "themes/#{theme}/bottom" %>      
     </div>
     
-    
+    <footer class="footer">
+   <% if user_is_admin? || user_is_scheduler? || user_views_calendar?  %>
+      <nav class="navbar navbar-inverse navbar-fixed-bottom" >
+	<div class="navbar-collapse">
+	<%= render 'layouts/navigation' %>
+	</div>
+      </div>
+      <% end %>
+    </footer>
     
     
 
