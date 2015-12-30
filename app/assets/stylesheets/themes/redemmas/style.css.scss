@@ -6,7 +6,7 @@ $lightbrown:#b5a57f; //good but too dark?
 $lightbrown:#bcb093;
 $nearwhitetwo:#fafafa;
 $red:#b4282e;
-$lightred:#e59179;
+//$lightred:#e59179;
 $lightred:#cb3e38; //
 $lightishgrey:#80807f;
 $johnsgrey:#444a50;
@@ -19,8 +19,9 @@ color:$lightishgrey;
 
 
 body {
-font-family:"adobe-caslon-pro";
+font-family:"adobe-garamond-pro";
 color:$nearblack;
+font-size:16px;
 }
 
 #pagenav {
@@ -51,15 +52,7 @@ font-weight:normal;
 margin-top:30px;
 }
 
-.pages .introduction p, .pages .introduction p span,.pages .introduction li{
-font-family:"garamond-premier-pro-display";
-font-family:"adobe-caslon-pro";
-color:$johnsgrey;
-}
 
-.pages .body p, .pages .body p span, .pages .body ul, .pages .body li{
-color:$johnsgrey;
-}
 
 #main {
 background-color:white;
@@ -1144,6 +1137,17 @@ margin-top:0px;
 font-family:proxima-nova;
 }
 
+.btn-primary {
+
+background-color:$lightred;
+border: $red;
+
+}
+
+.btn-primary:hover {
+background-color:$darkred;
+}
+
 a {
 color:$lightred;
 }
@@ -1211,21 +1215,8 @@ text-align:justify;
 margin-bottom:20px;
 }
 
- h2.posttitle {
-border-bottom:0px solid #eee;
-font-size:28px;
-line-height:36px;
-font-weight:500;
-font-family:"garamond-premier-pro-display";
-}
 
- h3.postdate {
-font-weight:normal;
-font-size:18px;
-line-height:18px;
-float:right;
-margin-left:10px;
-}
+
 
 
 .item {

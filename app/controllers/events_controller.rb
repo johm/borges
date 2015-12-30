@@ -12,11 +12,11 @@ class EventsController < ApplicationController
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
     
-    @events = Event.by_year(@year).by_month(@month).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc")
-    
 
     if @upcoming
-      @events = @events.where("event_start > ?",DateTime.now - 6.hours)      
+      @events = @events.where("event_start > ?",DateTime.now - 6.hours).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc").limit(24)      
+    else
+      @events = Event.by_year(@year).by_month(@month).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc")      
     end
 
     respond_to do |format|
@@ -29,7 +29,8 @@ class EventsController < ApplicationController
     @upcoming = params[:month].blank?
     @year = (params[:year] || DateTime.now.year).to_i
     @month = (params[:month] || DateTime.now.month).to_i
-    
+    @is_2640_page=true
+
     @events = Event.by_year(@year).by_month(@month).where(:published=>true).where(:show_on_2640_page => true).order("event_start asc")
 
     if @upcoming
@@ -46,8 +47,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
 
+    @event = Event.find(params[:id])
+    @events = Event.where("event_start > ?",DateTime.now - 6.hours).where(:published=>true,:event_location_id=>@event.event_location_id).where("events.id != ?",@event.id).order("event_start asc").limit(24)
+      
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }

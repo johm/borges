@@ -57,17 +57,26 @@ class HomeController < ApplicationController
         client = Instagram.client()
         user = client.user
         
-    html = "<h1>Recently delicious</h1><ul class='thumbnails'>"
+        html = ""
         i=0
+        s=0
         for media_item in client.user_recent_media()
-          break if i>8
+          break if i>20
+          break if s>5
           i=i+1
           tags = media_item.tags
           if tags.include?("food") || tags.include?("vegan")  || tags.include?("cafe") 
-            html << "<li class='span2'><div class='thumbnail'><div style='margin-bottom:10px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.low_resolution.url.gsub(/^http:/,"")}'></div>#{media_item.caption.text}</a></div></li>"
+            html << "<div class='col-xs-6 col-sm-4 col-md-2' style='padding:0px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a><div class='igtext'>#{media_item.caption.text}</div></div>"
+            s=s+1
+            if s % 2 == 0
+              html << "<div class='clearfix visible-xs-block' ></div>"
+            end
+            if s % 3 == 0
+              html << "<div class='clearfix visible-sm-block' ></div>"
+            end
+
           end
         end
-        html << "</ul>"
         html
       end
     rescue

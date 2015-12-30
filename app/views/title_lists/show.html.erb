@@ -14,24 +14,26 @@
 <% content_for :description do%><%=h truncate(sanitize(@title_list.description, :tags=>[]),:length => 250) %><% end %>
 
 
-<div class="span8">
-<p id="notice"><%= notice %></p>
-
-<div style="float:right;">
-  <%= mylinkbutton 'Edit', edit_title_list_path(@title_list) if can? :edit,TitleList %>
-</div>  
-<h1>List: <%= @title_list.name %></h1>
-<p>
-  <%= sanitize @title_list.description %>
-</p>
-
-<div class="grid">
-  <% @title_list.title_list_memberships.each do |tlm| %>
-  <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>(tlm.notes || "") } unless tlm.title.nil? %>
-  <% end %>
+<div class="row spaceontop">
+  <p id="notice"><%= notice %></p>
+  
+  <div class="col-xs-12 col-sm-8">
+    <h1 class="headername"><%= @title_list.name %></h1>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+    <%= theme_partial :social %>
+    <%= mylinkbutton 'Edit', edit_title_list_path(@title_list) if can? :edit,TitleList %>
+  </div>
+  <div class="introduction col-xs-12 col-sm-8">
+    <%= sanitize @title_list.description %>
+  </div>
 </div>
-<%= theme_partial :social %>
+<div class="row">
+  <div class="grid">
+    <%= make_a_grid_from_tlm(@title_list.title_list_memberships) %>
+  </div>
 </div>
+
 
 
 

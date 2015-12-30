@@ -1,10 +1,7 @@
-  <div class="griditem">
-    <div class="griditeminner" style="background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable) rescue "" %>')">
-      <a href="<%= title_path(title) %>">
-	<div class="gridborder"></div>
-      </a>
-    </div>
-
+  <div class="col-xs-6 col-sm-4 col-md-2" style="padding:0px;">
+    
+    <a href="<%= title_path(title) %>" class="gridcover" style="height:200px;display:block;background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable) rescue "" %>');background-size:cover;"> 
+    </a>
     <div class="griditemtitle"><%= if title.is_in_stock? 
 				   "IN STOCK" 
 				   elsif title.is_in_print? 
@@ -18,7 +15,7 @@
           <% if can? :edit, Title %>
     <div class="hiddenactions">
       <%= unless title.latest_published_edition.nil?  
-	 link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window',:title=>title.latest_published_edition.publisher}  
+	 link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window',:title=>title.latest_published_edition.publisher}  
       end %>
     </div>
     <% end %>

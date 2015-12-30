@@ -1,5 +1,6 @@
-<div class="row">
-  <div class="span12">
+<div class="container">
+<div class="row spaceontop">
+  <div class="col-xs-12">
     <h1><%= link_to "«",daily_path({:day=>@day - 1.day}) %> Sales for <%= @day %> <%= link_to "»",daily_path({:day=>@day + 1.day}) %></h1>
     
     <h3>Total: $<%= @total %></h3>
@@ -65,4 +66,5 @@
     
 
 
+</div>
 </div>

@@ -11,39 +11,39 @@
 
 <% content_for :description do%><%=h truncate(sanitize(@page.introduction, :tags=>[]),:length => 250) %><% end %>
 
+<div class="container">
 
-
-<div class="span8">
-<h1 id="pagetitle"><%= @page.title %>
-  <div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_page_path(@page)   if can? :edit, Page %> 
-</h1>
-<div class="introduction">
-  <%= raw @page.introduction %>
-</div>
-
-<% if @page.is_image_grid? %>
-<div class="grid">
-  <% @page.images.each do |i| %>
-  <div class="griditem">
-    <div class="griditeminner" style="background-image:url('<%= i.the_image_url(:reasonable)%>')">
-      <a href="<%= i.link %>">
-	<div class="gridborder"></div>
-      </a>
+  <div class="row spaceontop">
+    <div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='fa fa-edit'></i> Edit"), edit_page_path(@page),{:class=>"btn btn-primary"}  if can? :edit, Page %> </div>
+    <h1 id="pagetitle"><%= @page.title %>
+    </h1>
+    <div class="introduction">
+      <%= raw @page.introduction %>
     </div>
-    <div class="griditemtitle"><%= i.title %></div>
-    <div class="griditemdescription"><%= i.description.html_safe %></div>
+    
+    <% if @page.is_image_grid? %>
+    <div class="grid">
+      <% @page.images.each do |i| %>
+      <div class="griditem">
+	<div class="griditeminner" style="background-image:url('<%= i.the_image_url(:reasonable)%>')">
+	  <a href="<%= i.link %>">
+	    <div class="gridborder"></div>
+	  </a>
+	</div>
+	<div class="griditemtitle"><%= i.title %></div>
+	<div class="griditemdescription"><%= i.description.html_safe %></div>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+    
+    <div class="body">
+      <%= raw @page.body %>
+    </div>
+    <%= theme_partial :social %>
+    </div>
   </div>
-  <% end %>
 </div>
-<% end %>
-
-<div class="body">
-  <%= raw @page.body %>
-</div>
-      <%= theme_partial :social %>
-</div>
-      
-
       
 
 
