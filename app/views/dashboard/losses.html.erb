@@ -17,7 +17,7 @@
   </tr>
 
   <% @losses.each do |copy| %>
-  <%= if ! copy.status=="RETURNED" %>
+  <% if ! copy.status=="RETURNED" %>
   <tr>
     <td><%= link_to copy.edition.title.title, copy.edition, :target=>"blank" %> <small>(Copy #<%= copy.id%>)</small></td>
     <td><%= copy.status %></td>
