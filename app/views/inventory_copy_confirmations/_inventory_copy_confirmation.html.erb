@@ -1,5 +1,5 @@
 <tr id="inventory_copy_confirmation_<%= inventory_copy_confirmation.id %>" >
-  <td><%= link_to inventory_copy_confirmation.copy.edition.title.title, inventory_copy_confirmation.copy.edition, :target=>"blank" %> <small>(Copy #<%= inventory_copy_confirmation.copy.id%>, priced at $<%= inventory_copy_confirmation.copy.price %>, from <%= link_to(copy.invoice.distributor.name, copy.invoice.distributor) rescue "???" %>)</small></td>
+  <td><%= link_to inventory_copy_confirmation.copy.edition.title.title, inventory_copy_confirmation.copy.edition, :target=>"blank" %> <small>(Copy #<%= inventory_copy_confirmation.copy.id%>, priced at $<%= inventory_copy_confirmation.copy.price %>, from <%= link_to(inventory_copy_confirmation.copy.invoice.distributor.name, inventory_copy_confirmation.copy.invoice.distributor) rescue "???" %>)</small></td>
   <td><%= inventory_copy_confirmation.copy.edition.isbn %></td> 
   <td >
     <%= form_for(inventory_copy_confirmation, :remote=>true) do |f| %>
