@@ -287,6 +287,20 @@ class DashboardController < ApplicationController
       @copies_returned=Copy.returned.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
       @copies_sold=Copy.sold.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
     end
+    
+    respond_to do |format|
+      format.html {}
+      format.csv {
+        @csv=CSV.generate do |csv|
+          csv << ["Title","ISBN13","Copies in Stock"]
+          @copies_in_stock.inject(Hash.new(0)) { |h, copy| h[copy.edition] += 1 ; h }.each do |edition,count| 
+            csv << [edition.title,edition.isbn13,count]
+          end 
+        end
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-inventory-#{@owner.name}.csv\""  
+        render text: @csv 
+      }   
+    end
   end
 
   def inventory_value_by_date_and_owner
