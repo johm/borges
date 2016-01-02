@@ -15,6 +15,7 @@
 	     <% end %>
 	     <% end %>
 	   </td>
+	   <td>	 <%= purchase_order_line_item.cancelled %></td>
 	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
 	   <td>
 	     <% unless purchase_order_line_item.purchase_order.ordered? %>

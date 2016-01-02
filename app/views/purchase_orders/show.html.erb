@@ -46,7 +46,7 @@
        <% end %>
        
        <table class="table" id="line_items">
-	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Customer</th><th>Move</th></tr>
+	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Cancelled</th><th>Customer</th><th>Move</th></tr>
 	 <% @purchase_order_line_items.each do |li| %>
 	 <%= render li %>
 	 <% end %>
@@ -56,6 +56,7 @@
     <div class="span4">
       <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
       <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
+      <%= mypostlinkbutton("<i class='icon-trash'></i> Cancel outstanding",cancel_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
       <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
       <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
       <%= mylinkbutton("<i class='icon-font'></i> Text export", purchase_order_path(@purchase_order,:format=>'txt'),:target=>"_blank") %> 

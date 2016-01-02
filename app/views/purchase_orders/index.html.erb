@@ -11,6 +11,7 @@
     <th><%= sortable "order_by_when", "Order By When" %></th>
     <th><%= sortable "ordered", "Ordered?" %></th>
     <th><%= sortable "ordered_when", "Ordered When" %></th>
+    <th>Outstanding copies</th>
     <th></th>
   </tr>
 
@@ -23,6 +24,7 @@
     <td><%= purchase_order.order_by_when.to_formatted_s(:just_date) rescue "-" %></td>
     <td><span class="label <%= purchase_order.ordered? ? 'label-success' : ''%>"><%= purchase_order.ordered? ? 'Yes' : 'Not yet' %></span></td>
     <td><%= purchase_order.ordered_when.to_formatted_s(:just_date) rescue "-" %></td>
+    <td><%= purchase_order.outstanding %></td></td>
     <td><%= link_to 'Destroy', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-mini btn-danger'  unless purchase_order.ordered? %>
   </tr>
 <% end %>
