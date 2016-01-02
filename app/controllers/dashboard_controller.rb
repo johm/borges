@@ -232,7 +232,23 @@ class DashboardController < ApplicationController
     
     @cost=@sales.inject(Money.new(0)) {|sum2,s| sum2 + s.cost_by_owner(@date_range_object.owner)}
     
+    respond_to do |format|
+      format.html {}
+      format.csv {
+        @csv=CSV.generate do |csv|
+          csv << ["Title","ISBN13","Copies in Stock"]
+          @copies_sold=@sales.collect do |s|
+            s.sale_order_line_items.select {|l| l.copy.owner==@date_range_object.owner}
+          end.flatten
 
+          @copies_sold.inject(Hash.new(0)) { |h, lineitem| h[lineitem.copy.edition] += 1 ; h }.each do |edition,count| 
+            csv << [edition.title,edition.isbn13,count]
+          end 
+        end
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-consignment-#{@date_range_object.owner.name}.csv\""  
+        render text: @csv 
+      }   
+    end
   end
 
   def daily 
