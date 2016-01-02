@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150215011655) do
+ActiveRecord::Schema.define(:version => 20160102181701) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "full_name"
-    t.text     "bio"
+    t.text     "bio",        :limit => 16777215
   end
 
   create_table "categories", :force => true do |t|
@@ -111,10 +111,10 @@ ActiveRecord::Schema.define(:version => 20150215011655) do
     t.integer  "year_of_publication"
     t.string   "format"
     t.boolean  "in_print"
-    t.text     "notes"
+    t.text     "notes",               :limit => 16777215
     t.integer  "title_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "cover"
     t.integer  "list_price_cents"
     t.integer  "publisher_id"
@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(:version => 20150215011655) do
     t.datetime "updated_at",        :null => false
     t.integer  "received"
     t.integer  "customer_id"
+    t.integer  "cancelled"
   end
 
   add_index "purchase_order_line_items", ["customer_id"], :name => "index_purchase_order_line_items_on_customer_id"
@@ -426,17 +427,6 @@ ActiveRecord::Schema.define(:version => 20150215011655) do
   add_index "sale_orders", ["customer_id"], :name => "index_sale_orders_on_customer_id"
   add_index "sale_orders", ["user_id"], :name => "index_sale_orders_on_user_id"
 
-  create_table "section_title_list_memberships", :force => true do |t|
-    t.integer  "title_list_id_id"
-    t.integer  "section_id_id"
-    t.integer  "index"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "section_title_list_memberships", ["section_id_id"], :name => "index_section_title_list_memberships_on_section_id_id"
-  add_index "section_title_list_memberships", ["title_list_id_id"], :name => "index_section_title_list_memberships_on_title_list_id_id"
-
   create_table "shopping_cart_line_items", :force => true do |t|
     t.integer  "shopping_cart_id"
     t.integer  "edition_id"
@@ -507,10 +497,10 @@ ActiveRecord::Schema.define(:version => 20150215011655) do
 
   create_table "titles", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "description"
-    t.text     "introduction"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "description",  :limit => 16777215
+    t.text     "introduction", :limit => 16777215
   end
 
   create_table "users", :force => true do |t|
