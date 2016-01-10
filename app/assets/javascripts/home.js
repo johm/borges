@@ -3,6 +3,7 @@ jQuery('document').ready(function (){
     $('video,audio').mediaelementplayer();
 
 
+    $('.whizzy').froalaEditor();
 
 
 

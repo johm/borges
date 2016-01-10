@@ -6,11 +6,11 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
       # Always performed
-      can :access, :ckeditor   # needed to access Ckeditor filebrowser
+#      can :access, :ckeditor   # needed to access Ckeditor filebrowser
 
       # Performed checks for actions:
-      can [:read, :create, :destroy], Ckeditor::Picture
-      can [:read, :create, :destroy], Ckeditor::AttachmentFile
+#      can [:read, :create, :destroy], Ckeditor::Picture
+#      can [:read, :create, :destroy], Ckeditor::AttachmentFile
     else
       if user.has_role? :scheduler 
         can :manage, Event

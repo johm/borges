@@ -96,7 +96,7 @@ Borges::Application.routes.draw do
   resources :images
 
 
-  mount Ckeditor::Engine => '/ckeditor'
+#  mount Ckeditor::Engine => '/ckeditor'
 
   resources :pages  do 
     get :autocomplete_parent_title, :on => :collection
