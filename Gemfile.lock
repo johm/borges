@@ -64,9 +64,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    ckeditor (4.0.2)
-      mime-types
-      orm_adapter
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -100,6 +97,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     fontsquirrel-download (1.1.1)
       rails (>= 3.1)
       rubyzip
@@ -280,6 +279,9 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    wysiwyg-rails (2.0.5)
+      font-awesome-rails (~> 4.4, >= 4.4.0.0)
+      railties (>= 3.2, < 5.0)
 
 PLATFORMS
   ruby
@@ -293,7 +295,6 @@ DEPENDENCIES
   bootstrap-switch-rails (= 0.1.1)
   cancan (>= 1.6.9)
   carrierwave
-  ckeditor (= 4.0.2)
   coffee-rails (~> 3.2.1)
   database_cleaner (>= 1.0.0.RC1)
   default_value_for
@@ -338,3 +339,7 @@ DEPENDENCIES
   therubyracer (>= 0.11.3)
   thin (>= 1.5.0)
   uglifier (>= 1.0.3)
+  wysiwyg-rails
+
+BUNDLED WITH
+   1.10.6

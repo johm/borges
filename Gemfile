@@ -57,7 +57,7 @@ gem 'rmagick'
 gem 'best_in_place'
 gem "default_value_for"
 
-gem 'ckeditor', "= 4.0.2"
+#gem 'ckeditor', "= 4.0.2"
 gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails", "= 0.1.1"
@@ -76,3 +76,4 @@ gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem "addressable"
+gem "wysiwyg-rails"

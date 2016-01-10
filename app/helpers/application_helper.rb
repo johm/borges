@@ -99,7 +99,7 @@ module ApplicationHelper
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
-        f.cktext_area(m,options.merge({:class=>"input-xxlarge"})),
+        f.text_area(m,options.merge({:class=>"input-xxlarge whizzy"})),
         :class=>"controls"),
       :class=>"field control-group")
   end
