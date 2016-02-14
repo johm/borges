@@ -65,8 +65,11 @@ Borges::Application.routes.draw do
   resources :title_category_memberships
 
 
-  resources :categories
-
+  resources :categories do 
+    member do 
+      get :chart
+    end
+  end
 
   resources :post_title_list_links
 
@@ -93,7 +96,7 @@ Borges::Application.routes.draw do
   resources :images
 
 
-  mount Ckeditor::Engine => '/ckeditor'
+#  mount Ckeditor::Engine => '/ckeditor'
 
   resources :pages  do 
     get :autocomplete_parent_title, :on => :collection
@@ -143,6 +146,7 @@ Borges::Application.routes.draw do
     member do
       post :submit
       post :receive
+      post :cancel
     end
     get :autocomplete_distributor_name, :on => :collection
     resources :purchase_order_line_items

@@ -10,6 +10,7 @@ jQuery('document').ready(function (){
     $('video,audio').mediaelementplayer();
 
 
+    $('.whizzy').froalaEditor();
     
     $('.carousel').carousel();    
 
@@ -39,6 +40,43 @@ jQuery('document').ready(function (){
 	}
     });
     
+    jQuery('#menubar .menuwrapper').hover(function() {
+	jQuery(this).stop().animate({
+            "top": "10px",
+	}, 400);
+
+	jQuery(this).children("a").stop().animate({
+            "padding-top": "6px",
+	}, 400);
+	
+	jQuery(this).find('a').css("color","#fafafa");
+	jQuery(this).find('a').css("background-color","#cb3e38");
+	jQuery(this).find('a').css("opacity",".95");
+
+	jQuery(this).find("img").show("fade");
+	jQuery(this).find(".menusub").slideDown();
+    }, function() {
+	jQuery(this).stop().animate({
+            "top": "0px",
+	}, 400);
+	
+	
+	jQuery(this).children("a").stop().animate({
+            "padding-left": "0px",
+	}, 400);
+	
+	jQuery(this).children('a').css("color","#cb3e38");
+	jQuery(this).children('a').css("background-color","#ffffff");
+	jQuery(this).find('a').css("opacity","1");
+
+	jQuery(this).children('a').each(function(){
+	if (jQuery(this).data("active") != "yes"){
+	    jQuery(this).find("img").hide("fade");
+	    }
+	});
+	jQuery(this).find(".menusub").slideUp();
+    });
+
 
     jQuery("iframe[src*='archive.org/embed']").each(function(){ jQuery(this).height(3/4*jQuery(this).width());});    
 

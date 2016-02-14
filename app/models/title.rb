@@ -163,7 +163,7 @@ class Title < ActiveRecord::Base
     #ignore returned copies
     #add the three numbers, divide by number of copies sold or in stock or lost
     
-    (stock_on_shelves_for+took_this_long_to_sell+took_this_long_to_lose) / (copies.instock.count+copies.sold.count+copies.lost.count) 
+    (stock_on_shelves_for+took_this_long_to_sell+took_this_long_to_lose) / (copies.instock.count+copies.sold.count+copies.lost.count) rescue 0 #in case we don't have any copies at all?
 
   end
   

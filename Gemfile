@@ -45,6 +45,7 @@ gem "rolify", ">= 3.2.0"
 
 gem "figaro", ">= 0.6.3"
 
+
 gem "libv8", ">= 3.11.8"
 
 gem 'rails3-jquery-autocomplete'
@@ -57,7 +58,7 @@ gem 'rmagick'
 gem 'best_in_place'
 gem "default_value_for"
 
-gem 'ckeditor', "= 4.0.2"
+#gem 'ckeditor', "= 4.0.2"
 gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails", "= 0.1.1"
@@ -78,3 +79,4 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem "addressable"
 gem 'fittextjs_rails'
 gem "font-awesome-rails"
+gem "wysiwyg-rails"

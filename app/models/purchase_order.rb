@@ -27,7 +27,15 @@ class PurchaseOrder < ActiveRecord::Base
  def number_of_copies
     purchase_order_line_items.inject(0) {|sum,li| sum+li.quantity}
  end
+
  
+ def outstanding 
+   purchase_order_line_items.inject(0) {|sum,li| sum+li.quantity-li.received}
+ end
+
+ def cancel 
+   purchase_order_line_items.each {|poli| poli.cancel}
+ end
 
 
   def as_json(options = {})

@@ -6,9 +6,12 @@
     <!-- mydatefield f,:date,:date  -->
     <%= myselectfield f,:owner,:owner,autocomplete_owner_name_owners_path, "" %> 
     <%= mysubmit f,"Get report" %>
+    
   <% end %>
-
 <% if !@owner.nil? %>
+<div>
+  <%= link_to "Download CSV",{:format => :csv,:date_range_object=>{:owner_id=>@owner.id} },{:class=>"btn btn-primary"} %>
+</div>
 
 <% [[@copies_in_stock,"in stock"],
 [@copies_sold,"sold"],
