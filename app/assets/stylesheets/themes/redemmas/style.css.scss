@@ -34,6 +34,10 @@ font-family: "proxima-nova";
 font-weight:500;
 }
 
+.carousel {
+    height:80vh;
+ }
+
 #heroCarousel .heroheader{
 color:$nearwhite;
 font-family: "proxima-nova";
@@ -799,6 +803,11 @@ font-size:16px;
 /*              .navbar>ul li:last-child a:after {
           content:" BIG PHONE";   
 }*/	  		             
+
+.carousel {
+    height:300px;
+ }
+
 
 #middlelogobig {display:none;}
 
