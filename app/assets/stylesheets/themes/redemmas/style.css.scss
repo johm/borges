@@ -279,7 +279,7 @@ border-top-right-radius: 2px;
 //color:#525353;
 //color:#6b6c6c;
 //color:$lightishgrey; this one kate likes
-opacity:.7;
+
 }
 
 .front_address {
@@ -510,15 +510,16 @@ border-radius: 3px;
 
 
     #front_1 {
-    margin-top:40px;
-    text-align:center;
+	margin-top:40px;
+	text-align:center;
+	font-size:56px;
     }
 
     #front_2 {
     text-align:center;
-	margin-top:0px;
-
-
+    margin-top:0px;
+	font-size:28px;
+	
     }
 
     #front_3 {
@@ -681,6 +682,10 @@ border-radius: 3px;
            content:" BIG TABLET";   
        }	  		             */
 
+    .nav > li > a {
+	padding-left: 5px;
+	padding-right: 5px;
+    }
 
     .frontpage .menubar a {
 font-size:16px;
@@ -1306,6 +1311,8 @@ box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
  
    .footersocial a {
    color:$nearwhite;
+   font-size:72px;
+   margin:5px;
 }  		
    .footersocial a:hover {
    color:#000;

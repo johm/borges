@@ -2,9 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-group :production, :staging do
-  gem "mysql2"
-end
+
 
 group :development do
   gem "quiet_assets", ">= 1.0.2"
@@ -63,7 +61,7 @@ gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails", "= 0.1.1"
 gem 'sequel'
-gem 'mysql'
+gem 'mysql2', "~> 0.3.10"
 gem 'googlebooks'
 gem 'sunspot_rails'
 gem 'sunspot_solr'

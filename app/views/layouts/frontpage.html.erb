@@ -9,6 +9,9 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
 <%= favicon_link_tag 'favicon.ico' %>
+
+
+
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <%= yield %>
