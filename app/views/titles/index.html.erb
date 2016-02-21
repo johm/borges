@@ -1,12 +1,9 @@
 <div class="container">
   <div class="row spaceontop"
-  <div class="col-sm-9">
-    <h1>Listing titles</h1>
-    <%= make_a_grid_from_titles(usefully_sorted(@titles)) %>
-  </div>
-  <div class="col-sm-3">
-    <%=  mylinkbutton "<i class='fa fa-plus-circle'></i> New Title", new_title_path   if can? :create, Title %>
-    <%= form_tag '/titles',method: :get,:html=>{:class=>"form-horizontal"} %>
+       <div class="col-xs-12">
+	 <h2 class="related">Search results</h2>
+	 <%=  mylinkbutton "<i class='fa fa-plus-circle'></i> New Title", new_title_path   if can? :create, Title %>
+	 <%= form_tag '/titles',method: :get,:html=>{:class=>"form-horizontal"} %>
     <div class="fields">
       <div class="field control-group">
 	<div class="controls">
@@ -16,6 +13,11 @@
       </div>
     </div>
 </form>
+
+
+<%= make_a_grid_from_titles(usefully_sorted(@titles)) %>
+</div>
+
 </div>
 </div>
   
