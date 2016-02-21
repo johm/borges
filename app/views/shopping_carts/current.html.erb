@@ -1,11 +1,12 @@
-<% if @shopping_cart.empty? %>
-<h1>Your cart is empty.</h1>
+<div class="row spaceontop"> 
+  <% if @shopping_cart.empty? %>
+  <h1>Your cart is empty.</h1>
+  
+  <% else %>
+  
+  <div class="col-sm-8">
 
-<% else %>
-
-<div class="span6">
-
-<h1>My cart</h1>
+    <h1 class="related">My cart</h1>
 <%= ENV["ADDTOCARTMESSAGE"].html_safe %>
 <table class="table">
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
@@ -71,7 +72,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 
 </script>
 
-<div class="span4" id="CheckoutPane">
+<div class="col-sm-4" id="CheckoutPane">
 <% if ! @shopping_cart.ordered? %>
 <h2>Ready to checkout...</h2>
 <h4>How would you like to recieve this order?</h4>
@@ -114,7 +115,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <div style="margin-left:-0px">
 <%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
 </div>
-
+</div>
 <script>
   var handler = StripeCheckout.configure({
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
@@ -244,3 +245,4 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
   </div>
 </div>
 <% end %>
+
