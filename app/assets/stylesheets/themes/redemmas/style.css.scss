@@ -11,6 +11,10 @@ $lightred:#cb3e38; //
 $lightishgrey:#80807f;
 $johnsgrey:#444a50;
 
+.cartlink {
+position:absolute;
+top:0px;
+}
 
 
 .faint {
@@ -681,11 +685,8 @@ border-radius: 3px;
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
-/*
-       .navbar>ul li:last-child a:after{
-           content:" BIG TABLET";   
-       }	  		             */
-
+  .cartlink {margin-left:-20px;}
+       
     .nav > li > a {
 	padding-left: 5px;
 	padding-right: 5px;
@@ -800,9 +801,7 @@ font-size:16px;
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
-/*              .navbar>ul li:last-child a:after {
-          content:" BIG PHONE";   
-}*/	  		             
+  .cartlink {margin-left:50px;}
 
 .carousel {
     height:300px;

@@ -7,7 +7,7 @@
   <div class="col-sm-8">
 
     <h1 class="related">My cart</h1>
-<%= ENV["ADDTOCARTMESSAGE"].html_safe %>
+<%= ENV["ADDTOCARTMESSAGE"].html_safe rescue "" %>
 <table class="table">
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>
@@ -74,7 +74,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 
 <div class="col-sm-4" id="CheckoutPane">
 <% if ! @shopping_cart.ordered? %>
-<h2 class="related">Ready to checkout?</h2>
+<h2 class="related" style="font-size:24px;line-height:28px;">Ready to checkout?</h2>
 <h4>How would you like to recieve this order?</h4>
 <%= nested_form_for @shopping_cart,:url=>{:action => "update_current"},:remote=>true,:html=>{:class=>"form-horizontal checkoutform"} do |f| %>
 
@@ -111,6 +111,12 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 
 <button id="customButton" class="btn btn-success" style="margin-left:0px;" >Proceed to checkout</button>
 <div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
+
+  <div style="margin-top:20px;margin-left:0px;">
+    <small>Get updates? &nbsp;</small>
+    <%= f.check_box :shipping_subscribe, {checked: true} %> 
+  </div>
+
 
 <div style="margin-left:-0px">
 <%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
@@ -184,10 +190,6 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 </script>
 
 
-  <div style="margin-top:20px;margin-left:100px;">
-    <small>Get updates? &nbsp;</small>
-    <%= f.check_box :shipping_subscribe %> 
-  </div>
 </form>
 <% end %>
 <% end %>

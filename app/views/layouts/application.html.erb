@@ -49,6 +49,14 @@
 <% end %>
 
           </ul>
+
+	<% if current_cart.active? and @oncart.nil? %>
+	<div class="cartlink">
+	<a href="/cart" class="btn" style="float:right;margin-top:10px;">
+	  <i class="fa fa-shopping-cart"></i> : <%= current_cart.number_of_items %> item<%= current_cart.number_of_items>1 ? 's' : ''%>
+	</a>
+	</div>
+	<% end %>
         </div><!--/.nav-collapse -->
 
       </div>
