@@ -43,9 +43,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.4.0)
     arel (3.0.3)
-    autoprefixer-rails (6.3.3)
-      execjs
-      json
     bcrypt (3.1.10)
     best_in_place (3.1.0)
       actionpack (>= 3.2)
@@ -56,9 +53,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.5.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.3.0)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     bootstrap-switch-rails (0.1.1)
     builder (3.0.4)
     cancan (1.6.10)
@@ -304,7 +300,7 @@ DEPENDENCIES
   best_in_place
   better_errors (>= 0.7.2)
   binding_of_caller (>= 0.7.1)
-  bootstrap-sass (= 3.3.5.1)
+  bootstrap-sass (= 3.1.1.0)
   bootstrap-switch-rails (= 0.1.1)
   cancan (>= 1.6.9)
   carrierwave
