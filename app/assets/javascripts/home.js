@@ -128,7 +128,7 @@ jQuery('document').ready(function (){
 
     $('.manage_calendar .calendar td.day').not('.not-current-month').each(function(){
 	$(this).prepend(
-	    "<a class='newevent' href='/events/new?date="+$(this).data('date')+"'><i class='icon-plus-sign'></i></a>"
+	    "<a class='newevent' href='/events/new?date="+$(this).data('date')+"'><i class='fa fa-plus-circle'></i></a>"
 	);
     }); 
 

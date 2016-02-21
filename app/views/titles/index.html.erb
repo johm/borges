@@ -11,7 +11,7 @@
     <%= paginate @titles %>
     </div>
     <div class="span3">
-      <%=  mylinkbutton "<i class='icon-plus'></i> New Title", new_title_path   if can? :create, Title %>
+      <%=  mylinkbutton "<i class='fa fa-plus-circle'></i> New Title", new_title_path   if can? :create, Title %>
       <%= form_tag '/titles',method: :get,:html=>{:class=>"form-horizontal"} %>
       <div class="fields">
 	<div class="field control-group">

@@ -1,4 +1,5 @@
-<div class="span8">
+<div class="row spaceontop">
+<div class="col-sm-8">
   <p id="notice"><%= notice %></p>
   <h1>Sale: <%= @sale_order.id %></h1>
   
@@ -11,7 +12,7 @@
   <%= my_autocomplete_field_tag f,
       :item,:copy,
       autocomplete_copies_path(:sale_order_id=>@sale_order.id),
-      link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+      link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
   "window.open('#{new_title_path}?isbn='+$('#item').val())", 
   {:class=>'btn'}),"input-xxlarge" %>
       
@@ -21,7 +22,7 @@
     });
   </script>
   
-  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_sale_order_line_item"}) %> 
+  <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_sale_order_line_item"}) %> 
   
   
   <% end %>
@@ -36,13 +37,11 @@
 
   </div>
     
-    <div class="span2">
-      quicklinks to last 3 sold books
-    </div>
 
-    <div class="span2">
+
+    <div class="col-sm-4">
       <% if ! @sale_order.posted? %>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Complete sale",post_sale_order_path(@sale_order)) %>
+      <%= mypostlinkbutton("<i class='fa fa-check'></i> Complete sale",post_sale_order_path(@sale_order)) %>
       <% else %>
       <b>Posted:</b> <%= @sale_order.posted_when %>
       <% end %>
@@ -51,7 +50,7 @@
 	<%= render :partial=>"meta",:locals=>{:sale_order=>@sale_order} %>
       </div>
     </div>
-
+    
 </div>
 
 

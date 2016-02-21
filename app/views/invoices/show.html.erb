@@ -15,7 +15,7 @@
       <%= my_autocomplete_field_tag f,
 	  :item,:edition,
 	  autocomplete_editions_path,
-	  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
       "window.open('#{new_title_path}?isbn='+$('#item').val())", 
       {:class=>'btn'}) %>
 
@@ -27,7 +27,7 @@
 	});
       </script>
       
-      <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_invoice_line_item"}) %> 
+      <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_invoice_line_item"}) %> 
 
 	   
       <% end %>
@@ -46,7 +46,7 @@
     <div class="span4">
 
       <% if ! @invoice.received? %>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Receive invoice",receive_invoice_path(@invoice)) %>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Receive invoice",receive_invoice_path(@invoice)) %>
       <% end %>
       
        <table class="table">
