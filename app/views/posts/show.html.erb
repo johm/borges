@@ -11,96 +11,126 @@
 
 <% content_for :description do%><%=h truncate(sanitize(@post.introduction, :tags=>[]),:length => 250) %><% end %>
 
-<div class="span8">
+
+<% if  @post.images.first.nil? %>
+
+<div class="row spaceontop">
+  <div class="col-xs-offset-1 col-xs-10">
+    <h1 class="posttitle"><%= @post.title %></h1>
+  </div>
+</div>
+
+<% else %>
+
+<div class="row post_titlesplash <%= 'post-has-image' if @post.images.length > 0 %>" 
+style="background:linear-gradient(
+      rgba(20,0,0, 0.2), 
+      rgba(20,0,0, 0.2)
+      ),url(<%= @post.images.first.the_image_url %>);background-attachment:fixed; 
+      background-size:cover;">
+  <div class="col-xs-offset-1 col-xs-10">
+    <h1 class="posttitle"><%= @post.title %></h1>
+  </div>
+</div>
+
+<% end %>
+
+
+<div class="row">
+
+
+  <div class="col-sm-offset-1 col-sm-6">
+
     
-  <h1 id="pagetitle"><div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_post_path(@post) if can? :edit, Post %></div>
-    <%= @post.title %>
-  </h1>
-  <h2><%= @post.created_at.to_formatted_s(:long_date) %></h2>
+
+    
+    <div class="introduction">
+      <%= raw @post.introduction %>
+    </div>
+    
+
+
   
-  <div style="float:right;padding-left:5px;">
-      
-      <% index=0 %>
-      <% @post.images.each do |i| %>
-      <% index=index+1 %>
-      <div>
-	<%= image_tag i.the_image_url(:medium),{:width => "100%"} %>
-	<h5><%= i.title %></h5>
-      </div>
-      <% end %>
+    <% if !@post.audio.blank? %>
+    <div class="audioplayer">
+      <audio src="<%= @post.audio %>" />
     </div>
-
-    
-      <div class="introduction">
-	<%= raw @post.introduction %>
-      </div>
-      
-      <% if !@post.audio.blank? %>
-      <div class="audioplayer">
-	<audio src="<%= @post.audio %>" />
-      </div>
-      <% end %>
-
-      <div class="body">
-	<%= raw @post.body %>
-      </div>
-
-      <%= theme_partial :social %>      
-<hr>
-      
-      <% @post.titles.each do |t| %>
-      <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
-      <% end %>
-      
-
-
-
-    </div>
-      <div class="span2">
-	
-	<% if @post.post_categories.length > 0 %>
-	<h2>More posts in <%= link_to @post.post_categories[0].name, @post.post_categories[0] %></h2>
-	<% moreposts = @post.post_categories[0].posts.published.where('posts.id != ?',@post.id).order("created_at desc") %>
-	<% else %>
-	<h2>More posts</h2>
-	<% moreposts = Post.where('id != ?',@post.id).order("created_at desc").limit(10) %>
-	<% end %>
-	<% moreposts.each do |p| %>
-	<h3><%= link_to p.title,p %></h3>
-	<p><%= p.created_at.to_formatted_s(:long_date) %></p>
-	<% end %>
-	
-
-	
-
-
-      </div>
-
-    </div>
+    <% end %>
+  
+    <div class="body">
+      <%= raw @post.body %>
+    </div> 
+  
+    <%= theme_partial :social %>      
   </div>
 
-<div class="container">
-<% @post.title_lists.each do |title_list| %>
-<div class="row">
-  <div class="span2"></div>
-  <div class="span8">
-    <h1><%= link_to title_list.name,title_list %></h1>
-    <p>
-      <%= sanitize title_list.description %>
-    </p>
-    
-    <div class="grid">
-      <% title_list.title_list_memberships.each do |tlm| %>
-      <%= render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>(tlm.notes || "") } unless tlm.title.nil? %>
+    <div class="col-sm-4">
+      <div class="metafloat">
+    <div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to "Edit", edit_post_path(@post),:class=>"btn btn-primary" if can? :edit, Post %></div>
+	<h3 class="postdate"><%= @post.created_at.to_formatted_s(:long_date) %></h3>      
+	<div class="postedin"><%= @post.post_categories.collect{|cat|  link_to cat.name,cat}.join(" ★ ").html_safe %></div> 
+      </div>
+      
+      <% @post.titles.each do |t| %>
+      <%= render :partial=>'titles/gridtitlefull', :locals => {:title=>t,:text=>""}%>
       <% end %>
     </div>
+
 </div>
-  <div class="span2">
-      <%= mylinkbutton 'Edit', edit_title_list_path(title_list) if can? :edit,TitleList %>
+
+
+<div class="container">
+  <% @post.title_lists.each do |title_list| %>
+  <div class="row">
+    <%= make_a_grid_from_titles usefully_sorted(title_list.titles) %>
+  </div>
+  <% end %>
 </div>
+
+
+<div class="container">
+  <div class="row spaceontop">
+    <div class="col-xs-12">
+      <% if @post.post_categories.length > 0 %>
+      <h2 class="related">More posts in <%= link_to @post.post_categories[0].name, @post.post_categories[0] %></h2>
+      <% moreposts = @post.post_categories[0].posts.published.where('posts.id != ?',@post.id).order("created_at desc") %>
+      <% else %>
+      <h2 class="related">More posts</h2>
+      <% moreposts = Post.where('id != ?',@post.id).order("created_at desc").limit(10) %>
+      <% end %>
+    </div>
+  </div>  
+  
+  <div class="row">
+    <% moreposts.each_with_index do |post,i| %>
+  <div class="col-sm-6 col-lg-4">
+    <a href="<%= post_path(post) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= post.images.first.the_image_url rescue "" %>');background-size:cover;"> 
+    </a>  
+    <div class="row">
+      <div class="col-sm-8">
+	<h2 class="posttitle"><%= link_to post.title,post %></h2>
+      </div>
+      <div class="col-sm-4">
+	<div class="metafloat">
+	  <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
+	  <div class="postedin"><%= post.post_categories.collect{|cat|  link_to cat.name,cat}.join(" ★ ").html_safe %></div> 
+	</div>
+      </div>
+    </div>
+  </div>
+  
+  <% if i % 3 == 2 %>
+  <div class="clearfix visible-lg-block" ></div>
+  <% end %>
+  <% if i % 2 == 1 %>
+  <div class="clearfix visible-sm-block visible-md-block" ></div>
+  <% end %>
+  
+<% end %>
+  </div>
 </div>
-    <% end %>
-</div>
+	
+
 
 
 

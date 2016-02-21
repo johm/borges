@@ -1,0 +1,104 @@
+<div class="row">
+  <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000" style="height:80vh;overflow:hidden;box-shadow: rgba(0, 0, 0, 0.341176) 0px 2px 5px 0px;">
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+	<img src="/coffeepix/IMG_1720.JPG" width="100%" alt="...">
+      </div>
+
+      <div class="item">
+	<img src="/coffeepix/IMG_1760.JPG" width="100%" alt="...">
+      </div>
+
+      <div class="item">
+	<img src="/coffeepix/IMG_1793.JPG" width="100%" alt="...">
+      </div>
+
+
+      <h1 class="departmentname" style="position:absolute;bottom:40px;left:40px;color:white;text-shadow:2px 2px 20px black;">our coffee</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row spaceontop">
+    <div class="col-sm-8">
+      <h1 class="departmentname">Brewing now</h1>
+      <div class="introduction">
+	<p >
+	  Welcome to the cafe at Red Emma's Bookstore Coffeehouse, a
+	  worker-owned and operated vegetarian and vegan restaurant in the
+	  heart of Baltimore's North Avenue arts district. We specialize
+	  in high-quality, low-cost food that's socially responsible—from
+	  transparently-traded coffee, to organic dairy, locally-crafted
+	  bread, and beyond. We pride ourselves on offering one of
+	  Baltimore's best selections of vegan and vegetarian fare
+	  ... check out our menu for a sample of what we offer, and stop
+	  in any day to see what's on special! And be sure to sample our
+	  wide range of delectable vegan baked goods—all produced in house
+	  by our coop kitchen crew—and grab a cup of Thread Coffee,
+	  transparently-traded and roasted onsite by our collective.</p>
+	
+	<p>
+	  With seating for more than a hundred (and a private meeting room
+	  available for rent, plus a small area just for kids), there's always
+	  room for families and other large groups, or come by yourself for some
+	  quiet reading time. There's free wifi available througout the cafe,
+	  and plenty of reading material to excite and engage in our
+	  bookstore—plus a full program of readings and lectures throughout the
+	  week. Email us for more information, or come on by any Tuesday -
+	  Sunday ...
+	</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="metafloat">
+	<h3 style="margin-top:10px;">We proudly serve</h3>
+	<a href="http://threadcoffeecoop.org"><img width="100%" style="	-webkit-filter: invert(100%);filter: invert(100%);" src="/assets/redemmas/thread_logotext_2015.png"></a>
+	<h3 style="margin-left:30px;margin-right:30px;margin-bottom:10px;">transparently traded with cooperatives across the Global South and roasted here in Baltimore.</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row" >
+    <%= @instagram.html_safe %>
+  </div>
+
+  <div class="row spaceontop">
+    <div class="col-sm-12">
+      <h1 class="headername">The Cafe Blog</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <% PostCategory.find_by_name("Cafe").posts.where(:published=>true).order("created_at DESC").limit(11).each_with_index do |post,i| %>
+    <div class="col-sm-6 col-lg-4">
+      <a href="<%= post_path(post) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= post.images.first.the_image_url rescue "" %>');background-size:cover;"> 
+      </a>  
+      <div class="row">
+	<div class="col-sm-8">
+	  <h2 class="posttitle"><%= link_to post.title,post %></h2>
+	</div>
+	<div class="col-sm-4">
+	  <div class="metafloat">
+	    <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
+	    <div class="postedin"><%= post.post_categories.collect{|cat|  link_to cat.name,cat}.join(" ★ ").html_safe %></div> 
+	  </div>
+	</div>
+      </div>
+    </div>
+    
+    <% if i % 3 == 2 %>
+    <div class="clearfix visible-lg-block" ></div>
+    <% end %>
+    <% if i % 2 == 1 %>
+    <div class="clearfix visible-sm-block visible-md-block" ></div>
+    <% end %>
+    <% end %>
+    <div class="col-sm-6 col-lg-4 gridmore" style="height:300px;">
+      <%= link_to "More posts about food »",  PostCategory.find_by_name("Cafe")%>
+    </div>
+    
+  </div>
+  </div>
+
+

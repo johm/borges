@@ -20,55 +20,137 @@
 <% content_for :description do%><%=h truncate(sanitize(@event.introduction, :tags=>[]),:length => 250) %><% end %>
 
 
-<div class="span7">
-<h1><%= @event.title %>
-  <div style="float:right;"><small><%= "Not published" unless @event.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_event_path(@event)   if can? :edit, Event %> 
-</h1>
-<h4><%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %> @ <%= link_to @event.event_location,@event.event_location %></h4>
-<%= @event.introduction.html_safe %>
+<% if  @event.picture.nil? %>
 
-<% @event.titles.each do |t| %>
-<%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
-<% end %>
-
-<%= @event.description.html_safe %>
-
-<%= theme_partial :social %>
-<br />
-<% if !@event.facebook_url.blank? %> <div class="well" ><%= link_to "Let us know you are coming on Facebook",@event.facebook_url %> (optional, but helpful!)</div> <% end %>
-<% if can? :edit, Event %>
-<br />
-<div class="well">
-<h2>Internal Details</h2>
-
-<b>Setup begins:</b> <%= @event.event_setup_starts.to_formatted_s(:long_readable_date) rescue "" %>, <%= @event.event_setup_starts.to_formatted_s(:just_time) rescue "" %><br />
-<b>Event starts:</b> <%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %><br />
-<b>Event ends:</b> <%= @event.event_end.to_formatted_s(:long_readable_date) %>, <%= @event.event_end.to_formatted_s(:just_time) %><br />
-<b>Breakdown ends:</b> <%= @event.event_breakdown_ends.to_formatted_s(:long_readable_date) rescue ""%>, <%= @event.event_breakdown_ends.to_formatted_s(:just_time) rescue "" %><br /> 
-<br /> 
-<b>Rental payment info:</b> <%= @event.rental_payment_info %>
-
-<hr />
-<%= @event.internal_notes.html_safe rescue "" %>
-
-<h3>Shifts</h3>
-<table class="table">
-<% @event.event_shifts.each do |s| %>
-<tr>
-  <td><%= mail_to s.event_staffer.email,s.event_staffer.name %></td>
-  <td><%= s.notes %></td>
-</tr>
-<% end %>
-</table>
-
-
+<div class="row spaceontop">
+  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-8">
+    <h1 class="posttitle"><%= @event.title %></h1>
+  </div>
 </div>
-<% end %>
+
+<% else %>
+
+<div class="row post_titlesplash <%= 'post-has-image' if @event.picture %>" 
+     style="background:linear-gradient(
+	    rgba(20,0,0, 0.4), 
+	    rgba(20,0,0, 0.4)
+	    ),url(<%= @event.picture.url %>);background-attachment:fixed; 
+	    background-size:cover;margin-bottom:0px;">
+  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-8">
+    <h1 class="posttitle"><%= @event.title %></h1>
+  </div>
+  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4">
+    <div class="metafloat eventmeta">
+      <h2 ><%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %></h2> 
+      <h2>@ <%= link_to @event.event_location,@event.event_location %></h2>
+    </div>
+    <%= theme_partial :social %>
+  </div> 
 
 </div>
 
-<div class="span3">
-<% if !@event.picture.nil? %>
-<img src="<%= @event.picture_url %>">
 <% end %>
+
+
+<div class="row spaceontop">
+  <div class="col-xs-12 col-sm-8">      
+    <%= @event.introduction.html_safe %>
+    
+    
+    <%= @event.description.html_safe %>
+    
+    
+
+
+    
+      <% if can? :edit, Event %>
+      <br />
+      <div class="well">
+	<h2>Internal Details</h2>
+	
+	<b>Setup begins:</b> <%= @event.event_setup_starts.to_formatted_s(:long_readable_date) rescue "" %>, <%= @event.event_setup_starts.to_formatted_s(:just_time) rescue "" %><br />
+	<b>Event starts:</b> <%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %><br />
+	<b>Event ends:</b> <%= @event.event_end.to_formatted_s(:long_readable_date) %>, <%= @event.event_end.to_formatted_s(:just_time) %><br />
+	<b>Breakdown ends:</b> <%= @event.event_breakdown_ends.to_formatted_s(:long_readable_date) rescue ""%>, <%= @event.event_breakdown_ends.to_formatted_s(:just_time) rescue "" %><br /> 
+	<br /> 
+	<b>Rental payment info:</b> <%= @event.rental_payment_info %>
+	
+	<hr />
+	<%= @event.internal_notes.html_safe rescue "" %>
+	
+	<h3>Shifts</h3>
+	<table class="table">
+	  <% @event.event_shifts.each do |s| %>
+	  <tr>
+	    <td><%= mail_to s.event_staffer.email,s.event_staffer.name %></td>
+	    <td><%= s.notes %></td>
+	  </tr>
+	  <% end %>
+	</table>
+	
+	
+      </div>
+      <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+    <% if !@event.facebook_url.blank? %> <div class="well rsvp" ><%= link_to "Let us know you are coming on Facebook",@event.facebook_url %> (optional, but helpful!)</div> <% end %> 
+
+    <div><small><%= "Not published" unless @event.published? %></small></div>
+    <div><%=  link_to raw("<i class='fa fa-edit'></i> Edit"), edit_event_path(@event),:class=>"btn btn-primary",:style=>"margin-bottom:10px;width:100%;"   if can? :edit, Event %></div>      
+    
+    <% @event.titles.each do |t| %>
+    <%= render :partial=>'titles/gridtitlefull', :locals => {:title=>t,:text=>""}%>
+    <% end %>
+     
+    
 </div>
+  
+</div>
+
+  <div class="row" >
+    <div class="col-xs-12">
+    <h1 class="related">
+      More upcoming events
+    </h1>
+    </div>
+  </div>
+  <div class="row"> 
+    
+    <% @events.each_with_index do |event,i| %>
+    
+    <div class="col-sm-6 col-lg-4">
+      <a href="<%= event_path(event) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= event.picture_url rescue "" %>');background-size:cover;"> 
+      </a>  
+      <div class="row">
+	<div class="col-sm-6">
+	  <h2 class="posttitle"><%= link_to event.title,event %></h2>
+	</div>
+	<div class="col-sm-6">
+	  <div class="metafloat">
+	    <h3 class="postdate"><%= event.event_start.to_formatted_s(:long_readable_date) %>, <%= event.event_start.to_formatted_s(:just_time) %></h3>
+	  <div class="postedin">@ <%= event.event_location %></div> 
+	  </div>
+	</div>
+      </div>
+      <div class="row">
+	<div class="col-xs-12">
+	  <div class="introduction abridged" style="height:100px;overflow:hidden;position:relative;">
+	    <%= event.introduction.html_safe %>
+	    <div><%= link_to "More info",event,:class=>"btn btn-primary",:style=>"width:100%;margin-bottom:20px;" %></div>
+	    <div class="fadebottom"></div>
+	  </div>
+	</div>
+      </div>
+    </div>
+    
+    <% if i % 3 == 2 %>
+    <div class="clearfix visible-lg-block" ></div>
+    <% end %>
+    <% if i % 2 == 1 %>
+    <div class="clearfix visible-sm-block visible-md-block" ></div>
+    <% end %>
+    
+    
+    <% end %>
+  </div>
+

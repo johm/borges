@@ -1,0 +1,5 @@
+  <div class="col-xs-6 col-sm-4 col-md-2" style="padding:0px;">
+    
+    <a href="<%= title_path(title) %>" class="gridcover" style="height:200px;display:block;background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable) rescue "" %>');background-size:cover;"> 
+    </a>
+  </div>

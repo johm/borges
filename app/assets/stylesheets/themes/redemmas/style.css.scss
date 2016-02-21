@@ -6,7 +6,7 @@ $lightbrown:#b5a57f; //good but too dark?
 $lightbrown:#bcb093;
 $nearwhitetwo:#fafafa;
 $red:#b4282e;
-$lightred:#e59179;
+//$lightred:#e59179;
 $lightred:#cb3e38; //
 $lightishgrey:#80807f;
 $johnsgrey:#444a50;
@@ -19,8 +19,9 @@ color:$lightishgrey;
 
 
 body {
-font-family:"adobe-caslon-pro";
+font-family:"adobe-garamond-pro";
 color:$nearblack;
+font-size:16px;
 }
 
 #pagenav {
@@ -32,6 +33,10 @@ color:$nearwhite;
 font-family: "proxima-nova";
 font-weight:500;
 }
+
+.carousel {
+    height:80vh;
+ }
 
 #heroCarousel .heroheader{
 color:$nearwhite;
@@ -51,15 +56,7 @@ font-weight:normal;
 margin-top:30px;
 }
 
-.pages .introduction p, .pages .introduction p span,.pages .introduction li{
-font-family:"garamond-premier-pro-display";
-font-family:"adobe-caslon-pro";
-color:$johnsgrey;
-}
 
-.pages .body p, .pages .body p span, .pages .body ul, .pages .body li{
-color:$johnsgrey;
-}
 
 #main {
 background-color:white;
@@ -120,7 +117,7 @@ text-align:justify;
 
 
 .frontpage .navbar {
-display:none;
+
 }
 
 .frontpage {
@@ -128,7 +125,7 @@ padding-bottom:100px;
 }
 
 .frontpage #fronttextfluid{
-padding-top:100px;
+//padding-top:100px;
 }
 
 #frontleft {
@@ -286,7 +283,7 @@ border-top-right-radius: 2px;
 //color:#525353;
 //color:#6b6c6c;
 //color:$lightishgrey; this one kate likes
-opacity:.7;
+
 }
 
 .front_address {
@@ -322,11 +319,10 @@ color:$nearwhite;
 #mc_embed_signup form {
 padding-left:0px !important;
 padding-right:0px !important;
-font-family:Copse !important;
 }
 
 #mc_embed_signup form input {
-font-family:Copse !important;
+color:$nearblack;
 }
 
 #mc_embed_signup .button {
@@ -368,8 +364,8 @@ color:$lightred;
 text-decoration:none;
 }
 
-.front_whoweare{
-opacity:.9;
+.front_whoweare,.front_moreaboutus{
+text-align:center;
 }
 
 .griditem {
@@ -518,13 +514,16 @@ border-radius: 3px;
 
 
     #front_1 {
-	font-size:45px;
+	margin-top:40px;
+	text-align:center;
+	font-size:56px;
     }
 
     #front_2 {
-	margin-top:23px;
-	line-height:65px;
-	font-size:46px;
+    text-align:center;
+    margin-top:0px;
+	font-size:28px;
+	
     }
 
     #front_3 {
@@ -546,11 +545,6 @@ border-radius: 3px;
     }
 
     .front_whoweare {
-	font-size:20px;
-	line-height:30px;
-	position:relative;
-	top:-10px;
-	padding-right:80px;
     }
     
     .menubar {
@@ -565,9 +559,7 @@ border-radius: 3px;
     }
     
     .front_moreaboutus {
-	font-size:20px;
-	line-height:28px;
-	padding-right:80px;
+
     }
 
     .front_address {
@@ -604,14 +596,9 @@ border-radius: 3px;
 
 
 
-    #front_1 {
-	font-size:55px;
-    }
 
     #front_2 {
-	margin-top:23px;
-	line-height:65px;
-	font-size:56px;
+
     }
 
     #front_3 {
@@ -633,11 +620,7 @@ border-radius: 3px;
     }
 
     .front_whoweare {
-	font-size:20px;
-	line-height:30px;
-	position:relative;
-	top:-10px;
-	padding-right:95px;
+
     }
     
     .menubar {
@@ -657,9 +640,7 @@ border-radius: 3px;
     }
         
     .front_moreaboutus {
-	font-size:20px;
-	line-height:28px;
-	padding-right:95px;
+
     }
 
     .front_address {
@@ -693,6 +674,10 @@ border-radius: 3px;
 
 
 }
+
+       .navbar-toggle .icon-bar{
+       background-color:$nearblack;
+       }
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
@@ -701,6 +686,10 @@ border-radius: 3px;
            content:" BIG TABLET";   
        }	  		             */
 
+    .nav > li > a {
+	padding-left: 5px;
+	padding-right: 5px;
+    }
 
     .frontpage .menubar a {
 font-size:16px;
@@ -721,14 +710,8 @@ font-size:16px;
        }
 
 
-    #front_1 {
-	font-size:40px;
-    }
 
     #front_2 {
-	margin-top:20px;
-	line-height:40px;
-	font-size:40px;
 
     }
 
@@ -752,11 +735,7 @@ font-size:16px;
     }
 
     .front_whoweare {
-	font-size:19px;
-	line-height:29px;
-	position:relative;
-	top:-10px;
-	padding-right:15px;
+
     }
     
     .menubar {
@@ -770,9 +749,7 @@ font-size:16px;
     }
     
     .front_moreaboutus {
-	font-size:19px;
-	line-height:28px;
-	padding-right:15px;
+
     }
 
     .front_address {
@@ -827,6 +804,13 @@ font-size:16px;
           content:" BIG PHONE";   
 }*/	  		             
 
+.carousel {
+    height:300px;
+ }
+
+
+#middlelogobig {display:none;}
+
 .frontstagram .thumbnail {
 width: 420px;
 }
@@ -879,14 +863,9 @@ padding-bottom:0px;
     }
 
 
-    #front_1 {
-	font-size:40px;
-    }
 
     #front_2 {
-	margin-top:20px;
-	line-height:40px;
-	font-size:40px;
+
 
     }
 
@@ -910,11 +889,7 @@ padding-bottom:0px;
     }
 
     .front_whoweare {
-	font-size:19px;
-	line-height:29px;
-	position:relative;
-	top:-10px;
-	width:420px;
+
 	
     }
     
@@ -930,9 +905,7 @@ padding-bottom:0px;
     }
     
     .front_moreaboutus {
-	font-size:19px;
-	line-height:28px;
-	width:420px;
+
     }
 
     .front_address {
@@ -1013,15 +986,10 @@ width: 320px;
 }
 				     
 
-        #front_1 {
-	font-size:30px;
-	line-height:30px;
-	}
+
 
     #front_2 {
-	margin-top:20px;
-	line-height:30px;
-	font-size:30px;
+
 
     }
 
@@ -1045,11 +1013,7 @@ width: 320px;
     }
 
     .front_whoweare {
-	font-size:19px;
-	line-height:29px;
-	position:relative;
-	top:-10px;
-	width:320px;
+
 	
     }
     
@@ -1065,9 +1029,7 @@ width: 320px;
     }
     
     .front_moreaboutus {
-	font-size:19px;
-	line-height:28px;
-	width:320px;
+
     }
 
     .front_address {
@@ -1091,47 +1053,22 @@ width: 320px;
 
 	
 	
-/* Sticky footer styles
-   -------------------------------------------------- */
 
-html,
-body {
-    height: 100%;
-/* The html and body elements cannot have any padding or margin. */
+@media (min-width: 768px){
+#middlelogosmall {display:none;}
+.navbar-nav{
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float:none;
 }
-
-/* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-        /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-    height: 60px;
-}
-#footer {
-    background-color: #f5f5f5;
-      }
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-    #footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-
+} 
 
 .navbar-fixed-top {
-font-family: "proxima-nova";
+font-weight:700;
+font-family:"brandon-grotesque";
+text-transform:uppercase;
+background-color:#f6f6f6;
 }
 
 .navbar-fixed-top .navbar-inner {
@@ -1214,6 +1151,17 @@ margin-top:0px;
 font-family:proxima-nova;
 }
 
+.btn-primary {
+
+background-color:$lightred;
+border: $red;
+
+}
+
+.btn-primary:hover {
+background-color:$darkred;
+}
+
 a {
 color:$lightred;
 }
@@ -1259,7 +1207,7 @@ float:right;
 }
 
 
-.about h2 {
+.about h2.chunk {
 color:white;
 font-family:chunk;
 font-size:80px;
@@ -1271,7 +1219,8 @@ text-shadow:2px 2px #000000;
 .about #main p, .about #main li {
 font-size: 20px;
 line-height: 28px;
-opacity:0.7;
+    color: $nearblack;
+    //opacity:0.7;
 font-family: "adobe-caslon-pro";
 text-align:justify;
 }
@@ -1281,21 +1230,8 @@ text-align:justify;
 margin-bottom:20px;
 }
 
- h2.posttitle {
-border-bottom:0px solid #eee;
-font-size:28px;
-line-height:36px;
-font-weight:500;
-font-family:"garamond-premier-pro-display";
-}
 
- h3.postdate {
-font-weight:normal;
-font-size:18px;
-line-height:18px;
-float:right;
-margin-left:10px;
-}
+
 
 
 .item {
@@ -1321,4 +1257,106 @@ background-color:#F1D0FF;
 .event_location_4 {
 background-color:#EEFFC1;
 }
+
+.navbar-fixed-top {
+background-color:white;
+border-bottom:1px solid $nearblack;	
+-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+
+a.navbar-brand {
+color:$nearblack !important;
+}
+}
+
+#holder {
+margin-top:50px;
+padding-bottom:30px;
+}
+
+.frontstagram {
+-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.34);
+}
+
+
+.footer {
+    background-color:$lightishgrey;
+    color:$nearwhite;
+    padding-bottom:0px;
+    padding-top:40px;
+    font-family:"brandon-grotesque";
+    text-align:center;
+    p {margin-bottom:0px;}
+    a {color:inherit;}
+    a:hover {
+        color:black;
+	img{	
+	-webkit-filter: invert(100%);
+	filter: invert(100%);}
+	}
+
+    h2 {
+       font-family:"brandon-grotesque";
+       text-transform:uppercase;
+       font-weight:bold;
+       font-size:24px;
+       line-height:24px;	
+       margin-top:48px !important;
+    }
+
+       @media (max-width: 768px) { 
+	   #newsletter_form h2 {margin-top:0px !important;}
+	   }
+
+    .mc-field-group  {
+	margin-right:20%;
+	margin-top:15px;
+	margin-left:20%;
+}   
+
+    #mce-EMAIL {width:100% !important;}
+ 
+   .footersocial a {
+   color:$nearwhite;
+   font-size:72px;
+   margin:5px;
+}  		
+   .footersocial a:hover {
+   color:#000;
+}  		
+
+   #footerprojects img,#footernetworks img { width:100%;}
+
+#newsletter_form,#contact_info {
+  min-height:90px;		 
+}
+
+#contact,#location {
+text-align:center;
+table {
+margin-right:auto;
+margin-left:auto;
+
+td {
+text-align:right;
+padding-left:20px;
+}
+td:first-child {
+text-align:left;
+padding-right:20px;
+padding-left:0px;
+}
+
+
+}
+
+}
+
+}
+
+
+
 

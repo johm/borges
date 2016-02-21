@@ -9,6 +9,57 @@ module TitlesHelper
   end
 
 
+
+ 
+
+  def make_a_grid_from_tlm(title_list_memberships)
+    title_list_memberships.each_with_index.collect do |tlm,i|
+      capture do 
+        concat render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>(tlm.notes || "") } unless tlm.title.nil? 
+        if i % 6 == 5 
+        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        elsif i % 3 == 2
+          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+        elsif i % 2 == 1
+          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+        end
+      end
+    end.join.html_safe
+  end
+
+  def make_a_grid_from_titles(titles)
+    titles.each_with_index.collect do |t,i|
+      capture do 
+        concat render :partial=>'titles/gridtitle', :locals=>{:title=>t,:text=>("") } unless t.nil? 
+        if i % 6 == 5 
+        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        elsif i % 3 == 2
+          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+        elsif i % 2 == 1
+          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+        end
+      end
+    end.join.html_safe
+  end
+
+  def make_an_image_grid_from_titles(titles)
+    titles.each_with_index.collect do |t,i|
+      capture do 
+        concat render :partial=>'titles/imagegridtitle', :locals=>{:title=>t,:text=>("") } unless t.nil? 
+        if i % 6 == 5 
+        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        elsif i % 3 == 2
+          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+        elsif i % 2 == 1
+          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+        end
+      end
+    end.join.html_safe
+  end
+
+
+  
+
   def blurb_status(title)
     if title.introduction.blank?
       raw "<span class='label label-important'>No</span>"

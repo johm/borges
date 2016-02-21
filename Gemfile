@@ -2,9 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-group :production, :staging do
-  gem "mysql2"
-end
+
 
 group :development do
   gem "quiet_assets", ">= 1.0.2"
@@ -37,7 +35,8 @@ gem 'friendly_id', "4.0.9"
 gem 'jquery-rails'
 gem "thin", ">= 1.5.0"
 
-gem "bootstrap-sass", "= 2.3.2.0"
+gem "bootstrap-sass", "= 3.3.5.1
+"
 gem "devise", ">= 2.2.3"
 gem "cancan", ">= 1.6.9"
 gem "rolify", ">= 3.2.0"
@@ -62,7 +61,7 @@ gem "mini_magick"
 gem 'kaminari'
 gem "bootstrap-switch-rails", "= 0.1.1"
 gem 'sequel'
-gem 'mysql'
+gem 'mysql2', "~> 0.3.10"
 gem 'googlebooks'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
@@ -76,4 +75,6 @@ gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem "addressable"
+gem 'fittextjs_rails'
+gem "font-awesome-rails"
 gem "wysiwyg-rails"

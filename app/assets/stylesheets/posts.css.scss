@@ -3,22 +3,111 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+$nearblack:#000810;
+$nearwhite:#fafafa;
+$lightred:#cb3e38; 
+
 .posts .introduction p{
 font-size:18px;
-line-height:24px;
+line-height:27px;
 
 }
 
 
-h2.posttitle {
+h2.posttitle, h2.posttitle a{
 font-size:18px;
-line-height:22px;
-font-family:adobe-caslon-pro;
+line-height:24px !important;
+font-family:brandon-grotesque;
+text-transform:uppercase;
 }
 
 .posts .body p{
 font-size:18px;
-line-height:24px;
+line-height:27px !important;
 }
 
 
+.post_titlesplash {
+
+height:75vh;
+padding-top:150px;
+margin-bottom:40px;
+
+box-shadow: rgba(0, 0, 0, 0.341176) 0px 2px 5px 0px;
+
+
+h1 {
+color:white;
+text-shadow: 2px 2px 20px black;
+}
+
+
+
+}
+
+h1.posttitle {
+font-weight:bold;
+font-size:50px; 
+font-family: brandon-grotesque;
+text-transform:uppercase;
+
+}
+
+
+.metadata {
+float:right;padding-left:5px;
+}
+
+
+.metafloat {
+    margin-top:3px;margin-bottom:10px;
+    text-align:center;
+    padding:3px;
+
+    h3,.postedin,.postedin a {margin-top:0px;font-family:brandon-grotesque;font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;}
+
+    .postedin a:hover {
+    color:nearblack;
+    text-decoration:none;
+}   
+    
+    ul.bigmenu li {
+	a {font-size:20px !important;
+	   line-height:24px;}
+	margin-bottom:16px;
+    }				
+
+    ul.mediummenu li {
+	a {font-size:16px !important;
+	   line-height:20px;}
+	margin-bottom:8px;
+    }				
+
+    
+    ul {
+
+position: relative;
+	text-align:left;
+	list-style-type:none;
+	padding-left:0px;
+	margin-bottom:0px;
+	padding:5px;
+}	
+
+
+.pagelinks,.pagelinks a {
+color:$nearwhite;font-family:brandon-grotesque;font-weight:bold;text-transform:uppercase;	
+	   }
+}
+
+
+
+h2.related a {font-weight:bold;}
+
+.igtext {
+    font-family: "adobe-garamond-pro";
+    font-size: 12px;
+    line-height: 15px;
+    padding:6px;
+    text-align:center;
+ }

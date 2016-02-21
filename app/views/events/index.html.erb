@@ -3,63 +3,117 @@ Events
 <% end %>
 
 <% content_for :description do%>Our upcoming events at the store.<% end %>
-
-
-<div class="span6">
-  <h1 style="font-size:50px;margin-bottom:50px;">Events at Red Emma's</h1>
-</div>
-
-<div class="span4">
-  <h3>Your questions, answered:</h3>
-  <ul class="bookfaq">
-    <li><a href="/pages/propose-an-event">How do I propose an event to Red Emma's?</a></li>
-    <li><a href="/pages/events-faq#where">Where do your events take place?</a></li>
-    <li><a href="/pages/events-faq#music">Do you host musical events?</a></li>
-    <li><a href="/pages/events-faq#cost">How much do your events cost?</a></li>
-  </ul>
-</div>
+  <div class="row" style="height:200px;background-image:url('/event.jpg');background-size:cover;">
+<h1 class="departmentname" style="position:absolute;top:80px;left:20px;color:white;text-shadow:2px 2px 20px black;">events at red emma's</h1>
 
 </div>
-<hr>
-<div class="row" >
-  <div class="span8">
-    <h1>
+<div class="container-fluid">
+
+    
+  
+ 
+ 
+  <div class="row spaceontop" >
+    <div class="col-sm-8 col-md-7">
+    <h1 class="related">
       <% if @upcoming %>
-      Upcoming events in <%= Date::MONTHNAMES[@month] %> <%= @year %>
+      Upcoming events
       <% else %>
       Events for <%= Date::MONTHNAMES[@month] %> <%= @year %>
       <% end %>
     </h1>
-    <h5><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> | <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]} »", :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h5>
-    <% @events.each do |event| %>
-    <%= render event %>
-    <hr style="clear:right;">
+      <h4 class="relatedsubhead" ><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> :::::  <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]}&nbsp»".html_safe, :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h4>    
+    </div>
+    <div class="col-sm-4 col-md-5" style="text-align:right">
+      <div class="metafloat ">
+	<ul class="postedin mediummenu">
+     	    <li><a href="/pages/propose-an-event">How do I propose an event to Red Emma's?</a> </li>
+	    <li><a href="/pages/events-faq#where">Where do your events take place?</a></li>
+	    <li><a href="/pages/events-faq#music">Do you host musical events?</a></li>
+	    <li><a href="/pages/events-faq#cost">How much do your events cost?</a></li>
+	  </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="row"> 
+
+    <% @events.each_with_index do |event,i| %>
+    
+    <div class="col-sm-6 col-lg-4">
+      <a href="<%= event_path(event) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= event.picture_url rescue "" %>');background-size:cover;"> 
+      </a>  
+      <div class="row">
+	<div class="col-sm-6">
+	  <h2 class="posttitle"><%= link_to event.title,event %></h2>
+	</div>
+	<div class="col-sm-6">
+	  <div class="metafloat">
+	    <h3 class="postdate"><%= event.event_start.to_formatted_s(:long_readable_date) %>, <%= event.event_start.to_formatted_s(:just_time) %></h3>
+	  <div class="postedin">@ <%= event.event_location %></div> 
+	  </div>
+	</div>
+      </div>
+      <div class="row">
+	<div class="col-xs-12">
+	  <div class="introduction abridged" style="height:100px;overflow:hidden;position:relative;">
+	    <%= event.introduction.html_safe %>
+	    <div><%= link_to "More info",event,:class=>"btn btn-primary",:style=>"width:100%;margin-bottom:20px;" %></div>
+	    <div class="fadebottom"></div>
+	  </div>
+	</div>
+      </div>
+    </div>
+    
+    <% if i % 3 == 2 %>
+    <div class="clearfix visible-lg-block" ></div>
+    <% end %>
+    <% if i % 2 == 1 %>
+    <div class="clearfix visible-sm-block visible-md-block" ></div>
+    <% end %>
+    
+    
     <% end %>
   </div>
-  <div class="span4 blogcolumn">
-  <h2>Events Blog</h2>
-
-  <% PostCategory.find_by_name("Events").posts.where(:published=>true).order("created_at DESC").limit(5).each do |post| %>
-  <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
-    <h2 class="posttitle"><%= link_to post.title,post %></h2>
-
-  <% post.images.limit(1).each do |i| %>
-  <div class="item">
-    <%= image_tag i.the_image_url(:reasonable),{:class=>'blogbarimage'} %>
-  </div>  
-  <% end %>
-  <div class="introduction">
-    <%= raw post.introduction %>
+  
+  
+  <div class="row spaceontop">
+    <div class="col-sm-12">
+      <h1 class="headername">Events Blog</h1>
+    </div>
   </div>
-  <%= link_to "Read more...",post %>
-  <hr style="clear:both;">
-  <% end %>
-
-
+  
+  <div class="row">
+    <% PostCategory.find_by_name("Events").posts.where(:published=>true).order("created_at DESC").limit(10).each_with_index do |post,i| %>
+    <div class="col-sm-6 col-lg-4">
+      <a href="<%= post_path(post) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= post.images.first.the_image_url rescue "" %>');background-size:cover;"> 
+      </a>  
+      <div class="row">
+	<div class="col-sm-8">
+	  <h2 class="posttitle"><%= link_to post.title,post %></h2>
+	</div>
+	<div class="col-sm-4">
+	  <div class="metafloat">
+	    <h3 class="postdate"><%= post.created_at.to_formatted_s(:long_date) %></h3>
+	    <div class="postedin"><%= post.post_categories.collect{|cat|  link_to cat.name,cat}.join(" ★ ").html_safe %></div> 
+	  </div>
+	</div>
+      </div>
+    </div>
+    
+    <% if i % 3 == 2 %>
+    <div class="clearfix visible-lg-block" ></div>
+    <% end %>
+    <% if i % 2 == 1 %>
+    <div class="clearfix visible-sm-block visible-md-block" ></div>
+    <% end %>
+    
+    <% end %>
+  </div>
+  
 </div>
 
 
 
-</div>
 
 

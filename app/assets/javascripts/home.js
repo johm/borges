@@ -1,12 +1,28 @@
+function unabridge(el){
+	curHeight = el.height(),
+	autoHeight = el.css('height', 'auto').height();
+	el.height(curHeight).animate({height: autoHeight}, 400, "swing",function(){el.find(".fadebottom").hide();});
+    }
+
+
 jQuery('document').ready(function (){
     
     $('video,audio').mediaelementplayer();
 
 
     $('.whizzy').froalaEditor();
+    
+    $('.carousel').carousel();    
+
+    jQuery('.abridged').mouseover(function(){
+	unabridge(jQuery(this));
+    });
 
 
-
+    jQuery('.abridged').click(function(){
+	unabridge(jQuery(this));
+    });
+    
    
     jQuery('#menubar .menuwrapper>a').each(function(){
 	if (jQuery(location).attr('pathname')==jQuery(this).attr('href')){
@@ -181,3 +197,6 @@ function makefrontpagerespond(){
     });
 }
 
+$(window).load(function() {
+    $("#footer").stickyFooter();
+});

@@ -13,10 +13,10 @@ module EditionsHelper
   def buy_mini(edition) 
     if edition.has_copies_in_stock?
       content_tag(:div,
-                  button_to("Add to cart",
+                  button_to("Buy it now!",
                             shopping_cart_line_items_path(:edition=>edition),
-                            :class=>"btn btn-mini btn-success block"),
-                  :class=>"control-group",:style=>"float:right")
+                            :class=>"btn btn-mini btn-primary block",:style=>"width:100%;"),
+                  :class=>"control-group")
     end
   end
   
@@ -25,14 +25,14 @@ module EditionsHelper
       content_tag(:div,
                   button_to("Add to cart",
                             shopping_cart_line_items_path(:edition=>edition),
-                            :class=>"btn btn-large btn-success block"),
-                  :class=>"control-group") +
-        content_tag(:small,ENV["ADDTOCARTMESSAGE"].html_safe || "")
+                            :class=>"btn btn-large btn-primary block form-control"),
+                  :class=>"form-group") +
+        content_tag(:small,(ENV["ADDTOCARTMESSAGE"].html_safe rescue ""))
     else
-      content_tag(:div,
-                  "Sorry, not available",
-                  :class=>"not-available") +
-       (content_tag(:small,link_to("Email us about ordering this title","mailto:books@redemmas.org")) if edition.in_print?)
+      #      content_tag(:div,
+      #              "Sorry, not available",
+      #             :class=>"not-available") +
+      # (content_tag(:small,link_to("Email us about ordering this title","mailto:books@redemmas.org")) if edition.in_print?)
     end 
   end
   

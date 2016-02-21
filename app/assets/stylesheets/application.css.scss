@@ -19,6 +19,7 @@
  *= require mediaelement_rails
  *= require mediaelement_rails/mejs-skins
  *= require jquery.datetimepicker	
+ *= require font-awesome 
 */
 
 /*
@@ -125,6 +126,9 @@ padding-left:10px;
 }
 
 #pagetitle {
+font-family:brandon-grotesque;
+text-transform:uppercase;
+font-weight:bold;
 font-size:50px;
 line-height:56px;
 }

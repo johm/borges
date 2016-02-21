@@ -33,8 +33,8 @@ background-color:transparent;
 }
 
 .bookcover {
-float:right;
-margin-left:20px;
+width:100%;
+height:auto;
 }
 
 
@@ -219,4 +219,88 @@ margin-bottom:40px;
 
 .not-current-month div{
 opacity:.4;
+}
+
+.row-no-padding {
+  margin-left: -15px;
+  margin-right: -15px;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+.departmentname,.related {
+font-family:brandon-grotesque;
+text-transform:uppercase;
+font-weight:bold;
+font-size:50px;
+}
+
+.featuredaction {
+font-family:brandon-grotesque;
+text-transform:uppercase;
+}
+
+input[type=text] {
+font-family:proxima-nova;
+}
+
+
+.relatedsubhead {
+font-family:brandon-grotesque;
+text-transform:uppercase;
+a {font-size:24px !important;}
+}
+
+.modal-dialog {
+background-color:white;
+}
+
+.carousel-fade {
+    .carousel-inner {
+        .item {
+            transition-property: opacity;
+        }
+        
+        .item,
+        .active.left,
+        .active.right {
+            opacity: 0;
+        }
+
+        .active,
+        .next.left,
+        .prev.right {
+            opacity: 1;
+        }
+
+        .next,
+        .prev,
+        .active.left,
+        .active.right {
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .carousel-control {
+        z-index: 2;
+    }
+}
+
+
+
+html, 
+body, 
+.carousel, 
+.carousel-inner, 
+.carousel-inner .item {
+    height: 100%;
+}
+
+
+.dropdown-menu > li > a {
+padding:1px 20px;
 }
