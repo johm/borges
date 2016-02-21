@@ -1,6 +1,23 @@
-<% if  @category.image.nil? %>
+<% content_for :title do%>
+     <%= @category.name %>
+<% end %>
 
-<div class="row spaceontop">
+<% content_for :og do%>
+<% begin %>
+<meta property="og:image" content="https://redemmas.org/<%= @category.image.url %>" />
+<% rescue %>
+
+<% end %>
+<% end %>
+
+
+
+<% content_for :description do%><%= @category.description %><% end %>
+
+<% if @category.image.nil? %>
+
+<div class="container-fluid">
+  <div class="row spaceontop">
   <div class="col-xs-offset-1 col-xs-10">
     <h1 class="posttitle">Category:    <%= @category.name %></h1>
   </div>
@@ -14,10 +31,14 @@
 	    rgba(20,0,0, 0.2)
 	    ),url(<%= @category.image.url %>);background-attachment:fixed; 
 	    background-size:cover;margin-bottom:0px;">
-  <div class="col-xs-offset-1 col-xs-10">
-    <h1 class="posttitle">Category: <%= @category.name %></h1>
+  <div class="col-xs-offset-1 col-xs-7">
+    <h1 class="posttitle">Section: <%= @category.name %></h1>
   </div>
-</div>
+  <div class="col-xs-4">
+    <%= theme_partial :social %>
+    <%= mylinkbutton 'Edit', edit_category_path(@category) if can? :edit,Category %>
+  </div>
+  </div>
 
 <% end %>
 
@@ -29,9 +50,9 @@
     <div class="col-xs-12">
       <div style="float:right;">
 	<%= mylinkbutton 'Edit', edit_category_path(@category) if can? :edit,Category %>
-<%= mylinkbutton 'Analyze titles for profitability', chart_category_path(@category), {},"btn-success btn-large"  if can? :edit,Category %>
-     
- </div>  
+	<%= mylinkbutton 'Analyze titles for profitability', chart_category_path(@category), {},"btn-success btn-large"  if can? :edit,Category %>
+	
+      </div>  
       <div class="introduction">
 	<%= sanitize @category.description %>
       </div>
@@ -39,42 +60,33 @@
   </div>
   
   <hr />
-
-
-
+  
+  
+  
   <div class="row">
     <% if @category.title_lists.where(:public=>true).length > 0 %>
-<h2 class="related" style="clear:both;">Featured lists</h2>
-</div>
-<% @category.title_lists.order("position ASC").each do |tl| %>
-<h3 class="relatedsubhead"><%= link_to tl.name,tl %></h3>
-<div class="introduction"><%= sanitize tl.description %></div>
-<div class="row">
-  <%= make_a_grid_from_titles usefully_sorted(tl.titles).first(5) %>
-  <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
-    <%= link_to "More titles on this list »",tl %>
+    <h2 class="related" style="clear:both;">Featured lists</h2>
   </div>
-</div>
-<% end %>
-<% end %>
-
-
-<% if @category.titles.length >0 %>
-<h2 class="related" style="clear:both;">All titles in this section</h2>
-  <div class="row">  
-    <%= make_a_grid_from_titles(@category.titles.order("title asc")) %>
-  </div>
-<hr style="clear:both;">
-  <% end %>
-</div>
-<% end %>
-
-<div class="row">
-  <div class="span2"></div>
-  <div class="span8">
-    <div class="grid">  
-      <% @category.titles.order("title asc").each do |t| %>
-      <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
-      <% end %>
+  <% @category.title_lists.order("position ASC").each do |tl| %>
+  <h3 class="relatedsubhead"><%= link_to tl.name,tl %></h3>
+  <div class="introduction"><%= sanitize tl.description %></div>
+  <div class="row">
+    <%= make_a_grid_from_titles usefully_sorted(tl.titles).first(5) %>
+    <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
+      <%= link_to "More titles on this list »",tl %>
     </div>
   </div>
+  <% end %>
+  <% end %>
+  
+  
+  <% if @category.titles.length >0 %>
+  <h2 class="related" style="clear:both;">All titles in this section</h2>
+  <div class="row">  
+    <% cache("category-#{@category.id}", :expires_in => 120.minutes) do %>
+    <%= make_a_grid_from_titles(@category.titles.order("title asc")) %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+</div>

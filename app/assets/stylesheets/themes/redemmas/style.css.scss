@@ -1207,7 +1207,7 @@ float:right;
 }
 
 
-.about h2 {
+.about h2.chunk {
 color:white;
 font-family:chunk;
 font-size:80px;
@@ -1219,7 +1219,8 @@ text-shadow:2px 2px #000000;
 .about #main p, .about #main li {
 font-size: 20px;
 line-height: 28px;
-opacity:0.7;
+    color: $nearblack;
+    //opacity:0.7;
 font-family: "adobe-caslon-pro";
 text-align:justify;
 }

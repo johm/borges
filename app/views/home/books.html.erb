@@ -5,10 +5,18 @@
 <% content_for :description do%>Browse and search our titles, and find out how about placing special orders!<% end %>
 
 
-<div class="container">
+<div class="container-fluid">
+  <div class="row" >
+    <h1 class="departmentname" style="position:absolute;top:120px;z-index:2;color:white;text-shadow:4px 4px 20px black;" >The Bookstore</h1>
+    <% tl = TitleList.find(1) %>
+    <div class="row">
+      <%= make_an_image_grid_from_titles tl.titles.limit(6).order("RAND()") %>
+    </div>
+  </div>
+
+
   <div class="row spaceontop">
-    <div class="col-xs-6 col-sm-8">
-      <h1 class="departmentname">Books</h1>
+    <div class="col-xs-6 col-sm-6">
       <h2 class="featuredaction">Find a book:</h2>
       <%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-inline form-compact"},:url => {:action => :index,:controller => :titles } do |f| %>
       <div class="form-group">
@@ -17,10 +25,9 @@
 	<% end %>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4">
-      <div class="metafloat" style="float:right;">
-	<div class="postedin">
-	  <ul class="">
+    <div class="col-xs-6 col-sm-6">
+      <div class="metafloat" >
+	<ul class="postedin mediummenu">
 	    <li><a href="/pages/books-frequently-asked-questions#specialorders">How do I order a book that's not listed as in stock?</a>
 	    <li><a href="/pages/books-frequently-asked-questions#onlineorders">Can I buy books online from Red Emma's?</a>
 	    <li><a href="/pages/books-frequently-asked-questions#courseorders">Will you sell books for my class?</a>
@@ -28,7 +35,6 @@
 	    <li><a href="/pages/books-frequently-asked-questions#bookevents">Can I do an event for my book at Red Emma's?</a>
 	    <li><a href="/pages/books-frequently-asked-questions#hiring">Are you hiring?</a>
 	  </ul>
-	</div>
       </div>
     </div>
   </div>
@@ -84,18 +90,19 @@
     </div>
 
   </div>
-
-
+</div>
   <div class="row spaceontop">
-  <h2 class="related">Section(s)</h2>
+    <div class="col-xs-12">
+      <h2 class="related">Browse our Sections</h2>
+    </div>
     <% Category.all.each_with_index do |c,i| %>
     
-    <div class="col-xs-6 col-sm-4" style="padding:0px;">
+    <div class="col-xs-6 col-lg-4" style="padding:0px;">
       <a href="<%= category_path(c) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= c.image_url(:reasonable) rescue "" %>');background-size:cover;"> 
     </a>
-      <h3 class="relatedsubhead" ><%= link_to c.name,c %></h3>
+      <h3 class="relatedsubhead" style="margin-left:16px;" ><%= link_to c.name,c %></h3>
     </div>
-        <% if i % 3 == 2 %>
+    <% if i % 3 == 2 %>
     <div class="clearfix visible-lg-block" ></div>
     <% end %>
     <% if i % 2 == 1 %>

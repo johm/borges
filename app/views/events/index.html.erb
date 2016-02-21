@@ -3,29 +3,17 @@ Events
 <% end %>
 
 <% content_for :description do%>Our upcoming events at the store.<% end %>
+  <div class="row" style="height:200px;background-image:url('/event.jpg');background-size:cover;">
+<h1 class="departmentname" style="position:absolute;top:80px;left:20px;color:white;text-shadow:2px 2px 20px black;">events at red emma's</h1>
 
+</div>
 <div class="container-fluid">
 
-  <div class="row spaceontop">
-
-    <div class="col-xs-6 col-sm-8">
-      <h1 class="headername">Events at Red Emma's</h1>
-    </div>
-    <div class="col-xs-6 col-sm-4">
-      <div class="metafloat" style="float:right;">
-	<div class="postedin">
-	  <ul>
-     	    <li><a href="/pages/propose-an-event">How do I propose an event to Red Emma's?</a> </li>
-	    <li><a href="/pages/events-faq#where">Where do your events take place?</a></li>
-	    <li><a href="/pages/events-faq#music">Do you host musical events?</a></li>
-	    <li><a href="/pages/events-faq#cost">How much do your events cost?</a></li>
-	  </ul>
-	</div>
-      </div>
-    </div>
-  </div>
-  <hr />
-  <div class="row" >
+    
+  
+ 
+ 
+  <div class="row spaceontop" >
     <div class="col-sm-8 col-md-7">
     <h1 class="related">
       <% if @upcoming %>
@@ -34,13 +22,22 @@ Events
       Events for <%= Date::MONTHNAMES[@month] %> <%= @year %>
       <% end %>
     </h1>
+      <h4 class="relatedsubhead" ><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> :::::  <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]}&nbsp»".html_safe, :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h4>    
     </div>
     <div class="col-sm-4 col-md-5" style="text-align:right">
-      <h4 class="relatedsubhead"><%= link_to "« #{Date::MONTHNAMES[previous_month(@month,@year)]}", :month=>previous_month(@month,@year),:year=>previous_year(@month,@year) %> :::::  <%= link_to "#{Date::MONTHNAMES[next_month(@month,@year)]}&nbsp»".html_safe, :month=>next_month(@month,@year),:year=>next_year(@month,@year) %></h4>
+      <div class="metafloat ">
+	<ul class="postedin mediummenu">
+     	    <li><a href="/pages/propose-an-event">How do I propose an event to Red Emma's?</a> </li>
+	    <li><a href="/pages/events-faq#where">Where do your events take place?</a></li>
+	    <li><a href="/pages/events-faq#music">Do you host musical events?</a></li>
+	    <li><a href="/pages/events-faq#cost">How much do your events cost?</a></li>
+	  </ul>
+      </div>
+
     </div>
   </div>
   <div class="row"> 
-    
+
     <% @events.each_with_index do |event,i| %>
     
     <div class="col-sm-6 col-lg-4">

@@ -1,18 +1,18 @@
 <%= content_for :title do %>
- <%= @title.title %> by <%= sanitize(contributors_list(@title),:tags=>[]) %>
+<%= @title.title %> by <%= sanitize(contributors_list(@title),:tags=>[]) %>
 <% end %>
 
 <% content_for :og do%>
 <%= tag "meta", :property=>"og:title",:content=>@title.title %>
 <%= tag "meta", :property=>"og:type",:content=>"website" %>
-      <% if !(@edition.nil? || @edition.cover_url.blank?) %>
-      <meta property="og:image" content="https://redemmas.org/<%= @edition.cover_url(:medium) %>">
-      <% end %>
+<% if !(@edition.nil? || @edition.cover_url.blank?) %>
+<meta property="og:image" content="https://redemmas.org/<%= @edition.cover_url(:medium) %>">
+<% end %>
 <%= tag "meta", :property=>"og:url",:content=>"https://redemmas.org/titles/#{@title.id}" %>
 <%= tag "meta", :property=>"og:description",:content=>sanitize("#{@title.introduction}", :tags=>[]) unless @title.introduction.blank? %>
 
 <% end %>
-      
+
 
 <% content_for :description do%><%=h truncate(sanitize("#{@title.introduction}", :tags=>[]),:length => 250) %><% end %>
 
@@ -33,9 +33,9 @@
     
     <%= status_and_price(@edition) unless @edition.nil? %>
     <div style="margin-left:20px;"><%= buy_or_order(@edition) unless @edition.nil? %> </div>
-
+    
     <%= theme_partial :social %>
-
+    
     <% if !(@title.introduction.blank? && @title.description.blank?) %>
     <div class="introduction abridged" style="height:100px;overflow:hidden;position:relative;">
       <%= sanitize @title.introduction %>
@@ -43,7 +43,7 @@
       <div class="fadebottom"></div>
     </div>
     <% end %>
-     
+    
     <% if can? :edit,Edition %> 
     <div style="float:left;margin-right:10px;"><%=  mylinkbutton "<i class='fa fa-edit'></i> Edit this title", edit_title_path(@title),{},"btn-mini"   if can? :edit, Title %> </div>
     <% unless @edition.nil? %>
@@ -60,79 +60,77 @@
       </tr>
       
       <tr>
-      <th>In stock (all editions)</th>
-      <td><%= @title.in_stock %></td>
-    </tr>
-    <tr>
-      <th>Sold (all editions)</th>
-      <td><%= @title.sold %></td>
-    </tr>
-    <% end %>
-  <tr>
-    <th>ISBN</th>
-    <td style="font-size:12px;"><%= @edition.isbn13 unless @edition.nil? %></td>
-  </tr>
-  <tr>
-    <th>List price</th>
-    <td>$<%= @edition.list_price unless @edition.nil? %></td>
-  </tr>
-  <tr>
-    <th>Publisher</th>
-    <td><%= link_to(@edition.publisher.name, @edition.publisher) unless @edition.nil? || @edition.publisher.nil? %></td>
-  </tr>
-  <tr>
-    <th>Year of publication</th>
-    <td><%= @edition.year_of_publication unless @edition.nil? %></td>
-  </tr>
-  
-    <% if can? :edit,Edition && ! @edition.nil? %>
-    <tr class="">
-      <th>Copies</th>
-      <td><%= link_to "See all copies for this edition",edition_copies_path(@edition) unless @edition.nil? %></td>
-    </tr>
-    <% end %>
-
-  <% if @title.editions.without_edition(@edition).length > 0 %>
-  <tr>
-    <th>Other editions:</th>
-    <td>
-      <ul class="editions">
-      <% @title.editions.without_edition(@edition).each do |e| %>
-      <li><%= link_to e, e %>
-	<% end %>
-      </ul>
-    </td>
-  </tr>
-  <% end %>
-
-  <% if can? :edit,Title %>
-  <tr>
-    <th>Outstanding orders for this title:</th>
-    <td>
-      <ul>
-	<% @title.outstandingorderlines.each do |li| %>
-	<li> <%= link_to "#{li.quantity-li.received} on #{li.purchase_order.number}", li.purchase_order %> 
-	  <%= li.purchase_order.ordered? ? "(ORDERED on #{li.purchase_order.ordered_when.to_formatted_s(:just_date)})" : "(NOT ORDERED)" %>
-	<% end %>
-      </ul>
-    </td>
-  </tr>
-  <% end %>
-</table>
-
-
-  </div>
-
- 
+	<th>In stock (all editions)</th>
+	<td><%= @title.in_stock %></td>
+      </tr>
+      <tr>
+	<th>Sold (all editions)</th>
+	<td><%= @title.sold %></td>
+      </tr>
+      <% end %>
+      <tr>
+	<th>ISBN</th>
+	<td style="font-size:12px;"><%= @edition.isbn13 unless @edition.nil? %></td>
+      </tr>
+      <tr>
+	<th>List price</th>
+	<td>$<%= @edition.list_price unless @edition.nil? %></td>
+      </tr>
+      <tr>
+	<th>Publisher</th>
+	<td><%= link_to(@edition.publisher.name, @edition.publisher) unless @edition.nil? || @edition.publisher.nil? %></td>
+      </tr>
+      <tr>
+	<th>Year of publication</th>
+	<td><%= @edition.year_of_publication unless @edition.nil? %></td>
+      </tr>
       
-    
-
-
-<div class="col-sm-4">
+      <% if can? :edit,Edition && ! @edition.nil? %>
+      <tr class="">
+	<th>Copies</th>
+	<td><%= link_to "See all copies for this edition",edition_copies_path(@edition) unless @edition.nil? %></td>
+      </tr>
+      <% end %>
+      
+      <% if @title.editions.without_edition(@edition).length > 0 %>
+      <tr>
+	<th>Other editions:</th>
+	<td>
+	  <ul class="editions">
+	    <% @title.editions.without_edition(@edition).each do |e| %>
+	    <li><%= link_to e, e %>
+	      <% end %>
+	  </ul>
+	</td>
+      </tr>
+      <% end %>
+      
+      <% if can? :edit,Title %>
+      <tr>
+	<th>Outstanding orders for this title:</th>
+	<td>
+	  <ul>
+	    <% @title.outstandingorderlines.each do |li| %>
+	    <li> <%= link_to "#{li.quantity-li.received} on #{li.purchase_order.number}", li.purchase_order %> 
+	      <%= li.purchase_order.ordered? ? "(ORDERED on #{li.purchase_order.ordered_when.to_formatted_s(:just_date)})" : "(NOT ORDERED)" %>
+	      <% end %>
+	  </ul>
+	</td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
   
-  <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
-</div>
-    
+  
+  
+  
+
+  
+  <div class="col-sm-4">
+  
+    <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
+  </div>
+  
 </div>
 
 
@@ -143,60 +141,66 @@
 <% content_for :related do %>
 
 <% if @title.by_the_same_authors.length > 0 %>
-<h2 class="related">By the same author(s)</h2>
-<br />
 <div class="row">
+  <h2 class="related">By the same author(s)</h2>
+  <br />
   <%= make_a_grid_from_titles usefully_sorted(@title.by_the_same_authors) %>
 </div>
 <% end %>
 
 <% if @title.posts.length > 0 %>
-<h2  class="related">On our blog</h2>
-<% @title.posts.each do |post| %>
-<h2 class="relatedsubhead"><%= link_to post.title,post %></h2>
-<h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
-<% post.images.limit(1).each do |i| %>
-<div class="item">
-  <%= image_tag i.the_image_url(:reasonable),{:class=>'blogbarimage'} %>
-</div>  
-<% end %>
-<div class="introduction">
-  <%= raw post.introduction %>
-</div>
-<%= link_to "Read more...",post %>
-<hr style="clear:both;">
-<% end %>
-<% end %>
+<div class="row">
+  <h2  class="related">On our blog</h2>
+  <br />
+  <% @title.posts.each do |post| %>
+  <h2 class="relatedsubhead"><%= link_to post.title,post %></h2>
+  <h3><%= post.created_at.to_formatted_s(:long_date) %></h3>
+  <% post.images.limit(1).each do |i| %>
+  <div class="item">
+    <%= image_tag i.the_image_url(:reasonable),{:class=>'blogbarimage'} %>
+  </div>  
+  <% end %>
+  <div class="introduction">
+    <%= raw post.introduction %>
+  </div>
+  <%= link_to "Read more...",post %>
+  <hr style="clear:both;">
+  <% end %>
+  <% end %>
 
-  
+
 <% if @title.title_lists.where(:public=>true).length > 0 %>
-<h2 class="related" style="clear:both;">On our lists</h2>
-<% @title.title_lists.each do |l| %>
-<% if l.public? %>
-<h3 class="relatedsubhead"><%= link_to l.name,l %></h3>
-<div class="introduction"><%= sanitize l.description %></div>
-<div class="row">  
-  <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
-  <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
-    <%= link_to "More titles on this list »",l %>
+<div class="row">
+  <h2 class="related" style="clear:both;">On our lists</h2>
+  <% @title.title_lists.each do |l| %>
+  <% if l.public? %>
+  <h3 class="relatedsubhead"><%= link_to l.name,l %></h3>
+  <div class="introduction"><%= sanitize l.description %></div>
+  <div class="row">  
+    <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
+    <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
+      <%= link_to "More titles on this list »",l %>
+    </div>
+  </div>
+  
+  <% end %>
+  <% end %>
+  
+  
+  <% if @title.categories.length > 0 %>
+  <h2 class="related">Section(s)</h2>
+  <div class="row">
+    <% @title.categories.each_with_index do |c,i| %>
+    
+    <div class="col-xs-6 col-sm-4" style="padding:0px;">
+      <a href="<%= category_path(c) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= c.image_url(:reasonable) rescue "" %>');background-size:cover;"> 
+      </a>
+      <h3 class="relatedsubhead" style="margin-left:16px;" ><%= link_to c.name,c %></h3>
+    </div>
+    <% end %>  
+    <% end %>
+    
+    <% end %>  
+    <% end %>
   </div>
 </div>
-
-<% end %>
-<% end %>
-
-<% if @title.categories.length > 0 %>
-<h2 class="related">Section(s)</h2>
-<div class="row">
-<% @title.categories.each_with_index do |c,i| %>
-
-<div class="col-xs-6 col-sm-4" style="padding:0px;">
-    <a href="<%= category_path(c) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= c.image_url(:reasonable) rescue "" %>');background-size:cover;"> 
-    </a>
-  <h3 class="relatedsubhead" ><%= link_to c.name,c %></h3>
-</div>
-<% end %>  
-<% end %>
-
-<% end %>  
-<% end %>

@@ -63,17 +63,30 @@ float:right;padding-left:5px;
     margin-top:3px;margin-bottom:10px;
     text-align:center;
     padding:3px;
-    background-color:$nearblack;
-    h3,.postedin,.postedin a {margin-top:0px;color:$nearwhite;font-family:brandon-grotesque;font-weight:bold;text-transform:uppercase;font-size:10px;margin-bottom:0px;line-height:15px;}
-    //		   .postedin a {color:$lightred;}
+
+    h3,.postedin,.postedin a {margin-top:0px;font-family:brandon-grotesque;font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;}
+
+    .postedin a:hover {
+    color:nearblack;
+    text-decoration:none;
+}   
     
     ul.bigmenu li {
 	a {font-size:20px !important;
-	    line-height:24px;}
-	margin-bottom:10px;
+	   line-height:24px;}
+	margin-bottom:16px;
     }				
+
+    ul.mediummenu li {
+	a {font-size:16px !important;
+	   line-height:20px;}
+	margin-bottom:8px;
+    }				
+
     
     ul {
+
+position: relative;
 	text-align:left;
 	list-style-type:none;
 	padding-left:0px;
