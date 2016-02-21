@@ -74,7 +74,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 
 <div class="col-sm-4" id="CheckoutPane">
 <% if ! @shopping_cart.ordered? %>
-<h2>Ready to checkout...</h2>
+<h2 class="related">Ready to checkout?</h2>
 <h4>How would you like to recieve this order?</h4>
 <%= nested_form_for @shopping_cart,:url=>{:action => "update_current"},:remote=>true,:html=>{:class=>"form-horizontal checkoutform"} do |f| %>
 
@@ -109,13 +109,13 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<button id="customButton" class="btn btn-success" style="margin-left:180px;" >Proceed to checkout</button>
+<button id="customButton" class="btn btn-success" style="margin-left:0px;" >Proceed to checkout</button>
 <div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
 
 <div style="margin-left:-0px">
 <%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
 </div>
-</div>
+
 <script>
   var handler = StripeCheckout.configure({
     key: '<%= Rails.configuration.stripe[:publishable_key] %>',
@@ -192,7 +192,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <% end %>
 <% end %>
 </div>
-
+</div>
 
 <script>
 
