@@ -46,8 +46,8 @@ module ApplicationHelper
                             f.text_field(m,
                                          options.merge({:value => (f.object.send(m).strftime('%Y-%m-%d') if f.object.send(m)),:class => "datepicker",:autocomplete => "off"}))+ 
                             content_tag(:span,
-                                        content_tag(:i," ",{"data-date-icon"=>"icon-calendar"}),
-                                        :class=>"add-on"),
+                                        content_tag(:i," ",{"data-date-icon"=>"fa-calendar"}),
+                                        :class=>"add-on fa"),
                             :class=>"controls "),
                 :class=>"field control-group")
   end

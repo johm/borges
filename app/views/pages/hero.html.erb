@@ -33,7 +33,7 @@
     <div class="span8">
       <h1 id="pagetitle">
 	<%= @page.title %>	
-	<div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='icon-edit'></i>"), edit_page_path(@page)   if can? :edit, Page %> </div>
+	<div style="float:right;"><small><%= "Not published" unless @page.published? %></small><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_page_path(@page)   if can? :edit, Page %> </div>
       </h1>
       <div class="introduction">
 	<%= raw @page.introduction %>

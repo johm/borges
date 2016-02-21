@@ -11,7 +11,7 @@
   <tr>
     <td><%= link_to publisher.name,publisher %></td>
     <td><%= publisher.editions.count %></td>
-    <td><%=  link_to raw("<i class='icon-edit'></i>"), edit_publisher_path(publisher)   if can? :edit, Publisher %> </td>
+    <td><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_publisher_path(publisher)   if can? :edit, Publisher %> </td>
   </tr>
 <% end %>
 </table>

@@ -12,7 +12,7 @@
     </table>
   </div>
   <div class="span4">
-    <%= mylinkbutton "<i class='icon-plus'></i>  New Author",new_author_path %>
+    <%= mylinkbutton "<i class='fa fa-plus-circle'></i>  New Author",new_author_path %>
     <h1>Find authors</h1>
     <%= nested_form_for @author_search_object,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :authors } do |f| %>
 <%= mytextfield f,:name,:full_name %>

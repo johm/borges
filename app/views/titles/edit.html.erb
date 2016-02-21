@@ -38,11 +38,11 @@
 	<%= contribution_form.autocomplete_field :author, autocomplete_author_full_name_contributions_path,:id_element => "#author-#{contribution_form.my_unique_id}", :name=>'ignorethisonsubmit' %>
 	<%= contribution_form.hidden_field :author_id, :id => "author-#{contribution_form.my_unique_id}" %>
 	<%= contribution_form.text_field :what,:placeholder=>"Type of contribution" %>
-	<%= contribution_form.link_to_remove raw("<i class='icon-minus'></i> Remove this contributor"), :class=>"btn" %>
+	<%= contribution_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this contributor"), :class=>"btn" %>
 	<% end %>
 	<div class="verticaloffset">
-	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a contributor"), :contributions, {:class=>:btn} %>
-	  <%= link_to raw("<i class='icon-plus'></i> Create a new author"), new_author_path, {:class=>:btn,:target=>:new} %>
+	  <%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add a contributor"), :contributions, {:class=>:btn} %>
+	  <%= link_to raw("<i class='fa fa-plus-circle'></i> Create a new author"), new_author_path, {:class=>:btn,:target=>:new} %>
 	</div>
       </div>
     </div>
@@ -94,10 +94,10 @@
 	</div>
       </div>
 
-      <%= edition_form.link_to_remove raw("<i class='icon-minus'></i> Remove this edition"), :class=>"btn" %>
+      <%= edition_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this edition"), :class=>"btn" %>
       <% end %>
       <div class="verticaloffset">
-	<%= f.link_to_add raw("<i class='icon-plus'></i> Add an edition"), :editions, {:class=>:btn} %>
+	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add an edition"), :editions, {:class=>:btn} %>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
       <%= myselectfield member_form,:category,:name,autocomplete_category_name_titles_path  %>
       <% end %>
       <div class="verticaloffset">
-	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a category"), :title_category_memberships, {:class=>:btn} %>
+	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add to a category"), :title_category_memberships, {:class=>:btn} %>
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@
       
       <% end %>
       <div class="verticaloffset">
-	<%= f.link_to_add raw("<i class='icon-plus'></i> Add to a list"), :title_list_memberships, {:class=>:btn} %>
+	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add to a list"), :title_list_memberships, {:class=>:btn} %>
       </div>
     </div>
   </div>

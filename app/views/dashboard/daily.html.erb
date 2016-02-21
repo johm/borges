@@ -26,7 +26,7 @@
 	<%= link_to l.copy.edition.title.title, l.copy.edition %>
 	
 	<small>[<%= l.copy.edition.title.in_stock %> in stock, <span title="<%= l.copy.edition.title.whichorders %>"><%= l.copy.edition.title.on_order %><span class="faint">+<%= l.copy.edition.title.probably_on_order %></span></span> on order ]</small>
-	<%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(l.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless l.copy.edition.title.latest_published_edition.nil? %>
+	<%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(l.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless l.copy.edition.title.latest_published_edition.nil? %>
       </td>
       <td>
 	<%= ordering_from_info(l.copy.edition.title) %>

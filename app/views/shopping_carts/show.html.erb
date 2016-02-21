@@ -94,7 +94,7 @@
     <th>Completed?</th>
     <td>
       <div><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Mark order as complete",complete_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.completed?) %>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Mark order as complete",complete_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.completed?) %>
     </td>
   </tr>
 
@@ -103,7 +103,7 @@
     <th>Defer?</th>
     <td>
       <div><%= @shopping_cart.deferred? ? "Yes" : ""  %></div>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Dismiss the order alert",defer_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (@shopping_cart.ordered? && !@shopping_cart.deferred? && !@shopping_cart.completed?) %>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Dismiss the order alert",defer_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (@shopping_cart.ordered? && !@shopping_cart.deferred? && !@shopping_cart.completed?) %>
     </td>
   </tr>
   <% end %>
@@ -114,7 +114,7 @@
     <td>
       <%= link_to "Add to list",ENV["MAILCHIMP_URL"],{:class=>"btn btn-success btn-mini",:target=>"_blank"} %>
       <br /><br />
-   <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Mark as subscribed",subscribe_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (! @shopping_cart.shipping_subscribed?) %>
+   <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Mark as subscribed",subscribe_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-warning") if (! @shopping_cart.shipping_subscribed?) %>
     </td>
   </tr>
 <% end %>
