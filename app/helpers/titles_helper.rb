@@ -17,11 +17,11 @@ module TitlesHelper
       capture do 
         concat render :partial=>'titles/gridtitle', :locals=>{:title=>tlm.title,:text=>(tlm.notes || "") } unless tlm.title.nil? 
         if i % 6 == 5 
-        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        concat content_tag(:div,"", :class=>"clearfix visible-md visible-lg visible-sm visible-xs")
         elsif i % 3 == 2
-          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-sm")
         elsif i % 2 == 1
-          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-xs")
         end
       end
     end.join.html_safe
@@ -32,11 +32,11 @@ module TitlesHelper
       capture do 
         concat render :partial=>'titles/gridtitle', :locals=>{:title=>t,:text=>("") } unless t.nil? 
         if i % 6 == 5 
-        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        concat content_tag(:div,"", :class=>"clearfix visible-md visible-lg visible-sm visible-xs")
         elsif i % 3 == 2
-          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-sm")
         elsif i % 2 == 1
-          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-xs")
         end
       end
     end.join.html_safe
@@ -47,11 +47,11 @@ module TitlesHelper
       capture do 
         concat render :partial=>'titles/imagegridtitle', :locals=>{:title=>t,:text=>("") } unless t.nil? 
         if i % 6 == 5 
-        concat content_tag(:div,"", :class=>"clearfix visible-md-block visible-lg-block visible-sm-block visible-xs-block")
+        concat content_tag(:div,"", :class=>"clearfix visible-md visible-lg visible-sm visible-xs")
         elsif i % 3 == 2
-          concat content_tag(:div,"", :class=>"clearfix visible-sm-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-sm")
         elsif i % 2 == 1
-          concat content_tag(:div,"", :class=>"clearfix visible-xs-block")
+          concat content_tag(:div,"", :class=>"clearfix visible-xs")
         end
       end
     end.join.html_safe

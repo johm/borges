@@ -71,10 +71,10 @@ class HomeController < ApplicationController
             html << "<div class='col-xs-6 col-sm-4 col-md-2' style='padding:0px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a><div class='igtext'>#{media_item.caption.text}</div></div>"
             s=s+1
             if s % 2 == 0
-              html << "<div class='clearfix visible-xs-block' ></div>"
+              html << "<div class='clearfix visible-xs' ></div>"
             end
             if s % 3 == 0
-              html << "<div class='clearfix visible-sm-block' ></div>"
+              html << "<div class='clearfix visible-sm' ></div>"
             end
 
           end
@@ -112,10 +112,10 @@ class HomeController < ApplicationController
             html << "<div class='col-xs-6 col-sm-4 col-md-2' style='padding:0px;'><a target='_blank' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a><div class='igtext'>#{media_item.caption.text}</div></div>"
             s=s+1
             if s % 2 == 0
-              html << "<div class='clearfix visible-xs-block' ></div>"
+              html << "<div class='clearfix visible-xs' ></div>"
             end
             if s % 3 == 0
-              html << "<div class='clearfix visible-sm-block' ></div>"
+              html << "<div class='clearfix visible-sm' ></div>"
             end
 
           end
