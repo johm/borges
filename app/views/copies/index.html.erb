@@ -68,10 +68,10 @@
     </td>
 
     <td>
-      <%= mylinkbutton "<i class='icon-edit'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %>
+      <%= mylinkbutton "<i class='fa fa-pencil'></i> Edit", edit_copy_path(copy),{},"btn-mini"   if can? :edit, Copy %>
     </td>
     <td>
-      <%= mypostlinkbutton "<i class='icon-warning-sign'></i> Mark lost", mark_lost_copy_path(copy),{:remote=>true},{},"btn-mini copy-mark-lost"  if (copy.status=="STOCK" && (can? :edit, Copy)) %>
+      <%= mypostlinkbutton "<i class='fa fa-exclamation-circle-sign'></i> Mark lost", mark_lost_copy_path(copy),{:remote=>true},{},"btn-mini copy-mark-lost"  if (copy.status=="STOCK" && (can? :edit, Copy)) %>
     </td>
   </tr>
 <% end %>

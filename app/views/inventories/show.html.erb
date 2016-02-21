@@ -15,7 +15,7 @@
   <%= my_autocomplete_field_tag f,
       :item,:copy,
       inventory_autocomplete_copies_path(:inventory_id=>@inventory.id),
-  link_to_function(content_tag(:i,"",:class=>"icon-plus"),
+  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
   "window.open('#{new_title_path}?isbn='+$('#item').val())", 
   {:class=>'btn'}),"input-xxlarge" %>
   
@@ -25,7 +25,7 @@
     });
   </script>
   
-  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_inventory_copy_confirmation"}) %> 
+  <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_inventory_copy_confirmation"}) %> 
   <% end %>
 
   <%= paginate @inventory_confirmations %>

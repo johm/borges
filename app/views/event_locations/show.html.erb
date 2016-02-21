@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Event Location:   <%= @event_location.title %>
-  <div style="float:right;"><%=  link_to raw("<i class='icon-edit'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %> 
+  <div style="float:right;"><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %> 
 </h1>
 </div>
 </div>

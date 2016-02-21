@@ -18,7 +18,7 @@
     });
   </script>
   
-  <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_return_order_line_item"}) %> 
+  <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_return_order_line_item"}) %> 
   
   
   <% end %>
@@ -38,12 +38,12 @@
 
     <div class="span2">
       <% if ! @return_order.posted? %>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Complete return",post_return_order_path(@return_order)) %>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Complete return",post_return_order_path(@return_order)) %>
       <% else %>
       <b>Posted:</b> <%= @return_order.posted_when.to_formatted_s(:just_date) %>
       <% end %>
 
-      <%= mylinkbutton("<i class='icon-font'></i> Text export", return_order_path(@return_order,:format=>'txt'),:target=>"_blank") %> 
+      <%= mylinkbutton("<i class='fa fa-font'></i> Text export", return_order_path(@return_order,:format=>'txt'),:target=>"_blank") %> 
       
       <div id="return_order_meta">
 	<%= render :partial=>"meta",:locals=>{:return_order=>@return_order} %>

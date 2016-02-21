@@ -17,13 +17,13 @@
       <%= f.hidden_field(:customer_id) %>
       
       <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path , 
-	  link_to_function(content_tag(:i,"",:class=>"icon-plus-sign"),
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle-sign"),
                            "window.open('#{new_title_path}?isbn='+$('#item').val())", 
                   {:class=>'btn'}) %>
 
 
       <%= my_autocomplete_field_tag f,:customer,:customer,autocomplete_customer_name_customers_path, 
-	  link_to_function(content_tag(:i,"",:class=>"icon-plus-sign"),
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle-sign"),
       "window.open('#{new_customer_path}?customer_name='+$('#customer').val())", 
       {:class=>'btn'}) %>
 
@@ -41,7 +41,7 @@
 	     
 	   </script>
 
-	   <%= mylinkbutton("<i class='icon-plus'></i> Add","#",{:id=>"add_purchase_order_line_item"}) %> 
+	   <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_purchase_order_line_item"}) %> 
 	 <% end %>
        <% end %>
        
@@ -54,12 +54,12 @@
        <%= paginate @purchase_order_line_items %>
     </div>
     <div class="span4">
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
-      <%= mypostlinkbutton("<i class='icon-ok-sign'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
-      <%= mypostlinkbutton("<i class='icon-trash'></i> Cancel outstanding",cancel_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
-      <%= mylinkbutton("<i class='icon-edit'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
-      <%= mylinkbutton("<i class='icon-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
-      <%= mylinkbutton("<i class='icon-font'></i> Text export", purchase_order_path(@purchase_order,:format=>'txt'),:target=>"_blank") %> 
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
+      <%= mypostlinkbutton("<i class='fa fa-trash'></i> Cancel outstanding",cancel_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
+      <%= mylinkbutton("<i class='fa fa-pencil'></i> Edit", edit_purchase_order_path(@purchase_order)) %> 
+      <%= mylinkbutton("<i class='fa fa-print'></i> Print", purchase_order_path(@purchase_order,:format=>'pdf')) %> 
+      <%= mylinkbutton("<i class='fa fa-font'></i> Text export", purchase_order_path(@purchase_order,:format=>'txt'),:target=>"_blank") %> 
             <table class="table">
 	<tr>
 	  <th>Our PO number:</th>

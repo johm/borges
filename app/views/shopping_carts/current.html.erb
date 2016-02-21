@@ -15,7 +15,7 @@
     <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
     <td>$<%= li.cost %></td>
     <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
-    <td><%= link_to raw(content_tag(:i,"",{:class=>"icon-remove"})),li,:method=>:delete  %></td>
+    <td><%= link_to raw(content_tag(:i,"",{:class=>"fa fa-ban"})),li,:method=>:delete  %></td>
   </tr>
 <% end %>
 <tr>

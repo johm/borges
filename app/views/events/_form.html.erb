@@ -37,7 +37,7 @@
 	<%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
 	<% end %>
 	<div class="verticaloffset">
-	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a book"), :event_title_links, {:class=>:btn} %>
+	  <%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add a book"), :event_title_links, {:class=>:btn} %>
 	</div>
       </div>
     </div>
@@ -70,13 +70,13 @@
 	  <div class="controls">
 	    <%= f.fields_for :event_shifts do |shift_form| %>
 	    <div class="well">
-	      <%= shift_form.link_to_remove raw("<i class='icon-minus'></i> Remove this shift"), :class=>"btn",:style=>"float:right;" %>	    
+	      <%= shift_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this shift"), :class=>"btn",:style=>"float:right;" %>	    
 	      <%= myselectfield shift_form,:event_staffer,:staffer,autocomplete_event_staffer_name_event_staffers_path,new_event_staffer_path() %>
 	      <%= mytextfield shift_form,:what,:notes, {:class=>"input-xxlarge"} %>
 	    </div>
 	    <% end %>
 	    <div class="verticaloffset">
-	      <%= f.link_to_add raw("<i class='icon-plus'></i> Add a shift"), :event_shifts, {:class=>:btn} %>
+	      <%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add a shift"), :event_shifts, {:class=>:btn} %>
 	    </div>
 	  </div>
 	</div>

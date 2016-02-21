@@ -46,7 +46,7 @@
 	      <%= mytextfield image_form,"Or specify a remote url",:remote_the_image_url %>
 	      <div class="field control-group">
 		<div class="controls">
-		  <%= image_form.link_to_remove raw("<i class='icon-minus'></i> Remove this image"), :class=>"btn" %>
+		  <%= image_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this image"), :class=>"btn" %>
 		</div>
 	      </div>
 	    </div>
@@ -59,7 +59,7 @@
       </div>
       <% end %>
       <div class="verticaloffset">
-	<%= f.link_to_add raw("<i class='icon-plus'></i> Add another image"), :images, {:class=>:btn} %>
+	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add another image"), :images, {:class=>:btn} %>
       </div>
     </div>  
     
@@ -70,7 +70,7 @@
 	<%= myselectfield member_form,:title,:title,autocomplete_title_title_title_lists_path %>
 	<% end %>
 	<div class="verticaloffset">
-	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a book"), :post_title_links, {:class=>:btn} %>
+	  <%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add a book"), :post_title_links, {:class=>:btn} %>
 	</div>
       </div>
     </div>
@@ -83,7 +83,7 @@
 	<%= myselectfield member_form,:title_list,:name,autocomplete_title_list_name_title_lists_path %>
 	<% end %>
 	<div class="verticaloffset">
-	  <%= f.link_to_add raw("<i class='icon-plus'></i> Add a list"), :post_title_list_links, {:class=>:btn} %>
+	  <%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add a list"), :post_title_list_links, {:class=>:btn} %>
 	</div>
       </div>
     </div>

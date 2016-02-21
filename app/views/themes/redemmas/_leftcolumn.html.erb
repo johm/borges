@@ -33,7 +33,7 @@
 	</div>
 	<% if current_cart.active? and @oncart.nil? %>
 	<a href="/cart" class="btn" style="float:right;margin-top:10px;">
-	  <i class="icon-shopping-cart"></i>My cart: <%= current_cart.number_of_items %> item<%= current_cart.number_of_items>1 ? 's' : ''%>
+	  <i class="fa fa-shopping-cart"></i>My cart: <%= current_cart.number_of_items %> item<%= current_cart.number_of_items>1 ? 's' : ''%>
 	</a>
 	<% end %>
       </div>

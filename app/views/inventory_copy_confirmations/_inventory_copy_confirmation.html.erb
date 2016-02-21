@@ -9,13 +9,13 @@
           {:class=>"switch switch-inventory","data-on"=>"success","data-off"=>"danger","data-on-label"=>"HERE","data-off-label"=>"GONE"})
     %>
     <div class="inventory_trash">
-      <%= link_to raw('<i class="icon-trash"></i>'),inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:delete,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
-      <%= link_to raw('<i class="icon-backward"></i>'),probablyreturned_inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:post,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
+      <%= link_to raw('<i class="fa fa-trash"></i>'),inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:delete,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
+      <%= link_to raw('<i class="fa fa-backward"></i>'),probablyreturned_inventory_copy_confirmation_path(inventory_copy_confirmation),:method=>:post,:remote=>true,:style=>"#{'display:none' if inventory_copy_confirmation.status}" %>
     </div>
     <% end %>
   </td>
   <td>
     <small><%= sanitize category_status( inventory_copy_confirmation.copy.edition.title)%></small>
-    <%= link_to raw('<i class="icon-ok-circle"></i>'), hidden_actions_edition_path(inventory_copy_confirmation.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless inventory_copy_confirmation.copy.edition.title.latest_published_edition.nil? %>
+    <%= link_to raw('<i class="fa fa-circle-check-o"></i>'), hidden_actions_edition_path(inventory_copy_confirmation.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless inventory_copy_confirmation.copy.edition.title.latest_published_edition.nil? %>
   </td>
 </tr>
