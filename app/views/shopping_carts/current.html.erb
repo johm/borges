@@ -81,7 +81,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <% ShoppingCart::SHIPPING_OPTIONS.each do |x| %>
 <div class='a_shipping_method'><%= radio_button 'shopping_cart','shipping_method',x[1] %> <%= raw(x[0]) %></div>
 <% end %>
-<br />
+
 <h4>Who is this order for?</h4>
 <div style="margin-left:-0px">
 <%= mytextfield f,"Name",:shipping_name %>
