@@ -1,13 +1,15 @@
+<div class="row spaceontop">
 <div style="float:right">
   <%= mylinkbutton 'Edit', edit_author_path(@author) %> 
 </div>
 
 <p id="notice"><%= notice %></p>
 
-<h1>Author: <%= @author.full_name %></h1>
+<h1 class="related">Author: <%= @author.full_name %></h1>
 <div class="introduction">
   <%= raw @author.bio %>
 </div>
-<% @author.titles.each do |t|  %>
-<%= render :partial=>'titles/title', :object=>t %>
-<% end %>
+
+  <%= make_a_grid_from_titles(usefully_sorted(@author.titles)) %>
+
+</div>
