@@ -19,7 +19,7 @@
 	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
 	   <td>
 	     <% unless purchase_order_line_item.purchase_order.ordered? %>
-	     <%= link_to raw('<i class="fa fa-circle-check-o"></i>'), hidden_actions_purchase_order_line_item_path(purchase_order_line_item),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} %>
+	     <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_purchase_order_line_item_path(purchase_order_line_item),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} %>
 	     <% end %>
 	   </td>
 	 </tr>
