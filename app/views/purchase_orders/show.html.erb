@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     
-    <div class="span8">
+    <div class="col-sm-8">
       <p id="notice"><%= notice %></p>      
 
       <h1>Purchase Order: <%= @purchase_order.number %></h1>
@@ -17,13 +17,13 @@
       <%= f.hidden_field(:customer_id) %>
       
       <%= my_autocomplete_field_tag f,:item,:edition,autocomplete_editions_path , 
-	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle-sign"),
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
                            "window.open('#{new_title_path}?isbn='+$('#item').val())", 
                   {:class=>'btn'}) %>
 
 
       <%= my_autocomplete_field_tag f,:customer,:customer,autocomplete_customer_name_customers_path, 
-	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle-sign"),
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
       "window.open('#{new_customer_path}?customer_name='+$('#customer').val())", 
       {:class=>'btn'}) %>
 
@@ -53,7 +53,7 @@
       </table>
        <%= paginate @purchase_order_line_items %>
     </div>
-    <div class="span4">
+    <div class="col-sm-4">
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
       <%= mypostlinkbutton("<i class='fa fa-trash'></i> Cancel outstanding",cancel_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
