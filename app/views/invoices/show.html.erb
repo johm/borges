@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     
-    <div class="span8">
+    <div class="col-sm-8">
       <p id="notice"><%= notice %></p>      
       <h1>INVOICE <%= @invoice.id %></h1>
 
@@ -43,7 +43,7 @@
       
     </div>
     
-    <div class="span4">
+    <div class="col-sm-4">
 
       <% if ! @invoice.received? %>
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Receive invoice",receive_invoice_path(@invoice)) %>
