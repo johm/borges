@@ -120,14 +120,8 @@
       <% end %>
     </table>
   </div>
-  
-  
-  
-  
-
-  
   <div class="col-sm-4">
-  
+    
     <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
   </div>
   
@@ -201,6 +195,11 @@
     <% end %>
     
     <% end %>  
+    <%= render "/titles/searchbrowse" %>
     <% end %>
   </div>
 </div>
+
+
+
+

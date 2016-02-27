@@ -1,0 +1,7 @@
+<h2 class="featuredaction">Find a book:</h2>
+<%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-inline form-compact"},:url => {:action => :index,:controller => :titles } do |f| %>
+<div class="form-group">
+  <%= f.text_field :searchquery, :placeholder=>"Title, Author, or ISBN",:class=>"form-control" %>
+  <input class="btn btn-primary btn-medium" name="commit" type="submit" value="Search" >
+  <% end %>
+</div>
