@@ -1,4 +1,10 @@
+<%= content_for :title do %>
+<%= @author.full_name %> 
+<% end %>
+
+
 <div class="row spaceontop">
+<div class="col-xs-12">
 <div style="float:right">
   <%= mylinkbutton 'Edit', edit_author_path(@author) %> 
 </div>
@@ -12,4 +18,5 @@
 
   <%= make_a_grid_from_titles(usefully_sorted(@author.titles)) %>
 
+</div>
 </div>
