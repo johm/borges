@@ -4,19 +4,24 @@
 
 
 <div class="row spaceontop">
-<div class="col-xs-12">
-<div style="float:right">
-  <%= mylinkbutton 'Edit', edit_author_path(@author) %> 
-</div>
+  <div class="col-xs-12">
+    <div style="float:right">
+      <%= mylinkbutton 'Edit', edit_author_path(@author) %> 
+    </div>
+    
+    <p id="notice"><%= notice %></p>
+    
+    <h1 class="related">Author: <%= @author.full_name %></h1>
+    <div class="introduction">
+      <%= raw @author.bio %>
+    </div>
+    
+    <%= make_a_grid_from_titles(usefully_sorted(@author.titles)) %>
+    
 
-<p id="notice"><%= notice %></p>
 
-<h1 class="related">Author: <%= @author.full_name %></h1>
-<div class="introduction">
-  <%= raw @author.bio %>
-</div>
 
-  <%= make_a_grid_from_titles(usefully_sorted(@author.titles)) %>
+  </div>
 
 </div>
-</div>
+    <%= render "/titles/searchbrowse" %>

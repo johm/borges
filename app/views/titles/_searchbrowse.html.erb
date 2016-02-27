@@ -1,0 +1,16 @@
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2 class="featuredaction">Find a book:</h2>
+    <%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-inline form-compact"},:url => {:action => :index,:controller => :titles } do |f| %>
+    <div class="form-group">
+      <%= f.text_field :searchquery, :placeholder=>"Title, Author, or ISBN",:class=>"form-control" %>
+      <input class="btn btn-primary btn-medium" name="commit" type="submit" value="Search" >
+      <% end %>
+    </div>
+<hr />
+    <h2 class="featuredaction"><a href="/books">Browse our bookstore</a></h2>   
+    <% Category.all.each do |tl| %>
+    <%= link_to tl.name, tl, :class=>"btn btn-xs btn-primary",:style=>"margin-bottom:5px;" %>
+    <% end %>
+</div>
