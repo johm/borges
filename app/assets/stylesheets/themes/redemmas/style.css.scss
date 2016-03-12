@@ -511,6 +511,7 @@ border-radius: 3px;
 
 /* for "normal desktops" */
 
+	.events h1.posttitle {font-size:40px;}
 
     .frontpage .menubar a{
 	font-size:19px;
@@ -601,6 +602,7 @@ border-radius: 3px;
 
 
 
+
     #front_2 {
 
     }
@@ -685,7 +687,7 @@ border-radius: 3px;
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
-       h1.posttitle {font-size:35px}
+.events       h1.posttitle {font-size:35px}
 
   .cartlink {margin-left:-20px;}
        
@@ -804,7 +806,7 @@ font-size:16px;
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
   .cartlink {margin-left:50px;}
-       h1.posttitle {font-size:25px}
+.events       h1.posttitle {font-size:25px}
        .eventmeta h2 {font-size:20px;line-height:20px;}
 .carousel {
     height:300px;

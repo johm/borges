@@ -99,7 +99,7 @@
     <div><%=  link_to raw("<i class='fa fa-edit'></i> Edit"), edit_event_path(@event),:class=>"btn btn-primary",:style=>"margin-bottom:10px;width:100%;"   if can? :edit, Event %></div>      
     
     <% @event.titles.each do |t| %>
-    <%= render :partial=>'titles/gridtitlefull', :locals => {:title=>t,:text=>""}%>
+    <%= render :partial=>'titles/gridtitlefullheight', :locals => {:title=>t,:text=>""}%>
     <% end %>
      
     
