@@ -40,7 +40,7 @@
       <%= copy.invoice_line_item.purchase_order_line_item.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>
       <br />
       <%= link_to copy.invoice_line_item.purchase_order_line_item.purchase_order.number,copy.invoice_line_item.purchase_order_line_item.purchase_order  rescue "" %><br />
-        <%= link_to copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %>
+        <%= link_to copy.invoice_line_item.invoice.distributor,copy.invoice_line_item.invoice.distributor unless copy.invoice_line_item.nil? %>
     </td>
     <td>
       <%= copy.invoice_line_item.invoice.received_when.to_formatted_s(:just_date) rescue "" %>
