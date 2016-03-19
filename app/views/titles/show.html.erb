@@ -170,14 +170,13 @@
   <% if l.public? %>
   <h3 class="relatedsubhead"><%= link_to l.name,l %></h3>
   <div class="introduction"><%= sanitize l.description %></div>
-  <div class="row">  
-    <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
-    <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
-      <%= link_to "More titles on this list »",l %>
-    </div>
+  <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
+  <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
+    <%= link_to "More titles on this list »",l %>
   </div>
   
   <% end %>
+  <hr style="clear:both;" />
   <% end %>
   <% end %>
   
