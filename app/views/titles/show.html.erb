@@ -179,6 +179,7 @@
   
   <% end %>
   <% end %>
+  <% end %>
   
   
   <% if @title.categories.length > 0 %>
@@ -193,12 +194,13 @@
     </div>
     <% end %>  
     <% end %>
-    
-    <% end %>  
-    <%= render "/titles/searchbrowse" %>
-    <% end %>
   </div>
+  <hr />
+<%= render "/titles/searchbrowse" %>
 </div>
+
+<% end %>
+
 
 
 
