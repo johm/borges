@@ -11,9 +11,9 @@ module EditionsHelper
   end
   
   def buy_mini(edition) 
-    if edition.has_copies_in_stock?
+    if edition.has_copies_in_stock? || edition.can_back_order?
       content_tag(:div,
-                  button_to("Buy it now!",
+                  button_to("Add to cart",
                             shopping_cart_line_items_path(:edition=>edition),
                             :class=>"btn btn-mini btn-primary block",:style=>"width:100%;"),
                   :class=>"control-group")
@@ -21,7 +21,7 @@ module EditionsHelper
   end
   
   def buy_or_order(edition)
-    if edition.has_copies_in_stock?
+    if edition.has_copies_in_stock? || edition.can_back_order?
       content_tag(:div,
                   button_to("Add to cart",
                             shopping_cart_line_items_path(:edition=>edition),

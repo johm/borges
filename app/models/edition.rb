@@ -34,19 +34,37 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def can_back_order?
+    if in_print?
+      true
+    else
+      false
+    end
+  end
+
   def has_copies_in_stock?
     copies.where("status"=>"STOCK").length > 0
   end
 
+  def last_distributor 
+    copies.last.invoice.distributor rescue nil 
+  end
+
   def my_stock_status
     if has_copies_in_stock? 
-      "In stock" 
-    elsif in_print?
-      "Out of stock"
-    else
-      "Out of print"
+      "IN STOCK" 
+    elsif in_print? 
+      if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name && copies.last.inventoried_when > DateTime.now - 6.months )
+        "SHIPS IN 5-7 DAYS"
+      else
+        "SHIPS IN 2-4 WEEKS"
+      end
+    else 
+      "OUT OF PRINT"
     end
   end
+
+
 
   def my_online_price
     has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : ""

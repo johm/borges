@@ -8,8 +8,19 @@
 </p>
 
   <div class="grid">  
-    <% @publisher.titles.order('id desc').each do |t,i| %>
+    <% @publisher.titles.order('id desc').each_with_index do |t,i| %>
     <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>((("Distributor: " + (link_to t.last_distributor.name,t.last_distributor)) if can? :edit, Publisher) rescue "")}%>
+
+    <% if i % 6 == 5 %>
+    <div class="clearfix visible-md visible-lg visible-sm visible-xs" ></div>
+    <% elsif i % 3 == 2 %>
+    <div class="clearfix visible-sm" ></div>
+    <% elsif i % 2 == 1 %>
+    <div class="clearfix visible-xs" ></div>
+    <% end %>
+
+
+
     <% end %>
   </div>
 

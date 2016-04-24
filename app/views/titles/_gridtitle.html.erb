@@ -2,16 +2,10 @@
     
     <a href="<%= title_path(title) %>" class="gridcover" style="height:200px;display:block;background-color:#ddd;background-image:url('<%= title.latest_published_edition.cover_url(:reasonable) rescue "" %>');background-size:cover;"> 
     </a>
-    <div class="griditemtitle"><%= if title.is_in_stock? 
-				   "IN STOCK" 
-				   elsif title.is_in_print? 
-				   "SPECIAL ORDER"
-				   else 
-				   "OUT OF PRINT"
-				   end %></div>
+    <div class="griditemtitle"><%= title.availability  %></div>
 
     <div class="griditemdescription">
-    <%= buy_mini(title.latest_published_edition) unless title.latest_published_edition.nil? %>
+    <%= buy_mini(title.latest_published_edition) unless title.latest_published_edition.nil? %> 
           <% if can? :edit, Title %>
     <div class="hiddenactions">
       <%= unless title.latest_published_edition.nil?  
@@ -23,6 +17,6 @@
     <h3 class="contributors">
       <%= raw contributors_list(title) %>
     </h3>
-    <%= text.html_safe %>
+    <%= text.html_safe rescue "" %>
     </div>
   </div>

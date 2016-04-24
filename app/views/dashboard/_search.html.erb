@@ -1,6 +1,6 @@
 <h1>Find books</h1>
 
-<%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :search,:controller => :titles } do |f| %>
+<%= nested_form_for @title_search_object || SearchObject.new,:method => :get,:html=>{:class=>"form-horizontal"},:url => {:action => :search,:controller => :titles } do |f| %>
 <%= mytextfield f,:title,:title %>
 <%= mytextfield f,:isbn,:isbn %>
 <%= mytextfield f,:authors,:my_authors %>

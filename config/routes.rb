@@ -138,6 +138,7 @@ Borges::Application.routes.draw do
     member do
       get :hidden_actions 
       put :move_to_purchase_order
+      post :cancel
     end
   end
 

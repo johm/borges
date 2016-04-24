@@ -18,7 +18,7 @@
 
 
 <div class="row spaceontop">
-  <div class="col-sm-6 col-sm-offset-1">
+  <div class="col-sm-6 col-sm-offset-1 col-lg-offset-2 ">
     <h1 class="booktitle"><%= @title.title %> <%= @edition.number %> 
       <% if can? :edit, Title && ! @edition.nil? %>
       <div class="hiddenactions ">
@@ -120,7 +120,7 @@
       <% end %>
     </table>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4 col-lg-2">
     
     <%= image_tag @edition.cover_url(:medium),:class=>"bookcover" unless (@edition.nil? || @edition.cover_url.blank?)%>
   </div>
@@ -136,14 +136,17 @@
 
 <% if @title.by_the_same_authors.length > 0 %>
 <div class="row">
+  <div class="col-xs-12">
   <h2 class="related">By the same author(s)</h2>
   <br />
   <%= make_a_grid_from_titles usefully_sorted(@title.by_the_same_authors) %>
+  </div>
 </div>
 <% end %>
 
 <% if @title.posts.length > 0 %>
 <div class="row">
+  <div class="col-xs-12">
   <h2  class="related">On our blog</h2>
   <br />
   <% @title.posts.each do |post| %>
@@ -160,42 +163,52 @@
   <%= link_to "Read more...",post %>
   <hr style="clear:both;">
   <% end %>
+  </div>
+</div>
   <% end %>
 
 
 <% if @title.title_lists.where(:public=>true).length > 0 %>
 <div class="row">
-  <h2 class="related" style="clear:both;">On our lists</h2>
-  <% @title.title_lists.each do |l| %>
-  <% if l.public? %>
-  <h3 class="relatedsubhead"><%= link_to l.name,l %></h3>
-  <div class="introduction"><%= sanitize l.description %></div>
-  <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
-  <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
-    <%= link_to "More titles on this list »",l %>
+  <div class="col-xs-12">
+    <h2 class="related" style="clear:both;">On our lists</h2>
+    <% @title.title_lists.each do |l| %>
+    <% if l.public? %>
+    <h3 class="relatedsubhead"><%= link_to l.name,l %></h3>
+    <div class="introduction"><%= sanitize l.description %></div>
+    <%= make_a_grid_from_titles usefully_sorted(l.titles).first(5) %>
+    <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
+      <%= link_to "More titles on this list »",l %>
+    </div>
+    <% end %>
+    <hr style="clear:both;" />
+    <% end %>
   </div>
-  
-  <% end %>
-  <hr style="clear:both;" />
-  <% end %>
-  <% end %>
-  
+</div>
+<% end %>
+
   
   <% if @title.categories.length > 0 %>
-  <h2 class="related">Section(s)</h2>
   <div class="row">
-    <% @title.categories.each_with_index do |c,i| %>
-    
-    <div class="col-xs-6 col-sm-4" style="padding:0px;">
-      <a href="<%= category_path(c) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= c.image_url(:reasonable) rescue "" %>');background-size:cover;"> 
-      </a>
-      <h3 class="relatedsubhead" style="margin-left:16px;" ><%= link_to c.name,c %></h3>
-    </div>
-    <% end %>  
+    <div class="col-xs-12">
+      <h2 class="related">Section(s)</h2>
+      <% @title.categories.each_with_index do |c,i| %>
+      
+      <div class="col-xs-6 col-sm-4" style="padding:0px;">
+	<a href="<%= category_path(c) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= c.image_url(:reasonable) rescue "" %>');background-size:cover;"> 
+	</a>
+	<h3 class="relatedsubhead" style="margin-left:16px;" ><%= link_to c.name,c %></h3>
+      </div>
+      <% end %>
+      </div>
     <% end %>
   </div>
   <hr />
-<%= render "/titles/searchbrowse" %>
+  <div class="row">
+    <div class="col-xs-12">
+    <%= render "/titles/searchbrowse" %>
+    </div>
+  </div>
 </div>
 
 <% end %>

@@ -36,11 +36,14 @@
 	    rgba(20,0,0, 0.4)
 	    ),url(<%= @event.picture.url %>);background-attachment:fixed; 
 	    background-size:cover;margin-bottom:0px;">
-  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-8">
+  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-10">
     <h1 class="posttitle"><%= @event.title %></h1>
   </div>
-  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4">
+  <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-2">
     <div class="metafloat eventmeta">
+
+
+
       <h2 ><%= @event.event_start.to_formatted_s(:long_readable_date) %>, <%= @event.event_start.to_formatted_s(:just_time) %></h2> 
       <h2>@ <%= link_to @event.event_location,@event.event_location %></h2>
     </div>
@@ -53,7 +56,7 @@
 
 
 <div class="row spaceontop">
-  <div class="col-xs-12 col-sm-8">      
+  <div class="col-xs-12 col-sm-8 col-lg-offset-2 col-lg-6">      
     <%= @event.introduction.html_safe %>
     
     
@@ -92,7 +95,7 @@
       </div>
       <% end %>
   </div>
-  <div class="col-xs-12 col-sm-4">
+  <div class="col-xs-12 col-sm-4 col-lg-2">
     <% if !@event.facebook_url.blank? %> <div class="well rsvp" ><%= link_to "Let us know you are coming on Facebook",@event.facebook_url %> (optional, but helpful!)</div> <% end %> 
 
     <div><small><%= "Not published" unless @event.published? %></small></div>
