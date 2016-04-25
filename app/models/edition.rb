@@ -1,5 +1,5 @@
 class Edition < ActiveRecord::Base
-  belongs_to :title,   :touch=>true
+ belongs_to :title,   :touch=>true
   has_many :copies
   has_many :purchase_order_line_items
   has_many :invoice_line_items
@@ -54,7 +54,7 @@ class Edition < ActiveRecord::Base
     if has_copies_in_stock? 
       "IN STOCK" 
     elsif in_print? 
-      if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name && copies.last.inventoried_when > DateTime.now - 6.months )
+      if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
         "SHIPS IN 5-7 DAYS"
       else
         "SHIPS IN 2-4 WEEKS"
@@ -67,7 +67,7 @@ class Edition < ActiveRecord::Base
 
 
   def my_online_price
-    has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : ""
+    has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : copies.order("price_in_cents desc").first.price
   end
 
   def self.formats
