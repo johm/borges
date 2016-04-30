@@ -61,6 +61,10 @@ class Copy < ActiveRecord::Base
     @inventory_copy_confirmation.save!
   end
 
+  
+  def how_long_it_took_to_get
+  end
+
   private 
   def reindex_title 
     self.title.save! # does it reindex?

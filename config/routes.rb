@@ -224,6 +224,7 @@ Borges::Application.routes.draw do
   get '/books/', :to => 'home#books'
   get '/food/', :to => 'home#food'
   get '/coffee/', :to => 'home#coffee'
+  get '/orderfoodonline/', :to => 'home#orderfoodonline'
   get '/thread/', :to => 'home#thread'
   get '/blog/', :to => 'posts#index'
   get '/about/', :to => 'home#about'
