@@ -8,6 +8,9 @@ class HomeController < ApplicationController
 
   def newsletter
   end
+  
+  def orderfoodonline
+  end
 
   
   def frontpage

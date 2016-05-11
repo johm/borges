@@ -140,6 +140,20 @@ class Title < ActiveRecord::Base
     in_stock > 0
   end
 
+  def availability
+    if is_in_stock? 
+      "IN STOCK" 
+    elsif is_in_print? 
+      if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
+        "SHIPS IN 5-7 DAYS"
+      else
+        "SHIPS IN 2-4 WEEKS"
+      end
+    else 
+      "OUT OF PRINT"
+    end
+  end
+
   def copies_info 
     copies.instock.collect {|c| "$#{c.price} [#{c.edition.isbn}]" }.join("\n")
   end

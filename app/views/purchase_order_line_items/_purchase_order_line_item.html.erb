@@ -1,7 +1,9 @@
 <% if ! purchase_order_line_item.edition.nil? %>
 	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>">
 	   <td>
+	     <div class="ordered">
 	     <%= best_in_place_if (! purchase_order_line_item.purchase_order.ordered?),purchase_order_line_item, :quantity, :type => :input, :inner_class=>"input-tiny", :data => {:purchase_order_line_item => purchase_order_line_item.id,:purchase_order => purchase_order_line_item.purchase_order.id} %>
+	     </div>
 	  </td>
 	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>"#{purchase_order_line_item.edition.publisher}\nIn stock (all editions): #{purchase_order_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{purchase_order_line_item.edition.title.on_order} " %></td>
 	  <td><%= purchase_order_line_item.isbn %></td> 
@@ -15,7 +17,17 @@
 	     <% end %>
 	     <% end %>
 	   </td>
-	   <td>	 <%= purchase_order_line_item.cancelled %></td>
+	   <td>	 
+	     <div class="cancelled">
+	     <% if purchase_order_line_item.cancelled  %>
+	     <%= purchase_order_line_item.cancelled %> 
+	     <% else %>
+
+	     <%= link_to raw("<i class='fa fa-times-circle'></i>"),cancel_purchase_order_line_item_path(purchase_order_line_item),{:remote => true,:method=>"post"} if @purchase_order.ordered? %>
+
+<% end %>
+	     </div>
+</td>
 	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
 	   <td>
 	     <% unless purchase_order_line_item.purchase_order.ordered? %>

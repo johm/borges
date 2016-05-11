@@ -12,6 +12,24 @@ Home
 
 
 <!-- Fixed navbar -->
+        <div id="navbar2" class="">
+          <ul >
+	    <% if @is_2640_page %>
+            <li id="middlelogobig2" ><a href="/2640" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/2640.png",:width=>'50px',:style=>'-webkit-filter:invert(100%);filter:invert(100%);float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
+<% else %>
+            <li class="  hidden-xs"><a href="/food">Food</a></li>
+            <li  class="  hidden-xs"><a href="/books">Books</a></li>
+            <li  class="  hidden-xs"><a href="/coffee">Coffee</a></li>
+	    <li class="  hidden-xs"><a href="/pages/catering">Catering</a></li>         
+            <li class="  hidden-xs" id="middlelogobig2" ><a href="/" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/emmas.png",:width=>'50px'%></a></li>
+	    <li  class="  hidden-xs"><a href="/events">Events</a></li>         
+	    <li  class="  hidden-xs"><a href="/about">About</a></li>
+	    <li class="  hidden-xs"><a href="/orderfoodonline">ORDER ONLINE</a></li>
+<% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
+
+
     <nav class="navbar navbar-fixed-top ">
       <div class="container-fluid " >
         <div class="navbar-header">
@@ -25,19 +43,22 @@ Home
 	  
           
         </div>
+
+
+
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 	    <% if @is_2640_page %>
             <li id="middlelogobig" ><a href="/2640" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/2640.png",:width=>'50px',:style=>'-webkit-filter:invert(100%);filter:invert(100%);float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
 <% else %>
-            <li><a href="/food">Food</a></li>
-            <li><a href="/books">Books</a></li>
-            <li><a href="/coffee">Coffee</a></li>
-	    <li><a href="/pages/catering">Catering</a></li>         
-            <li id="middlelogobig" ><a href="/" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/emmas.png",:width=>'50px',:style=>'float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
-            <li><a href="/blog">News</a></li>
-	    <li><a href="/events">Events</a></li>         
-	    <li><a href="/about">About</a></li>
+            <li class="visible-xs-block"><a href="/food">Food</a></li>
+	    <li class="visible-xs-block"><a href="/orderfoodonline">ORDER ONLINE</a></li>
+            <li class="visible-xs-block"><a href="/books">Books</a></li>
+            <li class="visible-xs-block"><a href="/coffee">Coffee</a></li>
+	    <li class="visible-xs-block"><a href="/pages/catering">Catering</a></li>         
+	    <li class="visible-xs-block"><a href="/events">Events</a></li>         
+	    <li ><a href="/about">About</a></li>
+            <li ><a href="/blog">News</a></li>
 	    <li><a href="/pages/contact">Contact</a></li>
 <% end %>
           </ul>

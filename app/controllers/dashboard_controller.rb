@@ -183,10 +183,8 @@ class DashboardController < ApplicationController
           fake_event.event_location = @import_to_location
           
           add_this_to_time=0
-          if ::Rails.application.config.time_zone=="America/New_York"
-            if !event.dtstart.isdst
+          if ! Time.zone.parse("#{event.dtstart.to_s}").dst?
               add_this_to_time=1
-            end
           end
  
           fake_event.event_start=event.dtstart+add_this_to_time.hour

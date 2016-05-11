@@ -100,6 +100,14 @@ class PurchaseOrderLineItemsController < ApplicationController
     end
   end
     
+  def cancel 
+    @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])
+    @purchase_order_line_item.cancel
+    respond_to do |format| 
+      format.js {}
+    end
+  end
+
   def move_to_purchase_order
     @old_purchase_order=@purchase_order_line_item.purchase_order
     @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])

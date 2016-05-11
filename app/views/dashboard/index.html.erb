@@ -1,8 +1,8 @@
 
 
 <div class="row toolbar" >
-  <div class="span2"></div>
-  <div class="span10">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-10">
     <%= mylinkbutton "New title", new_title_path %>
     <%= mylinkbutton "Sell books", new_sale_order_path %>
     <%= mylinkbutton "Order books", new_purchase_order_path %>
@@ -15,54 +15,54 @@
 <hr>
 <div class="row">
 
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'search' %>
   </div>
 
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'sales' %>
   </div>
 
-  <div class="span4 last">
+  <div class="col-sm-4 last">
     <%= render 'mailorders' %>
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'purchaseorders' %>
   </div>
   
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'invoices' %>
   </div>
 
-  <div class="span4 last">
+  <div class="col-sm-4 last">
     <%= render 'returns' %>
   </div>
 </div>
 <hr>
 <div class="row">
 
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'newbooks' %>
   </div>
 
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'authors' %>
   </div>
 
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'lists' %>
   </div>
 </div>
 <hr>
 
 <div class="row">
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'categories' %>
   </div>
-  <div class="span4">
+  <div class="col-sm-4">
     <%= render 'owners' %>
   </div>
 </div>

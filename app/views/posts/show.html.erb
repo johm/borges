@@ -39,7 +39,7 @@ style="background:linear-gradient(
 <div class="row">
 
 
-  <div class="col-sm-offset-1 col-sm-6">
+  <div class="col-sm-offset-1 col-sm-6 col-lg-offset-1">
 
     
 
@@ -64,7 +64,7 @@ style="background:linear-gradient(
     <%= theme_partial :social %>      
   </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-lg-3">
       <div class="metafloat">
     <div style="float:right;"><small><%= "Not published" unless @post.published? %></small><%=  link_to "Edit", edit_post_path(@post),:class=>"btn btn-primary" if can? :edit, Post %></div>
 	<h3 class="postdate"><%= @post.created_at.to_formatted_s(:long_date) %></h3>      
@@ -72,7 +72,7 @@ style="background:linear-gradient(
       </div>
       
       <% @post.titles.each do |t| %>
-      <%= render :partial=>'titles/gridtitlefull', :locals => {:title=>t,:text=>""}%>
+      <%= render :partial=>'titles/gridtitlefullheight', :locals => {:title=>t,:text=>""}%>
       <% end %>
     </div>
 

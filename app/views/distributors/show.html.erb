@@ -120,8 +120,18 @@
 <div class="span8">
 <h2>Titles we have receieved through this distributor</h2>
   <div class="grid">  
-    <% @distributor.titles.order('id desc').each do |t,i| %>
+    <% @distributor.titles.order('id desc').each_with_index do |t,i| %>
     <%= render :partial=>'titles/gridtitle', :locals => {:title=>t,:text=>""}%>
+
+        <% if i % 6 == 5 %>
+    <div class="clearfix visible-md visible-lg visible-sm visible-xs" ></div>
+    <% elsif i % 3 == 2 %>
+    <div class="clearfix visible-sm" ></div>
+    <% elsif i % 2 == 1 %>
+    <div class="clearfix visible-xs" ></div>
+    <% end %>
+
+
     <% end %>
   </div>
 
