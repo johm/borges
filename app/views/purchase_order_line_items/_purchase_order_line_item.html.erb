@@ -23,7 +23,7 @@
 	     <%= purchase_order_line_item.cancelled %> 
 	     <% else %>
 
-	     <%= link_to raw("<i class='fa fa-times-circle'></i>"),cancel_purchase_order_line_item_path(purchase_order_line_item),{:remote => true,:method=>"post"} if @purchase_order.ordered? %>
+	     <%= link_to raw("<i class='fa fa-times-circle'></i>"),cancel_purchase_order_line_item_path(purchase_order_line_item),{:remote => true,:method=>"post"} if @purchase_order && @purchase_order.ordered? %>
 
 <% end %>
 	     </div>

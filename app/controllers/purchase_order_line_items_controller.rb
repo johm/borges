@@ -51,6 +51,8 @@ class PurchaseOrderLineItemsController < ApplicationController
     @purchase_order_line_item = PurchaseOrderLineItem.new(params[:purchase_order_line_item])
     @purchase_order_line_item.quantity=1 if @purchase_order_line_item.quantity.nil?
     @purchase_order_line_item.received=0
+
+
     respond_to do |format|
       if @purchase_order_line_item.save
         format.html { redirect_to @purchase_order_line_item, notice: 'Purchase order line item was successfully created.' }
