@@ -76,4 +76,5 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem "addressable"
 gem 'fittextjs_rails'
 gem "font-awesome-rails"
-gem "wysiwyg-rails"
+#gem "wysiwyg-rails"
+gem "summernote-rails"
