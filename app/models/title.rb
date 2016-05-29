@@ -123,13 +123,17 @@ class Title < ActiveRecord::Base
   end
 
   def whichorders 
-    purchase_order_line_items.collect do |x|
-      if x.purchase_order.nil?  || (x.quantity-x.received <= 0)
-        nil
-      else 
-        "#{x.quantity-x.received} on #{x.purchase_order.number}"
-      end
-    end.join("|")
+    begin
+      purchase_order_line_items.collect do |x|
+        if x.purchase_order.nil?  || (x.quantity-x.received <= 0)
+          nil
+        else 
+          "#{x.quantity-x.received} on #{x.purchase_order.number}"
+        end
+      end.join("|")
+    rescue
+      "PROBLEM WITH TITLE self.id"
+    end
   end
 
   def is_in_print?
