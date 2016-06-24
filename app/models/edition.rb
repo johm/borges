@@ -67,7 +67,11 @@ class Edition < ActiveRecord::Base
 
 
   def my_online_price
-    has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : copies.order("price_in_cents desc").first.price
+    if copies.length > 0
+      has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : copies.order("price_in_cents desc").first.price
+    else
+      list_price
+    end
   end
 
   def self.formats
