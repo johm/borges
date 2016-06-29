@@ -3,7 +3,7 @@ class PurchaseOrderLineItem < ActiveRecord::Base
   has_one :title, :through => :edition
   belongs_to :purchase_order, :touch => true
   belongs_to :customer
-  attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer
+  attr_accessible :quantity, :edition_id, :purchase_order_id, :customer_id,:customer,:notes
   has_many :invoice_line_items
   validates :edition,:presence=>true
   validates :purchase_order,:presence=>true
