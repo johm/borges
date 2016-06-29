@@ -46,7 +46,7 @@
        <% end %>
        
        <table class="table" id="line_items">
-	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Cancelled</th><th>Customer</th><th>Move</th></tr>
+	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Cancelled</th><th>Customer</th><th>Notes</th><th>Move</th></tr>
 	 <% @purchase_order_line_items.each do |li| %>
 	 <%= render li %>
 	 <% end %>
@@ -118,16 +118,21 @@
 <script>
   function afterQuantityChange() { 
   var self=$(this);
+  
+  if (self.data('customer') == "1" && self.data('bip-value').length>0){
+
+  $("#poli_customer_link_"+self.data('purchase-order-line-item')).html("<a href='/customers/"+self.data('bip-value')+"'><i class='fa fa-arrow-right'></i></a>");
+  }
+
 
   $.getJSON('/purchase_order_line_items/'+$(this).data('purchase-order-line-item')+'.json',function(data){
   $("#purchase_order_line_item_"+self.data('purchase-order-line-item')+" .ext_price").html(data.ext_price_string);
-  });
-  
+										    });
+										    
   $.getJSON('/purchase_orders/'+$(this).data('purchase-order'),function(data){
   $("#total").html(data.estimated_total_string);});
-  }
   
-
+}
   $('.best_in_place').bind("ajax:success", afterQuantityChange);
   // this replaces, but needs to be rebound
 

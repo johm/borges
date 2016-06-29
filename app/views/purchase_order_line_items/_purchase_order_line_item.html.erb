@@ -28,7 +28,13 @@
 <% end %>
 	     </div>
 </td>
-	   <td><%= link_to purchase_order_line_item.customer.name, purchase_order_line_item.customer unless purchase_order_line_item.customer.nil? %></td>
+	   <td class="small">
+<%= best_in_place purchase_order_line_item, :customer_id, :as => :select,:collection=>Customer.all.map{ |c| [c.id,c.name] },:data => {:purchase_order_line_item => purchase_order_line_item.id,:customer=>1},:place_holder=>"<i class='fa fa-user-plus'></i>" %>
+<span id="poli_customer_link_<%= purchase_order_line_item.id %>">
+<%= render :partial=>'purchase_order_line_items/customer_link', :locals=>{:purchase_order_line_item=>purchase_order_line_item} %>
+</span>
+
+	     <td class="small"><%= best_in_place purchase_order_line_item, :notes, :type => :textarea,:place_holder=>"<i class='fa fa-pencil'></i>" %></td>
 	   <td>
 	     <% unless purchase_order_line_item.purchase_order.ordered? %>
 	     <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_purchase_order_line_item_path(purchase_order_line_item),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} %>
