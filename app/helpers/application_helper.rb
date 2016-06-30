@@ -90,7 +90,7 @@ module ApplicationHelper
       content_tag(:div,
         content_tag(:div,
           f.check_box(m),
-          options.merge({:class=>"switch switch-large"})),
+          options.merge({:class=>"switch switch-large switch-jumbo"})),
         :class=>"controls"),
       :class=>"field control-group")
   end

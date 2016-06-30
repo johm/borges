@@ -144,9 +144,22 @@ class Title < ActiveRecord::Base
     in_stock > 0
   end
 
+  def is_preorderable? 
+    editions.index {|e| e.preorderable? && !e.unavailable?}.nil? ? false : true  
+  end
+  
+  def is_unavailable? 
+    editions.index {|e| ! e.unavailable?}.nil? ? true : false  
+  end
+
+
   def availability
     if is_in_stock? 
       "IN STOCK" 
+    elsif is_preorderable?
+      "PREORDER"
+    elsif is_unavailable?
+      "UNAVAILABLE"
     elsif is_in_print? 
       if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
         "SHIPS IN 5-7 DAYS"
