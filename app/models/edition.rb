@@ -8,7 +8,7 @@ class Edition < ActiveRecord::Base
 
   belongs_to :publisher
 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id,:number
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id,:number,:unavailable,:preorderable
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
@@ -34,8 +34,17 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def can_preorder?
+    if preorderable?  && copies.length > 0  && ! unavailable? # it should be a back order if we already have seen copies!
+      true
+    else 
+      false
+    end
+    
+  end
+
   def can_back_order?
-    if in_print?
+    if in_print? && ! unavailable?  # don't let people order things that are marked as out of print or unavailable
       true
     else
       false
@@ -53,6 +62,10 @@ class Edition < ActiveRecord::Base
   def my_stock_status
     if has_copies_in_stock? 
       "IN STOCK" 
+    elsif unavailable?
+      "UNAVAILABLE"
+    elsif preorderable?
+      "PREORDER"
     elsif in_print? 
       if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
         "SHIPS IN 5-7 DAYS"

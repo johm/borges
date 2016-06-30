@@ -51,16 +51,23 @@
       <%= f.label :editions, :class=>"control-label" %><br />
       <div class="controls">
 	<%= f.fields_for :editions do |edition_form| %>
-	<%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13",:class=>"input-medium" %>
-	<%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10",:class=>"input-small" %>
-	<div class="input-prepend">
-	  <span class="add-on">$</span>
-	  <%= edition_form.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
-      </div>
-	<%= edition_form.select :format, Edition.formats,{},{:class=>"input-medium"} %>
-	<label class="checkbox inline">
-	  <%= edition_form.check_box :in_print %> in print?
-	</label>
+	<div class="well">
+	  <%= edition_form.text_field :isbn13,:placeholder=>"ISBN-13",:class=>"input-medium" %>
+	  <%= edition_form.text_field :isbn10,:placeholder=>"ISBN-10",:class=>"input-small" %>
+	  <div class="input-prepend">
+	    <span class="add-on">$</span>
+	    <%= edition_form.text_field :list_price,:placeholder=>"List price",:class=>"input-mini" %>
+	  </div>
+	  <%= edition_form.select :format, Edition.formats,{},{:class=>"input-medium"} %>
+	  <label class="checkbox inline">
+	    <%= edition_form.check_box :in_print %> in print?
+	  </label>
+	  <label class="checkbox inline">
+	    <%= edition_form.check_box :unavailable %> unavailable?
+	  </label>
+	  <label class="checkbox inline">
+	    <%= edition_form.check_box :preorderable %> preorderable?
+	  </label>
 
        <a href="#" onClick="$('#edition_details-<%= edition_form.my_unique_id %>').collapse('toggle');return false;">
 	<button type="button" class="btn btn-info">
@@ -95,6 +102,7 @@
       </div>
 
       <%= edition_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this edition"), :class=>"btn" %>
+      </div>
       <% end %>
       <div class="verticaloffset">
 	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add an edition"), :editions, {:class=>:btn} %>
