@@ -145,7 +145,7 @@ class Title < ActiveRecord::Base
   end
 
   def is_preorderable? 
-    editions.index {|e| e.preorderable? && !e.unavailable?}.nil? ? false : true  
+    editions.index {|e| e.can_preorder?}.nil? ? false : true  #only want titles that have an edition which has not been released
   end
   
   def is_unavailable? 
