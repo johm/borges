@@ -98,7 +98,7 @@
 	<td>
 	  <ul class="editions">
 	    <% @title.editions.without_edition(@edition).each do |e| %>
-	    <li><%= link_to e, e %>
+	    <li><%= link_to e, e %> <%= e.my_stock_status %>
 	      <% end %>
 	  </ul>
 	</td>
