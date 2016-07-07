@@ -182,6 +182,8 @@ Borges::Application.routes.draw do
   end
 
   get 'titles/search' => 'titles#search'
+  get '/titles/:id'=> 'titles#redirector',  :constraints => { :id => /[0-9]+/ }
+
   resources :titles do 
     get :autocomplete_publisher_name, :on => :collection
     get :autocomplete_distributor_name, :on => :collection
@@ -193,6 +195,7 @@ Borges::Application.routes.draw do
 
   
   get 'authors/search' => 'authors#search'
+  get '/authors/:id'=> 'authors#redirector',  :constraints => { :id => /[0-9]+/ }
   resources :authors
 
   resources :shopping_carts do

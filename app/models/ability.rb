@@ -23,8 +23,10 @@ class Ability
         can :manage_calendar, :dashboard
       end
       can :read, Title 
+      can [:redirector], Title
       can [:read,:byisbn], Edition
       can :read, Author
+      can [:redirector], Author
       can :read, Image
       can :read, Publisher
       can :read, Page, :published => true

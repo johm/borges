@@ -1,5 +1,5 @@
 class TitlesController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:index,:show]
+  before_filter :authenticate_user!, :except=>[:index,:show, :redirector]
   before_filter :hack_out_params , :only=>[:create,:update]
   load_and_authorize_resource
   autocomplete :publisher,:name,:full=>true,:display_value=>:name_and_editions,:limit => 20
@@ -31,6 +31,11 @@ class TitlesController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @titles }
     end
+  end
+
+  def redirector 
+    @title = Title.find(params[:id])
+    redirect_to @title
   end
 
   # GET /titles/1

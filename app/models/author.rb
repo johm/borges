@@ -15,6 +15,15 @@ class Author < ActiveRecord::Base
     text :bio
   end
 
+  def slug
+    full_name.downcase.gsub(/[^a-z0-9]/, "-")  
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+
   def to_s 
     full_name
   end

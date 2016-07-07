@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_filter :authenticate_user! 
+  before_filter :authenticate_user!, :except => [:redirector,:show] 
   load_and_authorize_resource
 
   # GET /authors
@@ -12,6 +12,14 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def redirector 
+    @author = Author.find(params[:id])
+    redirect_to @author
+  end
+
+
+
+  
   # GET /authors/1
   # GET /authors/1.json
   def show
