@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_filter :hack_out_params, :only=>[:create,:update]
-  before_filter :authenticate_user!, :except=>[:show,:index] 
+  before_filter :authenticate_user!, :except=>[:show,:index,:redirector] 
   
   load_and_authorize_resource
 
@@ -14,6 +14,12 @@ class CategoriesController < ApplicationController
       format.json { render json: @categories }
     end
   end
+
+  def redirector 
+    @category = Category.find(params[:id])
+    redirect_to @category
+  end
+
 
   # GET /categories/1
   # GET /categories/1.json

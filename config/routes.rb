@@ -24,7 +24,7 @@ Borges::Application.routes.draw do
     get :autocomplete_event_staffer_name, :on => :collection
   end
 
-
+  get '/events/:id'=> 'events#redirector',  :constraints => { :id => /[0-9]+/ }
   resources :events do 
     get :autocomplete_event_location_title, :on => :collection
   end
@@ -65,6 +65,7 @@ Borges::Application.routes.draw do
   resources :title_category_memberships
 
 
+  get '/categories/:id'=> 'categories#redirector',  :constraints => { :id => /[0-9]+/ }
   resources :categories do 
     member do 
       get :chart
