@@ -18,6 +18,16 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :event_shifts, :allow_destroy => true
   accepts_nested_attributes_for :event_title_links, :allow_destroy => true  
 
+
+  def slug
+    title.downcase.gsub(/[^a-z0-9]/, "-")  
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+
   def self.by_month(month)
     where('extract(month from event_start) = ?', month)
   end

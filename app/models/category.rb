@@ -10,6 +10,15 @@ class Category < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def slug
+    title.downcase.gsub(/[^a-z0-9]/, "-")  
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+
   def titles_in_stock
     titles.find_all {|t| t.in_stock > 0 }.length
   end

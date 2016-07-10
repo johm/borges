@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   autocomplete :event_location,:title,:full=>true,:display_value=>:name_and_id
-  before_filter :authenticate_user!, :except=>[:index,:show,:calendar,:twentysixforty]
+  before_filter :authenticate_user!, :except=>[:index,:show,:calendar,:twentysixforty,:redirector]
   before_filter :hack_out_params , :only=>[:create,:update]
 
   load_and_authorize_resource
@@ -41,6 +41,12 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @events }
     end
+  end
+
+
+  def redirector 
+    @event = Event.find(params[:id])
+    redirect_to @event
   end
 
 

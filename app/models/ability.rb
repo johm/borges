@@ -34,7 +34,8 @@ class Ability
       can :read, Post, :published => true
       can :read, PostCategory
       can :read, Category
-      can [:read,:calendar,:twentysixforty], Event, :published => true
+      can [:redirector], Category
+      can [:read,:calendar,:twentysixforty,:redirector], Event, :published => true
       can :read, EventLocation
       can [:current,:update_current], ShoppingCart
       can [:update,:destroy], ShoppingCartLineItem #further checks in controller!
