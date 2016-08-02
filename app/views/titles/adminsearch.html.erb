@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="span8">
+    <div class="col-md-3">
+      <%= render '/dashboard/search' %>
+    </div>
+    <div class="col-md-9">
       <table class="table">
 	<tr>
 	  <th>Title</th>
@@ -28,9 +31,6 @@
 	</tr>
 	<% end %>
       </table>
-    </div>
-    <div class="span4">
-      <%= render '/dashboard/search' %>
     </div>
   </div>
 </div>
