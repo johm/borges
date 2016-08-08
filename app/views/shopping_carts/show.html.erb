@@ -2,7 +2,7 @@
 
 </div>
 <div class="row spaceontop">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
 <h1>Who is this order for?</h1>
 <pre>
   <%= @shopping_cart.shipping_name %>
@@ -21,14 +21,21 @@
 </div>
 
 <table class="table">
-  <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th></tr>
+  <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>
   <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
     <td><%= li.quantity %></td>
     <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
     <td>$<%= li.cost %></td>
     <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
-     </tr>
+    <td class="small">
+      <table class="table table-condensed">
+	<tr><td style="padding:2px;">Publisher:</td><td style="padding:2px;"><%= link_to li.edition.publisher.name,li.edition.publisher %></td></tr>
+	<tr><td style="padding:2px;">In stock (all editions):</td><td style="padding:2px;"><%= "#{li.edition.copies.where(:status=>"STOCK").length} (#{li.edition.title.in_stock})" %></td></tr>
+	<tr><td style="padding:2px;">On order:</td><td style="padding:2px"><%= li.edition.title.on_order %></td></tr>
+      </table>
+    </td>
+  </tr>
 <% end %>
 <tr>
   <td></td>
@@ -69,7 +76,7 @@
 
 
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
 <table class="table">
   <tr>
     <th>Customer email</th>
