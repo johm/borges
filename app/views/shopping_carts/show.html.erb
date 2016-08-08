@@ -30,7 +30,7 @@
     <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
     <td class="small">
       <table class="table table-condensed">
-	<tr><td style="padding:2px;">Publisher:</td><td style="padding:2px;"><%= link_to li.edition.publisher.name,li.edition.publisher %></td></tr>
+	<tr><td style="padding:2px;">Publisher:</td><td style="padding:2px;"><%= link_to li.edition.publisher.name,li.edition.publisher rescue ""%></td></tr>
 	<tr><td style="padding:2px;">In stock (all editions):</td><td style="padding:2px;"><%= "#{li.edition.copies.where(:status=>"STOCK").length} (#{li.edition.title.in_stock})" %></td></tr>
 	<tr><td style="padding:2px;">On order:</td><td style="padding:2px"><%= li.edition.title.on_order %></td></tr>
       </table>
