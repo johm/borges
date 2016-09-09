@@ -23,8 +23,8 @@
   <div class="span2"></div>
   <div class="span7">
 <hr >
-<h2>Upcoming events at this location:</h2>
-<% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each do |event| %> 
+
+<% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each_with_index do |event,i| %> 
   <%= render :partial=>'events/eventnew',:locals => {:event=>event} %>
     <% if i % 3 == 2 %>
     <div class="clearfix visible-lg" ></div>
