@@ -1,42 +1,38 @@
-<div class="span7">
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  
+  <h1><%= @event_location.title %>
+    <div style="float:right;"><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %>   </div>
+  </h1>
+</div>
 
-<h1><%= @event_location.title %>
-  <div style="float:right;"><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %> 
-</h1>
-</div>
-</div>
 
 <div class="row">
-  <div class="span2"></div>
-  <div class="span4">
+  <div class="col-sm-8">
     <%= @event_location.description.html_safe %>
-    <%= link_to "More info about this location",@event_location.url if @event_location.url %>
+    <%= link_to "More info about this location",@event_location.url unless @event_location.url.blank? %>
   </div>
-  <div class="span3">
+  <div class="col-sm-4">
     <h2>Address:</h2>
     <%= @event_location.address.html_safe %>
     <p><%= link_to "Map", "http://maps.google.com/?q=#{strip_tags(@event_location.address)}",{:target=>'_blank'} %>  </p>
   </div>
 </div>
+
 <div class="row">
-  <div class="span2"></div>
-  <div class="span7">
-<hr >
-
-<% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each_with_index do |event,i| %> 
+  <% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each_with_index do |event,i| %> 
   <%= render :partial=>'events/eventnew',:locals => {:event=>event} %>
-    <% if i % 3 == 2 %>
-    <div class="clearfix visible-lg" ></div>
-    <% end %>
-    <% if i % 2 == 1 %>
-    <div class="clearfix visible-sm visible-md" ></div>
-    <% end %>
-
-<% end %>
-
+  <% if i % 3 == 2 %>
+  <div class="clearfix visible-lg" ></div>
+  <% end %>
+  <% if i % 2 == 1 %>
+  <div class="clearfix visible-sm visible-md" ></div>
+  <% end %>
+  
+  <% end %>
+  
 </div>
-</div>
+
 
 
 
