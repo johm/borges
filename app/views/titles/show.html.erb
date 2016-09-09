@@ -45,6 +45,8 @@
     <% end %>
     
     <% if can? :edit,Edition %> 
+
+
     <div style="float:left;margin-right:10px;"><%=  mylinkbutton "<i class='fa fa-edit'></i> Edit this title", edit_title_path(@title),{},"btn-mini"   if can? :edit, Title %> </div>
     <% unless @edition.nil? %>
     <%= mylinkbutton "<i class='fa fa-edit'></i> Edit this edition",edit_edition_path(@edition),{},"btn-mini" %>
@@ -117,6 +119,7 @@
 	  </ul>
 	</td>
       </tr>
+      
       <% end %>
     </table>
   </div>

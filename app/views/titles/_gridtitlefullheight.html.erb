@@ -2,7 +2,7 @@
     
     <a href="<%= title_path(title) %>" class="gridcover"><img style="width:100%;height:auto;" src="<%=title.latest_published_edition.cover_url(:reasonable) rescue "" %>"> 
     </a>
-    <div class="griditemtitle">><%= title.availability  %></div>
+    <div class="griditemtitle"><%= title.availability  %></div>
 
     <div class="griditemdescription">
     <%= buy_mini(title.latest_published_edition) unless title.latest_published_edition.nil? %>
