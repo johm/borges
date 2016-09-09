@@ -1,4 +1,11 @@
-<div class="row">
+<% content_for :og do%> 
+<%= tag "meta", :property=>"og:title",:content=>@event_location.title %>
+<% end %>
+
+<% content_for :description do%><%=h truncate(sanitize(@event_location.description, :tags=>[]),:length => 400) %><% end %>
+
+
+<div class="row spaceontop">
 <div class="col-xs-12">
   <p id="notice"><%= notice %></p>
   
