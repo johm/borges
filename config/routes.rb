@@ -237,7 +237,7 @@ Borges::Application.routes.draw do
   get '/pages/about/', :to => 'home#about'
   get '/cart', :to => "shopping_carts#current"
   put '/update_cart', :to => "shopping_carts#update_current"
-  match '/bookfair' => 'event_locations/show',:defaults => {:id => 4}
+  match '/bookfair' => 'event_locations#show',:defaults => {:id => 4}
   authenticated :user do
     root :to=>'home#frontpage' 
   end
