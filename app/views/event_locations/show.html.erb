@@ -1,3 +1,8 @@
+<% content_for :title do%>
+    <%= @event_location.title %>
+<% end %>
+
+
 <% content_for :og do%> 
 <%= tag "meta", :property=>"og:title",:content=>@event_location.title %>
 <% end %>
@@ -9,7 +14,7 @@
 <div class="col-xs-12">
   <p id="notice"><%= notice %></p>
   
-  <h1><%= @event_location.title %>
+  <h1 class="departmentname"><%= @event_location.title %>
     <div style="float:right;"><%=  link_to raw("<i class='fa fa-pencil'></i>"), edit_event_location_path(@event_location)   if can? :edit, EventLocation %>   </div>
   </h1>
 </div>
@@ -21,7 +26,7 @@
     <%= link_to "More info about this location",@event_location.url unless @event_location.url.blank? %>
   </div>
   <div class="col-sm-4">
-    <h2>Address:</h2>
+    <h1 class="headername">Address:</h1>
     <%= @event_location.address.html_safe %>
     <p><%= link_to "Map", "http://maps.google.com/?q=#{strip_tags(@event_location.address)}",{:target=>'_blank'} %>  </p>
   </div>
