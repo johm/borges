@@ -1,0 +1,24 @@
+<div class="col-sm-6 col-lg-4">
+  <a href="<%= event_path(event) %>" class="gridcover" style="height:300px;display:block;background-color:#ddd;background-image:url('<%= event.picture_url rescue "" %>');background-size:cover;"> 
+  </a>  
+  <div class="row">
+    <div class="col-xs-8 col-sm-6">
+      <h2 class="posttitle"><%= link_to event.title,event %></h2>
+    </div>
+    <div class="col-xs-4 col-sm-6">
+      <div class="metafloat">
+	<h3 class="postdate"><%= event.event_start.to_formatted_s(:long_readable_date) %>, <%= event.event_start.to_formatted_s(:just_time) %></h3>
+	<div class="postedin">@ <%= event.event_location %></div> 
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="introduction abridged" style="height:100px;overflow:hidden;position:relative;">
+	<%= event.introduction.html_safe %>
+	<div><%= link_to "More info",event,:class=>"btn btn-primary",:style=>"width:100%;margin-bottom:20px;" %></div>
+	<div class="fadebottom"></div>
+      </div>
+    </div>
+  </div>
+</div>
