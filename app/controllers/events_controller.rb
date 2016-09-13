@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     
 
     if @upcoming
-      @events = @events.where("event_start > ?",DateTime.now - 6.hours).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc").limit(24)      
+      @events = @events.where("event_start > ?",DateTime.now - 6.hours).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc").limit(48)      
     else
       @events = Event.by_year(@year).by_month(@month).where(:published=>true,:show_on_red_emmas_page=>true).order("event_start asc")      
     end

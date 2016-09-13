@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-  <% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).each_with_index do |event,i| %> 
+  <% @event_location.events.where(:published => true).where("event_start >= ?",DateTime.now).order("event_start asc").each_with_index do |event,i| %> 
   <%= render :partial=>'events/eventnew',:locals => {:event=>event} %>
   <% if i % 3 == 2 %>
   <div class="clearfix visible-lg" ></div>
