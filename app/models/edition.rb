@@ -8,7 +8,7 @@ class Edition < ActiveRecord::Base
 
   belongs_to :publisher
 
-  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id,:number,:unavailable,:preorderable
+  attr_accessible :format, :in_print, :isbn10, :isbn13, :notes, :year_of_publication, :list_price, :cover ,:publisher_id,:remote_cover_url,:publisher,:title_id,:number,:unavailable,:preorderable,:untaxed,:shipsfree
 
   validate :isbns_are_valid
   before_validation :normalize_isbns
