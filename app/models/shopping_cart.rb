@@ -19,13 +19,23 @@ class ShoppingCart < ActiveRecord::Base
     shopping_cart_line_items.inject(0) {|sum,li| sum+ li.quantity}
   end
 
+  def number_of_items_with_shippingcosts
+    shopping_cart_line_items.find_all {|x| !x.edition.shipsfree? }.inject(0) {|sum,li| sum+ li.quantity}
+  end
+    
+
   def subtotal
     shopping_cart_line_items.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
   end
+
+  def taxable_subtotal
+    shopping_cart_line_items.find_all {|x| !x.edition.untaxed? }.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
+  end
+
   
   def tax
     if (shipping_method=="Pickup" || shipping_method=="Bike" || shipping_state=="MD")
-        subtotal * 0.06
+        taxable_subtotal * 0.06
     else #no tax due, we need a report to pull these out!
       Money.new(0)
     end
@@ -42,16 +52,20 @@ class ShoppingCart < ActiveRecord::Base
     when "Bike"
       Money.new(1000)
     when "USPS Priority"
-      if number_of_items >= 2 
-        Money.new(550)*2 +  Money.new(200)*([number_of_items-2,0].max)
+      if number_of_items_with_shippingcosts >= 2 
+        Money.new(550)*2 +  Money.new(200)*([number_of_items_with_shippingcosts-2,0].max)
       else
-        Money.new(550)*number_of_items
+        Money.new(550)*number_of_items_with_shippingcosts
       end
     when "USPS Media Mail"
-      if number_of_items > 1 
-        Money.new(300) +  Money.new(50)*(number_of_items-1)
+      if number_of_items_with_shippingcosts == 0
+        Money.new(0)
       else
-        Money.new(300)
+        if number_of_items_with_shippingcosts > 1 
+          Money.new(300) +  Money.new(50)*(number_of_items_with_shippingcosts-1)
+        else
+          Money.new(300)*number_of_items_with_shippingcosts
+        end
       end
     else
       warn "WTF"
