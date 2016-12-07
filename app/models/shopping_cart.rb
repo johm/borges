@@ -20,7 +20,7 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def number_of_items_with_shippingcosts
-    shopping_cart_line_items.find_all {|x| !x.edition.shipsfree? }.inject(0) {|sum,li| sum+ li.quantity}
+    shopping_cart_line_items.find_all {|x| !x.edition.shipsfree? rescue false }.inject(0) {|sum,li| sum+ li.quantity}
   end
     
 
@@ -29,7 +29,7 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def taxable_subtotal
-    shopping_cart_line_items.find_all {|x| !x.edition.untaxed? }.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
+    shopping_cart_line_items.find_all {|x| !x.edition.untaxed? rescue false}.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
   end
 
   
