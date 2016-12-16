@@ -170,7 +170,7 @@ class Title < ActiveRecord::Base
       "UNAVAILABLE"
     elsif is_in_print? 
       if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
-        "SHIPS IN 5-7 DAYS"
+        "SHIPS IN 2-4 WEEKS" # "SHIPS IN 5-7 DAYS"
       else
         "SHIPS IN 2-4 WEEKS"
       end
