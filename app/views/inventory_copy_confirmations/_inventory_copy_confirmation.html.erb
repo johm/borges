@@ -16,6 +16,6 @@
   </td>
   <td>
     <small><%= sanitize category_status( inventory_copy_confirmation.copy.edition.title)%></small>
-    <%= link_to raw('<i class="fa fa-circle-check-o"></i>'), hidden_actions_edition_path(inventory_copy_confirmation.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless inventory_copy_confirmation.copy.edition.title.latest_published_edition.nil? %>
+    <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(inventory_copy_confirmation.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless inventory_copy_confirmation.copy.edition.title.latest_published_edition.nil? %>
   </td>
 </tr>
