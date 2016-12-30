@@ -1,6 +1,6 @@
 </div>
 <div class="row">
-<div class="span10">
+<div class="col-sm-10">
   <p id="notice"><%= notice %></p>
   
   
@@ -39,7 +39,7 @@
   
 </div>
 
-<div class="span2">
+<div class="col-sm-2">
   <h4>Fill</h4>
   <%= form_tag(fill_inventory_path(@inventory.id),:method=>:post) do %>
   <%= submit_tag "Fill with all copies not here",:confirm=>"Are you really freaking sure you want to do this?",:class=>"btn btn-mini" %>
