@@ -22,6 +22,10 @@
     <strong>Average discount: <%= 100 - (100 * (@cost/@revenue) )%></strong>
   </div>
   <div>
+    <strong>Shipping costs for invoices received: <%= @shipping_costs %></strong>
+  </div>
+
+  <div>
     <strong>Days in period with sales: <%= @days.length %> </strong>
   </div>
 
