@@ -32,6 +32,9 @@ class DashboardController < ApplicationController
     
 
     @sales_by_date=SaleOrder.includes(:sale_order_line_items => [:copy => [:edition => [:title]]]).where(:posted => true).order("created_at asc").where("convert_tz(posted_when,'UTC','#{timezone}') > ? && convert_tz(posted_when,'UTC','#{timezone}') < ?",@date_range_object.range_start,@date_range_object.range_end+1.days).group_by{ |so| so.posted_when.to_date }
+    
+    @invoices=Invoice.where(:received => true).where(:received_when => @date_range_object.range_start..@date_range_object.range_end)  
+    @shipping_costs=@invoices.inject(Money.new(0)) {|sum,i| sum + i.shipping_cost }
 
     @days=@sales_by_date.keys.sort
     
