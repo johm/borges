@@ -331,7 +331,7 @@ class DashboardController < ApplicationController
       deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date=Copy.where(:owner_id=> @date_range_object.owner).where(:inventoried_when => (DateTime.now-100.years)..@date_range_object.date).where("status ='SOLD' or status='RETURNED' or status='LOST' ").where(:deinventoried_when => @date_range_object.date..(DateTime.now+100.years))
 
 
-      @number_of_copies = inventoried_items_inventoried_before_the_date_which_are_still_in_stock,size + deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date.size
+      @number_of_copies = inventoried_items_inventoried_before_the_date_which_are_still_in_stock.size + deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date.size
       @cost = 
         [inventoried_items_inventoried_before_the_date_which_are_still_in_stock,
          deinventoried_items_inventoried_before_the_date_which_were_still_in_stock_on_that_date].inject(Money.new(0)) do |sum,c| 
