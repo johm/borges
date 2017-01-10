@@ -101,6 +101,7 @@
     <th>Total</th>
     <th>Received?</th>
     <th>Sold to date</th>
+    <th>Lost to date</th>
   </tr>
 
 <% @distributor.invoices.order(sort_column + ' ' + sort_direction).each do |invoice| %>
@@ -113,6 +114,7 @@
     <td><%= invoice.total_cost+invoice.shipping_cost %></td>
     <td><%= invoice.received?  ? invoice.received_when.to_formatted_s(:just_date) : "No" %></td>
     <td><%= invoice.received? ? invoice.sales_to_date : "n/a" %></td>
+    <td><%= invoice.received? ? invoice.lost_to_date : "n/a" %></td>
   </tr>
 <% end %>
 </table>
