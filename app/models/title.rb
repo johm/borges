@@ -191,6 +191,11 @@ class Title < ActiveRecord::Base
     income-cost+returned
   end
 
+  def hundreds_of_dollars 
+    n=(net_profit_or_loss/100).floor 
+    n > 0 ? n : 0
+  end
+
   def average_time_on_shelf
     #copies in stock---how many days ago were they received?
     #copies sold---how many days did they take to sell?
@@ -206,4 +211,12 @@ class Title < ActiveRecord::Base
 
   end
   
+  def hotness 
+    if average_time_on_shelf < 0 || average_time_on_shelf > 150
+      0
+    else
+      (150-average_time_on_shelf/6).ceil
+    end
+  end
+
 end
