@@ -28,7 +28,7 @@ class PurchaseOrderLineItem < ActiveRecord::Base
     begin
       edition.list_price * quantity
     rescue
-      0
+      Money.new(0)
     end
   end
 
