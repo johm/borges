@@ -212,10 +212,10 @@ class Title < ActiveRecord::Base
   end
   
   def hotness 
-    if average_time_on_shelf < 0 || average_time_on_shelf > 150
+    if average_time_on_shelf < 0 || average_time_on_shelf > 100
       0
     else
-      (150-average_time_on_shelf/6).ceil
+      ((100-average_time_on_shelf)/10).floor
     end
   end
 
