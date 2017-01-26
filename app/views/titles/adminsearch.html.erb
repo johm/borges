@@ -28,8 +28,8 @@
 	  <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
 	  <td><%= blurb_status(title) %></td>
 	  <td><small><%= sanitize category_status(title) %></small>	<small>
-	 <%= '💰' * l.copy.edition.title.hundreds_of_dollars %>
-	 <%= '🔥' * l.copy.edition.title.hotness %>
+	 <%= '💰' * title.hundreds_of_dollars %>
+	 <%= '🔥' * title.hotness %>
 	  
 	</small>
 	    <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
