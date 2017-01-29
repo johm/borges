@@ -219,8 +219,11 @@ class Title < ActiveRecord::Base
 #    end
 
     # number of copies sold in less than 30 days
-    10 * (copies.sold.find_all {|c| (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd) < 30}.length / copies.sold.length)
-
+    begin
+      10 * (copies.sold.find_all {|c| (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd) < 30}.length / copies.sold.length) 
+    rescue 
+      0
+    end
   end
 
 end
