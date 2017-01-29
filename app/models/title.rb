@@ -192,7 +192,7 @@ class Title < ActiveRecord::Base
   end
 
   def hundreds_of_dollars 
-    n=(net_profit_or_loss/100).floor 
+    n=(net_profit_or_loss.to_f/100).floor 
     n > 0 ? n : 0
   end
 
