@@ -212,18 +212,18 @@ class Title < ActiveRecord::Base
   end
   
   def hotness 
-#    if average_time_on_shelf <= 0 || average_time_on_shelf > 100
-#      0
-#    else
-#      ((100-average_time_on_shelf)/10).floor
-#    end
+    if average_time_on_shelf <= 0 || average_time_on_shelf > 100
+      0
+    else
+      (((100-average_time_on_shelf)/10) * (copies.sold.length/copies.length)).floor
+    end
 
     # number of copies sold in less than 7 days
-    begin
-      copies.sold.find_all {|c| (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd) < 7}.length 
-    rescue 
-      0
-    end
+#    begin
+ #     copies.sold.find_all {|c| (c.deinventoried_when.to_date.mjd - c.inventoried_when.to_date.mjd) < 7}.length 
+ #   rescue 
+  #    0
+  #  end
   end
 
 end
