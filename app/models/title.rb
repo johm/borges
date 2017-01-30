@@ -215,7 +215,7 @@ class Title < ActiveRecord::Base
     if average_time_on_shelf <= 0 || average_time_on_shelf > 100
       0
     else
-      (((100-average_time_on_shelf)/10) * (copies.sold.length/copies.length)).floor  rescue 0
+      (((100-average_time_on_shelf)/10) * (copies.sold.length/copies.length)).ceil  rescue 0
     end
 
     # number of copies sold in less than 7 days
