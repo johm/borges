@@ -26,6 +26,11 @@ padding-top:360px;
 }
 
 
+.gcl {
+.navbar-fixed-top {min-height:100px}
+.navbar-toggle {display:none;}
+#middlelogosmall {display:none;}
+}
 
 
 .content {
@@ -304,4 +309,13 @@ body,
 
 .dropdown-menu > li > a {
 padding:1px 20px;
+}
+
+
+@media (max-width: 500px) {
+.gcl #middlelogobig2 img {
+width: 200px !important;
+
+}
+
 }
