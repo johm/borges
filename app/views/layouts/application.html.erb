@@ -24,7 +24,7 @@
         <div id="navbar2" class="">
           <ul >
 	    <% if @is_2640_page %>
-            <li id="middlelogobig2" ><a href="/2640" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/2640.png",:width=>'50px',:style=>'-webkit-filter:invert(100%);filter:invert(100%);float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
+            <li id="middlelogobig2"><a href="/2640" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/2640.png",:width=>'50px',:style=>'-webkit-filter:invert(100%);filter:invert(100%);float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
 <% elsif @is_gcl_page %>
             <li id="middlelogobig2" ><a href="/gcl" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/gcl.png",:width=>'300px',:style=>'float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
 <% else %>
@@ -195,9 +195,14 @@
       <div class="col-sm-6" id="location">
 	<h2>Location & hours</h2>
 	<table>
+	  <tr><td colspan="2"><center>Red Emma's</center></tr>
 	  <tr><td><a href="https://maps.google.com/maps?ll=39.311717,-76.66735&z=12&t=m&hl=en-US&gl=US&mapclient=embed&cid=687401820438842131">30 W. North Ave.</a></td><td>Baltimore, MD</td></tr><tr><td> </td><td> </td></tr>
 	  <tr><td>Tuesday-Sunday</td><td>8:30AM-10PM</td></tr>
 	  <tr><td>Monday</td><td>Closed</td></tr>
+	  <tr><td colspan="2"><center>Greenmount Coffee Lab</center></tr>
+	  <tr><td><a href="https://goo.gl/maps/pQQQDYuUFBu">1400 Greenmount Avenue</a></td><td>Baltimore, MD</td></tr><tr><td> </td><td> </td></tr>
+	  <tr><td>Monday-Saturday</td><td>8:00AM-3PM</td></tr>
+	  <tr><td>Sunday</td><td>Closed</td></tr>
 	</table>
       </div>
     </div>
@@ -214,6 +219,9 @@
 	  </div>
 	  <div class="col-xs-8 col-xs-offset-2 col-sm-offset-2 col-sm-8 ">
 	    <a href="http://freeschool.redemmas.org/"><%= image_tag "redemmas/bfs-logo.png" %></a>
+	  </div>
+	  <div class="col-xs-8 col-xs-offset-2 col-sm-offset-2 col-sm-8 " style="margin-top:20px;">
+	    <a href="https://redemmas.org/gcl"><%= image_tag "redemmas/gcl-white.png" %></a>
 	  </div>
 	</div>
       </div>
