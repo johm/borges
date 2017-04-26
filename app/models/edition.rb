@@ -35,7 +35,7 @@ class Edition < ActiveRecord::Base
   end
 
   def can_preorder?
-    if preorderable?  && copies.length > 0  && ! unavailable? # it should be a back order if we already have seen copies!
+    if preorderable?  && copies.length == 0  && ! unavailable? # it should be a back order if we already have seen copies!
       true
     else 
       false
