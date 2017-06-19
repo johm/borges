@@ -3,6 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+p,span {
+font-family:inherit !important;
+font-size:inherit !important;
+line-height:inherit !important;
+}
+
+
 .newevent {
 float:right;
 opacity:0.5;
@@ -21,6 +28,8 @@ margin-left:20px !important;
 .events .event {
 clear:left
 }
+
+
 
 
 td.day {
