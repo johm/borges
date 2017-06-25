@@ -45,10 +45,9 @@
       <td>
 	<%= link_to title.title,title%>
 	<div>
-	<small>
-	 <%= '💰' * title.hundreds_of_dollars %>
-	 <%= '🔥' * title.hotness %>
-	</small>
+	  <% cache("emojitmetrics-title-#{title.id}", :expires_in => 20.minutes) do %>
+	  <%= render :partial=>'titles/emojimetrics', :locals => {:title=>title} %>
+	  <% end %>
 	</div>
       </td>
       <td><%= count %></td>
