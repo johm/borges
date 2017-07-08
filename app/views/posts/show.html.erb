@@ -4,7 +4,7 @@
 
 <% content_for :og do%>
 <% if ! @post.images.first.nil? %>
-<meta property="og:image" content="https://redemmas.org/<%= @post.images.first.the_image_url(:medium) %>">
+<meta property="og:image" content="https://redemmas.org/<%= @post.images.first.the_image_url %>">
 <% end %>
 <% end %>
  
