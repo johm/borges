@@ -231,9 +231,11 @@ class TitlesController < ApplicationController
       
 
       @authornames={}
-      params[:title][:contributions_attributes].each do |k,v|
-        @authornames[k]=v[:author]
-        params[:title][:contributions_attributes][k].delete :author
+      if params[:title].has_key?(:contributions_attributes)
+        params[:title][:contributions_attributes].each do |k,v|
+          @authornames[k]=v[:author]
+          params[:title][:contributions_attributes][k].delete :author
+        end
       end
     end
   end
