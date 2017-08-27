@@ -6,6 +6,9 @@ class HomeController < ApplicationController
   def about
   end
 
+  def promotion
+  end
+
   def newsletter
   end
   

@@ -235,6 +235,7 @@ Borges::Application.routes.draw do
   get '/about/', :to => 'home#about'
   get '/2640/', :to => 'events#twentysixforty'
   get '/newsletter/', :to => 'home#newsletter'
+  get '/promotion/antifa', :to => 'home#promotion'
   get '/pages/about/', :to => 'home#about'
   get '/cart', :to => "shopping_carts#current"
   put '/update_cart', :to => "shopping_carts#update_current"
