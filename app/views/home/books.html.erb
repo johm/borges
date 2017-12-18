@@ -10,7 +10,9 @@
     <h1 class="departmentname" style="position:absolute;top:120px;z-index:2;color:white;text-shadow:4px 4px 20px black;" >The Bookstore</h1>
     <% tl = TitleList.find(1) %>
     <div class="row">
+<% cache("books-image-grid", :expires_in => 120.minutes) do %>
       <%= make_an_image_grid_from_titles tl.titles.limit(6).order("RAND()") %>
+<% end %>
     </div>
   </div>
 
@@ -47,7 +49,9 @@
     <h3 class="relatedsubhead"><%= link_to tl.name,tl %></h3>
     <div class="introduction"><%= sanitize tl.description %></div>
     <div class="row">
+<% cache("books-landingpage-titlelist-#{tl.id}", :expires_in => 10.minutes) do %>
       <%= make_a_grid_from_titles usefully_sorted(tl.titles).first(5) %>
+<% end %>
       <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
 	<%= link_to "More titles on this list »",tl %>
       </div>
