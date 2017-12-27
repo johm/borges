@@ -123,8 +123,9 @@ class EditionsController < ApplicationController
   # DELETE /editions/1.json
   def destroy
     @edition = Edition.find(params[:id])
-    @edition.destroy
-
+    if (@edition.copies.length == 0)
+      @edition.destroy
+    end
     respond_to do |format|
       format.html { redirect_to editions_url }
       format.json { head :no_content }
