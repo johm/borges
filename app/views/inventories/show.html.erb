@@ -17,12 +17,13 @@
       inventory_autocomplete_copies_path(:inventory_id=>@inventory.id),
   link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
   "window.open('#{new_title_path}?isbn='+$('#item').val())", 
-  {:class=>'btn'}),"input-xxlarge" %>
+  {:class=>'btn' }),"input-xxlarge" %>
   
   <script>
     $('#item').bind('railsAutocomplete.select', function(event, data){
     $("#inventory_copy_confirmation_copy_id").val(data.item.id);
     });
+    $("#item").autocomplete( "option", "minLength",5);
   </script>
   
   <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_inventory_copy_confirmation"}) %> 

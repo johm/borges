@@ -101,8 +101,10 @@
 	</div>
       </div>
 
+      <% if edition_form.object.copies.length == 0  %>
       <%= edition_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this edition"), :class=>"btn" %>
-      </div>
+      <% end %>
+	</div>
       <% end %>
       <div class="verticaloffset">
 	<%= f.link_to_add raw("<i class='fa fa-plus-circle'></i> Add an edition"), :editions, {:class=>:btn} %>

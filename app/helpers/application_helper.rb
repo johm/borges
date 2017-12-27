@@ -167,7 +167,7 @@ module ApplicationHelper
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
-                  autocomplete_field_tag(m,"",p,:class=>size) + " " + extra,
+                  autocomplete_field_tag(m,"",p,:min_length => 5,:class=>size) + " " + extra,
         :class=>"controls"),
       :class=>"field control-group")
   end
