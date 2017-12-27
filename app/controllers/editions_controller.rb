@@ -81,17 +81,44 @@ class EditionsController < ApplicationController
   def update
     @edition = Edition.find(params[:id])
 
-    respond_to do |format|
-      if @edition.update_attributes(params[:edition])
-        format.html { redirect_to @edition, notice: 'Edition was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @edition.errors, status: :unprocessable_entity }
+    if ! params[:merge_edition].blank?
+      @old_edition_string = @edition.edition_string
+      @edition_to_keep=Edition.find(params[:merge_edition])
+      
+      successful=false
+      if !(@edition.id==@edition_to_keep.id)
+
+        ["copies", "purchase_order_line_items", "invoice_line_items"].each do |foo|
+          @edition.send(foo).each do |bar|
+            bar.edition=@edition_to_keep
+            bar.save!
+          end
+        end
+        @edition.destroy
+        @edition_to_keep.save!
+        @edition_to_keep.title.save!
+        successful=true
+      end
+      respond_to do |format|
+        if successful
+          format.html { redirect_to @edition_to_keep, notice: "Edition #{@old_edition_string} was successfully merged here, and deleted." }
+        else
+          format.html { redirect_to @edition,alert: 'I could not make the requested merge.' } 
+        end
+      end
+    else
+      
+      respond_to do |format|
+        if @edition.update_attributes(params[:edition])
+          format.html { redirect_to @edition, notice: 'Edition was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @edition.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
-
   # DELETE /editions/1
   # DELETE /editions/1.json
   def destroy
@@ -185,9 +212,10 @@ class EditionsController < ApplicationController
     private
 
   def hack_out_params
-    params[:edition].delete :title
-    params[:edition].delete :publisher
+    unless params[:edition].nil?
+      params[:edition].delete :title
+      params[:edition].delete :publisher
+    end
   end
-
 
 end

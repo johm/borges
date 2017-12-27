@@ -1,0 +1,9 @@
+<%= nested_form_for(@edition,:html => {:class=>"form-horizontal"}) do |f| %>
+<div class="field control-group">
+  <%= f.label :move_all_copies_to, :class=>"control-label" %>
+  <div class="controls">
+    <%= select_tag(:merge_edition, options_from_collection_for_select(@edition.title.editions, :id, :edition_string ), :class=>'a_contribution') %>
+  </div>
+</div>
+<%= mysubmit f,"Merge" %>
+<% end %>
