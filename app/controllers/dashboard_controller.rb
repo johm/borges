@@ -290,8 +290,14 @@ class DashboardController < ApplicationController
       @copies_sold_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:status => "SOLD",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
       @sales_cost=@copies_sold_for_period.inject(Money.new(0)) {|sum,c| sum+c.cost}
       @sales_price=@copies_sold_for_period.inject(Money.new(0)) {|sum,c| sum+c.price}
-
       
+      @copies_lost_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:status => "LOST",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
+      @lost=@copies_lost_for_period.inject(Money.new(0)) {|sum,c| sum+c.cost}
+      
+      @copies_probablyreturned_for_period=Copy.includes(invoice_line_item: [purchase_order_line_item: [:purchase_order]]).where(:status => "PROBABLYRETURNED",:owner_id=> @owner).where(:deinventoried_when => @date_range_object.range_start..@date_range_object.range_end)
+      @probablyreturned=@copies_probablyreturned_for_period.inject(Money.new(0)) {|sum,c| sum+c.cost}
+
+
     end
   end
 

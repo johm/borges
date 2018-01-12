@@ -39,6 +39,19 @@
       <th>Expansion budget balance (60% of sale price+Returns-Purchases)</th>
       <td><%= (@sales_price*0.6)+@returns-@purchases %></td>
     </tr>
+
+    <tr>
+      <th>Lost or stolen</th>
+      <td><%= @lost %></td>
+    </tr>
+    
+    <tr>
+      <th>Probably returned</th>
+      <td><%= @probablyreturned %></td>
+    </tr>
+
+
+
   </table>
     
 <br />
