@@ -302,13 +302,17 @@ class DashboardController < ApplicationController
   end
 
   def inventory_report_by_owner
-    @owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
+# might be broken
+    @date_range_object=DateRangeObject.new
+    @date_range_object.date=Date.parse(params[:date_range_object][:date]) rescue 0.days.ago.to_date
+    @date_range_object.owner=Owner.find(params[:date_range_object][:owner_id]) rescue nil
+
     
     unless @owner.nil?
-      @copies_in_stock=Copy.instock.where(:owner_id=> @owner).order("edition_id ASC,inventoried_when ASC")
-      @copies_lost=Copy.lost.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
-      @copies_returned=Copy.returned.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
-      @copies_sold=Copy.sold.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
+      @copies_in_stock=Copy.instock.where(:owner_id=> @owner).order("edition_id ASC,inventoried_when ASC") +  Copy.where(:deinventoried_when => @date_range_object.date..(DateTime.now+100.years)).order("edition_id ASC,inventoried_when ASC")
+      @copies_lost=Copy.where(:deinventoried_when => (DateTime.now-100.years)..@date_range_object.date).lost.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
+      @copies_returned=Copy.where(:deinventoried_when => (DateTime.now-100.years)..@date_range_object.date).returned.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
+      @copies_sold=Copy.where(:deinventoried_when => (DateTime.now-100.years)..@date_range_object.date).sold.where(:owner_id=> @owner).order("edition_id ASC, deinventoried_when ASC")
     end
     
     respond_to do |format|
