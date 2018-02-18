@@ -5,7 +5,7 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc")
+    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc").page(params[:page]).per(40)
 
     respond_to do |format|
       format.html # index.html.erb
