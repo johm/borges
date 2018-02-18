@@ -56,6 +56,22 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
+  def garbagecollect
+    x=0
+    ShoppingCart.where(:submitted => nil).where(:created_at => 10000.days.ago.to_date..6.days.ago.to_date).limit(10000).each do |c| 
+      if c.empty?
+        c.destroy
+        x=x+1
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to shopping_carts_url,notice: "Deleted #{x} unused carts." } 
+      format.json { head :no_content }
+    end
+
+  end
+
   # PUT /shopping_carts/1
   # PUT /shopping_carts/1.json
   def update

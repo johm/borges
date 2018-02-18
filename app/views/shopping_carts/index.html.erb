@@ -37,3 +37,6 @@
 <br />
 <%= paginate @shopping_carts %>
 
+<div>
+<%= link_to "Delete unused carts", garbagecollect_shopping_carts_path, :class => "btn btn-primary", :method => :post %>
+</div>

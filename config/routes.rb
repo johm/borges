@@ -200,6 +200,9 @@ Borges::Application.routes.draw do
   resources :authors
 
   resources :shopping_carts do
+    collection do
+      post :garbagecollect
+    end
     member do
       post :complete
       post :defer
