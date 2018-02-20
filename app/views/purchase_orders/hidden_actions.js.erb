@@ -1,0 +1,2 @@
+$("#modal-window .modal-body").html("<%= escape_javascript(render(:partial=>'purchase_orders/hidden_actions',:locals=> {:purchase_order=>@purchase_order})) %>");
+$("#modal-window .modal-title").html("<%= escape_javascript('PO operations') %>");

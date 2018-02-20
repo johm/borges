@@ -93,6 +93,48 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+
+  def smartdestroy
+    @purchase_order = PurchaseOrder.find(params[:id])
+    @old_number=@purchase_order.number
+    @dest_purchase_order = PurchaseOrder.find(params[:dest_purchase_order])
+    
+    unless @purchase_order.ordered? || @dest_purchase_order.ordered? || (@purchase_order.id == @dest_purchase_order.id)
+      @purchase_order.purchase_order_line_items.each do |poli|
+        if poli.customer || poli.notes || poli.title.copies.length==0
+          poli.purchase_order=@dest_purchase_order
+          poli.save!
+        else
+          poli.destroy
+        end
+      end
+
+      @purchase_order.reload.destroy 
+      @notice="Purchase Order #{@old_number} was successfully destroyed with savable line items moved to purchase order <a href='#{url_for(@dest_purchase_order)}'>#{@dest_purchase_order}</a>"
+      @success=true
+    else 
+      @notice="Something went wrong."
+      @success=false
+    end
+    respond_to do |format|
+      format.html { redirect_to purchase_orders_url,notice: @notice.html_safe }
+      format.json { head :no_content }
+      format.js { }
+    end
+  end
+
+
+  def hidden_actions
+    @purchase_order = PurchaseOrder.find(params[:id])
+
+    respond_to do |format|
+      format.html {  }
+      format.js { }
+    end
+  end
+
+
+
   def cancel 
     @purchase_order = PurchaseOrder.find(params[:id])
     @purchase_order.cancel

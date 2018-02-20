@@ -16,7 +16,7 @@
   </tr>
 
 <% @purchase_orders.each do |purchase_order| %>
-  <tr>
+  <tr id="purchase_order_<%= purchase_order.id%>">
     <td><%= purchase_order.created_at.to_formatted_s(:just_date) %></td>
     <td><%= link_to purchase_order.number,purchase_order %></td>
     <td><%= purchase_order.notes %></td>
@@ -24,8 +24,10 @@
     <td><%= purchase_order.order_by_when.to_formatted_s(:just_date) rescue "-" %></td>
     <td><span class="label <%= purchase_order.ordered? ? 'label-success' : ''%>"><%= purchase_order.ordered? ? 'Yes' : 'Not yet' %></span></td>
     <td><%= purchase_order.ordered_when.to_formatted_s(:just_date) rescue "-" %></td>
-    <td><%= purchase_order.outstanding %></td></td>
-    <td><%= link_to 'Destroy', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-mini btn-danger'  unless purchase_order.ordered? %>
+    <td><%= purchase_order.outstanding %></td>
+    <td>
+	     <%= link_to "Destroy (smart)", hidden_actions_purchase_order_path(purchase_order),  {:class => 'btn btn-xs btn-warning',:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless purchase_order.ordered? %>
+<%= link_to 'Destroy (stupid)', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-xs btn-mini btn-danger'  unless purchase_order.ordered? %></td>
   </tr>
 <% end %>
 </table>

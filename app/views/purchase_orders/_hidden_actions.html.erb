@@ -1,0 +1,9 @@
+<%= nested_form_for @purchase_order,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :smartdestroy,:controller => :purchase_orders } do |f| %>
+  <div class="field control-group">
+    <%= f.label :dest_purchase_order,"Move interesting titles to purchase order", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :dest_purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false).order("updated_at desc"),:id,:number) %>
+      <%= f.submit "Destroy", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>

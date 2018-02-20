@@ -1,0 +1,13 @@
+$("#modal-window").modal('hide');
+<% if @success %>
+$("#notificationcontent").html("<%= escape_javascript("Item was successfully moved to dest purchase order <a href='#{url_for(@dest_purchase_order)}'>#{@dest_purchase_order.number}</a>").html_safe %>");				   
+$("#purchase_order_<%= @purchase_order.id %>").hide("fade");
+<% else %>
+$("#notificationcontent").html("<%= escape_javascript("Something went wrong").html_safe %>");				   
+<% end %>
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+
