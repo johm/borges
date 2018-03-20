@@ -1,12 +1,18 @@
 <% if ! purchase_order_line_item.edition.nil? %>
-	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>">
+	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>" class="<%= 'warning' if purchase_order_line_item.edition.title.in_stock==0 && purchase_order_line_item.edition.title.on_order==0 %>">
 	   <td>
 	     <div class="ordered">
 	     <%= best_in_place_if (! purchase_order_line_item.purchase_order.ordered?),purchase_order_line_item, :quantity, :type => :input, :inner_class=>"input-tiny", :data => {:purchase_order_line_item => purchase_order_line_item.id,:purchase_order => purchase_order_line_item.purchase_order.id} %>
 	     </div>
 	  </td>
-	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>"#{purchase_order_line_item.edition.publisher}\nIn stock (all editions): #{purchase_order_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{purchase_order_line_item.edition.title.on_order} " %></td>
-	  <td><%= purchase_order_line_item.isbn %></td> 
+	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>"#{purchase_order_line_item.edition.publisher}\nIn stock (all editions): #{purchase_order_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{purchase_order_line_item.edition.title.on_order} " %>
+<small>
+	<% cache("emojitmetrics-title-#{l.copy.edition.title.id}", :expires_in => 20.minutes) do %>
+	<%= render :partial=>'titles/emojimetrics', :locals => {:title=>purchase_order_line_item.edition.title} %>
+	<% end %>
+</small>
+</td>
+	   <td><small><%= purchase_order_line_item.isbn %></small><div>	<%= ordering_from_info(purchase_order_line_item.edition.title) %></div></td> 
 	  <td><%= purchase_order_line_item.edition.list_price %></td>
 	  <td class="ext_price"><%= purchase_order_line_item.ext_price %></td>
 	   <td>
