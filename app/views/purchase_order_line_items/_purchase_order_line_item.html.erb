@@ -7,9 +7,10 @@
 	  </td>
 	  <td><%= link_to "#{purchase_order_line_item.edition.title.title} #{purchase_order_line_item.edition.number}", purchase_order_line_item.edition.title, :target=>"blank",:title=>"#{purchase_order_line_item.edition.publisher}\nIn stock (all editions): #{purchase_order_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{purchase_order_line_item.edition.title.on_order} " %>
 <small>
-	<% cache("emojitmetrics-title-#{l.copy.edition.title.id}", :expires_in => 20.minutes) do %>
+	<% cache("emojitmetrics-title-#{purchase_order_line_item.edition.title.id}", :expires_in => 20.minutes) do %>
 	<%= render :partial=>'titles/emojimetrics', :locals => {:title=>purchase_order_line_item.edition.title} %>
 	<% end %>
+	<div>[<%= purchase_order_line_item.edition.title.in_stock %> in stock, <span title="<%= purchase_order_line_item.edition.title.whichorders %>"><%= purchase_order_line_item.edition.title.on_order %><span class="faint">+<%= purchase_order_line_item.edition.title.probably_on_order %></span></span> on order ]</div>
 </small>
 </td>
 	   <td><small><%= purchase_order_line_item.isbn %></small><div>	<%= ordering_from_info(purchase_order_line_item.edition.title) %></div></td> 

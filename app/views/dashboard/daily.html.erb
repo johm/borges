@@ -24,7 +24,7 @@
 	<td></td>
       <td>
 	<%= link_to l.copy.edition.title.title, l.copy.edition %>
-	
+	 
 	<small>[<%= l.copy.edition.title.in_stock %> in stock, <span title="<%= l.copy.edition.title.whichorders %>"><%= l.copy.edition.title.on_order %><span class="faint">+<%= l.copy.edition.title.probably_on_order %></span></span> on order ]</small>
 	<% cache("emojitmetrics-title-#{l.copy.edition.title.id}", :expires_in => 20.minutes) do %>
 	<%= render :partial=>'titles/emojimetrics', :locals => {:title=>l.copy.edition.title} %>
