@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
     
-    <div class="col-md-8">
+    <div class="col-md-9">
       <p id="notice"><%= notice %></p>      
 
       <h1>Purchase Order: <%= @purchase_order.number %></h1>
@@ -53,7 +53,7 @@
       </table>
        <%= paginate @purchase_order_line_items %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Submit order",submit_purchase_order_path(@purchase_order)) unless @purchase_order.ordered? %>
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Receive order",receive_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
       <%= mypostlinkbutton("<i class='fa fa-trash'></i> Cancel outstanding",cancel_purchase_order_path(@purchase_order)) if @purchase_order.ordered? %>
