@@ -175,10 +175,14 @@ class DashboardController < ApplicationController
     
     # do the awesome for scheduling
     @ical=nil
-    open("http://freeschool.redemmas.org/course_calendar.ics")do |cal|
-      @ical = RiCal.parse(cal)
+    begin
+      open("http://freeschool.redemmas.org/course_calendar.ics")do |cal|
+        @ical = RiCal.parse(cal)
+      end
+    rescue
+      @ical=[]
     end
-    
+
     if @import_to_location=EventLocation.find_by_title("Free School Classroom") #because otherwise you don't care!
       @ical.each do |calendar|
         calendar.events.each do |event|
