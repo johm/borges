@@ -8,7 +8,7 @@ class SaleOrdersController < ApplicationController
   # GET /sale_orders
   # GET /sale_orders.json
   def index
-    @sale_orders = SaleOrder.all.order("created_at desc").page(params[:page]).per(100)
+    @sale_orders = SaleOrder.order("created_at desc").page(params[:page]).per(100)
 
     respond_to do |format|
       format.html # index.html.erb
