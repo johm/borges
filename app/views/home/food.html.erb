@@ -35,44 +35,34 @@
 	<p >
 	  Welcome to the cafe at Red Emma's Bookstore Coffeehouse, a
 	  worker-owned and operated vegetarian and vegan restaurant in the
-	  heart of Baltimore's North Avenue arts district. We specialize
+	  heart of Baltimore's Mount Vernon Neighborhood. We specialize
 	  in high-quality, low-cost food that's socially responsible—from
 	  transparently-traded coffee, to organic dairy, locally-crafted
 	  bread, and beyond. We pride ourselves on offering one of
 	  Baltimore's best selections of vegan and vegetarian fare
 	  ... check out our menu for a sample of what we offer, and stop
-	  in any day to see what's on special! And be sure to sample our
-	  wide range of delectable vegan baked goods—all produced in house
-	  by our coop kitchen crew—and grab a cup of Thread Coffee,
-	  transparently-traded and roasted onsite by our collective.</p>
+	  in any day to see what's on special! </p>
 	
-	<p>
-	  With seating for more than a hundred (and a private meeting room
-	  available for rent, plus a small area just for kids), there's always
-	  room for families and other large groups, or come by yourself for some
-	  quiet reading time. There's free wifi available througout the cafe,
-	  and plenty of reading material to excite and engage in our
-	  bookstore—plus a full program of readings and lectures throughout the
-	  week. Email us for more information, or come on by any Tuesday -
-	  Sunday ...
-	</p>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="metafloat">
+<!--      <div class="metafloat">
 	<ul class="postedin bigmenu"> 
 	  <li><a href="/pages/menu">Check out our menu</a>
 	  <li><%= link_to "Find out about seasonal specials",PostCategory.find_by_name("Cafe") %>
 	  <li><a href="/pages/catering">Talk to us about catering</a>
 	  <li><a href="/pages/meetings">Book our meeting room</a>
 	</ul>
-      </div>
+      </div>  -->
     </div>
   </div>
   <div class="row-fluid" >
     <%= @instagram.html_safe %>
   </div>
 
+
+
+<% if false %>
   <div class="row spaceontop" >
     <div class="col-sm-12">
       <hr />
@@ -113,5 +103,5 @@
     
   </div>
   </div>
-
+<% end %>
 

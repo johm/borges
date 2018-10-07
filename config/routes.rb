@@ -232,6 +232,7 @@ Borges::Application.routes.draw do
   get '/manage_calendar/', :to => 'dashboard#manage_calendar'
   get '/books/', :to => 'home#books'
   get '/food/', :to => 'home#food'
+  get '/comingsoon/', :to => 'home#comingsoon'
   get '/gcl/', :to => 'home#gcl'
   get '/coffee/', :to => 'home#coffee'
   get '/orderfoodonline/', :to => 'home#orderfoodonline'

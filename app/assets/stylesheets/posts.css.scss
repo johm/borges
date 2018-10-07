@@ -17,7 +17,7 @@ line-height:27px;
 h2.posttitle, h2.posttitle a{
 font-size:18px;
 line-height:24px !important;
-font-family:brandon-grotesque;
+font-family:"Gotham A","Gotham B";
 text-transform:uppercase;
 }
 
@@ -64,7 +64,7 @@ float:right;padding-left:5px;
     text-align:center;
     padding:3px;
 
-    h3,.postedin,.postedin a {margin-top:0px;font-family:brandon-grotesque;font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;}
+    h3,.postedin,.postedin a {margin-top:0px;font-family:"Gotham A","Gotham B";font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;}
 
     .postedin a:hover {
     color:nearblack;
@@ -96,7 +96,7 @@ position: relative;
 
 
 .pagelinks,.pagelinks a {
-color:$nearwhite;font-family:brandon-grotesque;font-weight:bold;text-transform:uppercase;	
+color:$nearwhite;font-family:"Gotham A","Gotham B";font-weight:bold;text-transform:uppercase;	
 	   }
 }
 
@@ -105,7 +105,7 @@ color:$nearwhite;font-family:brandon-grotesque;font-weight:bold;text-transform:u
 h2.related a {font-weight:bold;}
 
 .igtext {
-    font-family: "adobe-garamond-pro";
+font-family:"Gotham A","Gotham B";
     font-size: 12px;
     line-height: 15px;
     padding:6px;

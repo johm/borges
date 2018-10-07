@@ -31,9 +31,9 @@ class HomeController < ApplicationController
         html = "<div class='row frontstagram row-no-padding'>"
         i=0
         for media_item in client.user_recent_media()
-          break if i>3
+          break if i>2
           i=i+1
-          html << "<div class='col-md-3 col-xs-3'><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;') unless media_item.caption.nil?}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a></div>"
+          html << "<div class='col-md-4 '><a target='_blank' title='#{media_item.caption.text.gsub(/'/,'&quot;') unless media_item.caption.nil?}' href='#{media_item.link}'><img width='100%' src='#{media_item.images.standard_resolution.url.gsub(/^http:/,"")}'></a></div>"
         end
         html << "</div>"
         html

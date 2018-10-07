@@ -25,7 +25,7 @@ color:$lightishgrey;
 
 
 body {
-font-family:"adobe-garamond-pro";
+font-family:"Gotham A","Gotham B";
 color:$nearblack;
 font-size:16px;
 }
@@ -74,13 +74,13 @@ padding-top:60px;
 }
 
 h1 {
-font-family:"garamond-premier-pro-display";
-//font-family:"adobe-garamond-pro";
+font-family:"Gotham A","Gotham B";
+//font-family:"Gotham A","Gotham B";
 font-weight:400;
 }
 
 h2 {
-font-family:"garamond-premier-pro-display";
+font-family:"Gotham A","Gotham B";
 font-weight:300;
 line-height:28px;
 }
@@ -488,8 +488,15 @@ margin-top:30vh;
 
 .translucent {
 background-color:rgba($nearwhite,.95);
+background-color:rgba($nearwhite,1.0);
+-webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.23);
+-moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.23);
+box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.23);
 
 }
+
+
+.translucent a:hover{text-decoration:none;}
 
 
 
@@ -518,8 +525,8 @@ padding:20px;
 
 font-family:"Gotham A","Gotham B";	
 text-transform:uppercase;
-font-weight:bold;
-font-size:2em;
+font-weight:400;
+font-size:1.5em;
 
 img {margin-left:33%;margin-right:33%;display:none;width:33%;margin-bottom:25px;margin-top:10px;}
 
@@ -1116,7 +1123,7 @@ width: 320px;
 
 .navbar-fixed-top {
 font-weight:700;
-font-family:"brandon-grotesque";
+font-family: "Gotham A", "Gotham B";
 text-transform:uppercase;
 background-color:#f6f6f6;
 }
@@ -1493,7 +1500,7 @@ position:fixed;
 z-index:2000;
 top:5px;
 
-left: 21px;
+left: 81px;
   right: 0;
   margin: 0 auto;
 margin-right:75px;
