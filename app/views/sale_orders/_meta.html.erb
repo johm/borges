@@ -8,6 +8,10 @@
 	  <td><%= best_in_place_if (! sale_order.posted?),sale_order, :discount_percent, :type => :input %>%</td>
 	</tr>
 	<tr>
+	  <th>Subtotal after discount</th>
+	  <td id="sale_order_subtotal_after_discount"><%= sale_order.subtotal_after_discount_live %></td>
+	</tr>
+	<tr>
 	  <th>Tax</th>
 	  <td ><%= sale_order.tax_amount %></td>
 	</tr>
