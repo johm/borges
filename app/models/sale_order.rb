@@ -31,6 +31,11 @@ class SaleOrder < ActiveRecord::Base
       subtotal * ((100-(discount_percent || 0))/100.0)
     end
   end
+
+  def subtotal_after_discount_live
+      subtotal * ((100-(discount_percent || 0))/100.0)
+  end
+
   
   def tax_amount
     subtotal_after_discount * (ENV["TAX"].to_f || 0.0)
