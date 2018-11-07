@@ -728,6 +728,8 @@ line-height:18px;
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
 
+
+
 #navbar2 { 
 
 left:30px !important;
@@ -855,6 +857,9 @@ font-size:16px;
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
+
+
+
 
   .cartlink {margin-left:50px;}
 .events       h1.posttitle {font-size:25px}
@@ -1023,6 +1028,23 @@ padding-bottom:0px;
 /*              .navbar>ul li:last-child a:after {
           content:" SMALL PHONE";   
 }*/	  		             
+
+#front_0 {display:block; margin-top:40px; font-weight:bold;text-transform:uppercase;font-size:32px;line-height:32px;text-align:center;
+.translucent {padding:10px;width:100%;}
+
+}
+#front_1 {display:none;}
+
+	
+#frontlinks .translucent {
+margin-top:10px;
+}		
+
+#fronttag .translucent {
+font-size:16px;
+}	     
+
+
     .events .event_description {
 	margin-left:0px;
     }
@@ -1040,6 +1062,7 @@ padding-bottom:0px;
 width: 320px;
 }
 				     
+
 
 
 
@@ -1112,7 +1135,7 @@ width: 320px;
 @media (min-width: 768px){
 #frontlinks img {display:block;}
 #middlelogosmall {display:none;}
-
+#front_0 {display:none;}
 .navbar-nav{
     margin: 0 auto;
 //    display: table;
