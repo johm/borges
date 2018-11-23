@@ -101,7 +101,7 @@
 	</div>
       </div>
 
-      <% if edition_form.object.copies.length == 0  %>
+      <% if true || edition_form.object.copies.length == 0  %> <!-- totally disable for now! --> 
       <%= edition_form.link_to_remove raw("<i class='fa fa-minus-circle'></i> Remove this edition"), :class=>"btn" %>
       <% end %>
 	</div>
