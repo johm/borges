@@ -48,11 +48,12 @@ class Edition < ActiveRecord::Base
   end
 
   def can_back_order?
-    if in_print? && ! unavailable?  # don't let people order things that are marked as out of print or unavailable
-      true
-    else
-      false
-    end
+    false
+#    if in_print? && ! unavailable?  # don't let people order things that are marked as out of print or unavailable
+#      true
+#    else
+#      false
+#    end
   end
 
   def has_copies_in_stock?
