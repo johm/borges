@@ -105,7 +105,7 @@ class Title < ActiveRecord::Base
   end
 
   def on_order 
-    purchase_order_line_items.inject(0) do |sum,li| 
+    purchase_order_line_items.includes(:purchase_order).inject(0) do |sum,li| 
       if ! li.purchase_order.nil? && li.purchase_order.ordered? 
         [0,sum+li.quantity-li.received].max
       else 
@@ -117,7 +117,7 @@ class Title < ActiveRecord::Base
   
 
   def probably_on_order 
-    purchase_order_line_items.inject(0) do |sum,li| 
+    purchase_order_line_items.includes(:purchase_order).inject(0) do |sum,li| 
       if li.purchase_order.nil? || li.purchase_order.ordered?
         sum
       else
@@ -132,7 +132,7 @@ class Title < ActiveRecord::Base
 
   def whichorders 
     begin
-      purchase_order_line_items.collect do |x|
+      purchase_order_line_items.includes(:purchase_order).collect do |x|
         if x.purchase_order.nil?  || (x.quantity-x.received <= 0)
           nil
         else 
