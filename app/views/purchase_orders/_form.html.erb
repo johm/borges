@@ -21,7 +21,15 @@
     </div>
   </div>
 
+  <div class="field control-group">
+    <%= f.label :Edelweiss_Upload, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.file_field :editions %>
+    </div>
+  </div>
   <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
+
+  
 
 <%=  mysubmit(f,"Create") %>
   </div>
