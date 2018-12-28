@@ -29,11 +29,12 @@ class Event < ActiveRecord::Base
 
 
   def self.by_month(month)
-    where("extract(month from event_start) = ? at time zone ?", month,::Rails.application.config.time_zone)
+    # this is a annoying limitation of mysql datetimes not having timezone info. should likely rewrite all stuff that depends on this because it might not be doable in vanilla active record queries
+    where("extract(month from event_start) = ? or (extract(month from event_start) = ? and extract(day from event_start) = 1))", month, (month + 1) % 12) # will not get new years eve events
   end
 
   def self.by_year(year)
-    where('extract(year from event_start) = ? at time zone ?', year, ::Rails.application.config.time_zone)
+    where('extract(year from event_start) = ? ', year)
   end
 
   def start_time
