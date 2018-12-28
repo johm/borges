@@ -29,11 +29,11 @@ class Event < ActiveRecord::Base
 
 
   def self.by_month(month)
-    where('extract(month from event_start) = ?', month)
+    where("extract(month from event_start) = ? at time zone ?", month,::Rails.application.config.time_zone)
   end
 
   def self.by_year(year)
-    where('extract(year from event_start) = ?', year)
+    where('extract(year from event_start) = ? at time zone ?', year, ::Rails.application.config.time_zone)
   end
 
   def start_time
