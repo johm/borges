@@ -7,6 +7,7 @@ class PurchaseOrdersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   
+  
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -54,9 +55,13 @@ class PurchaseOrdersController < ApplicationController
 
     @purchase_order.ordered=false
 
+
+
+
     respond_to do |format|
       if @purchase_order.save
-        format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
+        upload_results=@purchase_order.process_upload
+        format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created. ' + upload_results }
         format.json { render json: @purchase_order, status: :created, location: @purchase_order }
       else
         format.html { render action: "new" }
