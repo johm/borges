@@ -11,12 +11,12 @@
     <%= calendar @calendar_events do |event| %>
     <div style="border:1px solid #ccc;padding:2px;" class="event_location_<%= event.event_location.id %>">
       <%= link_to event.title, event %>
-      <div style="height:12px;"><small style="font-size:12px;line-height:8px;"><%= link_to event.event_location, event.event_location %></small></div>
+      <div style="height:12px;"><small style="font-size:12px;line-height:8px;"><%= link_to event.event_location, event.event_location.url %></small></div>
       <div  style="height:12px;"><small style="font-size:12px;line-height:8px;"><%= event.event_start.to_formatted_s(:just_time)%> - <%= event.event_end.to_formatted_s(:just_time)  %></small></div>
       <% if !event.published? %>
       <div  style="height:12px;"><small style="font-size:12px;line-height:8px;" class="muted">Not published</small></div>
       <% end %>
-      <%= link_to raw('<i class="fa fa-trash"></i>'), event, method: :delete, data: { confirm: 'Are you sure?' },class: "btn-mini " %>
+      <%= link_to raw('<i class="fa fa-trash"></i>'), event, method: :delete, data: { confirm: 'Are you sure?' },class: "btn-mini " unless event.event_location=EventLocation.find_by_title("Date Holds")  %>
     </div>
     <% end %>    
   </div>
