@@ -176,14 +176,14 @@ class DashboardController < ApplicationController
     # do the awesome for scheduling
     @ical=nil
     begin
-      open("http://freeschool.redemmas.org/course_calendar.ics")do |cal|
+      open(ENV["DATEHOLDS"])do |cal|
         @ical = RiCal.parse(cal)
       end
     rescue
       @ical=[]
     end
 
-    if @import_to_location=EventLocation.find_by_title("Free School Classroom") #because otherwise you don't care!
+    if @import_to_location=EventLocation.find_by_title("Date Holds") #because otherwise you don't care!
       @ical.each do |calendar|
         calendar.events.each do |event|
         fake_event = Event.new
@@ -191,7 +191,7 @@ class DashboardController < ApplicationController
           
           add_this_to_time=0
           if ! Time.zone.parse("#{event.dtstart.to_s}").dst?
-              add_this_to_time=1
+#              add_this_to_time=1
           end
  
           fake_event.event_start=event.dtstart+add_this_to_time.hour
