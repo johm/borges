@@ -96,7 +96,9 @@
       <% end %>
   </div>
   <div class="col-xs-12 col-sm-4 col-lg-2">
-    <% if !@event.facebook_url.blank? %> <div class="well rsvp" ><%= link_to "Let us know you are coming on Facebook",@event.facebook_url %> (optional, but helpful!)</div> <% end %> 
+    <% if !@event.withfriends_url.blank? %> <div class="well rsvp" ><%= link_to "RSVP through withfriends",@event.withfriends_url %></div> <% end %> 
+
+    <% if !@event.facebook_url.blank? %> <div class="well rsvp" ><%= link_to "RSVP on Facebook",@event.facebook_url %> </div> <% end %> 
 
     <div><small><%= "Not published" unless @event.published? %></small></div>
     <div><%=  link_to raw("<i class='fa fa-edit'></i> Edit"), edit_event_path(@event),:class=>"btn btn-primary",:style=>"margin-bottom:10px;width:100%;"   if can? :edit, Event %></div>      
