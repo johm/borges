@@ -52,19 +52,19 @@ class ShoppingCart < ActiveRecord::Base
     when "Bike"
       Money.new(1000)
     when "USPS Priority"
-      if number_of_items_with_shippingcosts >= 2 
-        Money.new(550)*2 +  Money.new(200)*([number_of_items_with_shippingcosts-2,0].max)
+      if number_of_items_with_shippingcosts > 1 
+        Money.new(800) +  Money.new(400)*(number_of_items_with_shippingcosts-1)
       else
-        Money.new(550)*number_of_items_with_shippingcosts
+        Money.new(800)*number_of_items_with_shippingcosts
       end
     when "USPS Media Mail"
       if number_of_items_with_shippingcosts == 0
         Money.new(0)
       else
         if number_of_items_with_shippingcosts > 1 
-          Money.new(300) +  Money.new(50)*(number_of_items_with_shippingcosts-1)
+          Money.new(350) +  Money.new(50)*(number_of_items_with_shippingcosts-1)
         else
-          Money.new(300)*number_of_items_with_shippingcosts
+          Money.new(350)*number_of_items_with_shippingcosts
         end
       end
     else

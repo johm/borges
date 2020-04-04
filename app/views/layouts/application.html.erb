@@ -12,6 +12,7 @@
     <%= yield(:head) %> 
 <%= favicon_link_tag 'favicon.ico' %>
 <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7074256/6532592/css/fonts.css" />
+<meta name="google-site-verification" content="dUL1q_W_-jKwD_tIz6z4dKiKJF7QpaCE5VDsB7EHpV0" />
   </head>
 
 
@@ -32,7 +33,7 @@
             <li class="  hidden-xs" id="middlelogobig2" ><a href="/" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/emmas.png",:width=>'50px'%></a></li>
 	    <li  class="  hidden-xs"><a href="/events">Events</a></li>         
 	    <li  class="  hidden-xs"><a href="/about">About</a></li>
-	    <li class="  hidden-xs"><a href="https://www.toasttab.com/red-emma-s/giftcards">GIFT CARDS</a></li>
+	    <li class="  hidden-xs"><a href="https://www.toasttab.com/red-emma-s/v2/online-order#!/order">Order online</a></li>
 <% end %>
           </ul>
         </div><!--/.nav-collapse -->
@@ -62,7 +63,7 @@
             <li id="middlelogobig" ><a href="/gcl" style="padding-top:0px;padding-bottom:0px"><%= image_tag "redemmas/gcl.png",:width=>'150px',:style=>'float:left;margin-right:10px;position:relative;top:0px;'%></a></li>
 <% else %>
             <li class="visible-xs-block"><a href="/pages/food">Food</a></li>
-	    <li class="visible-xs-block"><a href="/comingsoon">ORDER ONLINE</a></li>
+	    <li class="visible-xs-block"><a href="https://www.toasttab.com/red-emma-s/v2/online-order#!/order">Order online</a></li>
             <li class="visible-xs-block"><a href="/books">Books</a></li>
 	    <li class="visible-xs-block"><a href="/pages/catering">Catering</a></li>         
 	    <li class="visible-xs-block"><a href="/events">Events</a></li>         
@@ -91,7 +92,17 @@
       </div>
     </nav>
 
+<div class="emergencyalert container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= render 'layouts/emergency' %>
+         
+  </div>
+</div>
+
+
 <div class="container-fluid" id="holder">
+
 
 
       <div id="modal-window" class="modal fade" role="dialog">
@@ -138,114 +149,7 @@
     </div> <!-- end of wrap -->
 
 <footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-	<div id="newsletter_form">
-	  <h2>Get our newsletter</h2>
-	  <!-- Begin MailChimp Signup Form -->
-	  <div id="mc_embed_signup">
-	    <form action="//redemmas.us6.list-manage.com/subscribe/post?u=ba8275d3da8a8eeb9ab92d64f&amp;id=723faff526" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-	      <div id="mc_embed_signup_scroll">
-		<div class="mc-field-group">
-		  <input type="email" value=""  name="EMAIL" class="required email form-control" placeholder="Your email address" id="mce-EMAIL" >      <input type="submit" value="Submit" style="display:none">
-		  
-		</div>
-		<div id="mce-responses" class="clear">
-		  <div class="response" id="mce-error-response" style="display:none"></div>
-		  <div class="response" id="mce-success-response" style="display:none"></div>
-		</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-		<div style="position: absolute; left: -5000px;"><input type="text" name="b_ba8275d3da8a8eeb9ab92d64f_723faff526" tabindex="-1" value=""></div>
-	      </div>
-	    </form>
-	  </div>
-	  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-	  <!--End mc_embed_signup-->  
-	</div>
-      </div>
-      <div class="col-sm-6" id="contact">
-	<div id="contact_info">
-	  <h2>Get in touch</h2>
-	  <table>
-<!--	    <tr><td><i class="fa fa-phone"></i> Books & General Info</td><td><a href="tel:+14436027585">(443) 602-7585</td></tr> -->
-	    <tr><td><i class="fa fa-phone"></i> Phone</td><td><a href="tel:+14433803968">(443) 380-3968</a></td></tr>
-	    <tr><td><i class="fa fa-envelope"></i> General Info</td><td><a href="mailto:info@redemmas.org">info@redemmas.org</a></td></tr>
-	  </table>
-	</div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-	<h2>Follow us</h2>
-	<div class="row">
-	  <div class="footersocial col-xs-8 col-xs-offset-2 col-sm-10 col-sm-offset-1">
-	    <a href="http://twitter.com/redemmas"><i class="fa fa-twitter"></i></a>
-	    <a href="http://facebook.com/redemmas"><i class="fa fa-facebook"></i></a>
-	    <a href="http://instagram.com/redemmas"><i class="fa fa-instagram"></i></a>
-	    <a href="http://youtube.com/redemmas"><i class="fa fa-youtube"></i></a>
-	  </div>
-	</div>
-      </div>
-      
-      <div class="col-sm-6" id="location">
-	<h2>Location & hours</h2>
-	<table>
-	  <tr><td colspan="2"><center>Red Emma's</center></tr>
-	  <tr><td><a href="https://maps.google.com/maps?ll=39.311717,-76.66735&z=12&t=m&hl=en-US&gl=US&mapclient=embed&cid=687401820438842131">1225 Cathedral St.</a></td><td>Baltimore, MD</td></tr><tr><td> </td><td> </td></tr>
-	  <tr><td>Tuesday-Thursday</td><td>10am-10pm</td></tr>
-	  <tr><td>Friday-Saturday</td><td>10am-10pm * Bar open until midnight!</td></tr>
-	  <tr><td>Sunday</td><td>10am-4pm * All day brunch!</td></tr>
-	  <tr><td>Monday</td><td>Closed</td></tr>
-	</table>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6" id="footerprojects">
-	<h2>Our projects</h2>
-	<div class="row">
-	  <div class="col-xs-3 col-xs-offset-2 col-sm-3 col-sm-offset-2 ">
-	    <a href="http://redemmas.org/2640"><%= image_tag "redemmas/2640.png" %></a> 
-	  </div>
-	  <div class="col-sm-5 col-xs-5 ">
-	    <a href="http://threadcoffee.com"><%= image_tag "redemmas/thread_logotext_2015.png" %></a> 
-	  </div>
-	  <div class="col-xs-8 col-xs-offset-2 col-sm-offset-2 col-sm-8 ">
-	    <a href="http://freeschool.redemmas.org/"><%= image_tag "redemmas/bfs-logo.png" %></a>
-	  </div>
-	  <div class="col-xs-8 col-xs-offset-2 col-sm-offset-2 col-sm-8 " style="margin-top:20px;">
-	    <a href="https://redemmas.org/gcl"><%= image_tag "redemmas/gcl-white.png" %></a>
-	  </div>
-	</div>
-      </div>
-      <div class="col-sm-6" id="footernetworks">
-	<h2>Our networks</h2>
-	<div class="row">
-	  <div class="col-xs-3 col-xs-offset-3 ">
-	    <a href="http://www.iww.org"><%= image_tag "redemmas/iww.png" %></a>
-	  </div>
-	  <div class="col-xs-3 ">
-	    <a href="http://usworker.coop"><%= image_tag "redemmas/usfcw.png" %></a>
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="col-xs-6 col-xs-offset-3 col-sm-6  col-sm-offset-3 ">
-	    <a href="http://theworkingworld.org"><%= image_tag "redemmas/TWW.png" %></a>
-	    <a href="http://ncdf.coop"><%= image_tag "redemmas/ncdf.png" %></a>
-	  </div>
-	</div>
-      </div>
-    </div>
-  </div>
-  
-  <br />
-  <div class="row">
-    <div class="col-xs-12">
-      
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3086.982569948913!2d-76.61778269999999!3d39.3113186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c804ea7de1339b%3A0x98a24504d36cb13!2sRed+Emma&#39;s+Bookstore+Coffeehouse!5e0!3m2!1sen!2sus!4v1441886696389" width="100%" height="250" frameborder="0" style="border:0;opacity:0.9;position:relative;top:10px;" allowfullscreen></iframe>
-    </div>
-  </div>
+	<%= render :partial => "themes/#{theme}/footer" %>      
 </footer>
 
 

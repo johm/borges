@@ -18,5 +18,14 @@
       <%= raw contributors_list(title) %>
     </h3>
     <%= text.html_safe rescue "" %>
+    
+          <% if can? :edit, Title %>
+	  <div>
+	    <% cache("emojitmetrics-title-#{title.id}", :expires_in => 20.minutes) do %>
+	    <%= render :partial=>'titles/emojimetrics', :locals => {:title=>title} %>
+	    <% end %>
+	  </div>
+	  <% end %>
+
     </div>
   </div>

@@ -233,7 +233,7 @@ Borges::Application.routes.draw do
   get '/books/', :to => 'home#books'
   get '/food/', :to => 'home#food'
   get '/comingsoon/', :to => 'home#comingsoon'
-  get '/gcl/', :to => 'home#gcl'
+  get '/gcl/', :to => redirect("https://www.threadcoffee.com/greenmount-coffee-lab/")
   get '/coffee/', :to => 'home#coffee'
   get '/orderfoodonline/', :to => 'home#orderfoodonline'
   get '/thread/', :to => 'home#thread'

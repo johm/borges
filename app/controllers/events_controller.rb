@@ -73,7 +73,7 @@ class EventsController < ApplicationController
       date = DateTime.parse(params[:date])
     end
     
-    @event.location=Location.find(first)
+    @event.event_location=EventLocation.first
     @event.event_start=DateTime.new(date.year,date.month,date.day,19,0,0,"#{Time.zone.utc_offset/3600}:00")
     @event.event_end=DateTime.new(date.year,date.month,date.day,21,0,0,"#{Time.zone.utc_offset/3600}:00")
 

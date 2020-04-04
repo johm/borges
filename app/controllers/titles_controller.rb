@@ -121,6 +121,8 @@ class TitlesController < ApplicationController
             bar.save!
           end
         end
+
+
         @title.destroy
 
         @title_to_keep.save #trigger sunspot

@@ -37,6 +37,10 @@
   <th>Cashier</th>
   <td><%= sale_order.user.name rescue ""%></td>
 </tr>
+<tr>
+  <th>Date created</th>
+  <td><%= sale_order.created_at rescue ""%></td>
+</tr>
 
       </table>
 <script>

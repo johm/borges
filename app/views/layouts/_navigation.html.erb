@@ -5,9 +5,9 @@
 <div id="outstanding_orders">
   <h1><blink>Online orders!</blink></h1>
   <% outstanding_carts.each do |s|  %>
-  <div class='order_alert'>New order: 
+  <span class='order_alert'><!--New order:  -->
     <%= link_to s.submitted_when.to_formatted_s(:full_date_time),s %>
-  </div>
+  </span>
   <% end %>
 </div>
 <% end %>

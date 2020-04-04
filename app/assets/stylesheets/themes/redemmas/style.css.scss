@@ -469,6 +469,8 @@ border-radius: 3px;
 .frontsplash {
 background-image: url('/assets/redemmas/background.jpg');
 background-size:cover;
+  background-attachment: fixed;
+
 }
 
 
@@ -1035,9 +1037,11 @@ padding-bottom:0px;
 }
 #front_1 {display:none;}
 
-	
+	#frontlinks {
+margin-top:10vh;
+}
 #frontlinks .translucent {
-margin-top:10px;
+margin-top:5vh;
 }		
 
 #fronttag .translucent {
@@ -1147,7 +1151,7 @@ width: 320px;
 .navbar-fixed-top {
 font-weight:700;
 font-family: "Gotham A", "Gotham B";
-text-transform:uppercase;
+//text-transform:uppercase;
 background-color:#f6f6f6;
 }
 
@@ -1155,7 +1159,7 @@ background-color:#f6f6f6;
 font-family: "Gotham A", "Gotham B";
 font-style: normal;
 font-weight: 400;
-text-transform:uppercase;
+//text-transform:uppercase;
 
 li>a {
 padding-top:15px;

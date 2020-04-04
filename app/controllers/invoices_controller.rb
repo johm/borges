@@ -8,7 +8,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.includes([:invoice_line_items,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    @invoices = Invoice.includes([:invoice_line_items,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(30)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -18,7 +18,8 @@ h2.posttitle, h2.posttitle a{
 font-size:18px;
 line-height:24px !important;
 font-family:"Gotham A","Gotham B";
-text-transform:uppercase;
+//text-transform:uppercase;
+font-weight:800;	
 }
 
 .posts .body p{
@@ -49,7 +50,7 @@ h1.posttitle {
 font-weight:bold;
 font-size:50px; 
 font-family:"Gotham A","Gotham B";
-text-transform:uppercase;
+//text-transform:uppercase;
 
 }
 
@@ -64,7 +65,7 @@ float:right;padding-left:5px;
     text-align:center;
     padding:3px;
 
-    h3,.postedin,.postedin a {margin-top:0px;font-family:"Gotham A","Gotham B";font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;}
+    h3,.postedin,.postedin a {margin-top:0px;font-family:"Gotham A","Gotham B";font-weight:bold;font-size:10px;margin-bottom:0px;line-height:15px;text-align:right;}
 
     .postedin a:hover {
     color:nearblack;

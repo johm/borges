@@ -51,7 +51,9 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   def process_upload
-    unless editions.nil? 
+    if editions.nil? 
+      "No file uploaded"
+    else    
       begin
         CSV.read(editions.tempfile, headers: true).collect {|row| process_upload_row(row)}.join(" #### ")
       rescue
@@ -62,7 +64,7 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   def process_upload_row(row)
-    isbn=row["ean"]
+    isbn=row["ean"] || row["EAN"]
     edition = Edition.where('isbn13 = ? or isbn10 = ?',isbn,isbn).first
     if edition.nil? 
       title=Title.new

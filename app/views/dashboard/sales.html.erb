@@ -41,7 +41,7 @@
     <% unless x[0].nil? %>
     <% title=x[0] %>
     <% count=x[1] %>
-    <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %>">
+    <tr class="<%= 'warning' if title.in_stock==0 && title.on_order==0 %> <%= 'danger' unless title.is_in_print? %> ">
       <td>
 	<%= link_to title.title,title%>
 	<div>
