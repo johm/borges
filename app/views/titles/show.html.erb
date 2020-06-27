@@ -13,6 +13,17 @@
 
 <% end %>
 
+<% if ! @edition.isbn13.blank? %>
+<script>
+ $( document ).ready(function() {
+ $.ajax({
+ type: 'GET',
+ url: '/editions/<%= @edition.id %>/bookshop',
+ dataType : 'script'
+ })});
+
+ </script>
+<% end %>
 
 <% content_for :description do%><%=h truncate(sanitize("#{@title.introduction}", :tags=>[]),:length => 250) %><% end %>
 
@@ -33,8 +44,10 @@
     
     <%= status_and_price(@edition) unless @edition.nil? %>
     <div style="margin-left:20px;"><%= buy_or_order(@edition) unless @edition.nil? %> </div>
+    <div id="bookshop"></div>
     
-    <%= theme_partial :social %>
+
+   <!-- theme_partial :social %> -->
     
     <% if !(@title.introduction.blank? && @title.description.blank?) %>
     <div class="introduction abridged" style="height:100px;overflow:hidden;position:relative;">

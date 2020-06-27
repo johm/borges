@@ -1,5 +1,7 @@
+require "net/http"
+
 class EditionsController < ApplicationController
-  before_filter :authenticate_user! , :except=>[:show,:byisbn]
+  before_filter :authenticate_user! , :except=>[:show,:byisbn,:bookshop]
   load_and_authorize_resource
   autocomplete :title,:title,:full=>true,:display_value=>:title_and_id,:limit => 20
   before_filter :hack_out_params , :only=>[:create,:update]
@@ -207,6 +209,26 @@ class EditionsController < ApplicationController
       format.js { }
     end
   end
+
+
+
+  def bookshop
+    @edition = Edition.find(params[:id])
+    @bookshop=false
+    if ! @edition.isbn13.nil?
+      @bookshop_url="https://bookshop.org/a/3323/#{@edition.isbn13}"
+      url = URI.parse(@bookshop_url)
+      res = Net::HTTP.get(url)
+      @bookshop=true if !res.blank? &&  !res.include?("404 | Not Found")
+    end
+
+    respond_to do |format|
+      format.html {  }
+      format.js { }
+    end
+  end
+
+
 
 
 

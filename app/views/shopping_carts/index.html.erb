@@ -10,6 +10,7 @@
     <th>Shipping city</th>
     <th>Items</th>
     <th>Total</th>
+    <th>Status?</th>
     <th>Completed?</th>
   </tr>
 
@@ -23,6 +24,13 @@
     <td><%= shopping_cart.shipping_city %></td>
     <td><%= shopping_cart.number_of_items %></td>
     <td><%= shopping_cart.total %></td>
+    <td>
+      <% [:pulled,:sold_through,:shipped,:picked_up,:is_preorder].each do |x| %>
+      <% if shopping_cart.send("#{x}?") %>
+      <span class="label label-default"><%= "#{x}" %></span>
+      <% end %>
+      <% end %>
+    </td>
     <td>
       <% if shopping_cart.completed? %>
       <span class="label label-success">Yes</span>

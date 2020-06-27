@@ -12,6 +12,7 @@
 	<th><%= sortable "titles_in_stock", "Titles in stock" %></th>
 	<th><%= sortable "total_titles", "Total titles" %></th>
 	<th></th>
+	<th></th>
 	<% end %>
       </tr>
       <% @title_lists.each do |title_list| %>
@@ -24,6 +25,7 @@
 	<td><%= title_list.titles_in_stock %></td>
 	<td><%= title_list.total_titles %></td>
 	<td><%= mylinkbutton "Edit",edit_title_list_path(title_list) %> </td>
+	<td><%= link_to "CSV",title_list_path(title_list,:format=>:csv) %></td>
 	<% end %>
       </tr>
       <% end %>

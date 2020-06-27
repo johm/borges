@@ -71,7 +71,9 @@
   <h3 class="relatedsubhead"><%= link_to tl.name,tl %></h3>
   <div class="introduction"><%= sanitize tl.description %></div>
   <div class="row">
+    <% cache("category-fl#{@category.id}", :expires_in => 120.minutes) do %>
     <%= make_a_grid_from_titles usefully_sorted(tl.titles).first(5) %>
+    <% end %>
     <div class="col-xs-6 col-sm-4 col-md-2 gridmore">
       <%= link_to "More titles on this list »",tl %>
     </div>

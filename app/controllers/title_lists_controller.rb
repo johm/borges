@@ -36,10 +36,20 @@ class TitleListsController < ApplicationController
   # GET /title_lists/1.json
   def show
     @title_list = TitleList.find(params[:id])
+    @csv=CSV.generate do |csv|
+      @title_list.titles.each do |t|
+        csv << [t.latest_edition.isbn13] unless t.latest_edition.isbn13.blank?
+      end    
+    end 
 
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @title_list }
+      format.csv { 
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-title_list-#{@title_list.id}.csv\""  
+        render text: @csv 
+        }
     end
   end
 

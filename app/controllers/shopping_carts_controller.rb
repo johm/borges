@@ -183,6 +183,43 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
+  def toggle_pulled
+    toggle_state(ShoppingCart.find(params[:id]),:pulled)
+  end
+
+ def toggle_sold_through
+    toggle_state(ShoppingCart.find(params[:id]),:sold_through)
+  end
+
+ def toggle_shipped
+    toggle_state(ShoppingCart.find(params[:id]),:shipped)
+  end
+
+ def toggle_picked_up
+    toggle_state(ShoppingCart.find(params[:id]),:picked_up)
+  end
+
+ def toggle_is_preorder
+    toggle_state(ShoppingCart.find(params[:id]),:is_preorder)
+  end
+
+
+
+  def toggle_state(cart,state)
+    @shopping_cart = ShoppingCart.find(params[:id])
+    @shopping_cart.toggle(state)
+    if @shopping_cart.save
+      respond_to do |format|
+        format.html {redirect_to @shopping_cart}
+        format.js {}
+      end
+    else
+      raise "couldn't save cart"
+    end
+  end
+
+
+
   def defer
     @shopping_cart = ShoppingCart.find(params[:id])
     @shopping_cart.deferred=true

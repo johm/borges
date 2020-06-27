@@ -24,7 +24,7 @@ class Ability
       end
       can :read, Title 
       can [:redirector], Title
-      can [:read,:byisbn], Edition
+      can [:read,:byisbn,:bookshop], Edition
       can :read, Author
       can [:redirector], Author
       can :read, Image

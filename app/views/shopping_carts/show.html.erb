@@ -97,10 +97,26 @@
 </td>
   </tr>
 
+
+<% [:pulled,:sold_through,:shipped,:picked_up,:is_preorder].each do |x| %>
+  <tr>
+    <th><%= x %>?</th>
+    <td>
+      <div style="float:left;margin-right:10px;"><%= @shopping_cart.send("#{x}?") ? "Yes" : "Not yet"  %>     </div>
+      <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Mark order as #{x}","/shopping_carts/#{@shopping_cart.id}/toggle_#{x}",{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.send("#{x}?") ) %>
+      <%= mypostlinkbutton("<i class='fa fa-undo'></i> ","/shopping_carts/#{@shopping_cart.id}/toggle_#{x}",{},{},"btn-small btn-success") if (@shopping_cart.ordered? && @shopping_cart.send("#{x}?") ) %>
+ 
+    </td>
+  </tr>
+<% end %>
+
+
+
+
   <tr>
     <th>Completed?</th>
     <td>
-      <div><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
+            <div style="float:left;margin-right:10px;"><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
       <%= mypostlinkbutton("<i class='fa fa-check-circle-o'></i> Mark order as complete",complete_shopping_cart_path(@shopping_cart),{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.completed?) %>
     </td>
   </tr>

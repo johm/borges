@@ -176,6 +176,7 @@ Borges::Application.routes.draw do
       put :add_to_purchase_order
       put :add_to_title_list
       put :add_to_category
+      get :bookshop
     end
   end
 
@@ -207,6 +208,11 @@ Borges::Application.routes.draw do
     end
     member do
       post :complete
+      post :toggle_pulled
+      post :toggle_sold_through
+      post :toggle_shipped
+      post :toggle_picked_up
+      post :toggle_is_preorder
       post :defer
       post :subscribe
     end
