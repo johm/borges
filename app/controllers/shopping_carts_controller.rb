@@ -17,7 +17,10 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts/1.json
   def show
     @shopping_cart = ShoppingCart.find(params[:id])
+    EasyPost.api_key= ENV["EASYPOST_API_KEY"]
+    @shipment = EasyPost::Shipment.retrieve(@shopping_cart.easypost_shipment_id) unless @shopping_cart.easypost_shipment_id.nil?
 
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @shopping_cart }
@@ -218,9 +221,62 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
+  def ship
+    @shopping_cart = ShoppingCart.find(params[:id])
+    rate=params[:rate]
+    if @shopping_cart.weight > 0 && (rate == "MediaMail" || rate == "Priority")
+      EasyPost.api_key= ENV["EASYPOST_API_KEY"]
+      parcel = EasyPost::Parcel.create(
+        :weight => @shopping_cart.weight,
+        :height => 4,
+        :length => 14,
+        :width => 10
+      )
 
+      from_address = EasyPost::Address.create(
+        street1: "1225 CATHEDRAL ST.",
+        street2: "",
+        city: "BALTIMORE",
+        state: "MD",
+        zip: "21201",
+        country: "US",
+        company: "Red Emma's Cooperative Corporation",
+        phone: "(410) 601-3072"
+      )
 
-  def defer
+      to_address = EasyPost::Address.create(
+        name: @shopping_cart.shipping_name,
+        street1: @shopping_cart.shipping_address_1,
+        street2: @shopping_cart.shipping_address_2,
+        city: @shopping_cart.shipping_city,
+        state: @shopping_cart.shipping_state,
+        zip: @shopping_cart.shipping_zip 
+      )
+
+        
+      shipment = EasyPost::Shipment.create(
+        :to_address => to_address,
+        :from_address => from_address,
+        :parcel => parcel,
+        :options => {"special_rates_eligibility": "USPS.MEDIAMAIL"})
+      
+      s=shipment.rates.find_all {|x| x.service==rate}.first
+      shipment.buy(:rate=>s) unless s.nil?
+      
+      @shopping_cart.easypost_shipment_id=shipment.id
+      
+      if (! s.nil?) && @shopping_cart.save 
+        respond_to do |format|
+          format.html {redirect_to @shopping_cart, notice: 'Shopping cart is shippable using links to postage and tracker below' }
+          format.js {}
+        end
+      else
+        raise "couldn't ship cart"
+      end
+    end
+    
+  end
+    def defer
     @shopping_cart = ShoppingCart.find(params[:id])
     @shopping_cart.deferred=true
     if @shopping_cart.save

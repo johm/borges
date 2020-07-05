@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161207022233) do
+ActiveRecord::Schema.define(:version => 20200705202340) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20161207022233) do
     t.datetime "event_breakdown_ends"
     t.text     "rental_payment_info"
     t.text     "facebook_url"
+    t.text     "withfriends_url"
   end
 
   add_index "events", ["event_location_id"], :name => "index_events_on_event_location_id"
@@ -469,7 +470,23 @@ ActiveRecord::Schema.define(:version => 20161207022233) do
     t.string   "shipping_ok_to_leave"
     t.text     "shipping_notes"
     t.boolean  "shipping_subscribed"
+    t.boolean  "pulled"
+    t.boolean  "sold_through"
+    t.boolean  "shipped"
+    t.boolean  "picked_up"
+    t.boolean  "is_preorder"
+    t.integer  "weight"
+    t.string   "easypost_shipment_id"
   end
+
+  add_index "shopping_carts", ["created_at"], :name => "index_shopping_carts_on_created_at"
+  add_index "shopping_carts", ["is_preorder"], :name => "index_shopping_carts_on_is_preorder"
+  add_index "shopping_carts", ["picked_up"], :name => "index_shopping_carts_on_picked_up"
+  add_index "shopping_carts", ["pulled"], :name => "index_shopping_carts_on_pulled"
+  add_index "shopping_carts", ["shipped"], :name => "index_shopping_carts_on_shipped"
+  add_index "shopping_carts", ["shipping_subscribe"], :name => "index_shopping_carts_on_shipping_subscribe"
+  add_index "shopping_carts", ["sold_through"], :name => "index_shopping_carts_on_sold_through"
+  add_index "shopping_carts", ["submitted", "deferred", "completed"], :name => "index_shopping_carts_on_submitted_and_deferred_and_completed"
 
   create_table "title_category_memberships", :force => true do |t|
     t.integer  "title_id"

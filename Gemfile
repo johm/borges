@@ -7,8 +7,9 @@ gem 'rails', '3.2.13'
 group :development do
   gem "quiet_assets", ">= 1.0.2"
   gem "better_errors", ">= 0.7.2"
-  gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
+  gem "binding_of_caller", ">= 0.7.1" #, :platforms => [:mri_19, :rbx]
   gem "lol_dba"
+  gem "test-unit"
 end
 
 group :development, :test do
@@ -77,4 +78,5 @@ gem "addressable"
 gem 'fittextjs_rails'
 gem "font-awesome-rails"
 #gem "wysiwyg-rails"
-gem "summernote-rails"
+gem "summernote-rails", "= 0.8.1.1"
+gem "easypost"

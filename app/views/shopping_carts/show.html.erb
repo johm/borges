@@ -11,8 +11,22 @@
   <%= @shopping_cart.shipping_city %> <%= @shopping_cart.shipping_state %>   <%= @shopping_cart.shipping_zip %>
 </pre>
 
-<% if ! @shopping_cart.shipping_address_1.blank? %>
-<%= link_to "Print postage via Endicia", endicia_url(@shopping_cart),:class=>"btn btn-mini btn-success" %>
+
+<% if @shopping_cart.easypost_shipment_id.nil? && @shipment.nil? %>
+<% if @shopping_cart.ordered? && !@shopping_cart.completed? && !@shopping_cart.shipping_address_1.blank? %>
+<%= mypostlinkbutton("<i class='fa fa-envelope'></i> Ship order via Media Mail",ship_shopping_cart_path(@shopping_cart,:rate=>"MediaMail"),{},{},"btn-small btn-success")  %>
+<%= mypostlinkbutton("<i class='fa fa-envelope'></i> Ship order via Priority",ship_shopping_cart_path(@shopping_cart,:rate=>"Priority"),{},{},"btn-small btn-success") %>
+<% end %>
+<% else %>
+<%= link_to "Print postage",@shipment.postage_label.label_url, :target=>"_blank", :class=>"btn btn-success btn-small"  %> 
+<%= link_to "Track",@shipment.tracker.public_url, :target=>"_blank", :class=>"btn btn-warning btn-small"  %> 
+<table class="table">
+  <tr><th>Status</th><td><%= @shipment.tracker.status %></td></tr>
+  <tr><th>Estimated delivery date</th><td><%= @shipment.tracker.est_delivery_date %></td></tr>
+  <tr><th>Tracker URL</th><td><%= @shipment.tracker.public_url %></td></tr>
+  <tr><th>Tracking #</th><td><%= @shipment.tracker.tracking_code %></td></tr>
+</table>
+
 <% end %>
 <br /><br />
 <h2>Customer notes:</h2>
@@ -96,7 +110,8 @@
       <% end %>
 </td>
   </tr>
-
+   <tr><th>Shipping weight in ounces</th><td><%= best_in_place @shopping_cart, :weight, :as => :select, :collection => (1..320).each_with_object({}) { |num, hash| hash[num] = "#{num} oz." } 
+ %></td></tr>
 
 <% [:pulled,:sold_through,:shipped,:picked_up,:is_preorder].each do |x| %>
   <tr>

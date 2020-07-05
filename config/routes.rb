@@ -214,6 +214,7 @@ Borges::Application.routes.draw do
       post :toggle_picked_up
       post :toggle_is_preorder
       post :defer
+      post :ship
       post :subscribe
     end
   end
