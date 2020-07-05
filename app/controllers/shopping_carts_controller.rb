@@ -224,7 +224,7 @@ class ShoppingCartsController < ApplicationController
   def ship
     @shopping_cart = ShoppingCart.find(params[:id])
     rate=params[:rate]
-    if @shopping_cart.weight > 0 && (rate == "MediaMail" || rate == "Priority")
+    if (! @shopping_cart.weight.nil? ) && (rate == "MediaMail" || rate == "Priority")
       EasyPost.api_key= ENV["EASYPOST_API_KEY"]
       parcel = EasyPost::Parcel.create(
         :weight => @shopping_cart.weight,
@@ -268,14 +268,22 @@ class ShoppingCartsController < ApplicationController
       if (! s.nil?) && @shopping_cart.save 
         respond_to do |format|
           format.html {redirect_to @shopping_cart, notice: 'Shopping cart is shippable using links to postage and tracker below' }
-          format.js {}
         end
       else
-        raise "couldn't ship cart"
+       respond_to do |format|
+         format.html {redirect_to @shopping_cart, notice: 'Shopping cart is not shippable. Check addresses?' }
+        end
       end
+    else
+       respond_to do |format|
+         format.html {redirect_to @shopping_cart, notice: 'Shopping cart is not shippable. Check weight?' }
+        end
+       
     end
     
   end
+
+  
     def defer
     @shopping_cart = ShoppingCart.find(params[:id])
     @shopping_cart.deferred=true
