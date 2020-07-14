@@ -212,6 +212,7 @@ Borges::Application.routes.draw do
       post :toggle_sold_through
       post :toggle_shipped
       post :toggle_picked_up
+      post :toggle_pickup_notify
       post :toggle_is_preorder
       post :defer
       post :ship

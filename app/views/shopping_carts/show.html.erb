@@ -113,7 +113,7 @@
    <tr><th>Shipping weight in ounces</th><td><%= best_in_place @shopping_cart, :weight, :as => :select, :collection => (1..320).each_with_object({}) { |num, hash| hash[num] = "#{num} oz." } 
  %></td></tr>
 
-<% [:pulled,:sold_through,:shipped,:picked_up,:is_preorder].each do |x| %>
+<% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].each do |x| %>
   <tr>
     <th><%= x %>?</th>
     <td>

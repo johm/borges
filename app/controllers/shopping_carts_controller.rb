@@ -202,6 +202,11 @@ class ShoppingCartsController < ApplicationController
     toggle_state(ShoppingCart.find(params[:id]),:picked_up)
   end
 
+ def toggle_pickup_notify
+    toggle_state(ShoppingCart.find(params[:id]),:pickup_notify)
+  end
+
+ 
  def toggle_is_preorder
     toggle_state(ShoppingCart.find(params[:id]),:is_preorder)
   end

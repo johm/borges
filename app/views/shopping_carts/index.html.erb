@@ -6,8 +6,9 @@
     <th>Ordered?</th>
     <th>Shipping method</th>
     <th>Shipping name</th>
-    <th>Shipping state</th>
-    <th>Shipping city</th>
+    <th>Where to?</th>
+    <th>Email</th>
+    <th>Total # Items</th>
     <th>Items</th>
     <th>Total</th>
     <th>Status?</th>
@@ -16,16 +17,25 @@
 
 <% @shopping_carts.each do |shopping_cart| %>
   <tr>
-    <td><%= link_to shopping_cart.id, shopping_cart %></td>
-    <td><%= shopping_cart.ordered? ? shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
-    <td><%= shopping_cart.shipping_method %></td>
-    <td><%= shopping_cart.shipping_name %></td>
-    <td><%= shopping_cart.shipping_state %></td>
-    <td><%= shopping_cart.shipping_city %></td>
+    <td><small><%= link_to shopping_cart.id, shopping_cart %></small></td>
+    <td><small><%= shopping_cart.ordered? ? shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></small></td>
+    <td><small><%= shopping_cart.shipping_method %></small></td>
+    <td><small><%= shopping_cart.shipping_name %></small></td>
+    <td><small><%= shopping_cart.shipping_city %>, <%= shopping_cart.shipping_state %></small></td>
+    <td><small><%= mail_to shopping_cart.shipping_email,nil,{:subject=>"About Your Red Emma's Order"} %></small></td>
     <td><%= shopping_cart.number_of_items %></td>
+    <td>
+      <small>
+	<ul>
+	<% shopping_cart.shopping_cart_line_items.each do |li| %>
+      <li><%= li.quantity %>x <%= link_to "#{li.edition.title}",li.edition %>
+      <% end %>
+      </ul>
+      </small>
+    </td>
     <td><%= shopping_cart.total %></td>
     <td>
-      <% [:pulled,:sold_through,:shipped,:picked_up,:is_preorder].each do |x| %>
+      <% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].each do |x| %>
       <% if shopping_cart.send("#{x}?") %>
       <span class="label label-default"><%= "#{x}" %></span>
       <% end %>
