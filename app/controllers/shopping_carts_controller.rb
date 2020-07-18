@@ -12,7 +12,8 @@ class ShoppingCartsController < ApplicationController
     @shopping_carts = @shopping_carts.where(:is_preorder=>true) if @cart_search.only_preorders
     @shopping_carts = @shopping_carts.where(:shipping_method=>"Pickup") if @cart_search.only_preorders
     @shopping_carts = @shopping_carts.where(:pulled=>true) if @cart_search.pulled
-    @shopping_carts = @shopping_carts.where(:pulled=>[false,nil]) if @cart_search.unpulled 
+    @shopping_carts = @shopping_carts.where(:pulled=>[false,nil]) if @cart_search.unpulled
+    @shopping_carts = @shopping_carts.where("shipping_email LIKE ?", "%" + @cart_search.email + "%" ) unless @cart_search.email.blank?
 
     
     respond_to do |format|

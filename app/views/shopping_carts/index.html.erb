@@ -8,6 +8,7 @@
       <button type="button" class="btn btn-default btn-sm">Show only pickups? <%= f.check_box :just_pickup, onchange: "this.form.submit();" %></button>
       <button type="button" class="btn btn-default btn-sm">Show only pulled orders? <%= f.check_box :pulled, onchange: "this.form.submit();" %></button>
       <button type="button" class="btn btn-default btn-sm">Show only unpulled orders? <%= f.check_box :unpulled, onchange: "this.form.submit();" %></button>
+      <button type="button" class="btn btn-default btn-sm">Filter by email? <%= f.text_field :email  %></button>
     <% end %>
   </div>
 </div>
