@@ -5,8 +5,16 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc").page(params[:page]).per(40)
+    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc").page(params[:page]).per(200)
+    @cart_search=CartSearch.new(params[:cart_search])
 
+    @shopping_carts = @shopping_carts.where(:completed=>[false,nil]) unless @cart_search.show_completed
+    @shopping_carts = @shopping_carts.where(:is_preorder=>true) if @cart_search.only_preorders
+    @shopping_carts = @shopping_carts.where(:shipping_method=>"Pickup") if @cart_search.only_preorders
+    @shopping_carts = @shopping_carts.where(:pulled=>true) if @cart_search.pulled
+    @shopping_carts = @shopping_carts.where(:pulled=>[false,nil]) if @cart_search.unpulled 
+
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shopping_carts }

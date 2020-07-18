@@ -1,5 +1,17 @@
-<h1>Listing shopping_carts</h1>
 
+<div class="row spaceontop">
+    <h1>Online orders</h1>
+  <div class="small">
+    <%= form_for @cart_search, :url => { :action => "index" }, :html => {:method => :get}  do |f| %>
+    <button type="button" class="btn btn-default btn-sm">Show completed orders? <%= f.check_box :show_completed, onchange: "this.form.submit();" %></button>
+    <button type="button" class="btn btn-default btn-sm">Show only preorders? <%= f.check_box :only_preorders, onchange: "this.form.submit();" %></button>
+      <button type="button" class="btn btn-default btn-sm">Show only pickups? <%= f.check_box :just_pickup, onchange: "this.form.submit();" %></button>
+      <button type="button" class="btn btn-default btn-sm">Show only pulled orders? <%= f.check_box :pulled, onchange: "this.form.submit();" %></button>
+      <button type="button" class="btn btn-default btn-sm">Show only unpulled orders? <%= f.check_box :unpulled, onchange: "this.form.submit();" %></button>
+    <% end %>
+  </div>
+</div>
+<br /><br />
 <table class="table">
   <tr>
     <th>Cart #id</th>

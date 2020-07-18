@@ -3,12 +3,13 @@
 
 <% if !outstanding_carts.empty? %>
 <div id="outstanding_orders">
-  <h1><blink>Online orders!</blink></h1>
-  <% outstanding_carts.each do |s|  %>
-  <span class='order_alert'><!--New order:  -->
-    <%= link_to s.submitted_when.to_formatted_s(:full_date_time),s %>
+  <h1><blink><%= link_to "Deal with online orders!", shopping_carts_path %></blink></h1>
+<!--   outstanding_carts.each do |s|  %>
+  <span class='order_alert'>
+     link_to s.submitted_when.to_formatted_s(:full_date_time),s %>
   </span>
-  <% end %>
+   end %>
+-->
 </div>
 <% end %>
 <% end %>
