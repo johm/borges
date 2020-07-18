@@ -10,7 +10,7 @@ class ShoppingCartsController < ApplicationController
 
     @shopping_carts = @shopping_carts.where(:completed=>[false,nil]) unless @cart_search.show_completed
     @shopping_carts = @shopping_carts.where(:is_preorder=>true) if @cart_search.only_preorders
-    @shopping_carts = @shopping_carts.where(:shipping_method=>"Pickup") if @cart_search.only_preorders
+    @shopping_carts = @shopping_carts.where(:shipping_method=>"Pickup") if @cart_search.just_pickup
     @shopping_carts = @shopping_carts.where(:pulled=>true) if @cart_search.pulled
     @shopping_carts = @shopping_carts.where(:pulled=>[false,nil]) if @cart_search.unpulled
     @shopping_carts = @shopping_carts.where("shipping_email LIKE ?", "%" + @cart_search.email + "%" ) unless @cart_search.email.blank?
@@ -103,7 +103,7 @@ class ShoppingCartsController < ApplicationController
   # PUT /shopping_carts/1.json
   def update_current
     # this only gets called when stripe goes through
-    #  raise "no stripe no action" unless 
+    # raise "no stripe no action" unless 
 
     @shopping_cart=current_cart
     
