@@ -2,6 +2,7 @@ class Edition < ActiveRecord::Base
  belongs_to :title,   :touch=>true
   has_many :copies
   has_many :purchase_order_line_items
+  has_many :shopping_cart_line_items
   has_many :invoice_line_items
 
   has_many :distributors, :through => :copies
@@ -82,7 +83,16 @@ class Edition < ActiveRecord::Base
     end
   end
 
-
+  def needed_for_online
+    shopping_cart_line_items.includes(:shopping_cart).inject(0) do |sum,li|
+      if li.shopping_cart && li.shopping_cart.ordered? && ! li.shopping_cart.sold_through
+        sum+li.quantity
+      else 
+        sum
+      end
+    end
+  end
+  
 
   def my_online_price
     if copies.length > 0
