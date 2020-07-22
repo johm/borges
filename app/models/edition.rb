@@ -85,7 +85,7 @@ class Edition < ActiveRecord::Base
 
   def needed_for_online
     shopping_cart_line_items.includes(:shopping_cart).inject(0) do |sum,li|
-      if li.shopping_cart && li.shopping_cart.ordered? && ! li.shopping_cart.sold_through
+      if li.shopping_cart && li.shopping_cart.ordered? && ! ( li.shopping_cart.sold_through || li.shopping_cart.completed)
         sum+li.quantity
       else 
         sum
