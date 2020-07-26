@@ -77,6 +77,12 @@ class ShoppingCart < ActiveRecord::Base
     submitted?
   end
 
+  def complete
+    self.completed=true
+    self.completed_when=DateTime.now
+    self.save
+  end
+  
   def submit_order
     self.submitted=true
     self.submitted_when=DateTime.now
