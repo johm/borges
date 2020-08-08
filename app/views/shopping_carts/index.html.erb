@@ -5,6 +5,7 @@
     <%= form_for @cart_search, :url => { :action => "index" }, :html => {:method => :get}  do |f| %>
     <button type="button" class="btn btn-default btn-sm">Show completed orders? <%= f.check_box :show_completed, onchange: "this.form.submit();" %></button>
     <button type="button" class="btn btn-default btn-sm">Show only preorders? <%= f.check_box :only_preorders, onchange: "this.form.submit();" %></button>
+    <button type="button" class="btn btn-default btn-sm">Hide preorders? <%= f.check_box :no_preorders, onchange: "this.form.submit();" %></button>
     <button type="button" class="btn btn-default btn-sm">Show only pickups? <%= f.check_box :just_pickup, onchange: "this.form.submit();" %></button>
     <button type="button" class="btn btn-default btn-sm">Show only media mail? <%= f.check_box :just_mediamail, onchange: "this.form.submit();" %></button>
           <button type="button" class="btn btn-default btn-sm">Show only priority mail? <%= f.check_box :just_prioritymail, onchange: "this.form.submit();" %></button>

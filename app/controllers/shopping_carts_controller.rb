@@ -10,6 +10,7 @@ class ShoppingCartsController < ApplicationController
 
     @shopping_carts = @shopping_carts.where(:completed=>[false,nil]) unless @cart_search.show_completed
     @shopping_carts = @shopping_carts.where(:is_preorder=>true) if @cart_search.only_preorders
+    @shopping_carts = @shopping_carts.where(:is_preorder=>[false,nil]) if @cart_search.no_preorders
     @shopping_carts = @shopping_carts.where(:shipping_method=>"Pickup") if @cart_search.just_pickup
     @shopping_carts = @shopping_carts.where(:shipping_method=>"USPS Media Mail") if @cart_search.just_mediamail
     @shopping_carts = @shopping_carts.where(:shipping_method=>"USPS Priority") if @cart_search.just_prioritymail
