@@ -38,8 +38,7 @@
   <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th><th></th><th></th></tr>
 <% @shopping_cart.shopping_cart_line_items.each do |li| %>
   <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
-    <td><%= li.quantity %></td>
-    <td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
+
     <td>$<%= li.cost %></td>
     <td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
     <td class="small">

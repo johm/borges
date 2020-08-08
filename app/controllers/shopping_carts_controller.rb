@@ -279,7 +279,19 @@ class ShoppingCartsController < ApplicationController
       shipment.buy(:rate=>s) unless s.nil?
       
       @shopping_cart.easypost_shipment_id=shipment.id
-      
+
+      if ! s.nil?
+	RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
+	"@api.mailgun.net/v3/mg.redemmas.org/messages",
+	:from => "Red Emma's Books Team <bookorders@redemmas.org>",
+	:to => @shopping_cart.shipping_email, 
+	:subject => "Your order from Red Emma's",
+	:text => "Your order from Red Emma's has shipped. Track it at #{shipment.tracker.public_url}",
+        :html => render_to_string(:template => "shopping_carts/shipped_email", :layout => false, :locals => {:shopping_cart => @shopping_cart,:shipment => shipment})
+        @shopping_cart.shipped=true
+                
+      end
+        
       if (! s.nil?) && @shopping_cart.save 
         respond_to do |format|
           format.html {redirect_to @shopping_cart, notice: 'Shopping cart is shippable using links to postage and tracker below' }
