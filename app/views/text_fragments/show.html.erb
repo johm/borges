@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @text_fragment.name %>
+</p>
+
+<p>
+  <b>Sometext:</b>
+  <%= @text_fragment.sometext %>
+</p>
+
+
+<%= link_to 'Edit', edit_text_fragment_path(@text_fragment) %> |
+<%= link_to 'Back', text_fragments_path %>

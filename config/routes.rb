@@ -1,6 +1,9 @@
 Borges::Application.routes.draw do
 
 
+  resources :text_fragments
+
+
   resources :inventory_copy_confirmations do 
     member do
       post :probablyreturned
