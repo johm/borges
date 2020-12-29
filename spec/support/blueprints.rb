@@ -147,3 +147,7 @@ end
 InventoryCopyConfirmation.blueprint do
   # Attributes here
 end
+
+TextFragment.blueprint do
+  # Attributes here
+end

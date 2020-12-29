@@ -1,0 +1,25 @@
+<%= form_for(@text_fragment) do |f| %>
+  <% if @text_fragment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@text_fragment.errors.count, "error") %> prohibited this text_fragment from being saved:</h2>
+
+      <ul>
+      <% @text_fragment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :sometext %><br />
+    <%= f.text_area :sometext %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

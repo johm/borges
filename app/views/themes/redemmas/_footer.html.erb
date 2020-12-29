@@ -52,14 +52,7 @@
       
       <div class="col-sm-6" id="location">
 	<h2>Location & hours</h2>
-	<table>
-	  <tr><td colspan="2"><center>Red Emma's</center></tr>
-	  <tr><td><a href="https://maps.google.com/maps?ll=39.311717,-76.66735&z=12&t=m&hl=en-US&gl=US&mapclient=embed&cid=687401820438842131">1225 Cathedral St.</a></td><td>Baltimore, MD</td></tr><tr><td> </td><td> </td></tr>
-	  <tr><td>Tuesday-Thursday</td><td>10am-10pm</td></tr>
-	  <tr><td>Friday-Saturday</td><td>10am-10pm * Bar open until midnight!</td></tr>
-	  <tr><td>Sunday</td><td>10am-4pm * All day brunch!</td></tr>
-	  <tr><td>Monday</td><td>Closed</td></tr>
-	</table>
+	<%= raw(TextFragment.find_by_name("location_and_hours").sometext) rescue "Add a fragment called 'location_and_hours'"%> 
       </div>
     </div>
 

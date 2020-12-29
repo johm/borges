@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20200714005135) do
+ActiveRecord::Schema.define(:version => 20201229005745) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -489,6 +489,13 @@ ActiveRecord::Schema.define(:version => 20200714005135) do
   add_index "shopping_carts", ["shipping_subscribe"], :name => "index_shopping_carts_on_shipping_subscribe"
   add_index "shopping_carts", ["sold_through"], :name => "index_shopping_carts_on_sold_through"
   add_index "shopping_carts", ["submitted", "deferred", "completed"], :name => "index_shopping_carts_on_submitted_and_deferred_and_completed"
+
+  create_table "text_fragments", :force => true do |t|
+    t.string   "name"
+    t.text     "sometext"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "title_category_memberships", :force => true do |t|
     t.integer  "title_id"
