@@ -172,3 +172,9 @@ a.gridcover {
     background-position: center;
     border: 4px solid white;
 }
+
+@media (max-width: 768px){
+a.gridcover {
+    height: 300px !important;
+    }
+}
