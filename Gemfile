@@ -73,7 +73,7 @@ gem 'ri_cal', :git=>"git://github.com/johm/ri_cal"
 gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 gem "addressable"
 gem 'fittextjs_rails'
 gem "font-awesome-rails"

@@ -37,7 +37,7 @@ class Ability
       can [:redirector], Category
       can [:read,:calendar,:twentysixforty,:redirector], Event, :published => true
       can :read, EventLocation
-      can [:current,:update_current], ShoppingCart
+      can [:current,:update_current,:checkout], ShoppingCart
       can [:update,:destroy], ShoppingCartLineItem #further checks in controller!
 
 # move this out, probably, since ShoppingCarts are their own beasties now

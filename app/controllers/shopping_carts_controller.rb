@@ -1,5 +1,8 @@
-class ShoppingCartsController < ApplicationController
-  before_filter :authenticate_user!, :except=>[:current,:update_current]
+class ShoppingCartsController < ApplicationController 
+  before_filter :authenticate_user!, :except=>[:current,:update_current,:checkout]
+  protect_from_forgery :except => [:checkout]
+
+
   load_and_authorize_resource
 
   # GET /shopping_carts
@@ -170,6 +173,31 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
+
+  def checkout
+    @shopping_cart=current_cart
+    stripe_session = Stripe::Checkout::Session.create({
+                                                        payment_method_types: ['card'],
+                                                        line_items:
+                                                          shopping_cart_line_items.collect do |x|   
+                                                          {
+                                                            price_data: {
+                                                              currency: 'usd',
+                                                              product_data: {
+                                                                name: 'T-shirt',
+                                                              },
+                                                              unit_amount: x.cost,
+                                                            },
+                                                            quantity: x.quantity,
+                                                          }
+                                                        end,
+                                                      mode: 'payment',
+                                                      success_url: 'https://example.com/success',
+                                                      cancel_url: 'https://example.com/cancel',
+                                                     })
+    render json: stripe_session 
+  end
+  
   def current
     @oncart=true
     @shopping_cart=current_cart 
@@ -177,6 +205,8 @@ class ShoppingCartsController < ApplicationController
       #you get a new cart
       @shopping_cart=new_cart
     end
+
+    
     warn "CART ID #{@shopping_cart.id}"
     raise "errr..." if @shopping_cart.nil?
   end
