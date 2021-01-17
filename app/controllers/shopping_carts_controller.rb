@@ -223,7 +223,7 @@ class ShoppingCartsController < ApplicationController
                                                             ])),
                                                         mode: 'payment',
                                                         success_url: "#{ENV['STRIPE_URL_BASE']}/shopping_cart_success?session_id={CHECKOUT_SESSION_ID}",
-                                                        cancel_url: 'https://example.com/cancel',
+                                                        cancel_url: "#{ENV['STRIPE_URL_BASE']}/cart"
                                                      }))
     render json: stripe_session 
   end
@@ -235,15 +235,18 @@ class ShoppingCartsController < ApplicationController
     raise "Stripe cart #{session.client_reference_id} doesn't match session cart #{@shopping_cart.id}!" unless session.client_reference_id.to_i == @shopping_cart.id.to_i
     
     customer = Stripe::Customer.retrieve(session.customer)
-    die customer
-    @shopping_cart.shipping_address_1=customer.shipping.address.line1
-    @shopping_cart.shipping_address_2=customer.shipping.address.line2
-    @shopping_cart.shipping_city=customer.shipping.address.city
-    @shopping_cart.shipping_name=customer.shipping_name
-    @shopping_cart.shipping_state=customer.shipping.address.state
-    @shopping_cart.shipping_zip=customer.shipping.address.postal_code
+    begin
+      @shopping_cart.shipping_address_1=session.shipping.address.line1
+      @shopping_cart.shipping_address_2=session.shipping.address.line2
+      @shopping_cart.shipping_city=session.shipping.address.city
+      @shopping_cart.shipping_name=session.shipping.name
+      @shopping_cart.shipping_state=session.shipping.address.state
+      @shopping_cart.shipping_zip=session.shipping.address.postal_code
+    rescue
+      warn "had a cart error/missing field"
+    end
     @shopping_cart.shipping_email=customer.email
-    @shopping_cart.save!
+      @shopping_cart.save!
     
     
     # record payment

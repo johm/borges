@@ -88,7 +88,8 @@ class ShoppingCart < ActiveRecord::Base
     self.completed=false
 
     #send an email
-    OrderMailer.confirmation_email(self).deliver
+
+    OrderMailer.confirmation_email(self).deliver rescue warn "couldn't send email."
 
     self.save!
   end
