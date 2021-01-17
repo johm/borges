@@ -77,10 +77,15 @@ class ShoppingCart < ActiveRecord::Base
     submitted?
   end
 
+
   def complete
     self.completed=true
     self.completed_when=DateTime.now
     self.save
+  end
+  
+  def shipping?
+   !(shipping_method=="Pickup") 
   end
   
   def submit_order
@@ -90,7 +95,8 @@ class ShoppingCart < ActiveRecord::Base
     self.completed=false
 
     #send an email
-    OrderMailer.confirmation_email(self).deliver
+
+    OrderMailer.confirmation_email(self).deliver rescue warn "couldn't send email."
 
     self.save!
   end

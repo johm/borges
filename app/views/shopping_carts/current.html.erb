@@ -87,6 +87,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= mytextfield f,"Name",:shipping_name %>
 </div>
 <br />
+<!--
 <div id="shipping_address" style="<%= 'display:none' if @shopping_cart.shipping_method=='Pickup' %>">
 <h4>Where should this order be delivered?</h4>
 <div style="margin-left:-0px">
@@ -99,6 +100,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= myselector f,"Business or residential?",:shipping_address_type,['Residential','Business'] %>
 </div>
 </div>
+-->
 <!-- 
      <div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
        <div style="margin-left:-0px">
@@ -107,13 +109,16 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
      </div>
 -->
 
-<script src="https://checkout.stripe.com/checkout.js"></script>
 
-<button id="customButton" class="btn btn-success" style="margin-left:0px;" >Proceed to checkout</button>
+<script src="https://js.stripe.com/v3/"></script>
+
+
+
+<button id="checkout-button" class="btn btn-success" style="margin-left:0px;" >Proceed to checkout</button>
 <div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
 
   <div style="margin-top:20px;margin-left:0px;">
-    <small>Get updates? &nbsp;</small>
+    <small>Get our newsletter? &nbsp;</small>
     <%= f.check_box :shipping_subscribe, {checked: true} %> 
   </div>
 
@@ -122,26 +127,18 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= myplaintextarea f,"Notes on your order",:shipping_notes,{:rows=>5,:style=>"width:100%"} %>
 </div>
 
-<script>
-  var handler = StripeCheckout.configure({
-    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
-    image: "/assets/redemmas/emmas.png",
-    token: function(token) {
-   // Use the token to create the charge with a server-side script.
-  // You can access the token ID with `token.id`
-  var input_token = $("<input>").attr("type", "hidden").attr("name","stripe_token").val(token.id);
-  var input_email = $("<input>").attr("type", "hidden").attr("name","stripe_email").val(token.email);
-  $('.checkoutform').append($(input_token));
-  $('.checkoutform').append($(input_email));
-  $('.checkoutform').submit();
-    }
-  });
+<script type="text/javascript">
 
-  document.getElementById('customButton').addEventListener('click', function(e) {
-  e.preventDefault();
-  // Open Checkout with further options
-      errorful=false
-      if ($("#shopping_cart_shipping_name").val()=="" || $("#shopping_cart_shipping_name").val()== null){
+  document.getElementById('checkout-button').addEventListener('click', function(e) {
+
+      e.preventDefault();
+  
+
+
+  
+// Open Checkout with further options
+errorful=false
+if ($("#shopping_cart_shipping_name").val()=="" || $("#shopping_cart_shipping_name").val()== null){
 	  $("#shopping_cart_shipping_name").css("border","1px solid red");
 	  errorful=true;
       }
@@ -169,21 +166,38 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 	  
       
       if (!errorful) {
-	  handler.open({
-	      name: "Red Emma's",
-	      description: 'Bookstore Coffeehouse',
-	      amount: parseFloat($("#cart_total").html())*100
-  });
-  }
+	  // Create an instance of the Stripe object with your publishable API key
+	  var stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+	 // console.log($('#checkout-form').serialize());
+	  $.ajax( {url: "/update_cart", 
+		   data: $('.checkoutform').serializeArray(),
+		   type: 'POST',
+		  }).done(
+		      fetch('/create-checkout-session', {
+			  method: 'PUT'
+		      }).then(function(response) {
+			  return response.json();
+		      }).then(function(session) {
+			  stripe.redirectToCheckout({ sessionId: session.id }).then(function(result) {
+			      // If `redirectToCheckout` fails due to a browser or network
+			      // error, you should display the localized error message to your
+			      // customer using `error.message`.
+			      if (result.error) {
+				  alert(result.error.message);
+			      }})}).catch(function(error) {
+			      console.error('Error:', error);
+			      }))
+      }
+		     
+      
   else{
   $("#warning").html("Please fill in the fields in red above!");
   }
-
   });
 
 
-  $("input,select").on('focus', function(e) {
-      $(this).css('border','1px solid #ccc');
+$("input,select").on('focus', function(e) {
+    $(this).css('border','1px solid #ccc');
         $("#warning").html("");
   });
 

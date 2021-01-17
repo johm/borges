@@ -224,6 +224,8 @@ Borges::Application.routes.draw do
   end
   resources :shopping_cart_line_items
 
+ 
+  
   get '/book/:isbn', :to => 'editions#byisbn'
   get '/book/', :to => 'editions#byisbn'
 
@@ -255,7 +257,9 @@ Borges::Application.routes.draw do
   get '/promotion/antifa', :to => 'home#promotion'
   get '/pages/about/', :to => 'home#about'
   get '/cart', :to => "shopping_carts#current"
+  get '/shopping_cart_success', :to => "shopping_carts#success"
   put '/update_cart', :to => "shopping_carts#update_current"
+  put '/create-checkout-session', :to => "shopping_carts#checkout"
   match '/bookfair' => 'event_locations#show',:defaults => {:id => 4}
   authenticated :user do
     root :to=>'home#frontpage' 

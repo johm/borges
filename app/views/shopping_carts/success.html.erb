@@ -1,0 +1,62 @@
+<div class="row spaceontop"> 
+  
+  <h1>Your order has been placed.</h1>
+  
+  
+  <div class="col-sm-8">
+    <table class="table">
+      <tr><th>Quantity</th><th>Item</th><th>Item Price</th><th>Total</th></tr>
+      <% @shopping_cart.shopping_cart_line_items.each do |li| %>
+      <tr class="shopping_cart_line_item" id="shopping_cart_line_item_#{@li.id}">
+	<td><%= li.quantity %></td>
+	<td><%= link_to "#{li.edition.title} #{li.edition}",li.edition %></td>
+	<td>$<%= li.cost %></td>
+	<td class="ext" id="shopping_cart_line_item_<%= li.id %>_ext">$<%= li.cost * li.quantity %></td>
+      </tr>
+      <% end %>
+      <tr>
+	<td></td>
+	<td></td>
+	<td>Subtotal:</td>
+	<td>$<span id="cart_subtotal"><%= @shopping_cart.subtotal %></span></td>
+      </tr>
+      <tr>
+	<td></td>
+	<td>Shipping: <strong><%= @shopping_cart.shipping_method %></strong></td>
+	<td></td>
+	<td>$<span id='shipping_cost'><%= @shopping_cart.shipping_cost %></span></td>
+	<td></td>
+      </tr>
+      
+      <tr>
+	<td></td>
+	<td>Sales tax:</td>
+	<td></td>
+	<td>$<span id='tax'><%= @shopping_cart.tax %></span></td>
+	
+      </tr>
+      
+      
+      <tr>
+	<td></td>
+	<td></td>
+	<td><strong>Total:</strong></td>
+	<td><strong>$<span id="cart_total"><%= @shopping_cart.total %></span></strong></td>
+      </tr>
+      
+
+      
+    </table>
+  </div>
+  
+  <h3>Thanks for your order!</h3>
+  
+  
+  <div class="modal-body">
+    <p>You will receive an automated email confirming your order soon (and a manual one if we have any questions about your order). Thank you for supporting a worker-owned radical business!</p>
+  </div>
+  <a href="/books" class="btn btn-primary">Back to our books section!</a>
+</div>
+
+
+
