@@ -87,6 +87,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= mytextfield f,"Name",:shipping_name %>
 </div>
 <br />
+<!--
 <div id="shipping_address" style="<%= 'display:none' if @shopping_cart.shipping_method=='Pickup' %>">
 <h4>Where should this order be delivered?</h4>
 <div style="margin-left:-0px">
@@ -99,6 +100,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <%= myselector f,"Business or residential?",:shipping_address_type,['Residential','Business'] %>
 </div>
 </div>
+-->
 <!-- 
      <div id="shipping_bike" style="<%= 'display:none' unless @shopping_cart.shipping_method=='Bike' %>">
        <div style="margin-left:-0px">
@@ -116,7 +118,7 @@ $("#notification").html('<%=escape_javascript(flash.discard(:notice)) %>').show(
 <div id="warning" style="color:#d00;margin-top:14px;margin-left:30px;"></div>
 
   <div style="margin-top:20px;margin-left:0px;">
-    <small>Get updates? &nbsp;</small>
+    <small>Get our newsletter? &nbsp;</small>
     <%= f.check_box :shipping_subscribe, {checked: true} %> 
   </div>
 

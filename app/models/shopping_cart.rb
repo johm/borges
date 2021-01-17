@@ -77,6 +77,10 @@ class ShoppingCart < ActiveRecord::Base
     submitted?
   end
 
+  def shipping?
+   !(shipping_method=="Pickup") 
+  end
+  
   def submit_order
     self.submitted=true
     self.submitted_when=DateTime.now

@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController 
-  before_filter :authenticate_user!, :except=>[:current,:update_current,:checkout]
-  protect_from_forgery :except => [:checkout]
+  before_filter :authenticate_user!, :except=>[:current,:update_current,:checkout,:success]
+  protect_from_forgery :except => [:checkout,:success]
 
 
   load_and_authorize_resource
@@ -176,26 +176,86 @@ class ShoppingCartsController < ApplicationController
 
   def checkout
     @shopping_cart=current_cart
-    stripe_session = Stripe::Checkout::Session.create({
+
+    shipping={}
+    shipping=  {shipping_address_collection: {allowed_countries: ['US']}} if @shopping_cart.shipping?
+    
+    stripe_session = Stripe::Checkout::Session.create(shipping.merge({
+                                                        client_reference_id: @shopping_cart.id, # for sanity on success
                                                         payment_method_types: ['card'],
+                                                        billing_address_collection: 'auto',
+                                                        allow_promotion_codes: 'true',
                                                         line_items:
-                                                          shopping_cart_line_items.collect do |x|   
+                                                          ((@shopping_cart.shopping_cart_line_items.collect do |x|   
                                                           {
                                                             price_data: {
                                                               currency: 'usd',
                                                               product_data: {
-                                                                name: 'T-shirt',
+                                                                name: "#{x.edition.title} #{x.edition}",
                                                               },
-                                                              unit_amount: x.cost,
+                                                              unit_amount: x.cost_in_cents,
                                                             },
                                                             quantity: x.quantity,
                                                           }
-                                                        end,
-                                                      mode: 'payment',
-                                                      success_url: 'https://example.com/success',
-                                                      cancel_url: 'https://example.com/cancel',
-                                                     })
+                                                          end).concat(
+                                                            [
+                                                              {
+                                                                price_data: {
+                                                                  currency: 'usd',
+                                                                  product_data: {
+                                                                    name: "Shipping method: #{@shopping_cart.shipping_method}"
+                                                                  },
+                                                                  unit_amount: @shopping_cart.shipping_cost.cents,
+                                                                },
+                                                                quantity: 1,
+                                                                
+                                                              },
+                                                              {
+                                                                price_data: {
+                                                                  currency: 'usd',
+                                                                  product_data: {
+                                                                    name: "Sales tax due"
+                                                                  },
+                                                                  unit_amount: @shopping_cart.tax.cents,
+                                                                },
+                                                                quantity: 1,
+                                                              }
+                                                            ])),
+                                                        mode: 'payment',
+                                                        success_url: "#{ENV['STRIPE_URL_BASE']}/shopping_cart_success?session_id={CHECKOUT_SESSION_ID}",
+                                                        cancel_url: 'https://example.com/cancel',
+                                                     }))
     render json: stripe_session 
+  end
+
+  def success
+    @shopping_cart=current_cart
+    raise "can't change ordered cart" if @shopping_cart.submitted?  
+    session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    raise "Stripe cart #{session.client_reference_id} doesn't match session cart #{@shopping_cart.id}!" unless session.client_reference_id.to_i == @shopping_cart.id.to_i
+    
+    customer = Stripe::Customer.retrieve(session.customer)
+    die customer
+    @shopping_cart.shipping_address_1=customer.shipping.address.line1
+    @shopping_cart.shipping_address_2=customer.shipping.address.line2
+    @shopping_cart.shipping_city=customer.shipping.address.city
+    @shopping_cart.shipping_name=customer.shipping_name
+    @shopping_cart.shipping_state=customer.shipping.address.state
+    @shopping_cart.shipping_zip=customer.shipping.address.postal_code
+    @shopping_cart.shipping_email=customer.email
+    @shopping_cart.save!
+    
+    
+    # record payment
+    @shopping_cart.submit_order
+    new_shopping_cart = ShoppingCart.new(:shipping_method=>"Pickup",:shipping_subscribe=>true)
+    new_shopping_cart.save!
+    session[:shopping_cart_id] = new_shopping_cart.id
+
+    respond_to do |format|
+      format.html {}
+    end
+    
   end
   
   def current
