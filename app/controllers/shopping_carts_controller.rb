@@ -25,6 +25,35 @@ class ShoppingCartsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shopping_carts }
+      format.csv {
+        unpaged_shopping_carts = @shopping_carts.except(:limit, :offset)
+        @csv=CSV.generate do |csv|
+          csv << ["Cart id","Ordered","Shipping Method","Address1","Address2","City","State","Zip","Total items","Items","Total","Status","Completed","Name","Email","Add to list?"]
+          unpaged_shopping_carts.each do |c|
+            csv << [
+              c.id,
+              c.ordered? ? c.submitted_when.to_formatted_s(:full_date_time) : "Not yet",
+              c.shipping_method,
+              c.shipping_address_1,
+              c.shipping_address_2,
+              c.shipping_city,
+              c.shipping_state,
+              c.shipping_zip,
+              c.number_of_items,
+              c.shopping_cart_line_items.collect { |li| "#{li.quantity} x #{li.edition.title rescue 'ERROR'} [#{li.edition.isbn13 rescue 'ERROR'}]" }.join(';'),
+              c.total,
+              [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].collect { |x| "#{x}" if c.send("#{x}?")}.join(';'),
+              c.completed?,
+              c.shipping_name,
+              c.shipping_email,
+              c.shipping_subscribe]
+          end
+        end
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-shopping-carts.csv\""  
+        render text: @csv 
+    
+      }
+
     end
   end
 
