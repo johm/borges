@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3-2-stable'
+gem 'rails', '3.2.22'
 
 
 
