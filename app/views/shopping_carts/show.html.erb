@@ -49,7 +49,7 @@
 	<tr><td style="padding:2px;">On order:</td><td style="padding:2px"><%= li.edition.title.on_order %></td></tr>
 	<tr><td style="padding:2px;">On unsold through online orders:</td><td style="padding:2px"><%= li.edition.needed_for_online %></td></tr>
       </table>
-      <%= mypostlinkbutton("<i class='fa fa-cut'></i> Split to new order","/shopping_cart_line_items/#{li.id}/split",{},{},"btn-small btn-success") if (@shopping_cart.ordered? && !@shopping_cart.completed? && !@shopping_cart.shipped && !@shopping_cart.picked_up ) %>
+      <%= mypostlinkbutton("<i class='fa fa-cut'></i> Split to new order","/shopping_cart_line_items/#{li.id}/split",{},{},"btn-small btn-success") if ((@shopping_cart.shopping_cart_line_items.length > 1) && @shopping_cart.ordered? && !@shopping_cart.completed? && !@shopping_cart.shipped && !@shopping_cart.pulled && !@shopping_cart.picked_up ) %>
      
     </td>
   </tr>
