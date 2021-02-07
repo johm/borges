@@ -222,9 +222,12 @@ Borges::Application.routes.draw do
       post :subscribe
     end
   end
-  resources :shopping_cart_line_items
 
- 
+  resources :shopping_cart_line_items do
+    member do
+      post :split
+    end
+  end
   
   get '/book/:isbn', :to => 'editions#byisbn'
   get '/book/', :to => 'editions#byisbn'

@@ -12,6 +12,27 @@ class ShoppingCartLineItemsController < ApplicationController
     end
   end
 
+  def split
+    @shopping_cart_line_item = ShoppingCartLineItem.find(params[:id])
+    @old_cart=@shopping_cart_line_item.shopping_cart
+    @new_cart=@old_cart.dup
+
+    @new_cart.notes="This order was split from order #{@old_cart.id}"
+
+    @new_cart.easypost_shipment_id=nil;
+    
+    @new_cart.save!
+    @old_cart.notes=@old_cart.notes+" This order has an item split onto order #{@new_cart.id}"
+    @old_cart.save!
+
+    @shopping_cart_line_item.shopping_cart = @new_cart
+    @shopping_cart_line_item.save!
+    respond_to do |format|
+      format.html { redirect_to @new_cart, notice: 'Successfully created a split cart.' }
+    end
+  end  
+
+  
   # GET /shopping_cart_line_items/1
   # GET /shopping_cart_line_items/1.json
   def show
