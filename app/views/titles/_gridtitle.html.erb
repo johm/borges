@@ -23,7 +23,10 @@
 	  <div>
 	    <% cache("emojitmetrics-title-#{title.id}", :expires_in => 20.minutes) do %>
 	    <%= render :partial=>'titles/emojimetrics', :locals => {:title=>title} %>
+	          
+
 	    <% end %>
+	    <%= raw("<span class='label label-default'>OOS</span>") unless title.is_in_stock? %>
 	  </div>
 	  <% end %>
 
