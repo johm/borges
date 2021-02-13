@@ -22,7 +22,7 @@ class ShoppingCartLineItemsController < ApplicationController
     @new_cart.easypost_shipment_id=nil;
     
     @new_cart.save!
-    @old_cart.notes=@old_cart.notes+" This order has an item split onto order #{@new_cart.id}"
+    @old_cart.notes=@old_cart.notes.to_s + " This order has an item split onto order #{@new_cart.id}"
     @old_cart.save!
 
     @shopping_cart_line_item.shopping_cart = @new_cart
