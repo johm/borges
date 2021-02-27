@@ -112,7 +112,7 @@
     <td><%= @shopping_cart.ordered? ? @shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
   </tr>
 
-  <tr>
+  <tr class="hideonprint">
     <th>Stripe payment token</th>
     <td><% if !@shopping_cart.shipping_stripe_id.blank?%>
       <%= link_to @shopping_cart.shipping_stripe_id, "https://dashboard.stripe.com/payments/"+@shopping_cart.shipping_stripe_id,{:target=>"_blank"} %>
@@ -121,11 +121,11 @@
       <% end %>
 </td>
   </tr>
-   <tr><th>Shipping weight in ounces</th><td><%= best_in_place @shopping_cart, :weight, :as => :select, :collection => (1..320).each_with_object({}) { |num, hash| hash[num] = "#{num} oz." } 
+   <tr  class="hideonprint"><th>Shipping weight in ounces</th><td><%= best_in_place @shopping_cart, :weight, :as => :select, :collection => (1..320).each_with_object({}) { |num, hash| hash[num] = "#{num} oz." } 
  %></td></tr>
 
 <% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].each do |x| %>
-  <tr>
+  <tr  class="hideonprint">
     <th><%= x %>?</th>
     <td>
       <div id="cart_state_text_<%= x %>" style="float:left;margin-right:10px;"><%= @shopping_cart.send("#{x}?") ? "Yes" : "Not yet"  %>     </div>
@@ -139,7 +139,7 @@
 
 
 
-  <tr>
+  <tr  class="hideonprint">
     <th>Completed?</th>
     <td>
             <div style="float:left;margin-right:10px;"><%= @shopping_cart.completed? ? @shopping_cart.completed_when.to_formatted_s(:full_date_time) : "Not yet"  %></div>
@@ -148,7 +148,7 @@
   </tr>
 
   <% if !@shopping_cart.completed? %>
-  <tr>
+  <tr  class="hideonprint">
     <th>Defer?</th>
     <td>
       <div><%= @shopping_cart.deferred? ? "Yes" : ""  %></div>
@@ -158,7 +158,7 @@
   <% end %>
 
 <% if @shopping_cart.shipping_subscribe? && ! @shopping_cart.shipping_subscribed? %>  
-  <tr>
+  <tr  class="hideonprint">
     <th>Subscribe to our list</th>
     <td>
       <%= link_to "Add to list",ENV["MAILCHIMP_URL"],{:class=>"btn btn-success btn-mini",:target=>"_blank"} %>
@@ -167,7 +167,7 @@
     </td>
   </tr>
 <% end %>
-   <tr><th>Our notes</th><td><%= best_in_place @shopping_cart, :notes, :type => :textarea %></td></tr>
+   <tr><th>Our notes</th><td><%= best_in_place @shopping_cart, :notes, :as => :textarea, :html_attrs => { :cols => '30', :rows => '20' } %></td></tr>
 </table>
   </div>
 </div>

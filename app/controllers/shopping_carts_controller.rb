@@ -8,7 +8,7 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc").page(params[:page]).per(200)
+    @shopping_carts = ShoppingCart.where(:submitted=>true).order("submitted_when desc").page(params[:page]).per(20000)
     @cart_search=CartSearch.new(params[:cart_search])
 
     @shopping_carts = @shopping_carts.where(:completed=>[false,nil]) unless @cart_search.show_completed
