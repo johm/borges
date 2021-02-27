@@ -48,13 +48,23 @@ class ImageUploader < CarrierWave::Uploader::Base
      process :resize_to_limit => [800, 100000]
   end
 
+  version :opengraph do
+    process :socialize
+  end
+
+  def socialize
+    manipulate! do |img|
+      background=Magick::Image.read("#{Rails.root}/app/assets/images/book-fb-background.jpg").first
+      img=background.composite(img.change_geometry("1100x580"){ |cols, rows, img|  img.resize!(cols, rows)} ,Magick::CenterGravity, Magick::OverCompositeOp)
+    end
+  end
+  
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png php
-)
-  end
+)  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
