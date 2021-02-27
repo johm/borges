@@ -6,6 +6,7 @@
 <%= tag "meta", :property=>"og:title",:content=>@title.title %>
 <%= tag "meta", :property=>"og:type",:content=>"website" %>
 <% if !(@edition.nil? || @edition.cover_url.blank?) %>
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://redemmas.org/<%= @edition.cover_url(:opengraph) %>">
 <% end %>
 <%= tag "meta", :property=>"og:url",:content=>"https://redemmas.org/titles/#{@title.id}" %>
