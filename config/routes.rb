@@ -217,6 +217,7 @@ Borges::Application.routes.draw do
       post :toggle_picked_up
       post :toggle_pickup_notify
       post :toggle_is_preorder
+      post :toggle_needs_attention
       post :defer
       post :ship
       post :subscribe

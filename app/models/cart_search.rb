@@ -1,5 +1,5 @@
 class CartSearch
-  attr_accessor :show_completed, :only_preorders, :no_preorders,:just_pickup,:just_mediamail,:just_prioritymail,:pulled,:unpulled,:email
+  attr_accessor :show_completed, :only_preorders, :no_preorders,:just_pickup,:just_mediamail,:just_prioritymail,:pulled,:unpulled,:email,:needs_attention
 
 
   def initialize(h)
