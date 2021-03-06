@@ -18,6 +18,7 @@ class ShoppingCartsController < ApplicationController
     @shopping_carts = @shopping_carts.where(:shipping_method=>"USPS Media Mail") if @cart_search.just_mediamail
     @shopping_carts = @shopping_carts.where(:shipping_method=>"USPS Priority") if @cart_search.just_prioritymail
     @shopping_carts = @shopping_carts.where(:pulled=>true) if @cart_search.pulled
+    @shopping_carts = @shopping_carts.where(:needs_attention=>true) if @cart_search.needs_attention
     @shopping_carts = @shopping_carts.where(:pulled=>[false,nil]) if @cart_search.unpulled
     @shopping_carts = @shopping_carts.where("shipping_email LIKE ?", "%" + @cart_search.email + "%" ) unless @cart_search.email.blank?
 
@@ -42,7 +43,7 @@ class ShoppingCartsController < ApplicationController
               c.number_of_items,
               c.shopping_cart_line_items.collect { |li| "#{li.quantity} x #{li.edition.title rescue 'ERROR'} [#{li.edition.isbn13 rescue 'ERROR'}]" }.join(';'),
               c.total,
-              [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].collect { |x| "#{x}" if c.send("#{x}?")}.join(';'),
+              [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder,:needs_attention].collect { |x| "#{x}" if c.send("#{x}?")}.join(';'),
               c.completed?,
               c.shipping_name,
               c.shipping_email,
@@ -336,6 +337,10 @@ class ShoppingCartsController < ApplicationController
 
  def toggle_pickup_notify
     toggle_state(ShoppingCart.find(params[:id]),:pickup_notify)
+ end
+
+  def toggle_needs_attention
+    toggle_state(ShoppingCart.find(params[:id]),:needs_attention)
   end
 
  

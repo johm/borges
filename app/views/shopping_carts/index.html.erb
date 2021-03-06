@@ -11,6 +11,7 @@
           <button type="button" class="btn btn-default btn-sm">Show only priority mail? <%= f.check_box :just_prioritymail, onchange: "this.form.submit();" %></button>
       <button type="button" class="btn btn-default btn-sm">Show only pulled orders? <%= f.check_box :pulled, onchange: "this.form.submit();" %></button>
       <button type="button" class="btn btn-default btn-sm">Show only unpulled orders? <%= f.check_box :unpulled, onchange: "this.form.submit();" %></button>
+            <button type="button" class="btn btn-default btn-sm">Show only what needs attention? <%= f.check_box :needs_attention, onchange: "this.form.submit();" %></button>
       <button type="button" class="btn btn-default btn-sm">Filter by email? <%= f.text_field :email  %></button>
     <% end %>
   </div>
@@ -51,9 +52,9 @@
     </td>
     <td><%= shopping_cart.total %></td>
     <td>
-      <% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder].each do |x| %>
+      <% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder,:needs_attention].each do |x| %>
       <% if shopping_cart.send("#{x}?") %>
-      <span class="label label-default"><%= "#{x}" %></span>
+      <span class="label <%= x == :needs_attention ? 'label-warning' : 'label-default' %>"><%= "#{x}" %></span>
       <% end %>
       <% end %>
     </td>
