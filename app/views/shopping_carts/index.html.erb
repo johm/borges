@@ -44,7 +44,7 @@
       <small>
 	<ul>
 	<% shopping_cart.shopping_cart_line_items.each do |li| %>
-      <li><%= li.quantity %>x <%= link_to "#{li.edition.title}",li.edition %>
+      <li><%= li.quantity %>x <%= li.edition.nil? ? "MISSING EDITION" : (link_to "#{li.edition.title}",li.edition) %>
       <% end %>
       </ul>
       </small>
