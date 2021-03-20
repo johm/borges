@@ -68,7 +68,7 @@ gem 'sunspot_solr'
 gem "sunspot_with_kaminari"
 gem 'jquery-datetimepicker-rails'
 gem "progress_bar"
-gem 'lazy_high_charts'
+gem "chart-js-rails"
 gem 'ri_cal', :git=>"git://github.com/johm/ri_cal"
 gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"

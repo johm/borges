@@ -1,43 +1,100 @@
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<h1>Average time on shelves vs. profit to date for titles from <%= @distributor.name %></h1>
+<canvas id="myChart" width="400" height="400"></canvas>
+
+
+2
+
 
 <script>
-    $(function () {
-	    $('#container').highcharts({
-		    chart: {
-			type: 'scatter',
-			zoomType: 'xy'
-		    },
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+	instocklabels: [<%=  raw @instock.collect {|t| "'#{t[:title]} [#{t[:id]}]'"}.join(", ") %>],
+	instockids: [<%=  raw @instock.collect {|t| t[:id]}.join(", ") %>],
+	outofstocklabels: [<%=  raw @outofstock.collect {|t| "'#{t[:title]} [#{t[:id]}]'"}.join(", ") %>],
+	outofstockids: [<%=  raw @outofstock.collect {|t| t[:id]}.join(", ") %>],
+	datasets: [
+	    {label: "Titles in stock",
+	     backgroundColor: 'rgba(30,255,30,0.5)',
+	     data: [ <%=  raw @instock.collect {|t| "{x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %>]},
+	    {label: "Titles out of stock",
+	     backgroundColor: 'rgba(255,30,30,0.5)',
+	    data: [ <%=  raw @outofstock.collect {|t| "{x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %>]}
+	    
+		   
+		   ,]
+    },
+    options: {
+	onClick: (evt, item) => {
+	    e = item[0];
+	    if(e._datasetIndex == 0) {
+		window.open("/titles/"+myChart.data.instockids[e._index]);}
+	    else{
+		window.open("/titles/"+myChart.data.outofstockids[e._index]);}
+	},
+	plugins: {
+            zoom: {
+                // Container for pan options
+                pan: {
+                    // Boolean to enable panning
+                    enabled: true,
 		    
-		    title: {
-			text: 'Average time on shelves vs. profit to date'
-		    },
-		    subtitle: {
-			text: 'for titles from <%= @distributor.name %>'
-		    },
-		    xAxis: {
-			title: {
-			    enabled: true,
-			    text: 'Days on shelf'
-			}},
+                    // Panning directions. Remove the appropriate direction to disable 
+                    // Eg. 'y' would only allow panning in the y direction
+                    mode: 'xy'
+                },
 
-		    yAxis: {
-			title: {
-			    enabled: true,
-			    text: 'Profit to date'
-			}
-		    },
+                // Container for zoom options
+                zoom: {
+                    // Boolean to enable zooming
+                    enabled: true,
+		    drag:true,
+                    // Zooming directions. Remove the appropriate direction to disable 
+                    // Eg. 'y' would only allow zooming in the y direction
+                    mode: 'xy',
+                }
+            }
+        },
 
-		    plotOptions: {
-		    scatter: {
-			tooltip: {pointFormat: '<b>{point.title}</b>'}}},
-		    
-		    series: [ {name:"Titles in stock",data: [ <%=  raw @title_info.find_all {|t| t[:instock]}.collect {|t| "{ title: '#{t[:title].gsub(/[^0-9a-z ]/i, '')}', x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %> ]},
-    {name:"Titles out of stock",data: [ <%=  raw @title_info.find_all {|t| ! t[:instock]}.collect {|t| "{ title: '#{t[:title].gsub(/[^0-9a-z ]/i, '')}', x: #{t[:average_time_on_shelf]},y: #{t[:profit_to_date]}}"}.join "," %> ]},
+	tooltips: {
+	    callbacks: {
+		label: function(tooltipItem, data) {
+		    var label;
+		    if(tooltipItem.datasetIndex == 0) {
+			label = data.instocklabels[tooltipItem.index];}
+		    else {
+			label = data.outofstocklabels[tooltipItem.index];
+		    }
+		    return label;
+		}
+	    }
+	} ,
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom',
+		scaleLabel: {
+		    display: true,
+		    labelString: "Days on shelf"
+		}
+	    }],
+	    yAxes: [{
+                type: 'linear',
+                position: 'left',
+		scaleLabel: {
+		    display: true,
+		    labelString: "Profit to date"
+		}
+            }]
 
+	    
+        }
+    }
+});
+    
 
-]
-		})});
 </script>
 
 
