@@ -94,7 +94,9 @@ class CategoriesController < ApplicationController
 
   def chart
     @category = Category.find(params[:id])
-    @title_info=@category.titles.collect {|t| t}.uniq.collect {|t| {:instock=>t.in_stock > 0,:title=>t.title,:average_time_on_shelf=>t.average_time_on_shelf,:profit_to_date=>t.net_profit_or_loss}}
+    @title_info=@category.titles.collect {|t| t}.uniq.collect {|t| {:instock=>t.in_stock > 0,:title=>t.title.gsub(/[^0-9a-z ]/i,""),:average_time_on_shelf=>t.average_time_on_shelf,:profit_to_date=>t.net_profit_or_loss.cents/100,:id=>t.id}}
+    @instock=@title_info.find_all {|t| t[:instock]}
+    @outofstock=@title_info.find_all {|t| ! t[:instock]}
     respond_to do |format|
       format.html { render action: "chart" }
     end

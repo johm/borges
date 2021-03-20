@@ -22,14 +22,15 @@
 //= require jquery.purr
 //= require best_in_place
 //= require jquery.datetimepicker
-//= require highcharts/highcharts                                                           
+
 //= require mediaelement_rails
+//= require Chart.min
 //= require_tree .
 
 
 
-// require highcharts/highcharts-more                                                         
-// require highcharts/highstock
+
+
 
 
 

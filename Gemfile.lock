@@ -58,6 +58,8 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    chart-js-rails (0.1.7)
+      railties (> 3.1)
     coderay (1.1.3)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -111,7 +113,6 @@ GEM
     friendly_id (4.0.9)
     googlebooks (0.0.9)
       httparty
-    hash-deep-merge (0.1.1)
     hashie (4.1.0)
     highline (2.0.3)
     hike (1.2.3)
@@ -139,8 +140,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    lazy_high_charts (1.5.8)
-      hash-deep-merge
     libv8 (3.16.14.19)
     lisbn (0.3.1)
       nokogiri
@@ -316,6 +315,7 @@ DEPENDENCIES
   bootstrap-switch-rails (= 0.1.1)
   cancan (>= 1.6.9)
   carrierwave
+  chart-js-rails
   coffee-rails (~> 3.2.1)
   database_cleaner (>= 1.0.0.RC1)
   default_value_for
@@ -333,7 +333,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
-  lazy_high_charts
   libv8 (>= 3.11.8)
   lisbn
   lol_dba
