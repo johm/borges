@@ -1,12 +1,15 @@
 
 <h1>Average time on shelves vs. profit to date for titles from <%= @distributor.name %></h1>
-<canvas id="myChart" width="400" height="400"></canvas>
+<button style="float:right" class="btn" onclick="window.myChart.resetZoom();">Reset zoom</button>
+<canvas id="myChart" width="100%" height="50%" style="height:80% !important;"></canvas>
 
 
 2
 
 
 <script>
+
+   
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'scatter',
