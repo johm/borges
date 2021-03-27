@@ -262,6 +262,7 @@ Borges::Application.routes.draw do
   get '/pages/about/', :to => 'home#about'
   get '/cart', :to => "shopping_carts#current"
   get '/shopping_cart_success', :to => "shopping_carts#success"
+  post '/webhook', :to => "shopping_carts#webhook"
   put '/update_cart', :to => "shopping_carts#update_current"
   put '/create-checkout-session', :to => "shopping_carts#checkout"
   match '/bookfair' => 'event_locations#show',:defaults => {:id => 4}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20210306202723) do
+ActiveRecord::Schema.define(:version => 20210327192513) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -479,11 +479,15 @@ ActiveRecord::Schema.define(:version => 20210306202723) do
     t.string   "easypost_shipment_id"
     t.boolean  "pickup_notify"
     t.boolean  "needs_attention"
+    t.string   "payment_status"
+    t.string   "payment_intent"
   end
 
   add_index "shopping_carts", ["created_at"], :name => "index_shopping_carts_on_created_at"
   add_index "shopping_carts", ["is_preorder"], :name => "index_shopping_carts_on_is_preorder"
   add_index "shopping_carts", ["needs_attention"], :name => "index_shopping_carts_on_needs_attention"
+  add_index "shopping_carts", ["payment_intent"], :name => "index_shopping_carts_on_payment_intent"
+  add_index "shopping_carts", ["payment_status"], :name => "index_shopping_carts_on_payment_status"
   add_index "shopping_carts", ["picked_up"], :name => "index_shopping_carts_on_picked_up"
   add_index "shopping_carts", ["pickup_notify"], :name => "index_shopping_carts_on_pickup_notify"
   add_index "shopping_carts", ["pulled"], :name => "index_shopping_carts_on_pulled"

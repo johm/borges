@@ -1,9 +1,9 @@
 class ShoppingCartsController < ApplicationController 
-  before_filter :authenticate_user!, :except=>[:current,:update_current,:checkout,:success]
-  protect_from_forgery :except => [:checkout,:success]
+  before_filter :authenticate_user!, :except=>[:current,:update_current,:checkout,:success,:webhook]
+  protect_from_forgery :except => [:checkout,:success,:webhook]
 
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:webhook]
 
   # GET /shopping_carts
   # GET /shopping_carts.json
@@ -210,14 +210,15 @@ class ShoppingCartsController < ApplicationController
   def checkout
     @shopping_cart=current_cart
 
+    
     shipping={}
     shipping=  {shipping_address_collection: {allowed_countries: ['US']}} if @shopping_cart.shipping?
     
     stripe_session = Stripe::Checkout::Session.create(shipping.merge({
-                                                        client_reference_id: @shopping_cart.id, # for sanity on success
-                                                        payment_method_types: ['card'],
-                                                        billing_address_collection: 'auto',
-                                                        allow_promotion_codes: 'true',
+                                                                       client_reference_id: @shopping_cart.id, # so we can update later
+                                                                       payment_method_types: ['card'],
+                                                                       billing_address_collection: 'auto',
+                                                                       allow_promotion_codes: 'true',
                                                         line_items:
                                                           ((@shopping_cart.shopping_cart_line_items.collect do |x|   
                                                           {
@@ -255,13 +256,85 @@ class ShoppingCartsController < ApplicationController
                                                               }
                                                             ])),
                                                         mode: 'payment',
-                                                        success_url: "#{ENV['STRIPE_URL_BASE']}/shopping_cart_success?session_id={CHECKOUT_SESSION_ID}",
+                                                        success_url: "#{ENV['STRIPE_URL_BASE']}/shopping_cart_success",
+                                                        #success_url: "#{ENV['STRIPE_URL_BASE']}/shopping_cart_success?session_id={CHECKOUT_SESSION_ID}",
                                                         cancel_url: "#{ENV['STRIPE_URL_BASE']}/cart"
-                                                     }))
+                                                                     }))
+
+    @shopping_cart.payment_intent=stripe_session.payment_intent
+    @shopping_cart.payment_status="PENDING"
+    @shopping_cart.save!
+    
     render json: stripe_session 
   end
 
   def success
+    @shopping_cart=current_cart
+    @shopping_cart.submit_order
+    
+    new_shopping_cart = ShoppingCart.new(:shipping_method=>"Pickup",:shipping_subscribe=>true)
+    new_shopping_cart.save!
+    session[:shopping_cart_id] = new_shopping_cart.id
+
+    if @shopping_cart.shopping_cart_line_items.empty? 
+      respond_to do |format|
+        format.html {redirect_to "/books" }
+      end
+    end
+    
+    respond_to do |format|
+      format.html {}
+    end
+  end
+
+
+  def webhook
+    endpoint_secret=ENV['STRIPE_ENDPOINT']
+    begin
+      sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+      payload = request.body.read
+      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+    rescue JSON::ParserError => e
+      # Invalid payload
+      head :bad_request
+    rescue Stripe::SignatureVerificationError => e
+      # Invalid signature
+        head :bad_request
+    end
+
+    json_data = JSON.parse(event.to_json)
+    
+    case json_data["type"]
+    when 'checkout.session.completed'
+      stuff=json_data["data"]["object"]
+      cart=ShoppingCart.find(stuff["client_reference_id"])
+      begin
+        cart.shipping_address_1=stuff["shipping"]["address"]["line1"]
+        cart.shipping_address_2=stuff["shipping"]["address"]["line2"]
+        cart.shipping_city=stuff["shipping"]["address"]["city"]
+        cart.shipping_name=stuff["shipping"]["name"]
+        cart.shipping_state=stuff["shipping"]["address"]["state"]
+        cart.shipping_zip=stuff["shipping"]["address"]["postal_code"]
+      rescue
+        cart.shipping_email=stuff["customer_details"]["email"]
+      end
+      cart.save!
+          
+    when 'payment_intent.succeeded'
+      payment_intent = event.data.object # contains a Stripe::PaymentIntent
+      puts 'PaymentIntent was successful!'
+      stuff=json_data["data"]["object"]
+      cart=ShoppingCart.where(:payment_intent => stuff["id"]).first
+      cart.payment_status="SUCCESS"
+      cart.shipping_stripe_id=stuff["id"]
+      cart.save!
+    else
+      puts "Unhandled event type: #{event.type}"
+    end
+    head :ok
+  end
+  
+  def finalize
     @shopping_cart=current_cart
     raise "can't change ordered cart" if @shopping_cart.submitted?  
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
@@ -281,16 +354,9 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.shipping_email=customer.email
       @shopping_cart.save!
     
-    
+     
     # record payment
     @shopping_cart.submit_order
-    new_shopping_cart = ShoppingCart.new(:shipping_method=>"Pickup",:shipping_subscribe=>true)
-    new_shopping_cart.save!
-    session[:shopping_cart_id] = new_shopping_cart.id
-
-    respond_to do |format|
-      format.html {}
-    end
     
   end
   
