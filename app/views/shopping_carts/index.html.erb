@@ -28,6 +28,7 @@
     <th>Total # Items</th>
     <th>Items</th>
     <th>Total</th>
+    <th>Payment Status</th>
     <th>Status?</th>
     <th>Completed?</th>
   </tr>
@@ -51,6 +52,7 @@
       </small>
     </td>
     <td><%= shopping_cart.total %></td>
+    <td><%= shopping_cart.payment_status %></td>
     <td>
       <% [:pulled,:sold_through,:shipped,:pickup_notify,:picked_up,:is_preorder,:needs_attention].each do |x| %>
       <% if shopping_cart.send("#{x}?") %>

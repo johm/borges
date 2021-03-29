@@ -111,9 +111,13 @@
     <th>Ordered?</th>
     <td><%= @shopping_cart.ordered? ? @shopping_cart.submitted_when.to_formatted_s(:full_date_time) : "Not yet"  %></td>
   </tr>
-
+  
   <tr class="hideonprint">
-    <th>Stripe payment token</th>
+    <th>Stripe payment status</th>
+    <td><%= @shopping_cart.payment_status %></td>
+  </tr>
+  <tr class="hideonprint">
+      <th>Stripe payment token</th>
     <td><% if !@shopping_cart.shipping_stripe_id.blank?%>
       <%= link_to @shopping_cart.shipping_stripe_id, "https://dashboard.stripe.com/payments/"+@shopping_cart.shipping_stripe_id,{:target=>"_blank"} %>
       <% else %>
