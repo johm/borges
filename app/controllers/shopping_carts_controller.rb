@@ -316,8 +316,9 @@ class ShoppingCartsController < ApplicationController
         cart.shipping_state=stuff["shipping"]["address"]["state"]
         cart.shipping_zip=stuff["shipping"]["address"]["postal_code"]
       rescue
-        cart.shipping_email=stuff["customer_details"]["email"]
+        puts "Something missing in address"
       end
+      cart.shipping_email=stuff["customer_details"]["email"]
       cart.save!
           
     when 'payment_intent.succeeded'
