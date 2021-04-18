@@ -36,13 +36,19 @@ class DashboardController < ApplicationController
     @invoices=Invoice.where(:received => true).where(:received_when => @date_range_object.range_start..@date_range_object.range_end)  
     @shipping_costs=@invoices.inject(Money.new(0)) {|sum,i| sum + i.shipping_cost }
 
+    @shopping_carts=ShoppingCart.where(:submitted => true).where(:submitted_when => @date_range_object.range_start..@date_range_object.range_end)  
+    @shipping_income=@shopping_carts.inject(Money.new(0)) {|sum,i| sum + i.shipping_cost }
+    @tax_exempt_sales=@shopping_carts.find_all {|x| not x.is_taxable?}.inject(Money.new(0)) {|sum,i| sum + i.taxable_subtotal }
+
+
+
     @days=@sales_by_date.keys.sort
     
-    @saleschart = LazyHighCharts::HighChart.new('column') do |f|
-      f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.subtotal_after_discount).to_f} } )
-      f.title({ :text=>"Sales"})
-      f.xAxis(:categories => @days)
-    end    
+#    @saleschart = LazyHighCharts::HighChart.new('column') do |f|
+#      f.series(:name=>'Books & Merch',:data=> @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.subtotal_after_discount).to_f} } )
+#      f.title({ :text=>"Sales"})
+#      f.xAxis(:categories => @days)
+#    end    
 
     @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.subtotal_after_discount} }
     @cost=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.cost} }
@@ -78,19 +84,19 @@ class DashboardController < ApplicationController
 
 
 
-    @formatchart = LazyHighCharts::HighChart.new('pie') do |f|
-      f.chart({:defaultSeriesType=>"pie" } )
-      f.series(:type=>'pie',:name=>'Merchandise',:data=> @format_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
-      f.title({ :text=>"Sales by format"})
+#    @formatchart = LazyHighCharts::HighChart.new('pie') do |f|
+#      f.chart({:defaultSeriesType=>"pie" } )
+#      f.series(:type=>'pie',:name=>'Merchandise',:data=> @format_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
+#      f.title({ :text=>"Sales by format"})
       
-    end    
+#    end    
 
-    @sectionchart = LazyHighCharts::HighChart.new('pie') do |f|
-      f.chart({:defaultSeriesType=>"pie" } )
-      f.series(:type=>'pie',:name=>'Merchandise',:data=> @section_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
-      f.title({ :text=>"Sales by section"})
+#    @sectionchart = LazyHighCharts::HighChart.new('pie') do |f|
+#      f.chart({:defaultSeriesType=>"pie" } )
+#      f.series(:type=>'pie',:name=>'Merchandise',:data=> @section_to_total.collect {|k,v| [k,((v/@prediscount_total) *100)  ]})
+#      f.title({ :text=>"Sales by section"})
       
-    end    
+#    end    
     
  
   end

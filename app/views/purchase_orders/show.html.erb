@@ -106,7 +106,7 @@
 	
 	<tr>
 	  <th>Notes:</th>
-	  <td><%= best_in_place @purchase_order, :notes, :type => :textarea %></td>
+	  <td><%= best_in_place @purchase_order, :notes, :as => :textarea, :html_attrs => { :cols => '30', :rows => '20' } %></td>
 	</tr>
       </table>
 

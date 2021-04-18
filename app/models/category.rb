@@ -20,11 +20,15 @@ class Category < ActiveRecord::Base
 
 
   def titles_in_stock
-    titles.find_all {|t| t.in_stock > 0 }.length
+    Rails.cache.fetch("/category/#{id}/titles_in_stock", :expires_in => 12.hours) do
+      titles.find_all {|t| t.in_stock > 0 }.length
+    end
   end
   
   def copies_sold
-    titles.inject(0) {|sum,t| sum + t.sold}
+    Rails.cache.fetch("/category/#{id}/copies_sold", :expires_in => 12.hours) do
+      titles.inject(0) {|sum,t| sum + t.sold}
+    end
   end
   
 

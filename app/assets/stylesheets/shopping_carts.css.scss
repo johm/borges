@@ -11,3 +11,12 @@
 #OrderConfirmation div {
 		   background-color:#fff;    
 }
+
+
+
+@media print {
+.hideonprint {
+display:none;
+}
+
+}

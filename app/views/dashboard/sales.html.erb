@@ -10,7 +10,7 @@
   <% end %>
 
 
-  <%= high_chart("saleschart", @saleschart) %>
+  <!-- high_chart("saleschart", @saleschart) -->
   
   <div>
     <strong>Revenue: $<%= @revenue %></strong>  (does not include sales tax collected)
@@ -28,6 +28,16 @@
   <div>
     <strong>Days in period with sales: <%= @days.length %> </strong>
   </div>
+
+  <div>
+    <strong>Online shipping income for this period: <%= @shipping_income %> </strong>
+  </div>
+
+  <div>
+    <strong>Total amount of online orders for this period that are exempt from sales tax: <%= @tax_exempt_sales %> </strong>
+  </div>
+
+
 
   <hr>
   
@@ -66,13 +76,13 @@
 
 <h2>Sales by format</h2>
 
-<%= high_chart("formatchart", @formatchart) %>
+<!-- high_chart("formatchart", @formatchart) -->
 
 </div>
     
 <h2>Sales by section</h2>
 
-<%= high_chart("sectionchart", @sectionchart) %>
+<!-- high_chart("sectionchart", @sectionchart) -->
 
 </div>
 

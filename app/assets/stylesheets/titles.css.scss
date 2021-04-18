@@ -173,6 +173,19 @@ a.gridcover {
     border: 4px solid white;
 }
 
+@media (min-width: 992px) and (max-width:1199px){
+a.gridcover {
+    height: 300px !important;
+    }
+}
+
+@media (min-width: 1200px) and (max-width:1600px){
+a.gridcover {
+    height: 400px !important;
+    }
+}
+
+
 @media (max-width: 768px){
 a.gridcover {
     height: 300px !important;

@@ -7,7 +7,7 @@ function unabridge(el){
 
 jQuery('document').ready(function (){
 
-    if(sessionStorage && !sessionStorage.getItem('visited')){
+    if(false && sessionStorage && !sessionStorage.getItem('visited')){
             $('.emergencyalert').show();
             sessionStorage.setItem('visited', true);
     }

@@ -153,7 +153,7 @@ class PurchaseOrdersController < ApplicationController
     
     @purchase_order.ordered=true
     @purchase_order.ordered_when=DateTime.now
-    @purchase_order.order_by_when=nil
+    # @purchase_order.order_by_when=nil
 
     @purchase_order.save!
 

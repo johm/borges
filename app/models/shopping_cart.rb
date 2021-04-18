@@ -32,9 +32,13 @@ class ShoppingCart < ActiveRecord::Base
     shopping_cart_line_items.find_all {|x| !x.edition.untaxed? rescue false}.inject(Money.new(0)) { |sum,i| sum + (i.cost * i.quantity)}
   end
 
+  def is_taxable?
+    shipping_method=="Pickup" || shipping_method=="Bike" || shipping_state=="MD"
+  end
+
   
   def tax
-    if (shipping_method=="Pickup" || shipping_method=="Bike" || shipping_state=="MD")
+    if is_taxable?
         taxable_subtotal * 0.06
     else #no tax due, we need a report to pull these out!
       Money.new(0)

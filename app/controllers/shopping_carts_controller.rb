@@ -329,6 +329,7 @@ class ShoppingCartsController < ApplicationController
       cart.payment_status="SUCCESS"
       cart.shipping_stripe_id=stuff["id"]
       cart.save!
+      cart.submit_order unless cart.submitted?  
     else
       puts "Unhandled event type: #{event.type}"
     end
