@@ -432,14 +432,21 @@ class ShoppingCartsController < ApplicationController
   def ship
     @shopping_cart = ShoppingCart.find(params[:id])
     rate=params[:rate]
-    if (! @shopping_cart.weight.nil? ) && (rate == "MediaMail" || rate == "Priority")
+    if (! @shopping_cart.weight.nil? ) && (rate == "MediaMail" || rate == "Priority" || rate == "PriorityFR" )
       EasyPost.api_key= ENV["EASYPOST_API_KEY"]
+      if rate=="PriorityFR"
+        predefined_package = "FlatRateEnvelope"
+        rate = "Priority" 
+      end
+
       parcel = EasyPost::Parcel.create(
         :weight => @shopping_cart.weight,
         :height => 4,
         :length => 14,
-        :width => 10
+        :width => 10,
+        :predefined_package => predefined_package
       )
+
 
       from_address = EasyPost::Address.create(
         street1: "1225 CATHEDRAL ST.",

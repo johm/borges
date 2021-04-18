@@ -16,6 +16,7 @@
 <% if @shopping_cart.ordered? && !@shopping_cart.completed? && !@shopping_cart.shipping_address_1.blank? %>
 <%= mypostlinkbutton("<i class='fa fa-envelope'></i> Ship order via Media Mail",ship_shopping_cart_path(@shopping_cart,:rate=>"MediaMail"),{},{},"btn-small btn-success")  %>
 <%= mypostlinkbutton("<i class='fa fa-envelope'></i> Ship order via Priority",ship_shopping_cart_path(@shopping_cart,:rate=>"Priority"),{},{},"btn-small btn-success") %>
+<%= mypostlinkbutton("<i class='fa fa-envelope'></i> Ship order via Priority Flat Rate",ship_shopping_cart_path(@shopping_cart,:rate=>"PriorityFR"),{},{},"btn-small btn-success") %>
 <% end %>
 <% else %>
 <%= link_to "Print postage",@shipment.postage_label.label_url, :target=>"_blank", :class=>"btn btn-success btn-small"  %> 
