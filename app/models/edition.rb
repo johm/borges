@@ -35,6 +35,16 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def cover_image_url
+    cover_url(:medium)
+  end
+  
+  def opengraph_image_url
+    cover_url(:opengraph)
+  end
+
+  
+  
   def edition_string
     "#{id} #{format} #{isbn13}"
   end

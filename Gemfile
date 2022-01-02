@@ -81,3 +81,7 @@ gem "font-awesome-rails"
 gem "summernote-rails", "= 0.8.1.1"
 gem "easypost"
 gem "rest-client"
+gem "graphql", "= 1.12.23"
+
+#gem "graphiql-rails", :group => :development
+
