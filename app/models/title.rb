@@ -22,6 +22,11 @@ class Title < ActiveRecord::Base
       editions.map {|e| "#{e.isbn13} #{e.isbn10}"}
     end
 
+    integer :year_of_publication, :multiple => true do
+      editions.map {|e| e.year_of_publication }
+    end
+
+
     integer :copies_sold do
       copies.where(status: "SOLD").length
     end
@@ -51,7 +56,7 @@ class Title < ActiveRecord::Base
   accepts_nested_attributes_for :title_category_memberships, :allow_destroy => true    
 
   def slug
-    title.downcase.gsub(/[^a-z0-9]/, "-")  
+    title.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")   
   end
 
   def to_param
