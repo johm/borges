@@ -8,10 +8,21 @@ class TitleList < ActiveRecord::Base
 
   accepts_nested_attributes_for :title_list_memberships, :allow_destroy => true  
 
+  def to_param
+    "#{id}-#{slug}"
+  end
+
+
+  
   def to_s
     name_and_id
   end
 
+  def slug
+    name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")  
+  end
+
+  
   def name_and_id
     "#{name} (#{id})"
   end

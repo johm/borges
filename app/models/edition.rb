@@ -35,6 +35,26 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def as_json(*)
+    super.tap do |hash|
+      hash["instock"] = my_stock_status
+      #libro.fm here
+    end
+  end
+  
+  
+  def cover_image_url
+    cover_url(:medium)
+  end
+  
+  def opengraph_image_url
+    cover_url(:opengraph)
+  end
+
+  def publisher_name
+    publisher.name rescue ""
+  end
+  
   def edition_string
     "#{id} #{format} #{isbn13}"
   end

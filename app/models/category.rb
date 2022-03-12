@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def slug
-    name.downcase.gsub(/[^a-z0-9]/, "-")  
+    name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")  
   end
 
   def to_param
