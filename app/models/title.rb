@@ -33,6 +33,21 @@ class Title < ActiveRecord::Base
 
   end
 
+  def as_json(*)
+    super.tap do |hash|
+      hash["the_title"] = {slug: to_param,
+                           title: title,
+                           contributions: contributions.map {|x| {author: {fullName: x.author.full_name },
+                                                                  what: x.what,
+                                                             }}}
+      hash["the_edition"] = {cover_image_url: latest_edition.cover_image_url,
+                             list_price: latest_edition.list_price.to_s,
+                             key: latest_edition.id}
+    end
+  end
+  
+
+  
   has_many :contributions
   has_many :authors, :through => :contributions
   has_many :editions
@@ -51,7 +66,7 @@ class Title < ActiveRecord::Base
   accepts_nested_attributes_for :title_category_memberships, :allow_destroy => true    
 
   def slug
-    title.downcase.gsub(/[^a-z0-9]/, "-")  
+    title.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")  
   end
 
   def to_param
@@ -62,6 +77,10 @@ class Title < ActiveRecord::Base
     title
   end
 
+  def titlelists
+    title_lists.where(:public => true)
+  end
+  
   def title_and_id
     "#{title} (#{id})"
   end

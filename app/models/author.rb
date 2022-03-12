@@ -16,7 +16,7 @@ class Author < ActiveRecord::Base
   end
 
   def slug
-    full_name.downcase.gsub(/[^a-z0-9]/, "-")  
+    full_name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")    
   end
 
   def to_param

@@ -16,14 +16,40 @@ module Types
       Title.find(id)
     end
 
+    field :author, AuthorType, null: false, description: "Find a author by ID" do
+      argument :id, ID, required: true
+    end
+    
+    def author(id:)
+      Author.find(id)
+    end
+
+    
 
     field :categories, [CategoryType], null: false, description: "Get all categories" 
     
     def categories
-      Category.includes(:titles)
+      Category.includes(:titles) # sort by what here?
     end
 
+    field :titlelists, [TitlelistType], null: false, description: "Get all title lists" 
+    
+    def titlelists
+      TitleList.where(:public => true).includes(:titles) # sort by what here?
+    end
+    
 
+    field :authors, [AuthorType],null:false, description: "Get all authors" do
+      argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
+    end
+    
+    def authors(**args)
+      if args[:updated_at]
+        Author.where('updated_at > ?',args[:updated_at]).includes(:titles)
+      else
+        Author.includes(:titles)
+      end
+    end
 
     
     field :edition, EditionType, null: false, description: "Find a edition by ID" do
@@ -36,11 +62,17 @@ module Types
 
 
     
-    field :titles, [TitleType],null: false, description: "Get all titles"
+    field :titles, [TitleType],null: false, description: "Get all titles" do
+      argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
+    end
 
 
-    def titles
-      Title.includes(:editions)
+    def titles(**args)
+      if args[:updated_at]
+        Title.where('updated_at > ?',args[:updated_at]).includes(:editions,:contributions,:categories,:title_lists)
+      else
+        Title.includes(:editions,:contributions,:categories,:title_lists)
+      end
     end
 
     field :editions, [EditionType],null: false, description: "Get all editions"

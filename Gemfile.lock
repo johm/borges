@@ -114,9 +114,6 @@ GEM
     friendly_id (4.0.9)
     googlebooks (0.0.9)
       httparty
-    graphiql-rails (1.8.0)
-      railties
-      sprockets-rails
     graphql (1.12.23)
     hashie (5.0.0)
     highline (2.0.3)
@@ -199,6 +196,7 @@ GEM
     rack (1.4.7)
     rack-cache (1.13.0)
       rack (>= 0.4)
+    rack-cors (1.0.3)
     rack-ssl (1.3.4)
       rack
     rack-test (0.6.3)
@@ -273,8 +271,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (0.0.1)
-      sprockets (>= 1.0.2)
     sqlite3 (1.4.2)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -341,7 +337,6 @@ DEPENDENCIES
   fontsquirrel-download
   friendly_id (= 4.0.9)
   googlebooks
-  graphiql-rails
   graphql (= 1.12.23)
   instagram
   jquery-datetimepicker-rails
@@ -359,6 +354,7 @@ DEPENDENCIES
   nested_form
   progress_bar
   quiet_assets (>= 1.0.2)
+  rack-cors
   rails (= 3.2.22)
   rails3-jquery-autocomplete
   rest-client
