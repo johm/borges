@@ -69,9 +69,9 @@ module Types
 
     def titles(**args)
       if args[:updated_at]
-        Title.where('updated_at > ?',args[:updated_at]).includes({:editions => :publisher },{:contributions => :author},:categories,:title_lists)
+        Title.where('updated_at > ?',args[:updated_at]).includes({:editions => :publisher },{:contributions => :author},:categories,{:title_list_memberships => :title_list})
       else
-        Title.includes({:editions => :publisher },{:contributions => :author},:categories,:title_lists)
+        Title.includes({:editions => :publisher },{:contributions => :author},:categories,{:title_list_memberships => :title_list})
       end
     end
 
