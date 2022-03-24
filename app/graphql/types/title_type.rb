@@ -8,5 +8,5 @@ class Types::TitleType < Types::BaseObject
   field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   field :contributions, [Types::ContributionType], null: true
   field :categories, [Types::CategoryType], null: true
-  field :titlelists, [Types::TitlelistType], null: true,camelize: false
+  field :title_lists, [Types::TitlelistType], null: true,camelize: false
 end
