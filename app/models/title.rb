@@ -51,7 +51,8 @@ class Title < ActiveRecord::Base
   has_many :contributions
   has_many :authors, :through => :contributions
   has_many :editions
-  has_many :copies, :through => :editions 
+  has_many :copies, :through => :editions
+  has_many :publishers, :through => :editions 
   has_many :purchase_order_line_items, :through => :editions
   has_many :title_lists,:through => :title_list_memberships
   has_many :title_list_memberships
@@ -77,9 +78,6 @@ class Title < ActiveRecord::Base
     title
   end
 
-  def titlelists
-    title_lists.where(:public => true)
-  end
   
   def title_and_id
     "#{title} (#{id})"
@@ -87,7 +85,7 @@ class Title < ActiveRecord::Base
 
   def latest_edition
     Rails.cache.fetch("/title/#{id}-#{updated_at}/latest_edition", :expires_in => 12.hours) do
-      editions.newest_first.first
+      editions.includes(:publisher).newest_first.first
     end
   end
 
@@ -97,7 +95,7 @@ class Title < ActiveRecord::Base
 
   def latest_published_edition
     Rails.cache.fetch("/title/#{id}-#{updated_at}/latest_published_edition", :expires_in => 12.hours) do
-      editions.published.newest_first.first || latest_edition
+      editions.includes(:publisher).published.newest_first.first || latest_edition
     end
   end
 
