@@ -1,6 +1,8 @@
 class Title < ActiveRecord::Base
   attr_accessible :title,:contributions_attributes,:authors_attributes,:editions_attributes,:description,:introduction, :title_list_memberships_attributes,:title_category_memberships_attributes
 
+  after_touch :set_lpe
+  
   searchable do
     text :title,:introduction,:description
     text :authors do
@@ -82,7 +84,6 @@ class Title < ActiveRecord::Base
   def to_s
     title
   end
-
   
   def title_and_id
     "#{title} (#{id})"
@@ -104,6 +105,11 @@ class Title < ActiveRecord::Base
     end
   end
 
+  def set_lpe #a hack to speed up graphql queries that need this
+    self.lpe = editions.published.newest_first.first.id || editions.newest_first.first.id rescue nil
+    save
+  end
+  
   def by_the_same_authors 
     authors.collect {|a| a.titles}.flatten.find_all {|t| t.id != self.id}.uniq.sort_by {|x| x.title}
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20210327192513) do
+ActiveRecord::Schema.define(:version => 20220331185539) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20210327192513) do
     t.boolean  "unavailable"
     t.boolean  "shipsfree"
     t.boolean  "untaxed"
+    t.text     "publisher_name"
   end
 
   add_index "editions", ["publisher_id"], :name => "index_editions_on_publisher_id"
@@ -538,6 +539,7 @@ ActiveRecord::Schema.define(:version => 20210327192513) do
     t.datetime "updated_at",                       :null => false
     t.text     "description",  :limit => 16777215
     t.text     "introduction", :limit => 16777215
+    t.integer  "lpe"
   end
 
   create_table "users", :force => true do |t|
