@@ -4,7 +4,9 @@ class Edition < ActiveRecord::Base
   has_many :purchase_order_line_items
   has_many :shopping_cart_line_items
   has_many :invoice_line_items
+  
 
+  
   has_many :distributors, :through => :copies
 
   belongs_to :publisher
@@ -14,6 +16,7 @@ class Edition < ActiveRecord::Base
   validate :isbns_are_valid
   before_validation :normalize_isbns
   before_save :copy_isbns
+  before_save :set_publisher_name
   mount_uploader :cover, ImageUploader
 
   monetize :list_price_cents
@@ -51,9 +54,6 @@ class Edition < ActiveRecord::Base
     cover_url(:opengraph)
   end
 
-  def publisher_name
-    publisher.name rescue ""
-  end
   
   def edition_string
     "#{id} #{format} #{isbn13}"
@@ -153,6 +153,11 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def set_publisher_name
+    self.publisher_name=publisher.name 
+  end
+
+  
   protected
   def normalize_isbns
     isbn10.gsub!(/[^0-9X]/,'') unless isbn10.nil?
