@@ -154,7 +154,7 @@ class Edition < ActiveRecord::Base
   end
 
   def set_publisher_name
-    self.publisher_name=publisher.name 
+    self.publisher_name=publisher.name rescue ""
   end
 
   
