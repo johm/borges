@@ -69,16 +69,16 @@ module Types
 
     def titles(**args)
       if args[:updated_at]
-        Title.where('updated_at > ?',args[:updated_at]).includes({:editions => :publisher },{:contributions => :author},:categories,:title_lists,:publishers)
+        Title.where('updated_at > ?',args[:updated_at]).includes(:editions,{:contributions => :author},:categories,:title_lists,:publishers)
        else
-        Title.includes({:editions => :publisher },{:contributions => :author},:categories,:title_lists)
+        Title.includes(:editions,{:contributions => :author},:categories,:title_lists)
       end
     end
 
     field :editions, [EditionType],null: false, description: "Get all editions"
 
     def editions
-      Edition.includes(:publisher)
+      Edition.all
     end
 
     field :publishers, [PublisherType],null: false, description: "Get all publishers"
