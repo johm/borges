@@ -101,7 +101,7 @@ class Title < ActiveRecord::Base
   end
 
   def set_lpe #a hack to speed up graphql queries that need this
-    self.lpe = editions.published.newest_first.first.id || editions.newest_first.first.id rescue nil
+    self.lpe = editions.published.newest_first.first.id rescue nil || editions.newest_first.first.id rescue nil
     save
   end
   
