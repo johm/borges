@@ -30,6 +30,13 @@ class Edition < ActiveRecord::Base
 
   default_value_for :format, "Paperback"
 
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
+  
   searchable do
     text :isbn10,:isbn13
 

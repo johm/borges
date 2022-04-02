@@ -4,6 +4,13 @@ class Author < ActiveRecord::Base
   has_many :titles, :through => :contributions
 
   before_save :set_first_last_and_full_name
+
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
   
   searchable do
     text :full_name
@@ -15,6 +22,8 @@ class Author < ActiveRecord::Base
     text :bio
   end
 
+
+  
   def slug
     full_name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")    
   end
