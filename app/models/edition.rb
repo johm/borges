@@ -1,5 +1,5 @@
 class Edition < ActiveRecord::Base
- belongs_to :title,   :touch=>true
+  belongs_to :title,   :touch=>true
   has_many :copies
   has_many :purchase_order_line_items
   has_many :shopping_cart_line_items
@@ -47,7 +47,7 @@ class Edition < ActiveRecord::Base
   
   
   def cover_image_url
-    cover_url(:medium)
+    cover_url(:reasonable)
   end
   
   def opengraph_image_url
