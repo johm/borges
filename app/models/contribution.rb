@@ -3,6 +3,13 @@ class Contribution < ActiveRecord::Base
   belongs_to :author
   belongs_to :title
 
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
+  
   def to_s
     if author 
       if ! what.blank? 

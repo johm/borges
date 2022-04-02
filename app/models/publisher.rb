@@ -3,6 +3,14 @@ class Publisher < ActiveRecord::Base
   has_many :editions
   has_many :titles, :through => :editions  
 
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
+
+  
   def to_s 
     name_and_id
   end

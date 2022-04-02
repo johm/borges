@@ -8,6 +8,14 @@ class TitleList < ActiveRecord::Base
 
   accepts_nested_attributes_for :title_list_memberships, :allow_destroy => true  
 
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
+
+  
   def to_param
     "#{id}-#{slug}"
   end

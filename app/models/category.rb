@@ -10,6 +10,13 @@ class Category < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
+
+  
   def slug
     name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/-$/,"")  
   end

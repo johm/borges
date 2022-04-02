@@ -12,8 +12,15 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       # current_user: current_user,
     }
-    result = BorgesSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+
+    # this assumes only one query is ever made! 
+    result = Rails.cache.fetch("gatsby-graphql",:expires_in => 10.days ) do
+      BorgesSchema.execute(query, variables: variables, context: context, operation_name: operation_name).to_json
+    end
+    
     render json: result
+
+    
   rescue StandardError => e
     raise e unless Rails.env.development?
     handle_error_in_development(e)
