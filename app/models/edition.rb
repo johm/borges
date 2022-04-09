@@ -48,6 +48,8 @@ class Edition < ActiveRecord::Base
   def as_json(*)
     super.tap do |hash|
       hash["instock"] = my_stock_status
+      hash["libro_url"] = my_libro_url
+
       #libro.fm here
     end
   end
@@ -110,6 +112,23 @@ class Edition < ActiveRecord::Base
     end
   end
 
+  def my_libro_url
+    Rails.cache.fetch("/edition/#{id}-#{updated_at}/libro_url", :expires_in => 12.hours) do
+      api_url="https://libro.fm/api/v4/related/#{isbn13}?partner_id=redemmas&auth=#{ENV['LIBRO_KEY']}"
+      logger.error("getting #{api_url}")
+      response = HTTParty.get(api_url)
+      if response.code == 200
+        res=JSON.parse(response.body)
+        status=res["status"]
+        logger.error("Status:#{status} #{isbn13}")
+        
+        if status.starts_with?("https")
+          return "#{status}?bookstore=redemmas"
+        end
+      end
+    end
+  end
+  
   def needed_for_online
     shopping_cart_line_items.includes(:shopping_cart).inject(0) do |sum,li|
       if li.shopping_cart && li.shopping_cart.ordered? && ! ( li.shopping_cart.sold_through || li.shopping_cart.completed)
@@ -128,7 +147,6 @@ class Edition < ActiveRecord::Base
       list_price
     end
   end
-
   def self.formats
     ['Hardcover','Paperback','Pamphlet','Magazine','Journal','CD','DVD','Clothing','Coffee','Other','Ships free','Pickup only']
   end

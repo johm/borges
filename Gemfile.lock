@@ -338,6 +338,7 @@ DEPENDENCIES
   friendly_id (= 4.0.9)
   googlebooks
   graphql (= 1.12.23)
+  httparty
   instagram
   jquery-datetimepicker-rails
   jquery-rails
