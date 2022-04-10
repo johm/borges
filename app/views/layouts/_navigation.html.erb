@@ -72,7 +72,11 @@
       <li>
       <%= link_to 'Content Management', '/content' %>
       </li>
-    <% end %>
+  <li>
+    <%= link_to 'PUBLISH', '/publish' %>
+  </li>
+      
+      <% end %>
 
     <% if can? :edit,TextFragment %>
       <li>
@@ -84,6 +88,7 @@
       <li>
       <%= link_to 'Calendar', '/manage_calendar' %>
       </li>
+
     <% end %>
 
 

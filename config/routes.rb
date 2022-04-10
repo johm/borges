@@ -9,6 +9,8 @@ Borges::Application.routes.draw do
   get "/graphql", to: "graphql#execute"
   post "/graphql", to: "graphql#execute"
 
+  get "/publish", to: "graphql#publish"
+  
   resources :text_fragments
 
 
