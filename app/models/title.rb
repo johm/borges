@@ -2,6 +2,12 @@ class Title < ActiveRecord::Base
   attr_accessible :title,:contributions_attributes,:authors_attributes,:editions_attributes,:description,:introduction, :title_list_memberships_attributes,:title_category_memberships_attributes
 
   after_touch :set_lpe
+
+  after_save :delete_gatsby_cache
+
+  def delete_gatsby_cache
+    Rails.cache.delete("gatsby-graphql")
+  end
   
   searchable do
     text :title,:introduction,:description
@@ -44,7 +50,8 @@ class Title < ActiveRecord::Base
                                                              }}}
       hash["the_edition"] = {cover_image_url: latest_edition.cover_image_url,
                              list_price: latest_edition.list_price.to_s,
-                             key: latest_edition.id}
+                             key: latest_edition.id,
+                             isbn13: latest_edition.isbn13}
     end
   end
   
