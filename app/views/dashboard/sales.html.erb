@@ -17,16 +17,16 @@
    
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-type: "line",
+type: 'line',
 labels: [<%=  raw @days.join(", ") %>],
-data: {
+datasets: [{
 label: "Sales",
 data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.subtotal_after_discount).to_f}}.join(", ") %>],
-}
+}]
 });
 </script>
 
-  <!-- high_chart("saleschart", @saleschart) -->
+  
   
   <div>
     <strong>Revenue: $<%= @revenue %></strong>  (does not include sales tax collected)
