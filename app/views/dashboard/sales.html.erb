@@ -9,6 +9,22 @@
     <%= mysubmit f,"Get report" %>
   <% end %>
 
+  <button style="float:right" class="btn" onclick="window.myChart.resetZoom();">Reset zoom</button>
+  <canvas id="myChart" width="100%" height="30%" style="height:30% !important;"></canvas>
+
+  <script>
+
+   
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+type: "line",
+labels: [<%=  raw @days.join(", ") %>],
+data: {
+label: "Sales",
+data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.subtotal_after_discount).to_f}}.join(", ") %>],
+}
+});
+</script>
 
   <!-- high_chart("saleschart", @saleschart) -->
   
