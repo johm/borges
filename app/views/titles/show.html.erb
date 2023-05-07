@@ -127,7 +127,7 @@
 	<td>
 	  <ul>
 	    <% @title.outstandingorderlines.each do |li| %>
-	    <li> <%= link_to "#{li.quantity-li.received} on #{li.purchase_order.number}", li.purchase_order %> 
+	    <li> <%= link_to "#{li.quantity-li.received rescue 0} on #{li.purchase_order.number}", li.purchase_order %> 
 	      <%= li.purchase_order.ordered? ? "(ORDERED on #{li.purchase_order.ordered_when.to_formatted_s(:just_date)})" : "(NOT ORDERED)" %>
 	      <% end %>
 	  </ul>

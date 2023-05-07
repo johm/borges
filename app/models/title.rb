@@ -156,13 +156,13 @@ class Title < ActiveRecord::Base
       if li.purchase_order.nil? || li.purchase_order.ordered?
         sum
       else
-        sum+li.quantity-li.received
+        sum+li.quantity-li.received rescue 0
       end
     end
   end
   
   def outstandingorderlines
-    purchase_order_line_items.find_all {|x| ! x.purchase_order.nil?  && x.quantity-x.received > 0}
+    purchase_order_line_items.find_all {|x| ! x.purchase_order.nil?  && (x.quantity-x.received rescue 0) > 0}
   end
 
   def whichorders 

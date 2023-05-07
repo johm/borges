@@ -32,7 +32,7 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
  def number_of_copies
-    purchase_order_line_items.inject(0) {|sum,li| sum+li.quantity}
+    purchase_order_line_items.inject(0) {|sum,li| sum+li.quantity rescue 0}
  end
 
  

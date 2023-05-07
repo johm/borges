@@ -18,6 +18,9 @@
     </tr>
     
     <% s.sale_order_line_items.each do |l| %>
+    <% if l.copy.edition.nil? %>
+    <tr><td><%= l.copy.id %></td></tr>
+    <% else %>
     <tr class="<%= 'warning' if l.copy.edition.title.in_stock==0 && l.copy.edition.title.on_order==0 %>  <%= 'danger' unless l.copy.edition.title.is_in_print? %>">
       <td></td>
 
@@ -40,7 +43,7 @@
       </td>
       <td></td>
     </tr>
-    
+    <% end %>
     <% end %>
 
     <tr>

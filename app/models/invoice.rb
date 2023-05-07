@@ -24,7 +24,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def total_copies
-    invoice_line_items.inject(0){|sum,li| sum+li.quantity }
+    invoice_line_items.inject(0){|sum,li| sum+li.quantity rescue sum } 
   end
   
   def total_cost

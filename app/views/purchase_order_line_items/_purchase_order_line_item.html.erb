@@ -1,5 +1,5 @@
 <% if ! purchase_order_line_item.edition.nil? %>
-	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>" class="<%= 'warning' if purchase_order_line_item.edition.title.in_stock==0 && purchase_order_line_item.edition.title.on_order==0 %>">
+	 <tr id="purchase_order_line_item_<%= purchase_order_line_item.id %>" class="<%= 'warning' if purchase_order_line_item.edition.title.in_stock==0 && purchase_order_line_item.edition.title.on_order==0 %> <%= 'danger' unless purchase_order_line_item.edition.title.is_in_print? %>  ">
 	   <td>
 	     <div class="ordered">
 	     <%= best_in_place_if (! purchase_order_line_item.purchase_order.ordered?),purchase_order_line_item, :quantity, :type => :input, :inner_class=>"input-tiny", :data => {:purchase_order_line_item => purchase_order_line_item.id,:purchase_order => purchase_order_line_item.purchase_order.id} %>

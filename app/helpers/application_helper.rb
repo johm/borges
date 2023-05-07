@@ -163,11 +163,11 @@ module ApplicationHelper
       :class=>"field control-group")
   end
 
-  def my_autocomplete_field_tag (f,m,l,p,extra="",size="")
+  def my_autocomplete_field_tag (f,m,l,p,extra="",size="",default_value="")
     content_tag(:div,
       f.label(l,:class=>"control-label") +
       content_tag(:div,
-                  autocomplete_field_tag(m,"",p,:min_length => 5,:class=>size) + " " + extra,
+                  autocomplete_field_tag(m,"",p,:min_length => 5,:class=>size,:value=>default_value) + " " + extra,
         :class=>"controls"),
       :class=>"field control-group")
   end

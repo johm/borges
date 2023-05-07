@@ -53,16 +53,22 @@ class DashboardController < ApplicationController
     @revenue=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.subtotal_after_discount} }
     @cost=@days.inject(Money.new(0)) {|sum,d| sum + @sales_by_date[d].inject(Money.new(0)) {|sum2,s| sum2 + s.cost} }
     
-    @titles_sold_with_count=@days.collect {|d| @sales_by_date[d].collect {|s| s.sale_order_line_items.collect {|li| li.copy.edition.title  }}}.flatten.flatten.flatten.inject(Hash.new(0)) {|h,i| h[i] += 1; h}.sort_by{|k,v| v}.reverse      
+    @titles_sold_with_count=@days.collect {|d| @sales_by_date[d].collect {|s| s.sale_order_line_items.collect {|li| li.copy.edition.title}}}.flatten.flatten.flatten.inject(Hash.new(0)) {|h,i| h[i] += 1; h}.sort_by{|k,v| v}.reverse      
   
     @format_to_total={}
     @section_to_total={}
+    @distributor_to_total={}
 
     all_line_items=@sales_by_date.collect_concat {|d,sales| sales.collect_concat {|sales| sales.sale_order_line_items}}
 
     all_line_items.group_by {|l| l.copy.edition.format}.each do |f,items_sold|
       @format_to_total[f] = items_sold.inject(Money.new(0)) {|formatsum,item| formatsum+item.sale_price}
     end
+
+    all_line_items.group_by {|l| l.copy.edition.title.last_distributor.name rescue "unknown"}.each do |f,items_sold|
+      @distributor_to_total[f] = items_sold.inject(Money.new(0)) {|formatsum,item| formatsum+item.sale_price}
+    end
+
 
     all_line_items.each do |l|
       my_cats=l.copy.title.categories
@@ -82,7 +88,7 @@ class DashboardController < ApplicationController
     
     @prediscount_total=@format_to_total.values.inject(Money.new(0)) {|s,v| s+v}
 
-
+    
 
 #    @formatchart = LazyHighCharts::HighChart.new('pie') do |f|
 #      f.chart({:defaultSeriesType=>"pie" } )

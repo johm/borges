@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render '/dashboard/search' %>
+      <%= render '/dashboard/search'  %>
     </div>
     <div class="col-md-9">
       <table class="table">
@@ -36,6 +36,7 @@
 	</tr>
 	<% end %>
       </table>
+    <%= paginate @titles %>
     </div>
   </div>
 </div>

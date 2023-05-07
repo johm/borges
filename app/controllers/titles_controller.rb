@@ -16,7 +16,7 @@ class TitlesController < ApplicationController
     elsif params[:search_object] && ! params[:search_object][:searchquery].blank? 
       searchquery=params[:search_object][:searchquery]
     end
-    if ! searchquery.blank?
+    if ! searchquery.blank? 
       @searchquery=searchquery
       @title_search = Title.search(:include => [:editions]) do
         fulltext searchquery
@@ -24,7 +24,8 @@ class TitlesController < ApplicationController
       end
       @titles=@title_search.results
     else
-      @titles = Title.includes(:editions => [:copies]).page(params[:page]).per(20)
+#      @titles = Title.includes(:editions => [:copies]).page(params[:page]).per(20)
+      @titles= []
     end
 
     respond_to do |format|
@@ -174,6 +175,7 @@ class TitlesController < ApplicationController
       with(:copies_in_stock).greater_than(title_search_object.my_copies_stock_or_more.to_i-1) unless title_search_object.my_copies_stock_or_more.blank?
       with(:copies_in_stock).less_than(title_search_object.my_copies_stock_or_less.to_i+1) unless title_search_object.my_copies_stock_or_less.blank?
       with(:category_count,0) if title_search_object.uncategorized=="1"
+      with(:year_of_publication,title_search_object.year_of_publication) unless title_search_object.year_of_publication.blank?
 
       fulltext title_search_object.title do
         fields(:title)
@@ -194,6 +196,8 @@ class TitlesController < ApplicationController
       fulltext title_search_object.isbn do
         fields(:isbn)
       end
+
+
 
       paginate :page => params[:page], :per_page => 200
     end

@@ -49,8 +49,8 @@ class Edition < ActiveRecord::Base
     super.tap do |hash|
       hash["instock"] = my_stock_status
       hash["libro_url"] = my_libro_url
+      hash["description"] = (title.introduction || " ") + "<br /><br />" + (title.description || " ")
 
-      #libro.fm here
     end
   end
   
