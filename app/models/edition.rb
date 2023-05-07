@@ -50,7 +50,6 @@ class Edition < ActiveRecord::Base
       hash["instock"] = my_stock_status
       hash["libro_url"] = my_libro_url
       hash["description"] = (title.introduction || " ") + "<br /><br />" + (title.description || " ")
-
     end
   end
   
@@ -147,6 +146,8 @@ class Edition < ActiveRecord::Base
       list_price
     end
   end
+
+  
   def self.formats
     ['Hardcover','Paperback','Pamphlet','Magazine','Journal','CD','DVD','Clothing','Coffee','Other','Ships free','Pickup only']
   end
