@@ -98,13 +98,13 @@ class Edition < ActiveRecord::Base
       "IN STOCK" 
     elsif unavailable?
       "UNAVAILABLE"
-    elsif preorderable?
+    elsif can_preorder?
       "PREORDER"
     elsif in_print? 
       if ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"] && last_distributor && (YAML.load(ENV["DISTRIBUTORSWEORDERFROMFREQUENTLY"]).include? last_distributor.name) && (copies.last.inventoried_when > (DateTime.now - 6.months))
           "OUT OF STOCK" # "SHIPS IN 2-4 WEEKS" # "SHIPS IN 5-7 DAYS"
       else
-         "OUT OF STOCK" #  "SHIPS IN 2-4 WEEKS"
+        "OUT OF STOCK" #  "SHIPS IN 2-4 WEEKS"
       end
     else 
       "OUT OF PRINT"
