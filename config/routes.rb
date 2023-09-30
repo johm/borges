@@ -243,6 +243,7 @@ Borges::Application.routes.draw do
   get '/book/:isbn', :to => 'editions#byisbn'
   get '/book/', :to => 'editions#byisbn'
 
+  get '/orderdump', :to => 'sale_orders#dump'
   get '/dashboard/search', :to => 'dashboard#search'
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'

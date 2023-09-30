@@ -16,6 +16,31 @@ class SaleOrdersController < ApplicationController
     end
   end
 
+  def dump
+    @sale_orders = SaleOrder.order("posted asc,created_at desc")
+    
+
+    @csv=CSV.generate do |csv|
+      csv << ["Order","Date","Total"]
+      @sale_orders.each do |s|
+        csv << [s.id,s.posted_when,s.total]
+      end
+    end 
+    
+
+
+    respond_to do |format|
+      format.csv { 
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-order-dump.csv\""  
+        render text: @csv 
+      }
+    end
+
+    
+  end
+  
+  
+  
   # GET /sale_orders/1
   # GET /sale_orders/1.json
   def show
