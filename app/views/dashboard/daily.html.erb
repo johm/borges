@@ -14,6 +14,7 @@
       <td></td>
       <td></td>
       <td></td>
+      <td></td>
       <td><%= s.user.name rescue "" %></td>
     </tr>
     
@@ -37,7 +38,10 @@
       <td>
 	<%= ordering_from_info(l.copy.edition.title) %>
       </td>
-      
+            <td>
+	<small><%= sanitize category_status(l.copy.edition.title) %></small>
+      </td>
+
       <td>
 	$<%= l.sale_price %>
       </td>
@@ -47,6 +51,7 @@
     <% end %>
 
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
