@@ -63,7 +63,7 @@ data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.su
   <hr>
   <h2>Items sold</h2>
   <table class="table">
-    <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th></th><th></th></tr>
+    <tr><th>Title</th><th>Sold in this period</th><th>In stock?</th><th>On order?</th><th>Categorized?</th><th></th><th></th></tr>
     <% @titles_sold_with_count.each do |x| %>
     <% unless x[0].nil? %>
     <% title=x[0] %>
@@ -78,11 +78,27 @@ data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.su
 	</div>
       </td>
       <td><%= count %></td>
-      <td><%= title.in_stock %></td>
-      <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
+      <td>	  <div class="label <%= title.in_stock > 0 ? 'label-success' : 'label-warning' %>"><%= title.in_stock %> </div></td>
+      <td>
+
+	<% title.outstandingorderlines.each do |li| %>
+	<div>
+	  <small>	      
+	    <%= li.still_outstanding %> <%= li.purchase_order.ordered? ? 'ordered' : 'pending' %> on <%= link_to li.purchase_order.number,li.purchase_order %> <%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>	
+	  </small>
+	</div>
+	<% end %>
+
+</td>
+      <td>
+	<small><%= sanitize category_status(title) %></small>
+      </td>
+
       <td><%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
       <td>
+	<% cache("ordering_from_info-title-#{title.id}", :expires_in => 30.minutes) do %>
 	<%= ordering_from_info(title) %>
+	<% end %>
       </td>
     </tr>
     <% end %>

@@ -16,6 +16,10 @@ class PurchaseOrderLineItem < ActiveRecord::Base
     end
   end
 
+  def still_outstanding 
+    quantity-received 
+  end
+
   def cancel 
     outstanding=self.quantity-self.received 
     self.cancelled=outstanding

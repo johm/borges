@@ -1,4 +1,32 @@
+Hello! Below please find an order for Red Emma’s, acct <%= @purchase_order.distributor.our_account_number %>.
+
+<% if @purchase_order.tag=="Event order" %>
+This is for an author event on TK.
+<% end %>
+
+Please let me know if there are any issues or questions.
+Thanks!
+
+- Cullen for Red Emma's
+
+Red Emma’s
+Attn: Books
+3128 Greenmount Ave
+Baltimore, MD 21218
+<% if @purchase_order.tag=="Event order" %>
+AUTHOR EVENT 
+Event Date TK
+<% end %>
 Our PO number: <%= @purchase_order.number %>
+Our account number: <%= @purchase_order.distributor.our_account_number %> 
+
+<% @purchase_order.purchase_order_line_items.where("quantity > 0").each do |li| %>
+<%= li.quantity %>    <%= li.isbn %> <%= li.edition.title.title %>
+<% end %> 
+
+
+
+
 
 <% @purchase_order.purchase_order_line_items.where("quantity > 0").group_by {|li| li.edition.publisher.name rescue "No publisher"}.each do |publisher,lis| %>
 <%= publisher %>
@@ -8,6 +36,9 @@ Our PO number: <%= @purchase_order.number %>
 <% end %>
 
 <% end %>
+
+
+
 
 
 For Random House/etc. import:
