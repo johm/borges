@@ -11,6 +11,9 @@
       :item,:copy,
       autocomplete_copies_path(:return_order_id=>@return_order.id),
       "","input-xxlarge" %>
+
+
+  <%= mytextfield f,:quantity,:quantity %>
       
   <script>
     $('#item').bind('railsAutocomplete.select', function(event, data){

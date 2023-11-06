@@ -1,3 +1,3 @@
-$("#return_order_line_item_<%= @id %>").effect("fade");
+$("#return_order_line_item_<%= @id %>").effect("fade").remove();
 $("#return_order_meta").html("<%= escape_javascript(render :partial=>"return_orders/meta",:locals=>{:return_order=>@return_order_line_item.return_order}) %>");
 

@@ -2,6 +2,10 @@
 	<tr>
 	  <th>Total</th>
 	  <td id="return_order_total"><%= return_order.total %></td>
-	</tr>
+ 	</tr>
+	<tr>
+	  <th>Units</th>
+	  <td id="return_order_total"><%= return_order.copies.length %></td>
+ 	</tr>
 	 <tr><th>Distributor</th><td><%= link_to return_order.distributor.name, return_order.distributor %></td></tr>
       </table>
