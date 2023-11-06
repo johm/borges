@@ -1,30 +1,27 @@
-</div>
-<div class="row">
-  <div class="span8">
 
-<h1>Listing return_orders</h1>
+<hr />
+<h1>Listing Returns</h1>
+
+<%= mylinkbutton 'New Return', new_return_order_path %>
 
 <table class="table">
   <tr>
-    <th>Number</th>
-    <th>Distributor</th>
+    <th><%= sortable "created_at", "Created" %> </th>
+    <th><%= sortable "number", "Number" %></th>
+    <th><%= sortable "distributors.name", "Distributor" %></th>
     <th>Total</th>
-    <th>Posted</th>
+    <th><%= sortable "posted_when", "Posted When" %></th>
   </tr>
 
 <% @return_orders.each do |return_order| %>
   <tr>
+    <td><%= return_order.created_at.to_formatted_s(:just_date) %></td>
     <td><%= link_to return_order.id, return_order %></td>
     <td><%= link_to return_order.distributor.name, return_order.distributor unless return_order.distributor.nil? %></td>
     <td><%= return_order.total %></td>
-    <td><%= return_order.posted? ? "#{return_order.posted_when.to_formatted_s(:full_datetime)}" : "No"  %></td>
+    <td><%= return_order.posted? ? "#{return_order.posted_when.to_formatted_s(:just_date)}" : "No"  %></td>
   </tr>
 <% end %>
 </table>
 
-</div>
-<div class="span4">
 
-  <%= link_to 'New Return order', new_return_order_path %>
-</div>
-</div>

@@ -2,12 +2,13 @@ class ReturnOrdersController < ApplicationController
   before_filter :authenticate_user! 
   before_filter :hack_out_params , :only=>[:create,:update]  
   load_and_authorize_resource
+  helper_method :sort_column, :sort_direction
 
 
   # GET /return_orders
   # GET /return_orders.json
   def index
-    @return_orders = ReturnOrder.all
+    @return_orders = ReturnOrder.includes([:return_order_line_items,:copies,:distributor]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(40)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -112,5 +113,14 @@ class ReturnOrdersController < ApplicationController
     params[:return_order].delete :distributor
   end
   
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
+
+  def sort_column
+    %w[created_at distributors.name posted_when].include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+
 
 end
