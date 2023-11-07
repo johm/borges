@@ -166,7 +166,7 @@ class TitlesController < ApplicationController
 
 
   def search
-    @title_search_object=SearchObject.new((params[:search_object]).merge({:publisher=>params[:publisher],:distributor=>params[:distributor]}))
+    @title_search_object=SearchObject.new((params[:search_object]).merge({:publisher=>params[:publisher],:distributor=>params[:distributor],:category=>params[:category]}))
     title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block
 
     @title_search = Title.search do
@@ -176,6 +176,7 @@ class TitlesController < ApplicationController
       with(:copies_in_stock).less_than(title_search_object.my_copies_stock_or_less.to_i+1) unless title_search_object.my_copies_stock_or_less.blank?
       with(:category_count,0) if title_search_object.uncategorized=="1"
       with(:year_of_publication,title_search_object.year_of_publication) unless title_search_object.year_of_publication.blank?
+      with(:category,title_search_object.category) unless title_search_object.category.blank?
 
       fulltext title_search_object.title do
         fields(:title)
@@ -203,7 +204,7 @@ class TitlesController < ApplicationController
     end
     @titles=@title_search.results
 
-#    @titles=@titles.find_all {|t| t.categories.length==0} title_search_object.uncategorized=="1"
+
 
     respond_to do |format|
       format.html {render 'adminsearch'} # search.html.erb

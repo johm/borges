@@ -22,9 +22,15 @@ class Title < ActiveRecord::Base
     text :publisher do
       editions.map { |e| e.publisher }
     end  
+
     text :distributor do
       copies.map { |c| c.invoice_line_item.invoice.distributor unless c.invoice_line_item.nil? }
     end  
+
+    integer :category, :multiple => true do
+      categories.map {|c| c.id }
+    end
+    
     
     text :isbn do
       editions.map {|e| "#{e.isbn13} #{e.isbn10}"}
