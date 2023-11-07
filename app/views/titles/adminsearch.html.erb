@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
       <%= render '/dashboard/search'  %>
@@ -25,7 +25,12 @@
 	  </td>
 	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
-	  <td><span title="<%= title.whichorders %>"><%= title.on_order %><span class="faint">+<%= title.probably_on_order %></span></span></td>
+	  <td>	    <% title.outstandingorderlines.each do |li| %>
+	    <div>
+	      <small>	      <%= li.still_outstanding %> <%= li.purchase_order.ordered? ? 'ordered' : 'pending' %> on <%= link_to li.purchase_order.number,li.purchase_order %> <%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>		</small>
+	    </div>
+	    <% end %>
+	  </td>
 	  <td><%= blurb_status(title) %></td>
 	  <td><small><%= sanitize category_status(title) %></small>	<small>
 	 <%= '💰' * title.hundreds_of_dollars %>
