@@ -5,8 +5,8 @@
 <%= mytextfield f,:isbn,:isbn %>
 <%= mytextfield f,:year_of_publication,:year_of_publication %>
 <%= mytextfield f,:authors,:my_authors %>
-<%= my_autocomplete_field_tag f,'publisher','publisher',autocomplete_publisher_name_titles_path,"","",@title_search_object.publisher rescue "" %>
-<%= my_autocomplete_field_tag f,'distributor','distributor',autocomplete_distributor_name_titles_path,"","",@title_search_object.distributor rescue ""%>
+<%= my_autocomplete_field_tag f,'publisher','publisher',autocomplete_publisher_name_titles_path,"","",(@title_search_object.publisher rescue "") %>
+<%= my_autocomplete_field_tag f,'distributor','distributor',autocomplete_distributor_name_titles_path,"","",(@title_search_object.distributor rescue "")%>
 <%= mytextfield f,">= Sold" ,:my_copies_sold_or_more %>
 <%= mytextfield f,"<= Sold",:my_copies_sold_or_less %>
 <%= mytextfield f,">= In Stock" ,:my_copies_stock_or_more %>
