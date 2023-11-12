@@ -15,7 +15,7 @@
   <div class="field control-group">
     <%= f.label :category,"Category", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :category, options_from_collection_for_select(Category.order("name asc"),:id,:name,@title_search_object.category),:include_blank=>true %>
+      <%= select_tag :category, options_from_collection_for_select(Category.order("name asc"),:id,:name,(@title_search_object.category rescue "")),:include_blank=>true %>
     </div>
   </div>
 <%= mysubmit f, :search,{},"btn-medium" %>
