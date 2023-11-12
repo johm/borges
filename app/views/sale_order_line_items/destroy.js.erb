@@ -1,3 +1,3 @@
-$("#sale_order_line_item_<%= @id %>").effect("fade");
+$("#sale_order_line_item_<%= @id %>").hide("fade");
 $("#sale_order_meta").html("<%= escape_javascript(render :partial=>"sale_orders/meta",:locals=>{:sale_order=>@sale_order}) %>");
 
