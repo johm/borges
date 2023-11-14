@@ -150,10 +150,13 @@ class InventoriesController < ApplicationController
   end
 
   def bestsellers
-    sold = params[:sold] ? params[:sold].to_i : 50
+    sold_at_least = params[:sold_at_least] ? params[:sold_at_least].to_i : 50
+    sold_at_most = params[:sold_at_most] ? params[:sold_at_most].to_i : 5000000
+
     @inventory = Inventory.find(params[:id])
     @title_search = Title.search do
-      with(:copies_sold).greater_than(sold-1)
+      with(:copies_sold).greater_than(sold_at_least-1)
+      with(:copies_sold).less_than(sold_at_most+1)
       paginate :page => 1, :per_page => 5000
     end
     

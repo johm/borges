@@ -58,8 +58,9 @@
 
   <h4>Bestsellers</h4>
   <%= form_tag(bestsellers_inventory_path(@inventory.id),:method=>:get,:remote=>true) do %>
-  <%= text_field_tag(:sold,@sold) %>
-  <%= submit_tag "Check bestsellers",:class=>"btn" %>
+  <div>At least: <%= text_field_tag(:sold_at_least,@sold_at_least) %></div>
+  <div>At most: <%= text_field_tag(:sold_at_most,@sold_at_most) %></div>
+  <div><%= submit_tag "Check bestsellers",:class=>"btn" %></div>
   <% end %>
 
 
