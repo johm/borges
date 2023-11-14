@@ -150,8 +150,8 @@ class InventoriesController < ApplicationController
   end
 
   def bestsellers
-    sold_at_least = params[:sold_at_least] ? params[:sold_at_least].to_i : 50
-    sold_at_most = params[:sold_at_most] ? params[:sold_at_most].to_i : 5000000
+    sold_at_least = params[:sold_at_least].to_i > 0  ? params[:sold_at_least].to_i : 50
+    sold_at_most = params[:sold_at_most].to_i > 0 ? params[:sold_at_most].to_i : 5000000
 
     @inventory = Inventory.find(params[:id])
     @title_search = Title.search do
