@@ -24,6 +24,7 @@ Borges::Application.routes.draw do
   resources :inventories do
     member do 
       get :section
+      get :bestsellers
       get :owner
       post :fill
       post :fill_books
@@ -156,6 +157,16 @@ Borges::Application.routes.draw do
     end
   end
 
+  resources :bucket_line_items do 
+    member do
+      get :hidden_actions 
+      put :copy_to_purchase_order
+      put :copy_to_bucket
+      put :move_to_bucket
+    end
+  end
+
+
 
   resources :purchase_orders do 
     member do
@@ -168,6 +179,15 @@ Borges::Application.routes.draw do
     get :autocomplete_distributor_name, :on => :collection
     resources :purchase_order_line_items
   end
+
+  resources :buckets do 
+    member do
+      get :hidden_actions 
+      put :smartdestroy
+    end
+    resources :bucket_line_items
+  end
+
 
 
   resources :copies do 
@@ -188,6 +208,7 @@ Borges::Application.routes.draw do
       get :hidden_actions 
       put :add_to_purchase_order
       put :add_to_title_list
+      put :add_to_bucket
       put :add_to_category
       get :bookshop
     end

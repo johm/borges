@@ -1,6 +1,5 @@
-
 <ul style="width:320px;">
-<% @open_copies.each do |copy| %>
+<% bestsellers.each do |copy| %>
 <li>
   <small>
     <%= link_to "#{copy.info}—#{copy.edition.title.title} (#{copy.edition.year_of_publication}) {#{copy.edition.number} #{copy.edition.format}} [#{copy.edition.isbn13}]","#", :class=>"inventory_section_link", :id => "inventory_section_copy_#{copy.id}", :data => {:copy => copy.id,:inventory => @inventory.id} %>
