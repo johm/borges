@@ -6,7 +6,7 @@ class InventoriesController < ApplicationController
   # GET /inventories
   # GET /inventories.json
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.order("created_at desc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -125,6 +125,8 @@ class InventoriesController < ApplicationController
 
 
 
+
+
     
   def section
     @section=Category.find(params[:section])
@@ -146,6 +148,34 @@ class InventoriesController < ApplicationController
       format.html { render :layout => false }
     end
   end
+
+  def bestsellers
+    sold = params[:sold] ? params[:sold].to_i : 50
+    @inventory = Inventory.find(params[:id])
+    @title_search = Title.search do
+      with(:copies_sold).greater_than(sold-1)
+      paginate :page => 1, :per_page => 5000
+    end
+    
+    titles=@title_search.results
+    
+    copies_on_inventory_already= @inventory.copies.collect {|c| c.id}
+
+    sorted_titles=titles.sort_by do |title|
+      title.authors.first.last_name rescue ""
+    end
+    
+    editions=sorted_titles.collect {|t| t.editions}.flatten
+
+    copies=editions.collect {|e| e.copies.instock}.flatten
+    @open_copies=copies.find_all {|c| !(copies_on_inventory_already.include? c.id)}
+
+
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
 
 
   def owner
