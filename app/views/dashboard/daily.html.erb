@@ -36,15 +36,7 @@
       </td>
       <td>
 
-	  <div class="label <%= l.copy.edition.title.in_stock > 0 ? 'label-success' : 'label-warning' %>"><%= l.copy.edition.title.in_stock %> in stock</div>
-	  <div style="padding-top:5px">
-	    <% l.copy.edition.title.outstandingorderlines.each do |li| %>
-	    <div>
-	<small>	      <%= li.still_outstanding %> <%= li.purchase_order.ordered? ? 'ordered' : 'pending' %> on <%= link_to li.purchase_order.number,li.purchase_order %> <%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>		</small>
-	    </div>
-	    <% end %>
-	  </div>
-
+	<%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>l.copy.edition.title}  %>
     
       </td>
       <td>

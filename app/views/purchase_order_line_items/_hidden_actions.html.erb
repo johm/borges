@@ -8,3 +8,15 @@
     </div>
   </div>
 <% end %>
+
+<%= nested_form_for @purchase_order_line_item,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :copy_to_bucket,:controller => :purchase_order_line_items } do |f| %>
+  <div class="field control-group">
+    <%= f.label :purchase_order,"Copy to bucket 🪣", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+
+

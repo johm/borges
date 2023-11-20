@@ -1,0 +1,42 @@
+<br />
+<h1>🪣 Buckets!</h1>
+
+
+<%= mylinkbutton 'New Bucket 🪣', new_bucket_path %>
+
+<table class="table">
+  <tr>
+    <th><%= sortable "created_at", "Created" %></th>
+    <th><%= sortable "name", "Name" %></th>
+    <th>Notes</th>
+    <th>Last ordered from</th>
+    <th>Total editions</th>
+    <th>In stock</th>
+    <th></th>
+  </tr>
+
+
+<% Bucket.tags.each do |tag| %>  
+<tr>
+  <th colspan="7" style="background-color:#ccc;font-weight:bold;"><%= tag %></th>
+</tr>
+<% @buckets.where(:tag=>tag).each do |bucket| %>
+  <tr id="bucket_<%= bucket.id%>">
+    <td><%= bucket.created_at.to_formatted_s(:just_date) %></td>
+    <td><%= link_to bucket.name,bucket %></td>
+    <td><%= bucket.notes %></td>
+    <td><%= bucket.last_order %></td>
+    <td><%= bucket.number_of_editions %></td>
+    <td><%= bucket.number_of_editions_in_stock %></td>
+    <td>
+<!--	     <%= link_to "Destroy (smart)", hidden_actions_bucket_path(bucket),  {:class => 'btn btn-xs btn-warning',:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %>-->
+<%= link_to 'Destroy (stupid)', bucket, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-xs btn-mini btn-danger'  %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+
+<br />
+
+

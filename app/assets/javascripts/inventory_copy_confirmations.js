@@ -18,6 +18,8 @@ jQuery(document).ready(function() {
 
 
 
+    
+
     jQuery("#open_copies").on("click",".inventory_section_link",function(e){
 	jQuery.post("/inventory_copy_confirmations",{inventory_copy_confirmation: {copy_id: jQuery(this).data("copy"), inventory_id: jQuery(this).data("inventory")}},null,'script');
 	e.preventDefault();

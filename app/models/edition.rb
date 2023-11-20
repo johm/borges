@@ -2,6 +2,7 @@ class Edition < ActiveRecord::Base
   belongs_to :title,   :touch=>true
   has_many :copies
   has_many :purchase_order_line_items
+  has_many :bucket_line_items
   has_many :shopping_cart_line_items
   has_many :invoice_line_items
   
@@ -63,6 +64,10 @@ class Edition < ActiveRecord::Base
   end
 
   
+  def last_order_date 
+    purchase_order_line_items.joins(:purchase_order).where("purchase_orders.ordered=true").order("purchase_orders.ordered_when desc").first.purchase_order.ordered_when rescue nil
+  end
+
   def edition_string
     "#{id} #{format} #{isbn13}"
   end
@@ -88,6 +93,11 @@ class Edition < ActiveRecord::Base
   def has_copies_in_stock?
     copies.where("status"=>"STOCK").length > 0
   end
+
+  def copies_in_stock
+    copies.where("status"=>"STOCK").length
+  end
+  
 
   def last_distributor 
     copies.last.invoice.distributor rescue nil 

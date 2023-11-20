@@ -124,6 +124,22 @@ class PurchaseOrderLineItemsController < ApplicationController
     end
   end
 
+  def copy_to_bucket
+    @old_purchase_order=@purchase_order_line_item.purchase_order
+    @purchase_order_line_item = PurchaseOrderLineItem.find(params[:id])
+
+    @bucket = Bucket.find(params[:bucket])
+    @new_bucket_line_item=BucketLineItem.new(:edition_id=>@purchase_order_line_item.edition_id,:customer=>@purchase_order_line_item.customer,:notes => "#{@purchase_order_line_item.notes} From PO #{@old_purchase_order.number}")
+    @new_bucket_line_item.bucket = @bucket 
+    @new_bucket_line_item.save!
+
+    respond_to do |format| 
+      format.html { redirect_to @old_bucket }
+      format.js { }
+    end
+  end
+
+
 
   private
   

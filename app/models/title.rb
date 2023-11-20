@@ -74,6 +74,7 @@ class Title < ActiveRecord::Base
   has_many :copies, :through => :editions
   has_many :publishers, :through => :editions 
   has_many :purchase_order_line_items, :through => :editions
+  has_many :bucket_line_items, :through => :editions
   has_many :title_lists,:through => :title_list_memberships
   has_many :title_list_memberships
   has_many :post_title_links

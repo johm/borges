@@ -1,0 +1,55 @@
+
+<tr style="border-top:1px solid #ccc;" id="bucket_line_item_<%= bucket_line_item.id %>" class="<%= 'warning' if bucket_line_item.edition && bucket_line_item.edition.title.in_stock==0 && bucket_line_item.edition.title.on_order==0 %> <%= 'danger' unless bucket_line_item.edition && bucket_line_item.edition.title.is_in_print?  %>  ">
+  <td>
+    <% if bucket_line_item.edition %>
+    <%= link_to "#{bucket_line_item.edition.title.title} #{bucket_line_item.edition.number}", bucket_line_item.edition.title, :target=>"blank",:title=>"#{bucket_line_item.edition.publisher}\nIn stock (all editions): #{bucket_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{bucket_line_item.edition.title.on_order} " %>	    
+    <% else %>
+    <%= nested_form_for(bucket_line_item, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
+      <%= f.hidden_field(:edition_id,:id=>"item-#{bucket_line_item.id}-edition") %>
+          <%= my_autocomplete_field_tag f,"item-#{bucket_line_item.id}",:edition,autocomplete_editions_path , 
+	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
+      "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+      {:class=>'btn'}) %>
+	  <div class="actions control-group"><div class="controls"><input class="btn btn-primary btn-xs" name="commit" type="submit" value="attach"></div></div>
+	        <script>
+		  $('<%= "#item-#{bucket_line_item.id}" %>').bind('railsAutocomplete.select', function(event, data){
+		  $('<%= "#item-#{bucket_line_item.id}-edition" %>').val(data.item.id);
+	
+	});
+		</script>
+
+    <% end %>
+    <% end %>
+  </td>
+  
+  <td><small><%= bucket_line_item.isbn %></small><div>	<%= ordering_from_info(bucket_line_item.edition.title) if bucket_line_item.edition %></div></td> 
+  <td><%= bucket_line_item.edition.list_price if bucket_line_item.edition %></td>
+  <td>
+    
+    <small>
+      <% if bucket_line_item.edition %>
+      <% cache("emojitmetrics-title-#{bucket_line_item.edition.title.id}", :expires_in => 20.minutes) do %>
+      <%= render :partial=>'titles/emojimetrics', :locals => {:title=>bucket_line_item.edition.title}%>
+      <% end %>
+      <% end %>
+      <% if (! bucket_line_item.edition.nil? ) && bucket_line_item.edition.title.editions.size > 1 %>
+      <small><div class="label <%= bucket_line_item.edition.copies_in_stock > 0 ? 'label-success' : 'label-warning' %>"><%= bucket_line_item.edition.copies_in_stock %> of this edition in stock</div></small>
+      <% end %>
+      <%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>bucket_line_item.edition.title} if bucket_line_item.edition %>
+    </small>
+  </td> 
+
+  <td class="small">
+    <%= best_in_place bucket_line_item, :customer_id, :as => :select,:collection=>Customer.all.map{ |c| [c.id,c.name] },:data => {:bucket_line_item => bucket_line_item.id,:customer=>1},:place_holder=>"<i class='fa fa-user-plus'></i>" %>
+    <span id="poli_customer_link_<%= bucket_line_item.id %>">
+      <%= render :partial=>'bucket_line_items/customer_link', :locals=>{:bucket_line_item=>bucket_line_item} %>
+    </span>
+  </td> 
+  
+  <td class="small"><%= best_in_place bucket_line_item, :notes, :type => :textarea,:place_holder=>"<i class='fa fa-pencil'></i>" %></td>
+  <td>
+    <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_bucket_line_item_path(bucket_line_item),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} %>
+    <%= link_to raw('<i class="fa fa-trash"></i>'), bucket_line_item_path(bucket_line_item),  {:remote => true,:method=>:delete} %>
+  </td>
+</tr>
+

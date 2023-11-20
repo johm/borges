@@ -46,7 +46,7 @@
        <% end %>
        
        <table class="table" id="line_items">
-	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Cancelled</th><th>Customer</th><th>Notes</th><th>Move</th></tr>
+	 <tr><th>Quantity ordered</th><th>Title</th><th>ISBN</th><th>Orders and Buckets</th><th>List price</th><th>Ext</th><th>Quantity received</th><th>Cancelled</th><th>Customer</th><th>Notes</th><th>Move</th></tr>
 	 <% @purchase_order_line_items.each do |li| %>
 	 <%= render li %>
 	 <% end %>

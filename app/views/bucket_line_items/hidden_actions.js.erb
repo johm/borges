@@ -1,0 +1,2 @@
+$("#modal-window .modal-body").html("<%= escape_javascript(render(:partial=>'bucket_line_items/hidden_actions',:locals=> {:bucket_line_item=>@bucket_line_item})) %>");
+$("#modal-window .modal-title").html("<%= escape_javascript('Line item operations') %>");

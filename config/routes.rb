@@ -153,6 +153,7 @@ Borges::Application.routes.draw do
     member do
       get :hidden_actions 
       put :move_to_purchase_order
+      put :copy_to_bucket
       post :cancel
     end
   end

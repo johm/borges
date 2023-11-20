@@ -1,0 +1,32 @@
+<% if @bucket_line_item.edition %>
+<%= nested_form_for @bucket_line_item,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :copy_to_purchase_order,:controller => :bucket_line_items } do |f| %>
+  <div class="field control-group">
+    <%= f.label :purchase_order,"Copy to purchase order", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false).order("updated_at desc"),:id,:number) %>
+      <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+<% end %>
+
+<%= nested_form_for @bucket_line_item,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :copy_to_bucket,:controller => :bucket_line_items } do |f| %>
+  <div class="field control-group">
+    <%= f.label :purchase_order,"Copy to bucket 🪣", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+
+
+<%= nested_form_for @bucket_line_item,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :move_to_bucket,:controller => :bucket_line_items } do |f| %>
+  <div class="field control-group">
+    <%= f.label :purchase_order,"Move to bucket 🪣", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Move", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>

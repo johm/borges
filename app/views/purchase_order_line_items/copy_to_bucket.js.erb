@@ -1,0 +1,9 @@
+$("#modal-window").modal('hide');
+$("#notificationcontent").html("<%= escape_javascript("Item was successfully copied to bucket <a href='#{url_for(@bucket)}'>#{@bucket.name}</a>").html_safe %>");
+$("#purchase_order_line_item_<%= @purchase_order_line_item.id %>").replaceWith("<%= escape_javascript(render :partial=>"purchase_order_line_item",:object => @purchase_order_line_item) %>");
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+

@@ -1,0 +1,33 @@
+<%= nested_form_for(@bucket,:html=>{:class=>"form-horizontal"}) do |f| %>
+  <% if @bucket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bucket.errors.count, "error") %> prohibited this bucket from being saved:</h2>
+      <ul>
+      <% @bucket.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= mytextfield f,:name,:name %>
+  <div class="field control-group">
+    <%= f.label :tag, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.select :tag, Bucket.tags %>
+    </div>
+  </div>
+
+  <div class="field control-group">
+    <%= f.label :Edelweiss_Upload, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.file_field :editions %>
+    </div>
+  </div>
+  <%= myplaintextarea f,:notes,:notes, {:rows=>5} %>
+
+  
+
+<%=  mysubmit(f,"Create") %>
+  </div>
+<% end %>

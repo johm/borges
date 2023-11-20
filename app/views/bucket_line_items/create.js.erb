@@ -1,0 +1,9 @@
+$("#line_items tr:first-child").after("<%= escape_javascript(render :partial=>"bucket_line_item",:object => @bucket_line_item) %>");
+$("#item").val("");
+
+$("#eds").html("<%= escape_javascript(@bucket_line_item.bucket.number_of_editions.to_s) %>");
+$("#eds_in_stock").html("<%= escape_javascript(@bucket_line_item.bucket.number_of_editions_in_stock.to_s) %>");
+
+
+$("#bucketline_item_<%= @bucket_line_item.id %>").effect("highlight");
+$('.best_in_place').best_in_place();			      
