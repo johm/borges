@@ -69,7 +69,7 @@ gem "sunspot_with_kaminari"
 gem 'jquery-datetimepicker-rails'
 gem "progress_bar"
 gem "chart-js-rails"
-gem 'ri_cal', :git=>"git://github.com/johm/ri_cal"
+gem 'ri_cal', :git=>"https://github.com/johm/ri_cal"
 gem 'instagram'
 gem "simple_calendar", "~> 0.1.9"
 gem "mediaelement_rails"
@@ -86,3 +86,4 @@ gem "httparty"
 
 #gem "graphiql-rails", :group => :development
 
+gem "spark_pr"
