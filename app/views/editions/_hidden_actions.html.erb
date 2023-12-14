@@ -1,9 +1,20 @@
 
+<%= nested_form_for @edition,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :add_to_bucket,:controller => :editions } do |f| %>
+  <div class="field control-group">
+    <%= f.label :bucket,"Add to bucket 🪣", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.unscoped.order("updated_at desc"),:id,:name) %>
+      <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
+    </div>
+  </div>
+<% end %>
+
+
 <%= nested_form_for @edition,:html=>{:class=>"form-horizontal"},:remote=>true,:url => {:action => :add_to_purchase_order,:controller => :editions } do |f| %>
   <div class="field control-group">
     <%= f.label :purchase_order,"Add to purchase order", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false).order("updated_at desc"),:id,:number) %>
+      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.unscoped.where(ordered: false).order("updated_at desc"),:id,:number) %>
       <%= f.submit "Add", {:class=>"btn btn-primary"} %>
     </div>
   </div>

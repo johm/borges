@@ -3,7 +3,7 @@
   <div class="field control-group">
     <%= f.label :purchase_order,"Copy to purchase order", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.where(ordered: false).order("updated_at desc"),:id,:number) %>
+      <%= select_tag :purchase_order, options_from_collection_for_select(PurchaseOrder.unscoped.where(ordered: false).order("updated_at desc"),:id,:number) %>
       <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
     </div>
   </div>
@@ -14,7 +14,7 @@
   <div class="field control-group">
     <%= f.label :purchase_order,"Copy to bucket 🪣", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :bucket, options_from_collection_for_select(Bucket.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.unscoped.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
       <%= f.submit "Copy", {:class=>"btn btn-primary"} %>
     </div>
   </div>
@@ -25,7 +25,7 @@
   <div class="field control-group">
     <%= f.label :purchase_order,"Move to bucket 🪣", :class=>"control-label" %>
     <div class="controls">
-      <%= select_tag :bucket, options_from_collection_for_select(Bucket.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.unscoped.where('id != ?', @bucket_line_item.bucket.id).order("updated_at desc"),:id,:name) %>
       <%= f.submit "Move", {:class=>"btn btn-primary"} %>
     </div>
   </div>

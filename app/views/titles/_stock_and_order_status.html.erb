@@ -2,10 +2,12 @@
 <div style="padding-top:5px">
 
   <% title.outstandingorderlines.each do |li| %>
+  <% unless (local_assigns.has_key?(:purchase_order_context) && purchase_order_context.id==li.purchase_order.id) %>
   <div>
     <small>
         <%= li.still_outstanding %> <%= li.purchase_order.ordered? ? 'ordered' : 'pending' %> on <%= link_to li.purchase_order.number,li.purchase_order %> <%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>		</small>
   </div>
+  <% end %>
   <% end %>
 </div>
 
@@ -13,7 +15,7 @@
   <% title.bucket_line_items.each do |li| %>
   <div>
     <small>
-        🪣 <%= link_to li.bucket.name,li.bucket %> 		</small>
+         <%= link_to "🪣#{li.bucket.name}",li.bucket unless (local_assigns.has_key?(:bucket_context) && bucket_context.id==li.bucket.id) %> 		</small>
   </div>
   <% end %>
 

@@ -9,7 +9,6 @@
 	<tr>
 	  <th>Title</th>
 	  <th>Author(s)</th>
-	  <th># in stock</th>
 	  <th># sold</th>
 	  <th># on order</th>
 	  <th>Blurbed?</th>
@@ -24,15 +23,9 @@
 	    <small><%= sanitize contributors_list(title)%></small>
 	    <%= ordering_from_info(title) %>
 	  </td>
-	  <td><%= title.in_stock %></td>
 	  <td><%= title.sold %></td>
-	  <td>	    <% title.outstandingorderlines.each do |li| %>
-	    <div>
-	      <small>	      <%= li.still_outstanding %> <%= li.purchase_order.ordered? ? 'ordered' : 'pending' %> on <%= link_to li.purchase_order.number,li.purchase_order %> <%= li.purchase_order.ordered_when.to_formatted_s(:just_date) rescue "" %>		</small>
-	    </div>
-	    <% end %>
-	  </td>
-	  <td><%= blurb_status(title) %></td>
+	  <td>	<%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>title}  %></td>
+	  	  <td><%= blurb_status(title) %></td>
 	  <td><small><%= sanitize category_status(title) %></small>	<small>
 	 <%= '💰' * title.hundreds_of_dollars %>
 	 <%= '🔥' * title.hotness %>

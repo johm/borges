@@ -8,7 +8,7 @@
       <%= f.hidden_field(:edition_id,:id=>"item-#{bucket_line_item.id}-edition") %>
           <%= my_autocomplete_field_tag f,"item-#{bucket_line_item.id}",:edition,autocomplete_editions_path , 
 	  link_to_function(content_tag(:i,"",:class=>"fa fa-plus-circle"),
-      "window.open('#{new_title_path}?isbn='+$('#item').val())", 
+      "window.open('#{new_title_path}?isbn='+$('#item-#{bucket_line_item.id}').val())", 
       {:class=>'btn'}) %>
 	  <div class="actions control-group"><div class="controls"><input class="btn btn-primary btn-xs" name="commit" type="submit" value="attach"></div></div>
 	        <script>
@@ -35,7 +35,7 @@
       <% if (! bucket_line_item.edition.nil? ) && bucket_line_item.edition.title.editions.size > 1 %>
       <small><div class="label <%= bucket_line_item.edition.copies_in_stock > 0 ? 'label-success' : 'label-warning' %>"><%= bucket_line_item.edition.copies_in_stock %> of this edition in stock</div></small>
       <% end %>
-      <%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>bucket_line_item.edition.title} if bucket_line_item.edition %>
+      <%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>bucket_line_item.edition.title,:bucket_context =>bucket_line_item.bucket } if bucket_line_item.edition %>
     </small>
   </td> 
 

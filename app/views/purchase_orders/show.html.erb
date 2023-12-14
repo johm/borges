@@ -110,6 +110,10 @@
 	</tr>
       </table>
 
+	    <%= link_to "Destroy (smart)", hidden_actions_purchase_order_path(@purchase_order),  {:class => 'btn btn-xs btn-warning',:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless @purchase_order.ordered? %>
+<%= link_to 'Destroy (stupid)', @purchase_order, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-xs btn-mini btn-danger'  unless @purchase_order.ordered? %></td>
+
+
     </div>
   </div>
 </div>

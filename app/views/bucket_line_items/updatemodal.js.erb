@@ -5,7 +5,8 @@ $("#notice").append("<div><%= @notice.html_safe %></div>");
 $("#bucket_line_item_<%= @bucket_line_item.id %>").hide();
 
 <% unless @move %>
-$("#line_items tr:first-child").after("<%= escape_javascript(render :partial=>"bucket_line_item",:object => @bucket_line_item) %>");
+$("#bucket_line_item_<%= @bucket_line_item.id %>").replaceWith("<%= escape_javascript(render :partial=>"bucket_line_item",:object => @bucket_line_item) %>");
+$("#bucket_line_item_<%= @bucket_line_item.id %>").show();
 <% end %>
 
 

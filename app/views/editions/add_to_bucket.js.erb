@@ -1,0 +1,8 @@
+$("#modal-window").modal('hide');
+$("#notificationcontent").html("<%= escape_javascript("Edition was successfully added to bucket <a href='#{url_for(@bucket)}'>#{@bucket.name}</a>").html_safe %>");
+$("#notification").alert();
+$("#notification").show("fade");
+
+
+
+

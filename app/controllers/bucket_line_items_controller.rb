@@ -1,8 +1,10 @@
 class BucketLineItemsController < ApplicationController
   before_filter :hack_out_params , :only=>[:create,:update]
 
-  before_filter :authenticate_user! 
-  load_and_authorize_resource 
+  before_filter :authenticate_user!, :except=>[:create_from_webhook] 
+  protect_from_forgery :except => [:create_from_webhook]
+
+  load_and_authorize_resource :except => [:create_from_webhook]
 
   
 
@@ -45,11 +47,18 @@ class BucketLineItemsController < ApplicationController
     @bucket_line_item = BucketLineItem.find(params[:id])
   end
 
+  def create_from_webhook 
+    bucket=Bucket.where(:name => "#booksthatarecool").first
+    @bucket_line_item = BucketLineItem.new(:notes => "#{params[:slackbook]} [from #{params[:slackuser]}]")
+    @bucket_line_item.bucket = bucket
+    @bucket_line_item.save! 
+    head :ok       
+  end
+
   # POST /bucket_line_items
   # POST /bucket_line_items.json
   def create
     @bucket_line_item = BucketLineItem.new(params[:bucket_line_item])
-
     respond_to do |format|
       if @bucket_line_item.save
         format.html { redirect_to @bucket_line_item, notice: 'Bucket line item was successfully created.' }

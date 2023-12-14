@@ -146,7 +146,23 @@ class EditionsController < ApplicationController
       format.json { render json: @editions_data }
     end
   end
+  
+  def add_to_bucket
+    @edition = Edition.find(params[:id])
+    @bucket = Bucket.find(params[:bucket])
+    line=BucketLineItem.new
+    line.edition=@edition
+    line.bucket=@bucket
+    line.save!
 
+    respond_to do |format| 
+      format.html { redirect_to @edition.title, notice: "Edition was successfully added to bucket <a href='#{url_for(@bucket)}'>#{@bucket}</a>".html_safe }
+      format.js {}
+    end
+  end
+
+  
+  
   def add_to_purchase_order
     @edition = Edition.find(params[:id])
     @purchase_order = PurchaseOrder.find(params[:purchase_order])

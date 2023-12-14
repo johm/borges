@@ -13,7 +13,7 @@ class Bucket < ActiveRecord::Base
   default_scope  includes(:bucket_line_items)
   
   def self.tags
-    ['General','Frontlist','Events and Tabling','Special orders','Section stock','Bookseller favs']
+    ['General','Frontlist','Events and Tabling','Special orders','Section stock','Vendor stock','Bookseller favs']
   end
     
 

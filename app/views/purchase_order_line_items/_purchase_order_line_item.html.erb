@@ -16,7 +16,7 @@
 </small>
 </td>
 	   <td><small><%= purchase_order_line_item.isbn %></small><div>	<%= ordering_from_info(purchase_order_line_item.edition.title) %></div></td> 
-<td>	<%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>purchase_order_line_item.edition.title}  %></td>
+<td>	<%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>purchase_order_line_item.edition.title,:purchase_order_context=>purchase_order_line_item.purchase_order}  %></td>
 	  <td><%= purchase_order_line_item.edition.list_price %></td>
 	  <td class="ext_price"><%= purchase_order_line_item.ext_price %></td>
 	   <td>
