@@ -77,11 +77,19 @@
       
       <tr>
 	<th>In stock (all editions)</th>
-	<td><%= @title.in_stock %></td>
+	<td><%= @title.in_stock %>
+</td>
+
       </tr>
       <tr>
 	<th>Sold (all editions)</th>
-	<td><%= @title.sold %></td>
+	<td><%= @title.sold %> <br />
+<img src="<%= Spark.data_uri( @title.copies_sold_by_month,
+                :has_min => false, :has_max => true, 'has_last' => false,
+                'height' => '40', :step => 10 ) %>" />
+
+
+</td>
       </tr>
       <% end %>
       <tr>
