@@ -152,6 +152,17 @@ class Title < ActiveRecord::Base
     by_year.flatten
   end
 
+  def copies_in_stock_by_month 
+    my_copies=copies
+    by_year = (2014..Date.today.year).collect do |year|
+      (1..(      year == Date.today.year  ? Date.today.month : 12) ).collect do |month|
+        copies.find_all {|x| x.inventoried_when < Date.new(year,month,1) && (x.deinventoried_when.nil? || x.deinventoried_when >= Date.new(year,month,1)  )}.count
+      end
+    end
+    by_year.flatten
+  end
+
+
 
 
 

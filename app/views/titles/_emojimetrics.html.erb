@@ -1,8 +1,69 @@
 <small>
   <%= '💰' * title.hundreds_of_dollars %>
   <%= '🔥' * title.hotness %> <br />
-<img width="300" src="<%= Spark.data_uri( title.copies_sold_by_month,
-                :has_min => false, :has_max => true, 'has_last' => false,
-                'height' => '60', :step => 10, :line_color => [0x00, 0x66, 0x00, 0xFF] ) %>" />
+
+  <canvas id="title-<%= title.id %>-Chart" width="300px" height="50px" style=""></canvas>
+
+  <script>
+
+   
+var ctx = document.getElementById('title-<%= title.id %>-Chart').getContext('2d');
+var myChart = new Chart(ctx, {
+type: 'line',
+options: {
+    responsive: false,
+    legend: {
+      display: false
+    },
+    elements: {
+      line: {
+        borderColor: '#cb3e38',
+        borderWidth: 1
+      },
+      point: {
+        radius: 0
+      }
+    },
+    tooltips: {
+      enabled: false
+    },
+    scales: {
+      yAxes: [
+        {
+          display: false
+        }
+      ],
+      xAxes: [
+        {
+          display: false
+        }
+      ]
+    }
+  },
+data:{
+labels: [<%=   
+	      (2014..Date.today.year).collect do |year|
+	      (1..( year == Date.today.year ? Date.today.month : 12) ).collect do |month|
+	      "#{year}-#{month}"
+	      end
+ 	      end.flatten.join(", ") %>],
+datasets: [{
+label: "Sales",
+data: [<%= raw title.copies_sold_by_month.join(", ") %>],
+order:0,
+        backgroundColor: '#ff9999',
+
+},
+{
+data: [<%= raw title.copies_in_stock_by_month.join(", ") %>],
+borderColor: "ff0000",
+type:"line",
+order:1
+}
+]}
+});
+</script>
+
+
 <br />
 </small>
