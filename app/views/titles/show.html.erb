@@ -84,9 +84,9 @@
       <tr>
 	<th>Sold (all editions)</th>
 	<td><%= @title.sold %> <br />
-<img src="<%= Spark.data_uri( @title.copies_sold_by_month,
+<img width="100%" src="<%= Spark.data_uri( @title.copies_sold_by_month,
                 :has_min => false, :has_max => true, 'has_last' => false,
-                'height' => '40', :step => 10 ) %>" />
+                'height' => '40', :step => 10, :line_color => [0x00, 0x66, 0x00, 0xFF] ) %>" />
 
 
 </td>

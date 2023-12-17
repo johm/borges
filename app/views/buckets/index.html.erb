@@ -21,9 +21,9 @@
   <th colspan="7" style="background-color:#ccc;font-weight:bold;"><%= tag %></th>
 </tr>
 <% @buckets.where(:tag=>tag).each do |bucket| %>
-  <tr id="bucket_<%= bucket.id%>">
+  <tr id="bucket_<%= bucket.id%>" style="background-color:hsl(<%= bucket.percent_full %>, 100%, 85%)">
     <td><%= bucket.created_at.to_formatted_s(:just_date) %></td>
-    <td><%= link_to bucket.name,bucket %></td>
+    <td><strong><%= link_to bucket.name,bucket %></strong></td>
     <td><%= bucket.notes %></td>
     <td><%= bucket.last_order %></td>
     <td><%= bucket.number_of_editions %></td>

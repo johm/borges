@@ -1,4 +1,8 @@
 <small>
   <%= '💰' * title.hundreds_of_dollars %>
-  <%= '🔥' * title.hotness %>
+  <%= '🔥' * title.hotness %> <br />
+<img width="300" src="<%= Spark.data_uri( title.copies_sold_by_month,
+                :has_min => false, :has_max => true, 'has_last' => false,
+                'height' => '60', :step => 10, :line_color => [0x00, 0x66, 0x00, 0xFF] ) %>" />
+<br />
 </small>

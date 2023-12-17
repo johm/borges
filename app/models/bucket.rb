@@ -32,6 +32,10 @@ class Bucket < ActiveRecord::Base
    bucket_line_items.inject(0) {|sum,li| sum + (li.edition.has_copies_in_stock? ? 1 : 0 rescue 0)}
  end
 
+ def percent_full
+   (number_of_editions_in_stock.to_f / number_of_editions) * 100
+ end
+
 
 
   def as_json(options = {})

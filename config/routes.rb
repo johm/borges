@@ -159,6 +159,7 @@ Borges::Application.routes.draw do
   end
 
   resources :bucket_line_items do 
+
     member do
       get :hidden_actions 
       put :copy_to_purchase_order
@@ -296,6 +297,7 @@ Borges::Application.routes.draw do
   get '/cart', :to => "shopping_carts#current"
   get '/shopping_cart_success', :to => "shopping_carts#success"
   post '/webhook', :to => "shopping_carts#webhook"
+  post "/create_bli_from_webhook", :to => "bucket_line_items#create_from_webhook"
   put '/update_cart', :to => "shopping_carts#update_current"
   put '/create-checkout-session', :to => "shopping_carts#checkout"
   match '/bookfair' => 'event_locations#show',:defaults => {:id => 4}
