@@ -1,0 +1,33 @@
+<br />
+<br />
+<br />
+<br />
+
+
+<table class='table'>
+<% @response['items'].each do |order| %>
+<% if ['Processed','Pending'].include? order['status'] %>
+<tr>
+<td>
+<%= order['status'] %><br /> 
+<%= order['billingAddressName'] %> <br />
+<%= DateTime.parse(order['creationDate']).to_formatted_s(:just_date) %> <br />
+<%= link_to order['invoiceNumber'], "https://app.snipcart.com/dashboard/orders/"+ order['token'] %>
+<%= order['notes'] %>
+</td>
+<td>
+<% order['items'].each do |item| %>
+<div class="well">
+<% edition = Edition.where(:isbn13 => item['description']).first unless item['description'].blank? %>
+<% if edition.nil? %>
+<%= item['quantity'] %> x <%= item['name'] %>
+<% else %>
+<%= item['quantity'] %> x <%= link_to  item['name'], edition %>  	<%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %> <br /><%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>edition.title}  %>
+<% end %>
+</div>
+<% end %>
+</td>
+</tr>
+<% end %>
+<% end %>
+</table>

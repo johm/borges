@@ -268,6 +268,7 @@ Borges::Application.routes.draw do
 
   get '/orderdump', :to => 'sale_orders#dump'
   get '/dashboard/search', :to => 'dashboard#search'
+  get '/dashboard/snipcart', :to => 'dashboard#snipcart'
   get '/dashboard/:action', :to => 'dashboard'
   get '/dashboard/', :to => 'dashboard#index'
   get '/content/', :to => 'dashboard#content'
