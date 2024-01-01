@@ -28,11 +28,11 @@
       <td>
 	<%= link_to l.copy.edition.title.title, l.copy.edition %>
 	 
-
+ 	<%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(l.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless l.copy.edition.title.latest_published_edition.nil? %>
 	<% cache("emojitmetrics-title-#{l.copy.edition.title.id}", :expires_in => 20.minutes) do %>
 	    <%= render :partial=>'titles/emojimetrics', :locals => {:title=>l.copy.edition.title} %>
 	<% end %>
- 	<%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(l.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless l.copy.edition.title.latest_published_edition.nil? %>
+
       </td>
       <td>
 

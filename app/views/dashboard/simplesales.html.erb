@@ -1,0 +1,89 @@
+<div class="container-fluid">
+<div class="row spaceontop">
+  <div class="col-xs-12">
+    <h1>Sales</h1>
+    
+    <%= nested_form_for @date_range_object || DateRangeObject.new,:method => :get,:html=>{:class=>"form-horizontal form-compact"},:url => {:action => :simplesales,:controller => :dashboard } do |f| %>
+    <%= mydatefield f,:from,:range_start %>
+    <%= mydatefield f,:to,:range_end %>
+    <%= mysubmit f,"Get report" %>
+  <% end %>
+
+
+  <canvas id="myChart" width="100%" height="25%" style="height:25% !important;"></canvas>
+
+  <script>
+
+   
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+type: 'line',
+data:{
+labels: [<%=  raw @days.collect{|d| "'#{d}'"}.join(", ") %>],
+datasets: [{
+label: "Sales",
+data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.subtotal_after_discount).to_f}}.join(", ") %>],
+}]}
+});
+</script>
+
+  
+  
+  <div>
+    <strong>Revenue: $<%= @revenue %></strong>  (does not include sales tax collected)
+  </div>
+  <div>
+    <strong>Cost: $<%= @cost %></strong>
+  </div>
+  <div>
+    <strong>Average discount: <%= 100 - (100 * (@cost/@revenue) )%></strong>
+  </div>
+
+  <div>
+    <strong>Days in period with sales: <%= @days.length %> </strong>
+  </div>
+
+
+
+  <hr>
+  
+  
+
+  <hr>
+  <h2>Items sold</h2>
+  <table class="table">
+    <tr><th>Title</th><th>Sold in this period</th><th>In stock?/On order?</th><th>Categorized?</th><th></th><th></th></tr>
+    <% @titles_sold_with_count.each do |x| %>
+    <% unless x[0].nil? %>
+    <% title=x[0] %>
+    <% count=x[1] %>
+    <tr >
+      <td>
+	<%= link_to title.title,title%>
+	<div>
+	</div>
+      </td>
+      <td><%= count %></td>
+      <td>
+</td>
+      <td>
+
+	
+      </td>
+
+      <td><%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
+      <td>
+      </td>
+    </tr>
+    <% end %>
+    <% end %>
+    
+  </table>
+
+
+
+
+  </div>
+</div>
+</div>
+

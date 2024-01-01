@@ -146,7 +146,7 @@ class Title < ActiveRecord::Base
     sale_dates=copies.sold.collect {|c| "#{c.deinventoried_when.year}-#{c.deinventoried_when.month}"}
     by_year = (2014..Date.today.year).collect do |year|
         (1..(      year == Date.today.year  ? Date.today.month : 12) ).collect do |month|
-        sale_dates.count("#{year}-#{month}")
+        sale_dates.count("#{year}-#{month}") # sales in that month
         end
       end
     by_year.flatten
@@ -156,7 +156,7 @@ class Title < ActiveRecord::Base
     my_copies=copies
     by_year = (2014..Date.today.year).collect do |year|
       (1..(      year == Date.today.year  ? Date.today.month : 12) ).collect do |month|
-        copies.find_all {|x| x.inventoried_when < Date.new(year,month,1) && (x.deinventoried_when.nil? || x.deinventoried_when >= Date.new(year,month,1)  )}.count
+        copies.find_all {|x| x.inventoried_when < (Date.new(year,month,1) + 1.month) && (x.deinventoried_when.nil? || x.deinventoried_when >= (Date.new(year,month,1) + 1.month)  )}.count
       end
     end
     by_year.flatten
