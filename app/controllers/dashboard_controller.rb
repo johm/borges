@@ -23,6 +23,16 @@ class DashboardController < ApplicationController
   def search 
   end
 
+
+  def snipcart
+    begin
+      @response=JSON.parse((RestClient.get "https://#{ENV['SNIPCART_KEY']}:@app.snipcart.com/api/orders", {params: {limit: 1000},:accept => :json}))
+    rescue RestClient::ExceptionWithResponse => e
+      @error = e.response
+    end
+  end
+
+
   def sales
     @date_range_object=DateRangeObject.new
     @date_range_object.range_start = Date.parse(params[:date_range_object][:range_start]) rescue 6.days.ago.to_date
