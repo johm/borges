@@ -27,6 +27,11 @@ class DashboardController < ApplicationController
   def snipcart
     begin
       @response=JSON.parse((RestClient.get "https://#{ENV['SNIPCART_KEY']}:@app.snipcart.com/api/orders", {params: {limit: 1000},:accept => :json}))
+      @order_to_notifications={}
+      @response['items'].each do |order|
+        @order_to_notifications[order['token']]=JSON.parse((RestClient.get "https://#{ENV['SNIPCART_KEY']}:@app.snipcart.com/api/orders/#{order['token']}/notifications", {params: {limit: 1000},:accept => :json}))
+      end 
+
     rescue RestClient::ExceptionWithResponse => e
       @error = e.response
     end

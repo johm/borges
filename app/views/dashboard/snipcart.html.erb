@@ -4,16 +4,27 @@
 <br />
 
 
+
 <table class='table'>
 <% @response['items'].each do |order| %>
 <% if ['Processed','Pending'].include? order['status'] %>
 <tr>
-<td>
+<td width="50%">
 <%= order['status'] %><br /> 
 <%= order['billingAddressName'] %> <br />
 <%= DateTime.parse(order['creationDate']).to_formatted_s(:just_date) %> <br />
 <%= link_to order['invoiceNumber'], "https://app.snipcart.com/dashboard/orders/"+ order['token'] %>
 <%= order['notes'] %>
+<ul class="small">
+<% if @order_to_notifications[order['token']] %>
+<% @order_to_notifications[order['token']]['items'].each do |n| %>
+<li> <%= DateTime.parse(n['creationDate']).to_formatted_s(:just_date) %> 
+<%= n['type'] %> <%= n['subject'] %> / 
+<%=  n['message'] %></li>
+<% end %>
+<% end %>
+
+</ul>
 </td>
 <td>
 <% order['items'].each do |item| %>
