@@ -5,3 +5,8 @@
 # Disallow: /
 User-agent: SemrushBot
 Disallow: /
+
+User-agent: *
+Disallow: /
+Allow: /uploads/
+Allow: //uploads/

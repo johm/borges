@@ -15,6 +15,8 @@ class PurchaseOrder < ActiveRecord::Base
   has_many :purchase_order_line_items,dependent: :destroy
   attr_accessible :notes, :number, :ordered, :ordered_when,:order_by_when, :distributor_id,:owner_id,:tag,:editions
 
+  has_many :editions, through: :purchase_order_line_items
+
   default_scope  includes(:purchase_order_line_items)
   
   def self.tags
@@ -68,10 +70,16 @@ class PurchaseOrder < ActiveRecord::Base
     edition = Edition.where('isbn13 = ? or isbn10 = ?',isbn,isbn).first
     if edition.nil? 
       title=Title.new
-      title.title=row["Title"]
+      
+      if row["Subtitle"].blank? 
+        title.title=row["Title"] 
+      else
+        title.title=row["Title"] + ": " + row["Subtitle"] 
+      end
 
       edition=Edition.new
       edition.isbn13=isbn
+      edition.preorderable = true
       edition.publisher=Publisher.find_or_create_by_name(row["Publisher Name"])
       edition.format="Hardcover" if row["Format Description"].include?("Hardcover")
       edition.list_price=row["List Price"]

@@ -38,7 +38,7 @@ class EditionsController < ApplicationController
   # GET /editions/1
   # GET /editions/1.json
   def show
-    @edition = Edition.find(params[:id])
+    @edition = Edition.find(params[:id]) #.includes(title: {contributions: [:authors]} )
     @title = @edition.title
     respond_to do |format|
       format.html { redirect_to title_path(@title,:edition_id=>@edition)}

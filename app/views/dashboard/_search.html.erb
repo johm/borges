@@ -18,5 +18,12 @@
       <%= select_tag :category, options_from_collection_for_select(Category.order("name asc"),:id,:name,(@title_search_object.category rescue "")),:include_blank=>true %>
     </div>
   </div>
+  <div class="field control-group">
+    <%= f.label :bucket,"Bucket", :class=>"control-label" %>
+    <div class="controls">
+      <%= select_tag :bucket, options_from_collection_for_select(Bucket.order("name asc"),:id,:name,(@title_search_object.bucket rescue "")),:include_blank=>true %>
+    </div>
+  </div>
+
 <%= mysubmit f, :search,{},"btn-medium" %>
 <% end %>

@@ -9,6 +9,11 @@
       <%= link_to raw('<i class="fa fa-circle-check-o"></i>'), hidden_actions_edition_path(sale_order_line_item.copy.edition.title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless sale_order_line_item.copy.edition.title.latest_published_edition.nil? %>
     <% end %>
   </td>
-  <td><%= link_to("<i class='fa fa-ban'></i>".html_safe, sale_order_line_item, :remote=>true, :method => :delete,:class=>"") if (can? :destroy, SaleOrderLineItem && !sale_order_line_item.sale_order.posted?) %>
+  <td><%= link_to("<i class='fa fa-ban'></i>".html_safe, sale_order_line_item, :remote=>true, :method => :delete,:class=>"") if ((can? :destroy, SaleOrderLineItem) && !sale_order_line_item.sale_order.posted?) %>
+    <% if (sale_order_line_item.sale_order.posted? && (can? :edit, Title) && ! sale_order_line_item.copy.nil? && ! sale_order_line_item.copy.edition.nil? )%>
+      <div class="hiddenactions">
+	<%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(sale_order_line_item.copy.edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %>
+      </div>
+    <% end %>
   </td>
 </tr>

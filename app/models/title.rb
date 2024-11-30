@@ -30,6 +30,11 @@ class Title < ActiveRecord::Base
     integer :category, :multiple => true do
       categories.map {|c| c.id }
     end
+
+
+    integer :bucket, :multiple => true do
+      bucket_line_items.map{|x| x.bucket.id }.uniq
+    end
     
     
     text :isbn do
@@ -56,9 +61,9 @@ class Title < ActiveRecord::Base
     super.tap do |hash|
       hash["the_title"] = {slug: to_param,
                            title: title,
-                           contributions: contributions.map {|x| {author: {fullName: x.author.full_name },
+                           contributions: contributions.map {|x| {author: {fullName: (x.author.full_name rescue ""),
                                                                   what: x.what,
-                                                             }}}
+                                                             }}}}
       hash["the_edition"] = {cover_image_url: latest_edition.cover_image_url,
                              list_price: latest_edition.list_price.to_s,
                              key: latest_edition.id,
@@ -162,7 +167,24 @@ class Title < ActiveRecord::Base
     by_year.flatten
   end
 
+  def median_copies_sold_by_month
+    sold_bm=copies_sold_by_month
+    stock_bm=copies_in_stock_by_month
+    sba=sold_bm.map.with_index {|x,i|  x if stock_bm[i]>-0}.compact
 
+    if sba.length == 0
+      0
+    else
+      sba = sba.sort
+      if sba.length.odd?
+        sba[(sba.length - 1) / 2]
+      else
+        (sba[sba.length/2] + sba[sba.length/2 - 1])/2.to_f
+      end
+    end
+    
+    
+  end
 
 
 

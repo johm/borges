@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20220331185539) do
+ActiveRecord::Schema.define(:version => 20231107175045) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -20,6 +20,23 @@ ActiveRecord::Schema.define(:version => 20220331185539) do
     t.datetime "updated_at",                     :null => false
     t.string   "full_name"
     t.text     "bio",        :limit => 16777215
+  end
+
+  create_table "bucket_line_items", :force => true do |t|
+    t.integer "edition_id"
+    t.integer "customer_id"
+    t.integer "bucket_id"
+    t.text    "notes"
+  end
+
+  add_index "bucket_line_items", ["bucket_id"], :name => "index_bucket_line_items_on_bucket_id"
+
+  create_table "buckets", :force => true do |t|
+    t.text     "name"
+    t.text     "notes"
+    t.text     "tag"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "categories", :force => true do |t|

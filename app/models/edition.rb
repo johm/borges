@@ -3,6 +3,7 @@ class Edition < ActiveRecord::Base
   has_many :copies
   has_many :purchase_order_line_items
   has_many :bucket_line_items
+  has_many :buckets, through: :bucket_line_items
   has_many :shopping_cart_line_items
   has_many :invoice_line_items
   
@@ -44,6 +45,7 @@ class Edition < ActiveRecord::Base
     text :title do
       title.title rescue ""
     end
+
   end
 
   def as_json(*)
@@ -51,9 +53,21 @@ class Edition < ActiveRecord::Base
       hash["instock"] = my_stock_status
       hash["libro_url"] = my_libro_url
       hash["description"] = (title.introduction || " ") + "<br /><br />" + (title.description || " ")
+      hash["the_title"] = {slug: title.to_param,
+                           title: title.title,
+                           contributions: title.contributions.map {|x| {author: {fullName: x.author.full_name },
+                                                                  what: x.what,
+                                                             }}}
+      hash["the_edition"] = {cover_image_url: cover_image_url,
+                             list_price: list_price.to_s,
+                             key: id,
+                             isbn13: isbn13}
+
+      
+    
     end
   end
-  
+
   
   def cover_image_url
     cover_url(:reasonable)
@@ -122,7 +136,7 @@ class Edition < ActiveRecord::Base
   end
 
   def my_libro_url
-    Rails.cache.fetch("/edition/#{id}-#{updated_at}/libro_url", :expires_in => 12.hours) do
+    Rails.cache.fetch("/edition/#{id}-#{updated_at}/libro_url", :expires_in => 48.hours) do
       api_url="https://libro.fm/api/v4/related/#{isbn13}?partner_id=redemmas&auth=#{ENV['LIBRO_KEY']}"
       logger.error("getting #{api_url}")
       response = HTTParty.get(api_url)
@@ -151,7 +165,7 @@ class Edition < ActiveRecord::Base
 
   def my_online_price
     if copies.length > 0
-      has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : copies.order("price_in_cents desc").first.price
+      has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : [copies.order("price_in_cents desc").first.price,list_price].max
     else
       list_price
     end

@@ -21,7 +21,7 @@ module EditionsHelper
   end
   
   def buy_or_order(edition)
-    if edition.has_copies_in_stock? || edition.can_back_order? || edition.can_preorder?
+    if false && (edition.has_copies_in_stock? || edition.can_back_order? || edition.can_preorder?)
       content_tag(:div,
                   button_to("Add to cart",
                             shopping_cart_line_items_path(:edition=>edition),

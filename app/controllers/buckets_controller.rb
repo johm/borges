@@ -11,7 +11,8 @@ class BucketsController < ApplicationController
   # GET /buckets
   # GET /buckets.json
   def index
-    @buckets = Bucket.includes([:bucket_line_items]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(40)
+#    @buckets = Bucket.includes([:bucket_line_items]).order(sort_column + ' ' + sort_direction)
+    @buckets = Bucket.order(sort_column + ' ' + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,11 +24,22 @@ class BucketsController < ApplicationController
   # GET /buckets/1.json
   def show
     @bucket = Bucket.find(params[:id])
-    @bucket_line_items=@bucket.bucket_line_items.page(params[:page]).per(100)
+    @bucket_line_items=@bucket.bucket_line_items.includes(:edition => :title).page(params[:page]).per(300)
     respond_to do |format|
       format.html # show.html.erb
       format.text
       format.json { render json: @bucket }
+      format.csv {
+        @csv=CSV.generate do |csv|
+          csv << ["Item Name","Description","Variation Name","SKU","Category","Price"]
+          @bucket.bucket_line_items.each do |li|
+            csv << [li.edition.title.title,"",li.edition.format,li.edition.isbn13,@bucket.name,li.edition.list_price] 
+          end    
+        end 
+        
+        response.headers['Content-Disposition'] = "attachment; filename=\"redemmas-bucket-#{@bucket.id}.csv\""  
+        render text: @csv 
+      }
     end
   end
 

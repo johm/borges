@@ -1,8 +1,8 @@
-
 <tr style="border-top:1px solid #ccc;" id="bucket_line_item_<%= bucket_line_item.id %>" class="<%= 'warning' if bucket_line_item.edition && bucket_line_item.edition.title.in_stock==0 && bucket_line_item.edition.title.on_order==0 %> <%= 'danger' unless bucket_line_item.edition && bucket_line_item.edition.title.is_in_print?  %>  ">
   <td>
     <% if bucket_line_item.edition %>
     <%= link_to "#{bucket_line_item.edition.title.title} #{bucket_line_item.edition.number}", bucket_line_item.edition.title, :target=>"blank",:title=>"#{bucket_line_item.edition.publisher}\nIn stock (all editions): #{bucket_line_item.edition.title.in_stock}\nOn submitted po's but not received: #{bucket_line_item.edition.title.on_order} " %>	    
+
     <% else %>
     <%= nested_form_for(bucket_line_item, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>
       <%= f.hidden_field(:edition_id,:id=>"item-#{bucket_line_item.id}-edition") %>
@@ -28,14 +28,14 @@
     
     <small>
       <% if bucket_line_item.edition %>
-      <% cache("emojitmetrics-title-#{bucket_line_item.edition.title.id}", :expires_in => 20.minutes) do %>
+      <% cache("emojitmetrics-title-#{bucket_line_item.edition.title.id}", :expires_in => 1.day) do %>
       <%= render :partial=>'titles/emojimetrics', :locals => {:title=>bucket_line_item.edition.title}%>
       <% end %>
       <% end %>
       <% if (! bucket_line_item.edition.nil? ) && bucket_line_item.edition.title.editions.size > 1 %>
       <small><div class="label <%= bucket_line_item.edition.copies_in_stock > 0 ? 'label-success' : 'label-warning' %>"><%= bucket_line_item.edition.copies_in_stock %> of this edition in stock</div></small>
       <% end %>
-      <%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>bucket_line_item.edition.title,:bucket_context =>bucket_line_item.bucket } if bucket_line_item.edition %>
+       <%= render :partial=>'titles/stock_and_order_status', :locals => {:title=>bucket_line_item.edition.title,:bucket_context =>bucket_line_item.bucket } if bucket_line_item.edition %>
     </small>
   </td> 
 

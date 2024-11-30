@@ -47,6 +47,7 @@
     </div>
     <div class="col-md-3">
       <%= mylinkbutton("<i class='fa fa-pencil'></i> Edit", edit_bucket_path(@bucket)) %> 
+      <%= mylinkbutton("<i class='fa fa-font'></i> Export for square", bucket_path(@bucket,:format=>'csv'),:target=>"_blank") %> 
       <table class="table">
 	<tr>
 	  <th>Bucket Name:</th>
@@ -79,9 +80,9 @@
     <table class="table" id="line_items">  
       <tr><th>Title</th><th>ISBN</th><th>List price</th><th>Ordering</th><th>Customer</th><th>Notes</th><th>Move</th></tr>
       <% @bucket_line_items.each do |li| %>
-      <%= render li %>
+       <%= render li %>
       <% end %>
-      <%= paginate @bucket_line_items %>
+      <%= paginate @bucket_line_items  %>
     </table>
   </div>
 </div>

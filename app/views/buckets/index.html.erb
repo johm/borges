@@ -25,7 +25,7 @@
     <td><%= bucket.created_at.to_formatted_s(:just_date) %></td>
     <td><strong><%= link_to bucket.name,bucket %></strong></td>
     <td><%= bucket.notes %></td>
-    <td><%= bucket.last_order %></td>
+    <td><%= bucket.last_order.to_formatted_s(:just_date) rescue "" %></td>
     <td><%= bucket.number_of_editions %></td>
     <td><%= bucket.number_of_editions_in_stock %></td>
     <td>

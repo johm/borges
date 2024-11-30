@@ -4,71 +4,93 @@
 
 <% copies_sold_by_month = title.copies_sold_by_month %>
 
+
+
+
 <div style="margin-top: 10px;position:relative;">
-  <canvas id="title-<%= title.id %>-Chart" width="300px" height="<%= 10 + (Math.log(copies_sold_by_month.max) * 5 ) + (copies_sold_by_month.max/5)   %>px" style=""></canvas>
+  <canvas id="title-<%= title.id %>-Chart" width="300px" height="50px" style=""></canvas>
 <br />
-<div style="color:#ff9999;position:absolute;top:0px;left:0px;font-size:8px;"><%= copies_sold_by_month.max %> </div>
+<div style="color:#ff9999;position:absolute;top:0px;left:0px;font-size:8px;"><%= copies_sold_by_month.max %> max </div>
+<div style="color:#ff9999;position:absolute;top:10px;left:0px;font-size:8px;"><%= copies_sold_by_month.sum %> tot </div>
+<div style="color:#ff9999;position:absolute;top:20px;left:0px;font-size:8px;"><%= title.median_copies_sold_by_month %> med </div>
 </div>
+
+
   <script>
 
-   
+var copies_sold_by_month_<%= title.id %> =    [<%= raw copies_sold_by_month.collect {|x| x }.join(", ") %>];
+
+
 var ctx = document.getElementById('title-<%= title.id %>-Chart').getContext('2d');
 var myChart = new Chart(ctx, {
 type: 'line',
-options: {
-    responsive: false,
-    legend: {
-      display: false
-    },
-    elements: {
-      line: {
-        borderColor: '#cb3e38',
-        borderWidth: 1
-      },
-      point: {
-        radius: 0
-      }
-    },
-    tooltips: {
-      enabled: false
-    },
-    scales: {
-      yAxes: [
-        {
-          display: false
-        }
-      ],
-      xAxes: [
-        {
-          display: false
-        }
-      ]
-    }
-  },
-data:{
-labels: [<%=   
-	      (2014..Date.today.year).collect do |year|
-	      (1..( year == Date.today.year ? Date.today.month : 12) ).collect do |month|
-	      "#{year}-#{month}"
-	      end
- 	      end.flatten.join(", ") %>],
-datasets: [{
-label: "Sales",
-data: [<%= raw copies_sold_by_month.join(", ") %>],
-order:0,
-        backgroundColor: '#ff9999',
+    options: {
+	responsive: false,
+	legend: {
+	    display: false
+	},
+	elements: {
+	    line: {
+		borderColor: '#cb3e38',
+		borderWidth: 1
+	    },
+	    point: {
+		radius: 0
+	    }
+	},
+	tooltips: {
+	    enabled: true,
+	    yAlign: 'bottom',
+fontSize: 8,
 
-},
-{
-data: [<%= raw title.copies_in_stock_by_month.join(", ") %>],
-borderColor: "ff0000",
-type:"line",
-order:1
-}
-]}
+callbacks: {
+		label: function(t, d) {
+		    const label = "# sold";
+                    return (t.datasetIndex == 0 ? "SOLD: " +  copies_sold_by_month_<%= title.id %>[t.index] : "");
+		}
+	    }
+	},
+	scales: {
+	    xAxes: [{
+		gridLines: {display: false},
+		ticks: {
+		    display: false,
+		    fontSize: 8,
+		}}],
+	    yAxes: [{
+		gridLines: {display: false},
+		ticks: {
+		    fontColor: "#ffffff",
+		    min: 0,
+		    max: 30
+                }
+	    }]
+	}
+    },
+    data:{
+	labels: [<%=   raw(
+	    (2014..Date.today.year).collect do |year|
+		(1..( year == Date.today.year ? Date.today.month : 12) ).collect do |month|
+		"\"#{year}-#{month}\""
+	    end
+ 	    end.flatten.join(", ") )%>],
+	datasets: [{
+	    label: "Sales",
+	    data: [<%= raw copies_sold_by_month.collect {|x| Math.log(x+1,2) + x/5}.join(", ") %>],
+	    order:0,
+            backgroundColor: '#ff9999',
+	    
+	},
+		   {
+		       data: [<%= raw title.copies_in_stock_by_month.collect {|x| Math.log(x+1,2) + x/5}.join(", ") %>],
+		       borderColor: "ff0000",
+		       type:"line",
+		       order:1
+		   }
+		  ]
+    }
 });
 </script>
 
-
-<br />
 </small>
+

@@ -30,7 +30,8 @@ class TitlesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @titles }
+      format.json { render json: @titles.collect {|t| t.editions.find_all {|e| ! e.unavailable?}}.flatten}
+#       format.json { render json: @titles }
     end
   end
 
@@ -166,7 +167,7 @@ class TitlesController < ApplicationController
 
 
   def search
-    @title_search_object=SearchObject.new((params[:search_object]).merge({:publisher=>params[:publisher],:distributor=>params[:distributor],:category=>params[:category]}))
+    @title_search_object=SearchObject.new((params[:search_object]).merge({:publisher=>params[:publisher],:distributor=>params[:distributor],:category=>params[:category],:bucket=>params[:bucket]}))
     title_search_object=@title_search_object # sunspot doesn't let me see instance variables inside its block
 
     @title_search = Title.search do
@@ -177,6 +178,7 @@ class TitlesController < ApplicationController
       with(:category_count,0) if title_search_object.uncategorized=="1"
       with(:year_of_publication,title_search_object.year_of_publication) unless title_search_object.year_of_publication.blank?
       with(:category,title_search_object.category) unless title_search_object.category.blank?
+      with(:bucket,title_search_object.bucket) unless title_search_object.bucket.blank?
 
       fulltext title_search_object.title do
         fields(:title)

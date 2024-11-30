@@ -19,18 +19,25 @@ class Bucket < ActiveRecord::Base
 
 
   def last_order 
-    bucket_line_items.collect {|bli| bli.edition ? bli.edition.last_order_date : nil }.find_all {|x| ! x.nil?}.sort.last
+#    bucket_line_items.collect {|bli| bli.edition ? bli.edition.last_order_date : nil }.find_all {|x| ! x.nil?}.sort.last
+#   bucket_line_items.includes(:edition => {:purchase_order_line_items => :purchase_order} ).collect {|bli| bli.edition && bli.edition.purchase_order_line_items.collect {|poli| poli.purchase_order && poli.purchase_order.ordered_when}}.find_all {|d| ! d.nil?}.flatten.compact.sort.last #reduces queries   
+nil
+   PurchaseOrder.joins(:purchase_order_line_items => {:edition => :buckets}).where(:buckets => {:id => id}).order(:ordered_when).last.ordered_when
+
   end
 
 
  def number_of_editions
-    bucket_line_items.size
+   # bucket_line_items.size
+   Edition.includes("bucket_line_items","copies").where(:bucket_line_items => {:bucket_id => id}).count
  end
 
  
  def number_of_editions_in_stock 
-   bucket_line_items.inject(0) {|sum,li| sum + (li.edition.has_copies_in_stock? ? 1 : 0 rescue 0)}
- end
+#   bucket_line_items.includes(:edition => :copies).inject(0) {|sum,li| sum + (li.edition.has_copies_in_stock? ? 1 : 0 rescue 0)}
+#   bucket_line_items.includes(:edition => :copies).inject(0) {|sum,li| sum + (li.edition.copies.find_all {|c| c.status=="STOCK"}.size > 0 ? 1 : 0 rescue 0)} # use the include
+   Edition.includes("bucket_line_items","copies").where(:bucket_line_items => {:bucket_id => id},:copies => {:status => "STOCK"} ).count
+end
 
  def percent_full
    (number_of_editions_in_stock.to_f / number_of_editions) * 100
@@ -61,10 +68,16 @@ class Bucket < ActiveRecord::Base
     edition = Edition.where('isbn13 = ? or isbn10 = ?',isbn,isbn).first
     if edition.nil? 
       title=Title.new
-      title.title=row["Title"]
+      
+      if row["Subtitle"].blank? 
+        title.title=row["Title"] 
+      else
+        title.title=row["Title"] + ": " + row["Subtitle"] 
+      end
 
       edition=Edition.new
       edition.isbn13=isbn
+      edition.preorderable = true
       edition.publisher=Publisher.find_or_create_by_name(row["Publisher Name"])
       edition.format="Hardcover" if row["Format Description"].include?("Hardcover")
       edition.list_price=row["List Price"]
