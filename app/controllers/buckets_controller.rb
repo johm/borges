@@ -31,9 +31,9 @@ class BucketsController < ApplicationController
       format.json { render json: @bucket }
       format.csv {
         @csv=CSV.generate do |csv|
-          csv << ["Item Name","Description","Variation Name","SKU","Category","Price"]
+          csv << ["Item Name","Description","Variation Name","SKU","Category","Price","Authors","Categories","In stock (this edition)","Found","In stock (all editions)","Found all editions","Item Type"]
           @bucket.bucket_line_items.each do |li|
-            csv << [li.edition.title.title,"",li.edition.format,li.edition.isbn13,@bucket.name,li.edition.list_price] 
+            csv << [li.edition.title.title,"",li.edition.format,li.edition.isbn13,@bucket.name,li.edition.list_price,li.edition.title.contributions.collect {|c| c.author.full_name rescue ""}.to_sentence,li.edition.title.categories.collect {|c| c.name}.to_sentence,li.edition.copies_in_stock,"",li.edition.title.in_stock,"","Physical"] 
           end    
         end 
         

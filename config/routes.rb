@@ -222,7 +222,7 @@ Borges::Application.routes.draw do
   end
 
   get 'titles/search' => 'titles#search'
-  get '/titles/:id'=> 'titles#redirector',  :constraints => { :id => /[0-9]+/ }
+  get '/titles/:id'=> 'titles#redirector',  :constraints => { :id => /[0-9]+/, :format => 'html' }
 
   resources :titles do 
     get :autocomplete_publisher_name, :on => :collection

@@ -59,7 +59,7 @@ class Edition < ActiveRecord::Base
                                                                   what: x.what,
                                                              }}}
       hash["the_edition"] = {cover_image_url: cover_image_url,
-                             list_price: list_price.to_s,
+                             list_price: my_online_price.to_s,
                              key: id,
                              isbn13: isbn13}
 

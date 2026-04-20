@@ -44,6 +44,10 @@ data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.su
   </div>
 
 
+  <div>
+    <strong>Items sold: <%= @titles_sold_with_count.inject(0) {|sum,x| sum + x[1]} %> </strong>
+  </div>
+
 
   <hr>
   

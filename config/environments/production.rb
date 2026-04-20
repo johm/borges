@@ -1,5 +1,6 @@
 Borges::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.time_zone="America/New_York"
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -75,4 +76,18 @@ Borges::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 1
+
+  class NoCompression
+    def compress(string)
+      # do nothing
+      string
+    end
+  end
+
+  config.assets.compress = true
+  config.assets.js_compressor = NoCompression.new
+  config.assets.css_compressor = NoCompression.new
+  
+
+
 end

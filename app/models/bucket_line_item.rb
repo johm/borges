@@ -11,7 +11,7 @@ class BucketLineItem < ActiveRecord::Base
 #  validates :edition,:presence=>true # TK relax this for editionless items
   validates :bucket,:presence=>true
 
-  default_scope includes(:title).order('titles.title asc')
+#  default_scope includes(:title).order('titles.title asc')
 
   def isbn 
     if ! edition.nil?

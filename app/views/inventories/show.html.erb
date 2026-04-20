@@ -5,8 +5,9 @@
   
   
   <h1>Inventory session: <%= @inventory.name %></h1>
-  
-  <%= nested_form_for(InventoryCopyConfirmation.new, :remote=>true,:html=>{:class=>"form-horizontal"}) do |f| %>    
+
+
+  <%= nested_form_for(InventoryCopyConfirmation.new, :remote=>true,:html=>{:class=>"form-horizontal",:style=>"position:fixed;top:60px;right:50%; background:rgba(255,255,255,.5)"}) do |f| %>    
   
   <%= f.hidden_field(:inventory_id,:value => @inventory.id) %>
   <%= f.hidden_field(:copy_id) %>
@@ -28,6 +29,7 @@
   
   <%= mylinkbutton("<i class='fa fa-plus-circle'></i> Add","#",{:id=>"add_inventory_copy_confirmation"}) %> 
   <% end %>
+
 
   <%= paginate @inventory_confirmations %>
   <table class="table" id="inventory_copy_confirmations">

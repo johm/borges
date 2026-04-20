@@ -65,9 +65,14 @@ class Title < ActiveRecord::Base
                                                                   what: x.what,
                                                              }}}}
       hash["the_edition"] = {cover_image_url: latest_edition.cover_image_url,
-                             list_price: latest_edition.list_price.to_s,
+        opengraph_image_url: latest_edition.opengraph_image_url,
+                             list_price: latest_edition.my_online_price.to_s,
                              key: latest_edition.id,
-                             isbn13: latest_edition.isbn13}
+                             isbn13: latest_edition.isbn13,
+                             publisher_name: latest_edition.publisher.name,
+        year_of_publication: latest_edition.year_of_publication,
+      
+      }
     end
   end
   

@@ -10,6 +10,11 @@ class Bucket < ActiveRecord::Base
   has_many :bucket_line_items,dependent: :destroy
   attr_accessible :notes, :name, :tag,:editions
 
+  has_many :editions, through: :bucket_line_items
+  has_many :copies, through: :editions
+  has_many :titles, through: :editions
+
+
   default_scope  includes(:bucket_line_items)
   
   def self.tags
@@ -55,9 +60,10 @@ end
       "No file uploaded"
     else    
       begin
+        logger.error(editions.tempfile)
         CSV.read(editions.tempfile, headers: true).collect {|row| process_upload_row(row)}.join(" #### ")
-      rescue
-        
+      rescue => e
+        logger.error(e)
         "No rows processed"
       end
     end
