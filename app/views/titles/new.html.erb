@@ -18,7 +18,7 @@
     
     <script>
     function lookup(isbn){
-	var googleAPI = "https://www.googleapis.com/books/v1/volumes?key=AIzaSyDgFw0K_rvyqepNgfTlDVrWyAGmsy_Z-kc&q=isbn:";
+	var googleAPI = "https://www.googleapis.com/books/v1/volumes?key=#{ENV['GOOGLE_BOOKS_KEY']}&q=isbn:";
 	$.getJSON(googleAPI+isbn, function (response) {
 	    console.log("JSON Data: " + response.items);
 	    if (response.items.length > 0){
