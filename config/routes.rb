@@ -213,6 +213,7 @@ Borges::Application.routes.draw do
       put :add_to_bucket
       put :add_to_category
       get :bookshop
+      get :ingram_data
     end
   end
 
@@ -223,6 +224,7 @@ Borges::Application.routes.draw do
 
   get 'titles/search' => 'titles#search'
   get '/titles/:id'=> 'titles#redirector',  :constraints => { :id => /[0-9]+/, :format => 'html' }
+
 
   resources :titles do 
     get :autocomplete_publisher_name, :on => :collection
@@ -263,6 +265,8 @@ Borges::Application.routes.draw do
     end
   end
   
+  get '/editions/ingram_lookup/:isbn', :to => 'editions#ingram_lookup'
+
   get '/book/:isbn', :to => 'editions#byisbn'
   get '/book/', :to => 'editions#byisbn'
 
