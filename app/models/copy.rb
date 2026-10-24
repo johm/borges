@@ -65,6 +65,13 @@ class Copy < ActiveRecord::Base
   def how_long_it_took_to_get
   end
 
+  def self.sell_through_rate(copies,number_of_days)
+    total=copies.length
+    sold=copies.sold.where("DATEDIFF(deinventoried_when,inventoried_when) < ?",number_of_days).length
+    return 1.0*sold/total
+  end
+  
+
   private 
   def reindex_title 
     self.title.save! # does it reindex?

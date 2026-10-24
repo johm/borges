@@ -2,6 +2,7 @@ class Publisher < ActiveRecord::Base
   attr_accessible :description, :name, :notes
   has_many :editions
   has_many :titles, :through => :editions  
+  has_many :copies, :through => :editions  
 
   after_save :delete_gatsby_cache
 

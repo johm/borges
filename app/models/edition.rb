@@ -55,7 +55,7 @@ class Edition < ActiveRecord::Base
       hash["description"] = (title.introduction || " ") + "<br /><br />" + (title.description || " ")
       hash["the_title"] = {slug: title.to_param,
                            title: title.title,
-                           contributions: title.contributions.map {|x| {author: {fullName: x.author.full_name },
+                           contributions: title.contributions.map {|x| {author: {fullName: (x.author.full_name rescue "") },
                                                                   what: x.what,
                                                              }}}
       hash["the_edition"] = {cover_image_url: cover_image_url,
@@ -164,11 +164,14 @@ class Edition < ActiveRecord::Base
   
 
   def my_online_price
-    if copies.length > 0
-      has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : [copies.order("price_in_cents desc").first.price,list_price].max
-    else
-      list_price
+    Rails.cache.fetch("/edition/#{id}-#{updated_at}/my_online_price", :expires_in => 48.hours) do 
+      if copies.length > 0 #caching the copies on editions would be amazing
+        has_copies_in_stock? ? copies.where("status"=>"STOCK").order("price_in_cents desc").first.price : [copies.order("price_in_cents desc").first.price,list_price].max
+      else
+        list_price
+      end
     end
+
   end
 
   
@@ -207,7 +210,22 @@ class Edition < ActiveRecord::Base
     self.publisher_name=publisher.name rescue ""
   end
 
-  
+  def self.ingram_lookup(isbn)
+    url="https://#{ENV['INGRAM_USERNAME']}@#{ENV['INGRAM_URL']}/SearchRequestType5"
+    logger.info url
+    res=Hash.from_xml(RestClient.post(url, {:queryType=>"5",:isbn=>isbn,:dataRequest=>"IMG,I648,BIB,PM,BIO"}).to_s)
+    logger.info res.to_s
+    if res['IngramSearchResults']['SearchMessage']['MatchingRecs']==0
+      return false
+    else
+      return {
+        :ingram => res['IngramSearchResults']['Book']['Ingram'],
+        :book => res['IngramSearchResults']['Book'],
+        :more => res['IngramSearchResults']
+      }
+    end
+  end
+   
   protected
   def normalize_isbns
     isbn10.gsub!(/[^0-9X]/,'') unless isbn10.nil?

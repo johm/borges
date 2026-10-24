@@ -4,6 +4,8 @@
 
 <%= mylinkbutton 'New Bucket 🪣', new_bucket_path %>
 
+
+
 <table class="table">
   <tr>
     <th><%= sortable "created_at", "Created" %></th>
@@ -12,6 +14,7 @@
     <th>Last ordered from</th>
     <th>Total editions</th>
     <th>In stock</th>
+    <th>90 day sell through rate</th>
     <th></th>
   </tr>
 
@@ -28,6 +31,7 @@
     <td><%= bucket.last_order.to_formatted_s(:just_date) rescue "" %></td>
     <td><%= bucket.number_of_editions %></td>
     <td><%= bucket.number_of_editions_in_stock %></td>
+    <td><%= number_to_percentage(Copy.sell_through_rate(bucket.copies,90)*100) %></td>
     <td>
 <!--	     <%= link_to "Destroy (smart)", hidden_actions_bucket_path(bucket),  {:class => 'btn btn-xs btn-warning',:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'}  %>-->
 <%= link_to 'Destroy (stupid)', bucket, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-xs btn-mini btn-danger'  %></td>

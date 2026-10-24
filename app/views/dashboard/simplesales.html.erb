@@ -63,7 +63,7 @@ data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.su
     <% count=x[1] %>
     <tr >
       <td>
-	<%= link_to title.title,title%>
+	<%= link_to title.title,title rescue x.to_s %>
 	<div>
 	</div>
       </td>
@@ -75,7 +75,7 @@ data: [<%= raw @days.collect {|d| @sales_by_date[d].inject(0) {|sum,s| sum+(s.su
 	
       </td>
 
-      <td><%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? %></td>
+      <td><%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_edition_path(title.latest_published_edition),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} unless title.latest_published_edition.nil? rescue "hmmm"%></td>
       <td>
       </td>
     </tr>

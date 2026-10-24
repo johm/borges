@@ -226,6 +226,36 @@ class EditionsController < ApplicationController
     end
   end
 
+  def ingram_lookup
+    isbn=params[:isbn]
+    @ing_data={}
+    unless isbn.blank?
+      ing=Edition.ingram_lookup(isbn)
+      if ing
+        @ing_data=ing
+      end
+    end
+    
+    respond_to do |format|
+      format.json { render json: @ing_data }
+    end
+  end
+
+  def ingram_data
+    @edition = Edition.find(params[:id])
+    @ing_data={}
+    logger.info @edition
+    unless @edition.isbn13.blank?
+      ing=Edition.ingram_lookup(@edition.isbn13)
+      if ing
+        @ing_data=ing[:ingram]
+      end
+    end
+    respond_to do |format|
+      format.html { }
+      format.js { }
+    end
+  end
 
 
   def bookshop

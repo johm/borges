@@ -1,3 +1,7 @@
+require "uri"
+
+
+
 class BucketLineItem < ActiveRecord::Base
   belongs_to :edition
   has_one :title, :through => :edition
@@ -26,5 +30,8 @@ class BucketLineItem < ActiveRecord::Base
     super(options)
   end
 
+  def links_in_notes
+     URI.extract(notes.to_s)  || []
+  end
 
 end

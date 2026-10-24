@@ -17,7 +17,7 @@
 	
 	});
 		</script>
-
+		<%= extract_isbn(bucket_line_item.notes) %>
     <% end %>
     <% end %>
   </td>
@@ -46,7 +46,12 @@
     </span>
   </td> 
   
-  <td class="small"><%= best_in_place bucket_line_item, :notes, :type => :textarea,:place_holder=>"<i class='fa fa-pencil'></i>" %></td>
+  <td class="small bip">
+    <% bucket_line_item.links_in_notes.each do |link| %> 
+    <a style="display:block;width:300px;overflow:scroll;" href="<%= link %>"><%= link %></a>
+    <% end %>
+    <br />
+    <%= best_in_place bucket_line_item, :notes, :html_attrs => {:rows => "5"}, :as=>:textarea, :type => :textarea,:place_holder=>"<i class='fa fa-pencil'></i>" %></td>
   <td>
     <%= link_to raw('<i class="fa fa-check-circle-o"></i>'), hidden_actions_bucket_line_item_path(bucket_line_item),  {:remote => true, 'data-toggle' =>  'modal', :role=>'button', 'data-target' => '#modal-window'} %>
     <%= link_to raw('<i class="fa fa-trash"></i>'), bucket_line_item_path(bucket_line_item),  {:remote => true,:method=>:delete} %>

@@ -8,7 +8,7 @@ class CopiesController < ApplicationController
   # GET /copies.json
   def index
     @edition = Edition.find(params[:edition_id])
-    @copies = @edition.copies
+    @copies = @edition.copies.order("inventoried_when desc")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -173,7 +173,9 @@ module ApplicationHelper
   end
 
 
-
+  def extract_isbn(s) 
+    s.match(/97\d\d\d\d\d\d\d\d\d\d[\dX]/)[0] rescue ""
+  end
 
 
 

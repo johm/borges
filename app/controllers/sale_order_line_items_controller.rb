@@ -48,6 +48,10 @@ class SaleOrderLineItemsController < ApplicationController
     @sale_order_line_item.sale_price=@sale_order_line_item.copy.price 
     
     sale_order=SaleOrder.find(params[:sale_order_line_item][:sale_order_id])
+
+    if sale_order.posted 
+      raise "Can't add to posted sales order!"
+    end
     
     if sale_order.sale_order_line_items.collect {|li| li.copy.id }.include? @sale_order_line_item.copy.id
       raise "Can't add same copy to order twice!"
